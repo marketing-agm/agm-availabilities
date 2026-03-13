@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Tour - AGM Real Estate Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        /* Aggressive reset for iframe embedding */
+        *, *::before, *::after { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box !important;
+            -webkit-box-sizing: border-box !important;
+            -moz-box-sizing: border-box !important;
+        }
+        
+        html {
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+        
+        :root {
+            --primary: #1a1a1a;
+            --accent: #2e7d32;
+            --accent-hover: #1b5e20;
+            --bg: #fafafa;
+            --card-bg: #ffffff;
+            --text: #2c2c2c;
+            --text-light: #6b6b6b;
+            --border: #e5e5e5;
+            --success: #4caf50;
+            --error: #d32f2f;
+        }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        .page-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-header h1 {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .page-header .subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        .property-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .property-badge .icon {
+            font-size: 1.1rem;
+        }
+        
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .form-header {
+            background: var(--accent);
+            color: white;
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .form-header-icon {
+            font-size: 1.8rem;
+        }
+        
+        .form-header-content h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .form-header-content p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .form-body {
+            padding: 28px;
+        }
+        
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-label .required {
+            color: var(--error);
+            margin-left: 2px;
+        }
+        
+        .form-input,
+        .form-select {
+            display: block;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            padding: 14px 16px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 16px; /* Prevents iOS zoom */
+            font-weight: 400;
+            font-family: 'Work Sans', sans-serif;
+            background: white;
+            color: var(--text);
+            transition: all 0.2s ease;
+            box-sizing: border-box !important;
+            -webkit-box-sizing: border-box !important;
+            -moz-box-sizing: border-box !important;
+        }
+        
+        .form-input:hover,
+        .form-select:hover {
+            border-color: #bbb;
+        }
+        
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #aaa;
+        }
+        
+        /* Explicit date input fixes for iframe embedding */
+        .form-input[type="date"] {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            box-sizing: border-box !important;
+            -webkit-box-sizing: border-box !important;
+            -moz-box-sizing: border-box !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            appearance: none !important;
+        }
+        
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+        
+        .form-hint {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+        
+        .form-row + .form-hint {
+            margin-top: -10px;
+            margin-bottom: 4px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 28px 0;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        
+        /* Unit Type Buttons */
+        .unit-type-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .unit-type-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            text-align: center;
+        }
+        
+        .unit-type-btn:hover {
+            border-color: var(--accent);
+            background: #f8fff8;
+        }
+        
+        .unit-type-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .unit-type-btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        /* Submit Button */
+        .form-footer {
+            padding: 20px 28px 28px;
+            background: #fafafa;
+            border-top: 1px solid var(--border);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px 24px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Work Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+        }
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .privacy-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 16px;
+            line-height: 1.5;
+        }
+        
+        /* Success State */
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+        
+        .success-state.active {
+            display: block;
+        }
+        
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 24px;
+        }
+        
+        .success-title {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .success-message {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .success-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .success-btn {
+            padding: 14px 32px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Work Sans', sans-serif;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .success-btn:hover {
+            background: var(--accent-hover);
+        }
+        
+        .success-btn-secondary {
+            background: white;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+        
+        .success-btn-secondary:hover {
+            background: var(--bg);
+            border-color: var(--accent);
+        }
+        
+        /* Error State */
+        .error-message {
+            display: none;
+            background: #ffebee;
+            color: var(--error);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .error-message.active {
+            display: block;
+        }
+        
+        /* Property Not Found */
+        .not-found {
+            text-align: center;
+            padding: 60px 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .not-found-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .not-found h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .not-found p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+        
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: color 0.2s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive - with iframe embedding fixes */
+        @media (max-width: 600px) {
+            html, body {
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow-x: hidden !important;
+                padding: 12px !important;
+            }
+            
+            .page-container {
+                max-width: 100% !important;
+                width: 100% !important;
+                overflow-x: hidden !important;
+                padding: 0 !important;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .form-card {
+                overflow: hidden !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            
+            .form-body,
+            .form-footer {
+                padding: 16px !important;
+                overflow: hidden !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            /* Consistent spacing for all form groups on mobile */
+            .form-group {
+                margin-bottom: 18px;
+                max-width: 100% !important;
+                width: 100% !important;
+                overflow: hidden !important;
+            }
+            
+            .form-row .form-group {
+                margin-bottom: 18px;
+            }
+            
+            .form-row .form-group:last-child {
+                margin-bottom: 18px;
+            }
+            
+            /* Aggressive fix for all inputs in iframe on mobile */
+            .form-input,
+            .form-select,
+            .form-input[type="date"],
+            .form-input[type="text"],
+            .form-input[type="email"],
+            .form-input[type="tel"] {
+                display: block !important;
+                box-sizing: border-box !important;
+                -webkit-box-sizing: border-box !important;
+                -moz-box-sizing: border-box !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                -webkit-appearance: none !important;
+                -moz-appearance: none !important;
+                appearance: none !important;
+                font-size: 16px !important; /* Prevents iOS zoom */
+                padding: 14px 16px !important;
+            }
+            
+            .form-select {
+                padding-right: 40px !important;
+                background-position: right 16px center !important;
+            }
+            
+            .unit-type-btn {
+                min-width: 70px;
+                padding: 10px 12px;
+                font-size: 0.85rem;
+                flex: 1 1 calc(50% - 5px);
+            }
+            
+            .unit-type-group {
+                gap: 8px;
+            }
+            
+            .section-divider {
+                margin: 24px 0;
+            }
+            
+            .success-state {
+                padding: 40px 20px;
+            }
+            
+            .success-title {
+                font-size: 1.6rem;
+            }
+        }
+        
+        /* Extra small / narrow iframe fix */
+        @media (max-width: 400px) {
+            body {
+                padding: 8px !important;
+            }
+            
+            .form-body,
+            .form-footer {
+                padding: 12px !important;
+            }
+            
+            .form-header {
+                padding: 16px !important;
+            }
+            
+            .form-header-content h2 {
+                font-size: 1.2rem;
+            }
+            
+            .form-input,
+            .form-select,
+            .form-input[type="date"] {
+                padding: 12px 14px !important;
+            }
+            
+            .form-select {
+                padding-right: 36px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <a href="javascript:history.back()" class="back-link">
+            <span>&#8592;</span> Back
+        </a>
+        
+        <div class="page-header">
+            <h1>Book a Tour</h1>
+            <p class="subtitle">Schedule a visit to see your future home</p>
+            <div class="property-badge" id="property-badge" style="display: none;">
+                <span class="icon">&#127970;</span>
+                <span id="property-name-display"></span>
+            </div>
+        </div>
+        
+        <!-- Property Not Found State -->
+        <div class="not-found" id="not-found-state" style="display: none;">
+            <div class="not-found-icon">&#128269;</div>
+            <h2>Property Not Found</h2>
+            <p>The property you're looking for isn't available. Please select from our available properties below.</p>
+            <a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn">View All Properties</a>
+        </div>
+        
+        <!-- Main Form -->
+        <div class="form-card" id="form-card">
+            <div class="form-header">
+                <span class="form-header-icon">&#128197;</span>
+                <div class="form-header-content">
+                    <h2>Request a Tour</h2>
+                    <p>Fill out the form and we'll contact you within 24 hours</p>
+                </div>
+            </div>
+            
+            <div id="form-content">
+                <div class="form-body">
+                    <div class="error-message" id="error-message"></div>
+                    
+                    <!-- Property Selection (hidden if pre-selected) -->
+                    <div class="form-group" id="property-select-group">
+                        <label class="form-label">Property <span class="required">*</span></label>
+                        <select class="form-select" id="tour-property" required>
+                            <option value="">Select a property...</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Unit Type Selection -->
+                    <div class="form-group" id="unit-type-group">
+                        <label class="form-label">Unit Type Interest</label>
+                        <div class="unit-type-group" id="unit-type-buttons">
+                            <button type="button" class="unit-type-btn" data-type="studio">Studio</button>
+                            <button type="button" class="unit-type-btn" data-type="1bed">1 Bed</button>
+                            <button type="button" class="unit-type-btn" data-type="2bed">2 Bed</button>
+                            <button type="button" class="unit-type-btn" data-type="3bed">3+ Bed</button>
+                        </div>
+                        <p class="form-hint">Select all that apply</p>
+                    </div>
+                    
+                    <div class="section-divider">Your Information</div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" id="tour-first-name" placeholder="First name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" id="tour-last-name" placeholder="Last name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Email <span class="required">*</span></label>
+                            <input type="email" class="form-input" id="tour-email" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone <span class="required">*</span></label>
+                            <input type="tel" class="form-input" id="tour-phone" placeholder="(555) 123-4567" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Desired Move-in Date</label>
+                        <input type="date" class="form-input" id="tour-movein-date">
+                        <p class="form-hint">When are you looking to move?</p>
+                    </div>
+                    
+                    <div class="section-divider">Tour Availability</div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Earliest Tour Date <span class="required">*</span></label>
+                            <input type="date" class="form-input" id="tour-date-start" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Latest Tour Date</label>
+                            <input type="date" class="form-input" id="tour-date-end">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Earliest Time <span class="required">*</span></label>
+                            <select class="form-select" id="tour-time-start" required>
+                                <option value="">Select...</option>
+                                <option value="9:00 AM">9:00 AM</option>
+                                <option value="9:30 AM">9:30 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="10:30 AM">10:30 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="11:30 AM">11:30 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="12:30 PM">12:30 PM</option>
+                                <option value="1:00 PM">1:00 PM</option>
+                                <option value="1:30 PM">1:30 PM</option>
+                                <option value="2:00 PM">2:00 PM</option>
+                                <option value="2:30 PM">2:30 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
+                                <option value="3:30 PM">3:30 PM</option>
+                                <option value="4:00 PM">4:00 PM</option>
+                                <option value="4:30 PM">4:30 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Latest Time</label>
+                            <select class="form-select" id="tour-time-end">
+                                <option value="">Select...</option>
+                                <option value="9:00 AM">9:00 AM</option>
+                                <option value="9:30 AM">9:30 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="10:30 AM">10:30 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="11:30 AM">11:30 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="12:30 PM">12:30 PM</option>
+                                <option value="1:00 PM">1:00 PM</option>
+                                <option value="1:30 PM">1:30 PM</option>
+                                <option value="2:00 PM">2:00 PM</option>
+                                <option value="2:30 PM">2:30 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
+                                <option value="3:30 PM">3:30 PM</option>
+                                <option value="4:00 PM">4:00 PM</option>
+                                <option value="4:30 PM">4:30 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="form-hint">Let us know your general availability and we'll reach out to confirm a specific time.</p>
+                </div>
+                
+                <div class="form-footer">
+                    <button type="button" class="submit-btn" id="submit-btn">
+                        <span>Request Tour</span>
+                        <span>&#8594;</span>
+                    </button>
+                    <p class="privacy-note">By submitting, you agree to be contacted by our leasing team via email and phone.</p>
+                </div>
+            </div>
+            
+            <!-- Success State -->
+            <div class="success-state" id="success-state">
+                <div class="success-icon">&#127881;</div>
+                <h3 class="success-title">Tour Request Received!</h3>
+                <p class="success-message">Thank you for your interest in <strong id="success-property-name"></strong>! Our leasing team will reach out within 24 hours to confirm your tour.</p>
+                <div class="success-actions">
+                    <button class="success-btn" id="another-tour-btn">Request Another Tour</button>
+                    <a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-secondary">View All Listings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // All AGM Listings Data (for determining available unit types)
+        const agmListings = [
+            {"property":"Seward Park","neighborhood":"Seward Park","unit":"Unit 01","bedrooms":1},
+            {"property":"The Palms","neighborhood":"Eastlake","unit":"#7","bedrooms":2},
+            {"property":"The Palms","neighborhood":"Eastlake","unit":"#12-5","bedrooms":1},
+            {"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 214","bedrooms":2},
+            {"property":"Cedar Lane Apartments","neighborhood":"Greenwood","unit":"Apt 15","bedrooms":1},
+            {"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 301","bedrooms":2},
+            {"property":"Fremont Village","neighborhood":"Fremont","unit":"Apt 516","bedrooms":"Studio"},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 611","bedrooms":2},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 311","bedrooms":2},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 308","bedrooms":2},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 313","bedrooms":1},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 416","bedrooms":1},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 803","bedrooms":"Studio"},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 704","bedrooms":"Studio"},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 405","bedrooms":"Studio"},
+            {"property":"Willow Creek","neighborhood":"Bothell","unit":"#206","bedrooms":1},
+            {"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#A4","bedrooms":1},
+            {"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#B3","bedrooms":1},
+            {"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 118","bedrooms":2},
+            {"property":"Seward Park","neighborhood":"Seward Park","unit":"Unit 03","bedrooms":1},
+            {"property":"Seward Park","neighborhood":"Seward Park","unit":"#09","bedrooms":2},
+            {"property":"Rialto Court","neighborhood":"Capitol Hill","unit":"#201","bedrooms":1},
+            {"property":"Rialto Court","neighborhood":"Capitol Hill","unit":"#210","bedrooms":1},
+            {"property":"Rialto Court","neighborhood":"Capitol Hill","unit":"#106","bedrooms":"Studio"},
+            {"property":"Lorelei Apartments","neighborhood":"Capitol Hill","unit":"#23","bedrooms":1},
+            {"property":"Gilmanor Apartments","neighborhood":"Magnolia","unit":"#206","bedrooms":2},
+            {"property":"301 Apartments","neighborhood":"Central District","unit":"Apt 13","bedrooms":1},
+            {"property":"301 Apartments","neighborhood":"Central District","unit":"Apt 15","bedrooms":2},
+            {"property":"Cedar Lane Apartments","neighborhood":"Greenwood","unit":"Apt 1","bedrooms":1},
+            {"property":"White Heather Apartments","neighborhood":"Lake City","unit":"Unit","bedrooms":1},
+            {"property":"White Heather Apartments","neighborhood":"Lake City","unit":"Unit","bedrooms":2},
+            {"property":"6113 Apartments","neighborhood":"Roosevelt","unit":"Unit 103","bedrooms":1},
+            {"property":"Clift House Apartments","neighborhood":"Seattle","unit":"Unit C2","bedrooms":1},
+            {"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#C1","bedrooms":1},
+            {"property":"Golden Inca","neighborhood":"Capitol Hill","unit":"#204","bedrooms":1},
+            {"property":"De Selm Apartments","neighborhood":"Seattle","unit":"Apt 33","bedrooms":1},
+            {"property":"Mercer Tower","neighborhood":"Mercer Island","unit":"Apt 25","bedrooms":1},
+            {"property":"Arbor Heights","neighborhood":"North Seattle","unit":"Apt 205","bedrooms":1},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 612","bedrooms":"Studio"},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 605","bedrooms":"Studio"},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 513","bedrooms":1},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 319","bedrooms":1},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 201","bedrooms":1},
+            {"property":"De Selm Apartments","neighborhood":"Seattle","unit":"Unit","bedrooms":"Studio"},
+            {"property":"Gary Apartments","neighborhood":"Bellevue","unit":"Apt 3","bedrooms":2},
+            {"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#A2","bedrooms":1},
+            {"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 102","bedrooms":1},
+            {"property":"Arbor Heights","neighborhood":"North Seattle","unit":"Apt 103","bedrooms":1},
+            {"property":"301 Apartments","neighborhood":"Central District","unit":"Apt 12","bedrooms":1},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 806","bedrooms":"Studio"},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 805","bedrooms":"Studio"},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 701","bedrooms":1},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 516","bedrooms":1},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 412","bedrooms":"Studio"},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 314","bedrooms":"Studio"},
+            {"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 212","bedrooms":"Studio"},
+            {"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt B","bedrooms":"Studio"},
+            {"property":"Reverie Apartments","neighborhood":"Beacon Hill","unit":"Apt 205","bedrooms":1},
+            {"property":"Ondine Eastlake","neighborhood":"Eastlake","unit":"Apt 802","bedrooms":"Studio"},
+            {"property":"Ondine Eastlake","neighborhood":"Eastlake","unit":"Apt 702","bedrooms":"Studio"},
+            {"property":"Crestview Townhomes","neighborhood":"Lynnwood","unit":"Unit","bedrooms":2},
+            {"property":"Golden Inca","neighborhood":"Capitol Hill","unit":"#303","bedrooms":"Studio"},
+            {"property":"East Union Apartments","neighborhood":"Capitol Hill","unit":"Unit","bedrooms":1},
+            {"property":"Royal View Apartments","neighborhood":"Milton","unit":"Unit","bedrooms":2},
+            {"property":"Viewmont Apartments","neighborhood":"Capitol Hill","unit":"#301","bedrooms":2},
+            {"property":"Viewmont Apartments","neighborhood":"Capitol Hill","unit":"#102","bedrooms":1},
+            {"property":"Mercer Tower","neighborhood":"Mercer Island","unit":"Apt 2","bedrooms":2},
+            {"property":"Bayview Apartments","neighborhood":"Beacon Hill","unit":"Apt 304","bedrooms":1},
+            {"property":"Highway Place","neighborhood":"Everett","unit":"Apt 301","bedrooms":1},
+            {"property":"Highway Place","neighborhood":"Everett","unit":"Apt 302","bedrooms":1},
+            {"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 8","bedrooms":1},
+            {"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 202","bedrooms":1},
+            {"property":"Marianne Apartments","neighborhood":"Queen Anne","unit":"#103","bedrooms":"Studio"},
+            {"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 120","bedrooms":1},
+            {"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 108","bedrooms":1},
+            {"property":"The Palms","neighborhood":"Eastlake","unit":"#9","bedrooms":1},
+            {"property":"Hill Town Apartments","neighborhood":"Central District","unit":"Unit","bedrooms":1},
+            {"property":"Ondine Eastlake","neighborhood":"Eastlake","unit":"Apt 603","bedrooms":2},
+            {"property":"BalCro","neighborhood":"Ballard","unit":"Apt 103","bedrooms":1},
+            {"property":"Mercer Tower","neighborhood":"Mercer Island","unit":"Apt 46","bedrooms":1},
+            {"property":"Fairlake Quads","neighborhood":"Bellevue","unit":"3","bedrooms":3},
+            {"property":"The Palms","neighborhood":"Eastlake","unit":"#1","bedrooms":1},
+            {"property":"Highway Place","neighborhood":"Everett","unit":"Apt 102","bedrooms":1},
+            {"property":"Winslow Place","neighborhood":"Fremont","unit":"Unit","bedrooms":1},
+            {"property":"Marianne Apartments","neighborhood":"Queen Anne","unit":"#204","bedrooms":"Studio"}
+        ];
+
+        // Property to Leasing Agent Email Mapping
+        const propertyLeasingAgents = {
+            "301 Apartments": "leasing@agmrealestategroup.com",
+            "6113 Apartments": "leasing@agmrealestategroup.com",
+            "Arbor Heights": "leasing@agmrealestategroup.com",
+            "Avia Apartments": "leasing@agmrealestategroup.com",
+            "BalCro": "leasing@agmrealestategroup.com",
+            "Bayview Apartments": "leasing@agmrealestategroup.com",
+            "Cedar Lane Apartments": "leasing@agmrealestategroup.com",
+            "Clift House Apartments": "leasing@agmrealestategroup.com",
+            "Crestview Townhomes": "leasing@agmrealestategroup.com",
+            "De Selm Apartments": "leasing@agmrealestategroup.com",
+            "East Union Apartments": "leasing@agmrealestategroup.com",
+            "Fairlake Quads": "leasing@agmrealestategroup.com",
+            "Fremont Village": "leasing@agmrealestategroup.com",
+            "Gary Apartments": "leasing@agmrealestategroup.com",
+            "Gilmanor Apartments": "leasing@agmrealestategroup.com",
+            "Golden Inca": "leasing@agmrealestategroup.com",
+            "Highway Place": "leasing@agmrealestategroup.com",
+            "Hill Town Apartments": "leasing@agmrealestategroup.com",
+            "Lorelei Apartments": "leasing@agmrealestategroup.com",
+            "Marianne Apartments": "leasing@agmrealestategroup.com",
+            "Mercer Tower": "leasing@agmrealestategroup.com",
+            "Niwa Apartments": "leasing@agmrealestategroup.com",
+            "Ondine Eastlake": "leasing@agmrealestategroup.com",
+            "Reverie Apartments": "leasing@agmrealestategroup.com",
+            "Rialto Court": "leasing@agmrealestategroup.com",
+            "Royal View Apartments": "leasing@agmrealestategroup.com",
+            "Seward Park": "leasing@agmrealestategroup.com",
+            "Skandi Villa": "leasing@agmrealestategroup.com",
+            "The Palms": "leasing@agmrealestategroup.com",
+            "Viewmont Apartments": "leasing@agmrealestategroup.com",
+            "White Heather Apartments": "leasing@agmrealestategroup.com",
+            "Willow Creek": "leasing@agmrealestategroup.com",
+            "Winslow Place": "leasing@agmrealestategroup.com"
+        };
+
+        // Get unique properties
+        const allProperties = [...new Set(agmListings.map(l => l.property))].sort();
+        
+        // State
+        let selectedProperty = null;
+        let selectedUnitTypes = [];
+        
+        // Get URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                property: params.get('property')
+            };
+        }
+        
+        // Get available unit types for a property
+        function getAvailableUnitTypes(propertyName) {
+            const propertyListings = agmListings.filter(l => l.property === propertyName);
+            const types = {
+                studio: false,
+                '1bed': false,
+                '2bed': false,
+                '3bed': false
+            };
+            
+            propertyListings.forEach(listing => {
+                if (listing.bedrooms === 'Studio') types.studio = true;
+                else if (listing.bedrooms === 1) types['1bed'] = true;
+                else if (listing.bedrooms === 2) types['2bed'] = true;
+                else if (typeof listing.bedrooms === 'number' && listing.bedrooms >= 3) types['3bed'] = true;
+            });
+            
+            return types;
+        }
+        
+        // Update unit type buttons based on property
+        function updateUnitTypeButtons(propertyName) {
+            const buttons = document.querySelectorAll('.unit-type-btn');
+            
+            if (!propertyName) {
+                // Enable all buttons if no property selected
+                buttons.forEach(btn => {
+                    btn.classList.remove('disabled');
+                });
+                return;
+            }
+            
+            const availableTypes = getAvailableUnitTypes(propertyName);
+            
+            buttons.forEach(btn => {
+                const type = btn.dataset.type;
+                if (availableTypes[type]) {
+                    btn.classList.remove('disabled');
+                } else {
+                    btn.classList.add('disabled');
+                    btn.classList.remove('active');
+                    // Remove from selected if was selected
+                    selectedUnitTypes = selectedUnitTypes.filter(t => t !== type);
+                }
+            });
+        }
+        
+        // Populate property dropdown
+        function populatePropertyDropdown() {
+            const select = document.getElementById('tour-property');
+            allProperties.forEach(prop => {
+                const option = document.createElement('option');
+                option.value = prop;
+                option.textContent = prop;
+                select.appendChild(option);
+            });
+        }
+        
+        // Initialize EmailJS
+        emailjs.init('oVeCEKCpUsDe3_ba2');
+        
+        // Initialize page
+        function initializePage() {
+            const urlParams = getUrlParams();
+            
+            populatePropertyDropdown();
+            
+            // Set date minimums
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('tour-date-start').min = today;
+            document.getElementById('tour-date-end').min = today;
+            document.getElementById('tour-movein-date').min = today;
+            
+            if (urlParams.property) {
+                // Check if property exists
+                const propertyExists = allProperties.includes(urlParams.property);
+                
+                if (propertyExists) {
+                    selectedProperty = urlParams.property;
+                    
+                    // Update page title
+                    document.title = 'Book a Tour - ' + selectedProperty + ' | AGM Real Estate Group';
+                    
+                    // Show property badge
+                    document.getElementById('property-badge').style.display = 'inline-flex';
+                    document.getElementById('property-name-display').textContent = selectedProperty;
+                    
+                    // Hide property dropdown (already selected)
+                    document.getElementById('property-select-group').style.display = 'none';
+                    
+                    // Set the hidden value
+                    document.getElementById('tour-property').value = selectedProperty;
+                    
+                    // Update unit type buttons for this property
+                    updateUnitTypeButtons(selectedProperty);
+                } else {
+                    // Property not found
+                    document.getElementById('form-card').style.display = 'none';
+                    document.getElementById('not-found-state').style.display = 'block';
+                }
+            } else {
+                // No property specified - show full form
+                updateUnitTypeButtons(null);
+            }
+        }
+        
+        // Unit type button click handler
+        document.querySelectorAll('.unit-type-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.classList.contains('disabled')) return;
+                
+                btn.classList.toggle('active');
+                const type = btn.dataset.type;
+                
+                if (btn.classList.contains('active')) {
+                    if (!selectedUnitTypes.includes(type)) {
+                        selectedUnitTypes.push(type);
+                    }
+                } else {
+                    selectedUnitTypes = selectedUnitTypes.filter(t => t !== type);
+                }
+            });
+        });
+        
+        // Property select change handler
+        document.getElementById('tour-property').addEventListener('change', (e) => {
+            selectedProperty = e.target.value;
+            updateUnitTypeButtons(selectedProperty);
+        });
+        
+        // Form submission
+        document.getElementById('submit-btn').addEventListener('click', handleSubmit);
+        
+        function handleSubmit() {
+            const property = document.getElementById('tour-property').value;
+            const firstName = document.getElementById('tour-first-name').value.trim();
+            const lastName = document.getElementById('tour-last-name').value.trim();
+            const email = document.getElementById('tour-email').value.trim();
+            const phone = document.getElementById('tour-phone').value.trim();
+            const moveInDate = document.getElementById('tour-movein-date').value;
+            const tourDateStart = document.getElementById('tour-date-start').value;
+            const tourDateEnd = document.getElementById('tour-date-end').value;
+            const tourTimeStart = document.getElementById('tour-time-start').value;
+            const tourTimeEnd = document.getElementById('tour-time-end').value;
+            
+            // Validation
+            const errorEl = document.getElementById('error-message');
+            
+            if (!property || !firstName || !email || !phone || !tourDateStart || !tourTimeStart) {
+                errorEl.textContent = 'Please fill in all required fields.';
+                errorEl.classList.add('active');
+                errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorEl.textContent = 'Please enter a valid email address.';
+                errorEl.classList.add('active');
+                errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            
+            errorEl.classList.remove('active');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Sending...</span>';
+            
+            // Format dates
+            const formatDate = (dateStr) => {
+                if (!dateStr) return 'Not specified';
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+            };
+            
+            const tourDates = tourDateEnd 
+                ? formatDate(tourDateStart) + ' to ' + formatDate(tourDateEnd)
+                : formatDate(tourDateStart);
+            
+            const tourTimes = tourTimeEnd 
+                ? tourTimeStart + ' to ' + tourTimeEnd
+                : tourTimeStart + ' or later';
+            
+            // Format unit types
+            const typeLabels = {
+                'studio': 'Studio',
+                '1bed': '1 Bedroom',
+                '2bed': '2 Bedroom',
+                '3bed': '3+ Bedroom'
+            };
+            const unitTypesStr = selectedUnitTypes.length > 0 
+                ? selectedUnitTypes.map(t => typeLabels[t]).join(', ')
+                : 'Not specified';
+            
+            const submittedAt = new Date().toLocaleString('en-US', { 
+                weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
+                hour: 'numeric', minute: '2-digit', hour12: true 
+            });
+            
+            // EmailJS template parameters
+            const templateParams = {
+                property: property,
+                name: firstName + ' ' + lastName,
+                email: email,
+                phone: phone,
+                movein_date: formatDate(moveInDate),
+                tour_dates: tourDates,
+                tour_times: tourTimes,
+                unit_types: unitTypesStr,
+                submitted_at: submittedAt,
+                to_email: propertyLeasingAgents[property] || 'leasing@agmrealestategroup.com'
+            };
+            
+            // Send emails
+            Promise.all([
+                emailjs.send('service_mwnzq3g', 'template_ris04ko', templateParams),
+                emailjs.send('service_mwnzq3g', 'template_lhvuk2q', templateParams)
+            ])
+                .then(function(responses) {
+                    console.log('Emails sent successfully:', responses);
+                    showSuccess(property);
+                })
+                .catch(function(error) {
+                    console.error('Email failed to send:', error);
+                    errorEl.textContent = 'There was an error submitting your request. Please try again or call us directly.';
+                    errorEl.classList.add('active');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span>Request Tour</span><span>&#8594;</span>';
+                });
+        }
+        
+        function showSuccess(propertyName) {
+            document.getElementById('form-content').style.display = 'none';
+            document.getElementById('success-property-name').textContent = propertyName;
+            document.getElementById('success-state').classList.add('active');
+        }
+        
+        // Another tour button
+        document.getElementById('another-tour-btn').addEventListener('click', () => {
+            // Reset form
+            document.getElementById('tour-first-name').value = '';
+            document.getElementById('tour-last-name').value = '';
+            document.getElementById('tour-email').value = '';
+            document.getElementById('tour-phone').value = '';
+            document.getElementById('tour-movein-date').value = '';
+            document.getElementById('tour-date-start').value = '';
+            document.getElementById('tour-date-end').value = '';
+            document.getElementById('tour-time-start').value = '';
+            document.getElementById('tour-time-end').value = '';
+            
+            // Reset unit type selections
+            selectedUnitTypes = [];
+            document.querySelectorAll('.unit-type-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Keep property if it was pre-selected
+            if (!getUrlParams().property) {
+                document.getElementById('tour-property').value = '';
+                updateUnitTypeButtons(null);
+            }
+            
+            // Reset submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Request Tour</span><span>&#8594;</span>';
+            
+            // Hide success, show form
+            document.getElementById('success-state').classList.remove('active');
+            document.getElementById('form-content').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Initialize on load
+        initializePage();
+    </script>
+</body>
+</html>
