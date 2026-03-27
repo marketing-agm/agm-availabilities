@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book a Tour - Quil Creek Crossing Apartments</title>
+    <title>Book a Tour - Quil Crossing Apartments</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-        // Auto-select Quil Creek Crossing on page load
+        // Auto-select Quil Crossing on page load
         document.addEventListener('DOMContentLoaded', function() {
             const propertySelect = document.getElementById('tour-property');
             if (propertySelect) {
-                propertySelect.value = 'Quil Creek Crossing Apartments';
+                propertySelect.value = 'Quil Crossing Apartments';
             }
         });
     </script>
@@ -33,21 +33,21 @@
         }
         
         :root {
-            --primary: #1a1a1a;
-            --accent: #8B0000;
-            --accent-hover: #660000;
+            --primary: #2c4042;
+            --accent: #2c4042;
+            --accent-hover: #1e2e30;
             --bg: #fafafa;
             --card-bg: #ffffff;
             --text: #2c2c2c;
             --text-light: #6b6b6b;
-            --border: #e5e5e5;
+            --border: #d5d0c5;
             --success: #4caf50;
             --error: #d32f2f;
         }
         
         body {
             font-family: 'Work Sans', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            background: linear-gradient(135deg, #f5f3ee 0%, #eee9d9 100%);
             color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
@@ -189,7 +189,7 @@
         .form-select:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
+            box-shadow: 0 0 0 3px rgba(44,64,66,0.1);
         }
         
         .form-input::placeholder {
@@ -282,7 +282,7 @@
         
         .unit-type-btn:hover {
             border-color: var(--accent);
-            background: #f8fff8;
+            background: #f5f3ee;
         }
         
         .unit-type-btn.active {
@@ -325,7 +325,7 @@
         .submit-btn:hover {
             background: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+            box-shadow: 0 4px 12px rgba(44,64,66,0.3);
         }
         
         .submit-btn:disabled {
@@ -615,10 +615,10 @@
         
         <div class="page-header">
             <h1>Schedule Your Visit</h1>
-            <p class="subtitle">Experience modern living at Quil Creek Crossing</p>
+            <p class="subtitle">Experience modern living at Quil Crossing</p>
             <div class="property-badge" id="property-badge">
                 <span class="icon">&#127970;</span>
-                <span id="property-name-display">Quil Creek Crossing Apartments</span>
+                <span id="property-name-display">Quil Crossing Apartments</span>
             </div>
         </div>
         
@@ -656,10 +656,9 @@
                     <div class="form-group" id="unit-type-group">
                         <label class="form-label">Unit Type Interest</label>
                         <div class="unit-type-group" id="unit-type-buttons">
-                            <button type="button" class="unit-type-btn" data-type="studio">Studio</button>
                             <button type="button" class="unit-type-btn" data-type="1bed">1 Bed</button>
                             <button type="button" class="unit-type-btn" data-type="2bed">2 Bed</button>
-                            <button type="button" class="unit-type-btn" data-type="3bed">3+ Bed</button>
+                            <button type="button" class="unit-type-btn" data-type="3bed">3 Bed</button>
                         </div>
                         <p class="form-hint">Select all that apply</p>
                     </div>
@@ -783,7 +782,7 @@
     <script>
         // All AGM Listings Data (for determining available unit types)
         const agmListings = [
-            {"property":"Quil Creek Crossing Apartments","neighborhood":"Quil Creek","unit":"Various","bedrooms":1},
+            {"property":"Quil Crossing Apartments","neighborhood":"Quil Crossing","unit":"Various","bedrooms":1},
             {"property":"Seward Park","neighborhood":"Seward Park","unit":"Unit 01","bedrooms":1},
             {"property":"The Palms","neighborhood":"Eastlake","unit":"#7","bedrooms":2},
             {"property":"The Palms","neighborhood":"Eastlake","unit":"#12-5","bedrooms":1},
@@ -873,7 +872,7 @@
 
         // Property to Leasing Agent Email Mapping
         const propertyLeasingAgents = {
-            "Quil Creek Crossing Apartments": "leasing@agmrealestategroup.com",
+            "Quil Crossing Apartments": "leasing@agmrealestategroup.com",
             "301 Apartments": "leasing@agmrealestategroup.com",
             "6113 Apartments": "leasing@agmrealestategroup.com",
             "Arbor Heights": "leasing@agmrealestategroup.com",
@@ -1204,11 +1203,11 @@
         // Initialize on load
         initializePage();
     
-        // Auto-select Quil Creek Crossing on page load
+        // Auto-select Quil Crossing on page load
         document.addEventListener('DOMContentLoaded', function() {
             const propertySelect = document.getElementById('tour-property');
             if (propertySelect) {
-                propertySelect.value = 'Quil Creek Crossing Apartments';
+                propertySelect.value = 'Quil Crossing Apartments';
             }
         });
     </script>
