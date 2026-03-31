@@ -370,7 +370,7 @@
                                 <div>No tour times available this week.</div>
                                 <div style="margin-top:6px;font-size:0.84rem;">Try another week, or contact us directly.</div>
                                 <div class="contact-line">
-                                    &#9993; <a id="contact-email-link" href="mailto:leasing@agmrealestategroup.com">leasing@agmrealestategroup.com</a>
+                                    &#9993; <a id="contact-email-link" href="/cdn-cgi/l/email-protection#97fbf2f6e4fef9f0d7f6f0fae5f2f6fbf2e4e3f6e3f2f0e5f8e2e7b9f4f8fa"><span class="__cf_email__" data-cfemail="107c757163797e775071777d6275717c75636471647577627f65603e737f7d">[email&#160;protected]</span></a>
                                 </div>
                             </div>
                         </div>
@@ -414,7 +414,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ===== CONFIG =====
         const API_BASE = window.location.origin + '/api';
         const DAY_NAMES_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -506,7 +506,10 @@
             "Winslow Place": "leasing@agmrealestategroup.com"
         };
 
-        const allProperties = [...new Set(agmListings.map(l => l.property))].sort();
+        const allProperties = [...new Set([
+            ...agmListings.map(l => l.property),
+            ...Object.keys(propertyLeasingAgents)
+        ])].sort();
 
         // ===== STATE =====
         let selectedProperty = null;
@@ -942,14 +945,4 @@
             const el = document.getElementById('error-message');
             el.textContent = msg;
             el.classList.add('active');
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        function hideError() {
-            const el = document.getElementById('error-message');
-            el.textContent = '';
-            el.classList.remove('active');
-        }
-    </script>
-</body>
-</html>
+            el.scrollIntoView(
