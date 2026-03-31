@@ -128,8 +128,8 @@ export async function onRequestPost(context) {
     }
 }
 
-// DELETE /api/book?id=X
-// Auth required — agents can cancel a booking
+// DELETE /api/book?id=X or DELETE /api/book?slot_id=X
+// Auth required — agents can cancel a booking by booking ID or slot ID
 export async function onRequestDelete(context) {
     const { request, env } = context;
     const db = env.DB;
@@ -141,16 +141,24 @@ export async function onRequestDelete(context) {
 
     const url = new URL(request.url);
     const bookingId = url.searchParams.get('id');
+    const slotId = url.searchParams.get('slot_id');
 
-    if (!bookingId) {
-        return errorResponse('Booking ID is required.');
+    if (!bookingId && !slotId) {
+        return errorResponse('Booking ID or slot_id is required.');
     }
 
     try {
-        // Verify booking belongs to this property
-        const booking = await db.prepare(
-            'SELECT id, slot_id, property FROM bookings WHERE id = ?'
-        ).bind(bookingId).first();
+        // Look up booking by either booking ID or slot ID
+        let booking;
+        if (bookingId) {
+            booking = await db.prepare(
+                'SELECT id, slot_id, property FROM bookings WHERE id = ?'
+            ).bind(bookingId).first();
+        } else {
+            booking = await db.prepare(
+                'SELECT id, slot_id, property FROM bookings WHERE slot_id = ?'
+            ).bind(slotId).first();
+        }
 
         if (!booking) {
             return errorResponse('Booking not found.', 404);
@@ -162,7 +170,7 @@ export async function onRequestDelete(context) {
 
         // Atomically: delete booking + set slot back to available
         await db.batch([
-            db.prepare('DELETE FROM bookings WHERE id = ?').bind(bookingId),
+            db.prepare('DELETE FROM bookings WHERE id = ?').bind(booking.id),
             db.prepare(
                 "UPDATE slots SET status = 'available', updated_at = datetime('now') WHERE id = ?"
             ).bind(booking.slot_id),
@@ -170,7 +178,7 @@ export async function onRequestDelete(context) {
 
         return jsonResponse({
             success: true,
-            cancelled_booking_id: parseInt(bookingId),
+            cancelled_booking_id: booking.id,
             freed_slot_id: booking.slot_id,
         });
 
