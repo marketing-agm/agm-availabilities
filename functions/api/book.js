@@ -1,8 +1,8 @@
-// POST /api/book
-// Public endpoint — prospects book an available slot
-// Body: { slot_id, first_name, last_name?, email, phone, move_in_date?, unit_types?, notes? }
+// /api/book
+// POST — public, prospects book an available slot
+// DELETE — auth required, cancel a booking
 
-import { handleOptions, jsonResponse, errorResponse, validateSession } from './_utils.js';
+import { handleOptions, jsonResponse, errorResponse, validateSession, isAdmin } from './_utils.js';
 
 export async function onRequestOptions() {
     return handleOptions();
@@ -25,18 +25,15 @@ export async function onRequestPost(context) {
             notes = '',
         } = body;
 
-        // Validate required fields
         if (!slot_id || !first_name || !email || !phone) {
             return errorResponse('slot_id, first_name, email, and phone are required.');
         }
 
-        // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return errorResponse('Invalid email address.');
         }
 
-        // Check that the slot exists and is available
         const slot = await db.prepare(
             'SELECT id, property, slot_date, start_time, end_time, status FROM slots WHERE id = ?'
         ).bind(slot_id).first();
@@ -49,16 +46,10 @@ export async function onRequestPost(context) {
             return errorResponse('This time slot has already been booked. Please choose another.', 409);
         }
 
-        // Check that the slot is not in the past
         const slotDateTime = new Date(slot.slot_date + 'T' + slot.start_time + ':00');
         if (slotDateTime < new Date()) {
             return errorResponse('This time slot has already passed.', 410);
         }
-
-        // Atomically book the slot:
-        // 1. Update slot status to 'booked'
-        // 2. Create booking record
-        // Using a batch for atomicity
 
         const statements = [
             db.prepare(
@@ -71,19 +62,14 @@ export async function onRequestPost(context) {
 
         const results = await db.batch(statements);
 
-        // Check if the update actually changed a row (race condition protection)
         if (results[0].meta.changes === 0) {
             return errorResponse('This time slot was just booked by someone else. Please choose another.', 409);
         }
 
-        // Format slot info for the response (used by frontend to trigger EmailJS)
         const formatDate = (dateStr) => {
             const d = new Date(dateStr + 'T00:00:00');
             return d.toLocaleDateString('en-US', {
-                weekday: 'short',
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric',
+                weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
             });
         };
 
@@ -105,13 +91,7 @@ export async function onRequestPost(context) {
                 end_time: slot.end_time,
                 time_formatted: `${formatTime(slot.start_time)} - ${formatTime(slot.end_time)}`,
                 prospect: {
-                    first_name,
-                    last_name,
-                    email,
-                    phone,
-                    move_in_date,
-                    unit_types,
-                    notes,
+                    first_name, last_name, email, phone, move_in_date, unit_types, notes,
                 },
             },
         }, 201);
@@ -119,7 +99,6 @@ export async function onRequestPost(context) {
     } catch (err) {
         console.error('Booking error:', err);
 
-        // Handle unique constraint violation (double-booking attempt)
         if (err.message && err.message.includes('UNIQUE constraint failed')) {
             return errorResponse('This time slot has already been booked.', 409);
         }
@@ -129,13 +108,13 @@ export async function onRequestPost(context) {
 }
 
 // DELETE /api/book?id=X or DELETE /api/book?slot_id=X
-// Auth required — agents can cancel a booking by booking ID or slot ID
+// Auth required — admin or per-property agent can cancel a booking
 export async function onRequestDelete(context) {
     const { request, env } = context;
     const db = env.DB;
 
-    const property = await validateSession(request, db);
-    if (!property) {
+    const authedProperty = await validateSession(request, db);
+    if (!authedProperty) {
         return errorResponse('Authentication required.', 401);
     }
 
@@ -148,27 +127,28 @@ export async function onRequestDelete(context) {
     }
 
     try {
-        // Look up booking by either booking ID or slot ID
         let booking;
-        if (bookingId) {
-            booking = await db.prepare(
-                'SELECT id, slot_id, property FROM bookings WHERE id = ?'
-            ).bind(bookingId).first();
-        } else {
+
+        if (slotId) {
             booking = await db.prepare(
                 'SELECT id, slot_id, property FROM bookings WHERE slot_id = ?'
             ).bind(slotId).first();
+        } else {
+            booking = await db.prepare(
+                'SELECT id, slot_id, property FROM bookings WHERE id = ?'
+            ).bind(bookingId).first();
         }
 
         if (!booking) {
             return errorResponse('Booking not found.', 404);
         }
 
-        if (booking.property !== property) {
+        // Admin can cancel any booking; per-property agents only their own
+        if (!isAdmin(authedProperty) && booking.property !== authedProperty) {
             return errorResponse('You can only cancel bookings for your own property.', 403);
         }
 
-        // Atomically: delete booking + set slot back to available
+        // Delete booking and reset slot to available
         await db.batch([
             db.prepare('DELETE FROM bookings WHERE id = ?').bind(booking.id),
             db.prepare(
