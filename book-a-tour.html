@@ -182,7 +182,7 @@
                     <div id="cal-content" style="display:none;">
                         <div class="cal-nav"><div class="cal-nav-arrows"><button class="cal-nav-btn" onclick="changeWeek(-1)">&#8249;</button><span class="cal-week-label" id="cal-week-label"></span><button class="cal-nav-btn" onclick="changeWeek(1)">&#8250;</button></div><button class="cal-today-btn" onclick="goToday()">Today</button></div>
                         <div class="cal-days-grid" id="cal-days-grid"></div>
-                        <div class="no-slots-msg" id="no-slots-msg" style="display:none;"><span class="icon">&#128197;</span><div>No tour times available this week.</div><div style="margin-top:6px;font-size:.84rem">Try another week, or contact us directly.</div><div class="contact-line">&#9993; <a id="contact-email-link" href="mailto:leasing@agmrealestategroup.com">leasing@agmrealestategroup.com</a></div></div>
+                        <div class="no-slots-msg" id="no-slots-msg" style="display:none;"><span class="icon">&#128197;</span><div>No tour times available this week.</div><div style="margin-top:6px;font-size:.84rem">Try another week, or contact us directly.</div><div class="contact-line">&#9993; <a id="contact-email-link" href="/cdn-cgi/l/email-protection#e08c858193898e87a081878d9285818c85939481948587928f9590ce838f8d"><span class="__cf_email__" data-cfemail="721e1713011b1c153213151f0017131e17010613061715001d07025c111d1f">[email&#160;protected]</span></a></div></div>
                     </div>
                     <div class="selected-slot-bar" id="selected-slot-bar"><div class="selected-slot-info"><span id="selected-time-display"></span><div class="date" id="selected-date-display"></div></div><button class="clear-slot-btn" onclick="clearSelectedSlot()">&times;</button></div>
                 </div>
@@ -225,7 +225,7 @@
         <div class="success-panel" id="success-state"><div class="success-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div><h2 class="success-title">Tour booked!</h2><p class="success-msg" id="success-message">Your tour has been confirmed.</p><div class="success-actions"><button class="success-btn success-btn-primary" onclick="resetForm()">Request Another Tour</button><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-secondary" target="_blank">View All Listings</a></div></div>
         <div class="not-found-state" id="not-found-state"><h2>Property not found</h2><p>The property you&#8217;re looking for isn&#8217;t in our system.</p><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-primary" target="_blank">View All Listings</a></div>
     </div>
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         const API_BASE='/api';
         const DAY_NAMES_SHORT=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -283,7 +283,7 @@
             selectedProperty=prop;goToStep(2);
         });
         document.getElementById('btn-step2-back').addEventListener('click',()=>{clearInterval(pollTimer);goToStep(1);});
-        document.getElementById('btn-step2-next').addEventListener('click',()=>{if(selectedSlot)goToStep(3);});
+        document.getElementById('btn-step2-next').addEventListener('click',()=>{if(selectedSlot||(fallbackMode&&fallbackDate&&fallbackTime))goToStep(3);});
         document.getElementById('btn-step3-back').addEventListener('click',()=>goToStep(2));
         document.getElementById('tour-property').addEventListener('change',(e)=>{selectedProperty=e.target.value;updateUnitTypeCounts(selectedProperty);});
 
@@ -410,7 +410,7 @@
         function showError(msg){const e=document.getElementById('error-message');e.textContent=msg;e.classList.add('active');e.scrollIntoView({behavior:'smooth',block:'center'});}
         function hideError(){const e=document.getElementById('error-message');e.textContent='';e.classList.remove('active');}
 
-        document.querySelectorAll('.fb-time-chip').forEach(chip=>{chip.addEventListener('click',()=>{document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));chip.classList.add('active');fallbackTime=chip.dataset.time;if(fallbackDate)document.getElementById('btn-step2-next').disabled=false;});});
+                document.querySelectorAll('.fb-time-chip').forEach(chip=>{chip.addEventListener('click',()=>{document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));chip.classList.add('active');fallbackTime=chip.dataset.time;if(fallbackDate)document.getElementById('btn-step2-next').disabled=false;});});
         document.getElementById('fallback-date').addEventListener('change',(e)=>{fallbackDate=e.target.value;if(fallbackTime)document.getElementById('btn-step2-next').disabled=false;});
 
         initializePage();
