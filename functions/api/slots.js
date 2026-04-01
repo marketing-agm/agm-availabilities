@@ -3,7 +3,7 @@
 // POST - Auth required: create new availability slot(s)
 // DELETE - Auth required: remove a slot by ID
 
-import { handleOptions, jsonResponse, errorResponse, validateSession } from './_utils.js';
+import { handleOptions, jsonResponse, errorResponse, validateSession, isAdmin } from './_utils.js';
 
 export async function onRequestOptions() {
     return handleOptions();
@@ -29,7 +29,6 @@ export async function onRequestGet(context) {
         let params;
 
         if (from && to) {
-            // Date range query
             query = `
                 SELECT s.id, s.property, s.slot_date, s.start_time, s.end_time, s.status,
                        b.first_name AS booked_by_first, b.last_name AS booked_by_last,
@@ -42,7 +41,6 @@ export async function onRequestGet(context) {
             `;
             params = [property, from, to];
         } else if (from) {
-            // From date onward (default: next 7 days)
             query = `
                 SELECT s.id, s.property, s.slot_date, s.start_time, s.end_time, s.status,
                        b.first_name AS booked_by_first, b.last_name AS booked_by_last,
@@ -55,7 +53,6 @@ export async function onRequestGet(context) {
             `;
             params = [property, from];
         } else {
-            // Default: today onward
             query = `
                 SELECT s.id, s.property, s.slot_date, s.start_time, s.end_time, s.status,
                        b.first_name AS booked_by_first, b.last_name AS booked_by_last,
@@ -72,9 +69,9 @@ export async function onRequestGet(context) {
         const stmt = db.prepare(query);
         const result = await stmt.bind(...params).all();
 
-        // Check if request is from an authenticated agent
+        // Check if request is from an authenticated agent or admin
         const authedProperty = await validateSession(request, db);
-        const isAgent = authedProperty === property;
+        const isAgentOrAdmin = isAdmin(authedProperty) || authedProperty === property;
 
         // For prospects (unauthenticated), strip booking contact details
         const slots = result.results.map(slot => {
@@ -87,8 +84,8 @@ export async function onRequestGet(context) {
                 status: slot.status,
             };
 
-            // Agents see full booking details; prospects just see status
-            if (isAgent && slot.booked_by_first) {
+            // Agents/admins see full booking details; prospects just see status
+            if (isAgentOrAdmin && slot.booked_by_first) {
                 base.booking = {
                     first_name: slot.booked_by_first,
                     last_name: slot.booked_by_last,
@@ -111,25 +108,36 @@ export async function onRequestGet(context) {
 
 // POST /api/slots
 // Auth required. Creates one or more availability slots.
-// Body: { slots: [{ date, start_time, end_time }] }
-//   or: { date, start_time, end_time } for a single slot
+// Body: { property?: string, slots: [{ date, start_time, end_time }] }
+//   Admin must pass property in the body. Per-property agents use their session property.
 export async function onRequestPost(context) {
     const { request, env } = context;
     const db = env.DB;
 
-    // Verify agent authentication
-    const property = await validateSession(request, db);
-    if (!property) {
+    const authedProperty = await validateSession(request, db);
+    if (!authedProperty) {
         return errorResponse('Authentication required. Please log in.', 401);
     }
 
     try {
         const body = await request.json();
 
+        // Determine which property to create slots for
+        let property;
+        if (isAdmin(authedProperty)) {
+            // Admin must specify which property
+            property = body.property;
+            if (!property) {
+                return errorResponse('Admin must specify a property.');
+            }
+        } else {
+            // Per-property agent uses their session property
+            property = authedProperty;
+        }
+
         // Normalize to array
         const slotsInput = body.slots || [body];
 
-        // Validate all slots
         const errors = [];
         const validSlots = [];
 
@@ -142,25 +150,21 @@ export async function onRequestPost(context) {
                 continue;
             }
 
-            // Validate date format (YYYY-MM-DD)
             if (!/^\d{4}-\d{2}-\d{2}$/.test(s.date)) {
                 errors.push(`Invalid date format${idx}. Use YYYY-MM-DD.`);
                 continue;
             }
 
-            // Validate time format (HH:MM)
             if (!/^\d{2}:\d{2}$/.test(s.start_time) || !/^\d{2}:\d{2}$/.test(s.end_time)) {
                 errors.push(`Invalid time format${idx}. Use HH:MM (24-hour).`);
                 continue;
             }
 
-            // Ensure end_time is after start_time
             if (s.end_time <= s.start_time) {
                 errors.push(`End time must be after start time${idx}.`);
                 continue;
             }
 
-            // Ensure date is not in the past
             const slotDate = new Date(s.date + 'T00:00:00Z');
             const today = new Date();
             today.setUTCHours(0, 0, 0, 0);
@@ -169,7 +173,6 @@ export async function onRequestPost(context) {
                 continue;
             }
 
-            // Check for overlapping slots
             const overlap = await db.prepare(`
                 SELECT id FROM slots
                 WHERE property = ? AND slot_date = ?
@@ -189,7 +192,6 @@ export async function onRequestPost(context) {
             return errorResponse(errors.join(' '), 400);
         }
 
-        // Insert valid slots
         const inserted = [];
         for (const s of validSlots) {
             const result = await db.prepare(
@@ -230,9 +232,8 @@ export async function onRequestDelete(context) {
     const { request, env } = context;
     const db = env.DB;
 
-    // Verify agent authentication
-    const property = await validateSession(request, db);
-    if (!property) {
+    const authedProperty = await validateSession(request, db);
+    if (!authedProperty) {
         return errorResponse('Authentication required. Please log in.', 401);
     }
 
@@ -244,7 +245,6 @@ export async function onRequestDelete(context) {
     }
 
     try {
-        // Verify the slot belongs to this property and is not booked
         const slot = await db.prepare(
             'SELECT id, property, status FROM slots WHERE id = ?'
         ).bind(slotId).first();
@@ -253,7 +253,8 @@ export async function onRequestDelete(context) {
             return errorResponse('Slot not found.', 404);
         }
 
-        if (slot.property !== property) {
+        // Admin can delete any property's slots; per-property agents only their own
+        if (!isAdmin(authedProperty) && slot.property !== authedProperty) {
             return errorResponse('You can only delete slots for your own property.', 403);
         }
 
