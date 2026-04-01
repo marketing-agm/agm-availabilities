@@ -80,6 +80,17 @@
         .selected-slot-info .date{font-weight:400;font-size:.85rem;color:var(--text-light);margin-top:2px}
         .clear-slot-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--gray-300);background:var(--white);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-light);transition:all .2s}
         .clear-slot-btn:hover{background:var(--gray-100);color:var(--black)}
+        .fallback-section{display:none;animation:fadeUp .4s ease}.fallback-section.active{display:block}
+.fallback-note{text-align:center;font-size:.85rem;color:var(--text-light);margin-bottom:28px;font-weight:300;line-height:1.6;padding:16px 20px;background:var(--gray-100);border-radius:12px;border:1px solid var(--gray-200)}
+.fallback-date-group{margin-bottom:28px;text-align:center}
+.fallback-date-label{font-size:.85rem;font-weight:500;color:var(--text);margin-bottom:10px}
+.fallback-date-input{padding:14px 18px;font-size:1rem;font-family:'DM Sans',sans-serif;border:2px solid var(--gray-200);border-radius:12px;background:var(--white);color:var(--text);transition:border-color .2s;max-width:280px;width:100%;text-align:center}
+.fallback-date-input:focus{outline:none;border-color:var(--black)}
+.fallback-time-label{font-size:.85rem;font-weight:500;color:var(--text);margin-bottom:14px;text-align:center}
+.fallback-time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:420px;margin:0 auto}
+.fb-time-chip{padding:14px 8px;border:2px solid var(--gray-200);border-radius:12px;background:var(--white);font-size:.9rem;font-weight:500;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;transition:all .2s;text-align:center}
+.fb-time-chip:hover{border-color:var(--gray-400);background:var(--gray-100)}
+.fb-time-chip.active{background:var(--black);color:var(--white);border-color:var(--black)}
         .calendar-loading{text-align:center;padding:40px;color:var(--text-light);font-size:.9rem}
         .spin{width:28px;height:28px;border:3px solid var(--gray-200);border-top-color:var(--black);border-radius:50%;margin:0 auto 12px;animation:spin .7s linear infinite}
         @keyframes spin{to{transform:rotate(360deg)}}
@@ -128,7 +139,7 @@
         .not-found-state{display:none;text-align:center;padding:60px 20px}
         .not-found-state h2{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--black);margin-bottom:12px}
         .not-found-state p{color:var(--text-light);margin-bottom:28px}
-        @media(max-width:640px){.page-wrapper{padding:32px 16px 60px}.page-header h1{font-size:2rem}.step-label{display:none}.step-line{min-width:24px;margin:0 8px}.calendar-wrapper{padding:16px 10px}.cal-days-grid{gap:3px}.cal-day-body{min-height:80px;padding:3px 2px}.slot-pill{font-size:.62rem;padding:5px 2px}.cal-day-name{font-size:.6rem}.cal-day-num{font-size:.9rem}.unit-type-grid{gap:10px}.contact-grid{grid-template-columns:1fr}.btn-row{flex-direction:column-reverse;gap:12px}.btn-back,.btn-next{width:100%;justify-content:center}.review-row{flex-direction:column;gap:4px}.review-value{text-align:left}.selected-slot-bar{padding:12px 14px}}
+        @media(max-width:640px){.page-wrapper{padding:32px 16px 60px}.page-header h1{font-size:2rem}.step-label{display:none}.step-line{min-width:24px;margin:0 8px}.calendar-wrapper{padding:16px 10px}.cal-days-grid{gap:3px}.cal-day-body{min-height:80px;padding:3px 2px}.slot-pill{font-size:.62rem;padding:5px 2px}.cal-day-name{font-size:.6rem}.cal-day-num{font-size:.9rem}.unit-type-grid{gap:10px}.contact-grid{grid-template-columns:1fr}.btn-row{flex-direction:column-reverse;gap:12px}.btn-back,.btn-next{width:100%;justify-content:center}.review-row{flex-direction:column;gap:4px}.review-value{text-align:left}.selected-slot-bar{padding:12px 14px}.fallback-time-grid{gap:8px}.fb-time-chip{padding:12px 6px;font-size:.82rem}}
     </style>
 </head>
 <body>
@@ -175,6 +186,22 @@
                     </div>
                     <div class="selected-slot-bar" id="selected-slot-bar"><div class="selected-slot-info"><span id="selected-time-display"></span><div class="date" id="selected-date-display"></div></div><button class="clear-slot-btn" onclick="clearSelectedSlot()">&times;</button></div>
                 </div>
+                <div class="fallback-section" id="fallback-section">
+                    <div class="fallback-note">This property hasn&#8217;t set up specific tour times yet. Pick a preferred date and time below, and our leasing team will reach out to confirm.</div>
+                    <div class="fallback-date-group"><p class="fallback-date-label">Preferred tour date</p><input type="date" class="fallback-date-input" id="fallback-date"></div>
+                    <p class="fallback-time-label">Preferred time</p>
+                    <div class="fallback-time-grid" id="fallback-time-grid">
+                        <button class="fb-time-chip" data-time="9:00 AM">9:00 AM</button>
+                        <button class="fb-time-chip" data-time="10:00 AM">10:00 AM</button>
+                        <button class="fb-time-chip" data-time="11:00 AM">11:00 AM</button>
+                        <button class="fb-time-chip" data-time="12:00 PM">12:00 PM</button>
+                        <button class="fb-time-chip" data-time="1:00 PM">1:00 PM</button>
+                        <button class="fb-time-chip" data-time="2:00 PM">2:00 PM</button>
+                        <button class="fb-time-chip" data-time="3:00 PM">3:00 PM</button>
+                        <button class="fb-time-chip" data-time="4:00 PM">4:00 PM</button>
+                        <button class="fb-time-chip" data-time="5:00 PM">5:00 PM</button>
+                    </div>
+                </div>
                 <div class="btn-row"><button class="btn-back" id="btn-step2-back"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg><span>Back</span></button><button class="btn-next" id="btn-step2-next" disabled><span>Next</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
             </div>
             <!-- STEP 3 -->
@@ -210,6 +237,7 @@
 
         const allProperties=[...new Set([...agmListings.map(l=>l.property),...Object.keys(propertyLeasingAgents)])].sort();
         let currentStep=1,selectedProperty='',selectedUnitTypes=[],selectedSlot=null,slotsData=[],pollTimer=null,currentWeekStart=getMondayOfWeek(new Date());
+        let fallbackMode=false,fallbackDate='',fallbackTime='';
 
         emailjs.init('oVeCEKCpUsDe3_ba2');
 
@@ -245,7 +273,7 @@
             document.querySelectorAll('.step-item').forEach(item=>{const s=parseInt(item.dataset.step);item.classList.remove('active','completed');if(s===step)item.classList.add('active');else if(s<step)item.classList.add('completed');});
             document.querySelectorAll('.step-line').forEach(line=>{line.classList.toggle('completed',parseInt(line.dataset.line)<step);});
             if(step===2&&selectedProperty)loadSlots();
-            if(step===3)populateReview();
+            if(step===3){populateReview();document.getElementById('submit-btn').querySelector('span').textContent=fallbackMode?'Request Tour':'Book This Tour';}
             window.scrollTo({top:0,behavior:'smooth'});
         }
 
@@ -314,14 +342,16 @@
         }
 
         function selectSlot(slot){selectedSlot=slot;document.getElementById('selected-time-display').textContent=formatTime12(slot.start_time)+' \u2013 '+formatTime12(slot.end_time);document.getElementById('selected-date-display').textContent=formatDateLong(slot.date);document.getElementById('selected-slot-bar').classList.add('active');document.getElementById('btn-step2-next').disabled=false;renderSlots();document.getElementById('selected-slot-bar').scrollIntoView({behavior:'smooth',block:'center'});}
-        function clearSelectedSlot(){selectedSlot=null;document.getElementById('selected-slot-bar').classList.remove('active');document.getElementById('btn-step2-next').disabled=true;renderSlots();}
+        function clearSelectedSlot(){selectedSlot=null;document.getElementById('selected-slot-bar').classList.remove('active');document.getElementById('btn-step2-next').disabled=true;document.getElementById('fallback-section').classList.remove('active');document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));renderSlots();}
 
         async function loadSlots(){
             if(!selectedProperty)return;
             document.getElementById('cal-loading').style.display='block';document.getElementById('cal-content').style.display='none';
+            document.getElementById('fallback-section').classList.remove('active');
             const dates=getWeekDates(),from=formatDateISO(dates[0]),to=formatDateISO(dates[6]);
             try{const res=await fetch(API_BASE+'/slots?property='+encodeURIComponent(selectedProperty)+'&from='+from+'&to='+to);const data=await res.json();slotsData=data.slots||[];}catch(e){slotsData=[];}
-            document.getElementById('cal-loading').style.display='none';document.getElementById('cal-content').style.display='block';renderSlots();
+            if(slotsData.length===0){try{const fe=new Date();fe.setDate(fe.getDate()+60);const r2=await fetch(API_BASE+'/slots?property='+encodeURIComponent(selectedProperty)+'&from='+formatDateISO(new Date())+'&to='+formatDateISO(fe));const d2=await r2.json();if(!d2.slots||d2.slots.length===0){fallbackMode=true;document.getElementById('cal-loading').style.display='none';document.getElementById('cal-content').style.display='none';document.getElementById('fallback-section').classList.add('active');document.getElementById('fallback-date').min=new Date().toISOString().split('T')[0];document.getElementById('fallback-date').value='';fallbackDate='';fallbackTime='';document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));document.getElementById('btn-step2-next').disabled=true;clearInterval(pollTimer);return;}}catch(e){}}
+            fallbackMode=false;document.getElementById('cal-loading').style.display='none';document.getElementById('cal-content').style.display='block';renderSlots();
             clearInterval(pollTimer);pollTimer=setInterval(async()=>{try{const r=await fetch(API_BASE+'/slots?property='+encodeURIComponent(selectedProperty)+'&from='+from+'&to='+to);const d=await r.json();slotsData=d.slots||[];renderSlots();}catch(e){}},30000);
         }
 
@@ -329,14 +359,25 @@
             document.getElementById('review-property').textContent=selectedProperty||'\u2014';
             const tl={'studio':'Studio','1bed':'1 Bed','2bed':'2 Bed','3bed':'3+ Bed'};
             document.getElementById('review-units').textContent=selectedUnitTypes.length>0?selectedUnitTypes.map(t=>tl[t]).join(', '):'Any';
-            if(selectedSlot)document.getElementById('review-time').textContent=formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time)+'\u2013'+formatTime12(selectedSlot.end_time);
+            if(fallbackMode){document.getElementById('review-time').textContent=formatDateLong(fallbackDate)+' at '+fallbackTime+' (requested)';}else if(selectedSlot)document.getElementById('review-time').textContent=formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time)+'\u2013'+formatTime12(selectedSlot.end_time);
         }
 
         async function handleSubmit(){
             const property=selectedProperty,firstName=document.getElementById('tour-first-name').value.trim(),lastName=document.getElementById('tour-last-name').value.trim(),email=document.getElementById('tour-email').value.trim(),phone=document.getElementById('tour-phone').value.trim(),moveInDate=document.getElementById('tour-movein-date').value;
-            if(!property)return showError('Please select a property.');if(!firstName)return showError('Please enter your first name.');if(!email)return showError('Please enter your email.');if(!phone)return showError('Please enter your phone number.');if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return showError('Please enter a valid email address.');if(!selectedSlot)return showError('Please select a tour time.');
+            if(!property)return showError('Please select a property.');if(!firstName)return showError('Please enter your first name.');if(!email)return showError('Please enter your email.');if(!phone)return showError('Please enter your phone number.');if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return showError('Please enter a valid email address.');if(!fallbackMode&&!selectedSlot)return showError('Please select a tour time.');if(fallbackMode&&(!fallbackDate||!fallbackTime))return showError('Please select a date and time.');
             hideError();const btn=document.getElementById('submit-btn');btn.disabled=true;btn.innerHTML='<span class="submit-spinner"></span><span>Booking...</span>';
             try{
+                if(fallbackMode){
+                    const tl={studio:'Studio','1bed':'1 Bedroom','2bed':'2 Bedroom','3bed':'3+ Bedroom'};
+                    const unitStr=selectedUnitTypes.length>0?selectedUnitTypes.map(t=>tl[t]).join(', '):'Not specified';
+                    const now=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
+                    const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:formatDateLong(fallbackDate),tour_times:fallbackTime+' (preferred)',unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
+                    const ep=[emailjs.send('service_mwnzq3g','template_ris04ko',tp),emailjs.send('service_mwnzq3g','template_lhvuk2q',tp)];
+                    if(property==='Niwa Apartments'){ep.push(emailjs.send('service_mwnzq3g','template_ris04ko',Object.assign({},tp,{to_email:'leasing@niwaapartments.com'})));}
+                    await Promise.all(ep);
+                    document.getElementById('success-message').textContent='Thank you for your interest in '+property+'! We received your preferred time of '+fallbackTime+' on '+formatDateLong(fallbackDate)+'. Our leasing team will reach out within 24 hours to confirm.';
+                    document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');
+                }else{
                 const bookRes=await fetch(API_BASE+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slot_id:selectedSlot.id,first_name:firstName,last_name:lastName,email:email,phone:phone,move_in_date:moveInDate,unit_types:selectedUnitTypes.join(',')})});
                 const bookData=await bookRes.json();
                 if(!bookRes.ok){if(bookRes.status===409){showError('This time slot was just booked by someone else. Please pick another.');clearSelectedSlot();goToStep(2);await loadSlots();btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';return;}throw new Error(bookData.error||'Booking failed.');}
@@ -350,16 +391,16 @@
                 const tourTime=bookData.booking?bookData.booking.date_formatted+' at '+bookData.booking.time_formatted:formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time);
                 document.getElementById('success-message').textContent='Your tour at '+property+' is confirmed for '+tourTime+'. Our leasing team will reach out to confirm details.';
                 document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');clearInterval(pollTimer);
-            }catch(err){showError(err.message||'Something went wrong. Please try again.');}
+            }}catch(err){showError(err.message||'Something went wrong. Please try again.');}
             finally{btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';}
         }
 
         function resetForm(){
             document.getElementById('form-container').style.display='block';document.getElementById('steps-indicator').style.display='flex';document.getElementById('success-state').classList.remove('active');
             ['tour-first-name','tour-last-name','tour-email','tour-phone','tour-movein-date'].forEach(id=>document.getElementById(id).value='');
-            selectedUnitTypes=[];selectedSlot=null;slotsData=[];currentWeekStart=getMondayOfWeek(new Date());
+            selectedUnitTypes=[];selectedSlot=null;slotsData=[];currentWeekStart=getMondayOfWeek(new Date());fallbackMode=false;fallbackDate='';fallbackTime='';
             document.querySelectorAll('.unit-type-card').forEach(c=>c.classList.remove('active'));
-            document.getElementById('selected-slot-bar').classList.remove('active');document.getElementById('btn-step2-next').disabled=true;
+            document.getElementById('selected-slot-bar').classList.remove('active');document.getElementById('btn-step2-next').disabled=true;document.getElementById('fallback-section').classList.remove('active');document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));
             if(!getUrlParams().property){document.getElementById('tour-property').value='';updateUnitTypeCounts(null);}
             hideError();updateWeekLabel();renderCalendar();goToStep(1);
         }
@@ -368,6 +409,9 @@
         function formatDateLong(s){const d=new Date(s+'T12:00:00');return DAY_NAMES_SHORT[d.getDay()]+', '+MONTH_NAMES_LONG[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();}
         function showError(msg){const e=document.getElementById('error-message');e.textContent=msg;e.classList.add('active');e.scrollIntoView({behavior:'smooth',block:'center'});}
         function hideError(){const e=document.getElementById('error-message');e.textContent='';e.classList.remove('active');}
+
+        document.querySelectorAll('.fb-time-chip').forEach(chip=>{chip.addEventListener('click',()=>{document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));chip.classList.add('active');fallbackTime=chip.dataset.time;if(fallbackDate)document.getElementById('btn-step2-next').disabled=false;});});
+        document.getElementById('fallback-date').addEventListener('change',(e)=>{fallbackDate=e.target.value;if(fallbackTime)document.getElementById('btn-step2-next').disabled=false;});
 
         initializePage();
     </script>
