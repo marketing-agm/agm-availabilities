@@ -53,7 +53,10 @@ export function generateSalt() {
 }
 
 // Validate session token from Authorization header
-// Returns the property name if valid, null if not
+// Returns:
+//   '__admin__' if valid admin session (can manage any property)
+//   property name string if valid per-property session (legacy)
+//   null if invalid/expired
 export async function validateSession(request, db) {
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -73,4 +76,9 @@ export async function validateSession(request, db) {
     ).bind(token).first();
 
     return session ? session.property : null;
+}
+
+// Helper: check if a session result represents an admin
+export function isAdmin(sessionProperty) {
+    return sessionProperty === '__admin__';
 }
