@@ -30,15 +30,14 @@ This count is the authoritative number of listings. All must be captured.
 
 Run a Python script that parses the downloaded HTML using regex. The AppFolio HTML structure uses these CSS classes/patterns:
 
-- **Listing blocks**: Each listing is a `<div>` with `data-listing-id="UUID"` attribute
-- **Title**: `<a class="js-listing-title">` — contains property name + marketing text
-- **Address**: `<div class="js-listing-address">` — full street address
-- **Rent**: `<span class="js-listing-blurb-rent">` — e.g., "$1,695 / Month"
-- **Bed/Bath**: `<span class="js-listing-blurb-bed-bath">` — e.g., "1 Bed / 1 Bath", "Studio / 1 Bath"
-- **Square feet**: `<span class="js-listing-square-feet">` — e.g., "690 Sq Ft" (may be empty)
+- **Listing blocks**: Split HTML by `<div class="listing-item result js-listing-item"` — each block is one listing
+- **Title + UUID**: Inside each block, find the title inside `<h2 class="listing-item__title js-listing-title">` → `<a href="/listings/detail/UUID">Title Text</a>`. IMPORTANT: Each block also has an image `<a>` linking to the same UUID — match the one inside `js-listing-title` specifically to get clean title text.
+- **Address**: `<span class="js-listing-address">` — full street address
+- **Rent**: `<span/div class="js-listing-blurb-rent">` — contains e.g., "$1,695" (extract with regex `\$[\d,]+`)
+- **Bed/Bath**: `<span class="js-listing-blurb-bed-bath">` — e.g., "1 bd / 1 ba", "Studio / 1 ba"
+- **Square feet**: Prefer `<dt class="detail-box__label">Square Feet</dt><dd class="detail-box__value">NNN</dd>` (desktop). Fallback: `<span class="js-listing-square-feet">Square Feet: NNN</span>` (mobile).
 - **Availability**: `<dd class="detail-box__value js-listing-available">` — e.g., "NOW", "4/15/26"
   CRITICAL: Each listing has TWO availability elements (mobile + desktop). Use the `<dd>` version (detail-box__value), NOT the mobile one.
-- **Detail URL**: `<a class="js-listing-title" href="/listings/detail/UUID">` — extract UUID from href
 - **MFTE detection**: Check if title text contains "MFTE" (case-insensitive)
 
 The Python script should output JSON with these fields per listing:
@@ -84,13 +83,12 @@ Each AppFolio listing title contains the property name embedded in marketing tex
 | "Mercer Tower" | Mercer Tower |
 | "Niwa" | Niwa Apartments |
 | "Ondine" | Ondine Eastlake |
-| "Ramesh" | Ramesh House |
 | "Reverie" | Reverie Apartments |
 | "Rialto" | Rialto Court |
 | "Skandi" | Skandi Villa |
-| "The Palms" or "Palms" | The Palms |
 | "Viewmont" | Viewmont Apartments |
 | "White Heather" | White Heather Apartments |
+| "Willow Creek" | Willow Creek Apartments |
 
 If a listing title doesn't match ANY known property, it's a **new property**. STOP and ask the user for:
 1. Canonical property name
@@ -115,6 +113,7 @@ If a listing title doesn't match ANY known property, it's a **new property**. ST
 - "Reverie Apartments" → "Reverie"
 - "Viewmont Apartments" → "Viewmont"
 - "White Heather Apartments" → "White Heather"
+- "Willow Creek Apartments" → "Willow Creek"
 - All others keep their full canonical name as the short name (e.g., "BalCro", "Fremont Village", "Highway Place", "Mercer Tower", etc.)
 
 ---
@@ -201,13 +200,12 @@ Lorelei Apartments → Capitol Hill
 Mercer Tower → Mercer Island
 Niwa Apartments → Lower Queen Anne
 Ondine Eastlake → Eastlake
-Ramesh House → Green Lake
 Reverie Apartments → Beacon Hill
 Rialto Court → Capitol Hill
 Skandi Villa → Edmonds
-The Palms → Eastlake
 Viewmont Apartments → Capitol Hill
 White Heather Apartments → Lake City
+Willow Creek Apartments → Bothell
 ```
 
 If a new property appears, ask the user for the neighborhood.
@@ -238,19 +236,18 @@ The file `/home/user/agm-availabilities/index.html` has four data structures to 
 "Fairlake Quads": { lat: 47.5973, lng: -122.1465 }
 "Fremont Village": { lat: 47.6565, lng: -122.3501 }
 "Golden Inca": { lat: 47.6203, lng: -122.3112 }
-"Hill Town Apartments": { lat: 47.5921, lng: -122.3039 }
 "Highway Place": { lat: 47.9335, lng: -122.2276 }
+"Hill Town Apartments": { lat: 47.5921, lng: -122.3039 }
 "Lorelei Apartments": { lat: 47.6270, lng: -122.3219 }
 "Mercer Tower": { lat: 47.5686, lng: -122.2224 }
 "Niwa Apartments": { lat: 47.6240, lng: -122.3565 }
 "Ondine Eastlake": { lat: 47.6413, lng: -122.3252 }
-"Ramesh House": { lat: 47.6689, lng: -122.3384 }
 "Reverie Apartments": { lat: 47.5713, lng: -122.3117 }
 "Rialto Court": { lat: 47.6186, lng: -122.3098 }
 "Skandi Villa": { lat: 47.8127, lng: -122.3654 }
-"The Palms": { lat: 47.6472, lng: -122.3249 }
 "Viewmont Apartments": { lat: 47.6239, lng: -122.3242 }
 "White Heather Apartments": { lat: 47.7155, lng: -122.2987 }
+"Willow Creek Apartments": { lat: 47.7594, lng: -122.2013 }
 ```
 
 4. **`propertyWebsites` object** (~line 1541): Ensure all properties are present. Remove properties no longer in listings. For new properties without a dedicated website, use `"https://agmrealestategroup.appfolio.com/listings"`. Current websites:
@@ -269,19 +266,18 @@ The file `/home/user/agm-availabilities/index.html` has four data structures to 
 "Fairlake Quads": "https://www.fairlakequadsapartments.com/"
 "Fremont Village": "https://www.fremontvillageapts.com/"
 "Golden Inca": "https://www.goldenincaapartments.com/"
-"Hill Town Apartments": "https://www.hilltownapartments.com/"
 "Highway Place": "https://agmrealestategroup.appfolio.com/listings"
+"Hill Town Apartments": "https://www.hilltownapartments.com/"
 "Lorelei Apartments": "https://www.theloreleiapartments.com/"
 "Mercer Tower": "https://www.mercertowerapartments.com/"
 "Niwa Apartments": "https://www.niwaseattle.com/"
 "Ondine Eastlake": "https://www.ondineeastlake.com/"
-"Ramesh House": "https://agmrealestategroup.appfolio.com/listings"
 "Reverie Apartments": "https://www.reveriebeaconhill.com/"
 "Rialto Court": "https://www.rialtocourtapartments.com/"
 "Skandi Villa": "https://www.skandivillaapartments.com/"
-"The Palms": "https://www.thepalmseastlake.com/"
 "Viewmont Apartments": "https://www.viewmontapts.com/"
 "White Heather Apartments": "https://www.whiteheatherapts.com/"
+"Willow Creek Apartments": "https://www.willowcreekaptsbothell.com/"
 ```
 
 ---
@@ -306,39 +302,80 @@ After updating, verify:
 
 ### STEP 10: Generate change report
 
-After all changes are applied, print a structured text report to the user summarizing exactly what changed:
+After all changes are applied, print a **detailed, shareable** report to the user summarizing exactly what changed. Compare listings by UUID (extracted from detailsUrl) between the previous git commit (`HEAD~1:index.html`) and the newly updated file. The report should use markdown table format so the user can easily copy-paste and share it.
+
+The report MUST include ALL of the following sections with the exact formatting shown:
 
 ```
-=== AGM Availabilities Update Report ===
-Date: [today's date]
-Total listings: [new count] (was [old count])
+============================================================
+AGM AVAILABILITIES UPDATE — [Month Day, Year]
+============================================================
+Total active listings: [new count] (previously [old count])
 
---- NEW LISTINGS ADDED ([count]) ---
-- [Property] Unit [X]: $[rent], [beds]bd/[baths]ba, [sqft]sqft, Available: [date]
-  (repeat for each new listing)
-
---- LISTINGS REMOVED ([count]) ---
-- [Property] Unit [X]: was $[rent], [beds]bd/[baths]ba
-  (repeat for each removed listing)
-
---- LISTINGS CHANGED ([count]) ---
-- [Property] Unit [X]: rent $[old] → $[new]
-- [Property] Unit [X]: available "[old]" → "[new]"
-  (repeat for each changed listing, showing only changed fields)
-
---- NEW PROPERTIES ADDED ([count]) ---
-- [Property Name] (Neighborhood: [X], Website: [URL])
-  (repeat for each new property)
-
---- PROPERTIES REMOVED ([count]) ---
-- [Property Name]
-  (repeat for each removed property)
-
---- UNCHANGED LISTINGS ---
-[count] listings carried over with no changes
+------------------------------------------------------------
+NEW LISTINGS ([count])
+------------------------------------------------------------
 ```
 
-This report lets the user verify correctness at a glance without diffing files.
+For each new listing, show full details:
+```
+  [Property] — Unit [X]
+    $[rent]/mo | [beds] / [baths] | [sqft] sqft
+    Available: [date]
+    Address: [full address]
+```
+
+Then:
+```
+------------------------------------------------------------
+REMOVED LISTINGS ([count])
+------------------------------------------------------------
+```
+
+For each removed listing:
+```
+  [Property] — Unit [X]
+    Was: $[rent]/mo | [beds] / [baths] | [sqft] sqft
+```
+
+Then:
+```
+------------------------------------------------------------
+UPDATED LISTINGS ([count])
+------------------------------------------------------------
+```
+
+For each changed listing, show only the fields that changed:
+```
+  [Property] — Unit [X]
+    Rent: $[old] → $[new]
+    Available: [old] → [new]
+    Added tags: MFTE/MHA
+```
+
+Then:
+```
+------------------------------------------------------------
+NEW PROPERTIES ([count])
+------------------------------------------------------------
+  [Property Name] — Neighborhood: [X]
+
+------------------------------------------------------------
+REMOVED PROPERTIES ([count])
+------------------------------------------------------------
+  [Property Name]
+
+------------------------------------------------------------
+UNCHANGED LISTINGS ([count])
+------------------------------------------------------------
+  [Property] — Unit [X]: $[rent]/mo | [beds] / [baths] | [sqft] sqft | Avail: [date]
+```
+
+**Bed/Bath display format**: Use "Studio", "1 Bed", "2 Bed", "3 Bed" for bedrooms, and "1 Bath", "1.5 Bath", "2 Bath" for bathrooms.
+
+**Important**: List ALL unchanged listings with their full details (one line each) so the user has a complete inventory snapshot.
+
+This report lets the user verify correctness at a glance without diffing files, and is formatted to be easily shared with colleagues.
 
 ---
 
@@ -352,14 +389,17 @@ git push
 
 ### Key gotchas to watch for:
 1. **WebFetch truncates** — always use curl to download the full HTML
-2. **Dual availability elements** — use `<dd class="detail-box__value js-listing-available">`, not the mobile span
-3. **"Studio" is a string** — `"bedrooms": "Studio"` (with quotes), not an integer
-4. **Bathrooms are floats** — always `1.0`, `1.5`, `2.0` (not integers)
-5. **Missing sqft → 0** — never omit, never use null
-6. **Sort alphabetically** — by property name first, then unit number
-7. **New properties need user input** — don't guess neighborhoods, coordinates, or websites
-8. **MFTE units** — detected by "MFTE" in AppFolio title text, get `["On-Site Laundry", "MFTE/MHA"]` features
-9. **Address casing** — preserve exactly as AppFolio provides it
-10. **Unit "Not Specified"** — when no unit pattern found in address (not empty string, not null)
-11. **Tour booking** — powered by `propertyLeasingAgents`, not per-listing URLs. Ensure every property has an entry.
+2. **Split listings by the correct element** — use `<div class="listing-item result js-listing-item"` to split listing blocks (NOT by `<h2>` title tags). Each listing block wraps an image `<a>` and a title `<a>` that both link to `/listings/detail/UUID`; you must match the title inside `js-listing-title` specifically, not the first `<a>` in the block.
+3. **Dual availability elements** — use `<dd class="detail-box__value js-listing-available">`, not the mobile span
+4. **Square feet from detail-box** — prefer `<dt class="detail-box__label">Square Feet</dt><dd class="detail-box__value">NNN</dd>` (desktop detail box); fall back to `Square Feet: NNN` in the mobile span
+5. **"Studio" is a string** — `"bedrooms": "Studio"` (with quotes), not an integer
+6. **Bathrooms are floats** — always `1.0`, `1.5`, `2.0` (not integers)
+7. **Missing sqft → 0** — never omit, never use null
+8. **Sort alphabetically** — by property name first, then unit number
+9. **New properties need user input** — don't guess neighborhoods, coordinates, or websites
+10. **MFTE units** — detected by "MFTE" in AppFolio title text, get `["On-Site Laundry", "MFTE/MHA"]` features
+11. **Address casing** — preserve exactly as AppFolio provides it
+12. **Unit "Not Specified"** — when no unit pattern found in address (not empty string, not null)
+13. **Tour booking** — powered by `propertyLeasingAgents`, not per-listing URLs. Ensure every property has an entry.
+14. **Change report comparison** — compare by UUID from `detailsUrl` between `git show HEAD~1:index.html` (old) and the updated file (new). This correctly identifies added, removed, changed, and unchanged listings.
 ```
