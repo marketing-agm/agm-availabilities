@@ -146,6 +146,7 @@
             color: white;
         }
         .book-tour-btn:hover { background: #1b5e20; border-color: #1b5e20; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(46,125,50,0.3); }
+        body.single-property-mode .book-tour-btn { display: none !important; }
         .book-tour-btn .tour-icon { font-size: 1.1rem; }
 
         /* FILTER MODAL STYLES */
@@ -1072,13 +1073,13 @@
                     <option value="studio">Studio</option>
                     <option value="1bed">1 Bedroom</option>
                     <option value="2bed">2 Bedroom</option>
-                    <option value="3bed">3+ Bedroom</option>
+                    <option value="3bed">3 Bedroom</option>
                 </select>
                 <button class="sp-filter-btn active" data-filter="type" data-value="all">All Units</button>
                 <button class="sp-filter-btn" data-filter="type" data-value="studio">Studio</button>
                 <button class="sp-filter-btn" data-filter="type" data-value="1bed">1 Bedroom</button>
                 <button class="sp-filter-btn" data-filter="type" data-value="2bed">2 Bedroom</button>
-                <button class="sp-filter-btn" data-filter="type" data-value="3bed">3+ Bedroom</button>
+                <button class="sp-filter-btn" data-filter="type" data-value="3bed">3 Bedroom</button>
             </div>
             <div class="mfte-divider"></div>
             <div class="sp-filter-group mfte-filter-group">
@@ -1116,7 +1117,7 @@
                             <option value="studio">Studio</option>
                             <option value="1bed">1 Bedroom</option>
                             <option value="2bed">2 Bedroom</option>
-                            <option value="3bed">3+ Bedroom</option>
+                            <option value="3bed">3 Bedroom</option>
                         </select>
                     </div>
                     <div class="filter-group">
@@ -1619,9 +1620,42 @@
                         console.log('MFTE units detected for:', urlPropertyFilter);
                     }
                     
+                    // Hide unit type filters that have no available units
+                    const hasStudio = propertyListings.some(l => l.bedrooms === 'Studio');
+                    const has1Bed = propertyListings.some(l => l.bedrooms === 1);
+                    const has2Bed = propertyListings.some(l => l.bedrooms === 2);
+                    const has3Bed = propertyListings.some(l => typeof l.bedrooms === 'number' && l.bedrooms >= 3);
+
+                    const typeSelect = document.getElementById('sp-type-select');
+                    if (!hasStudio) {
+                        const opt = typeSelect.querySelector('option[value="studio"]');
+                        if (opt) opt.remove();
+                    }
+                    if (!has1Bed) {
+                        const opt = typeSelect.querySelector('option[value="1bed"]');
+                        if (opt) opt.remove();
+                    }
+                    if (!has2Bed) {
+                        const opt = typeSelect.querySelector('option[value="2bed"]');
+                        if (opt) opt.remove();
+                    }
+                    if (!has3Bed) {
+                        const opt = typeSelect.querySelector('option[value="3bed"]');
+                        if (opt) opt.remove();
+                    }
+
+                    document.querySelectorAll('.sp-filter-btn[data-filter="type"]').forEach(btn => {
+                        const val = btn.dataset.value;
+                        if (val === 'all') return;
+                        if (val === 'studio' && !hasStudio) btn.style.display = 'none';
+                        if (val === '1bed' && !has1Bed) btn.style.display = 'none';
+                        if (val === '2bed' && !has2Bed) btn.style.display = 'none';
+                        if (val === '3bed' && !has3Bed) btn.style.display = 'none';
+                    });
+
                     // Disable map view in single property mode
                     mapViewActive = false;
-                    
+
                     console.log('Single Property Mode activated for:', urlPropertyFilter);
                 } else {
                     console.warn('Property not found in listings:', urlParams.property);
