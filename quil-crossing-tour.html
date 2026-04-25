@@ -215,9 +215,9 @@
                     <select class="property-select" id="tour-property" style="display:none"><option value="">Select...</option></select>
                     <div class="property-select-section" id="property-select-section"></div>
                     <div class="unit-type-grid" id="unit-type-grid">
-                        <div class="unit-type-card" data-type="1bed"><div class="unit-type-icon">&#9632;&#9632;</div><div class="unit-type-info"><div class="unit-type-name">1 Bedroom</div><div class="unit-type-count" id="count-1bed"></div></div></div>
-                        <div class="unit-type-card" data-type="2bed"><div class="unit-type-icon">&#9632;&#9632;&#9632;</div><div class="unit-type-info"><div class="unit-type-name">2 Bedroom</div><div class="unit-type-count" id="count-2bed"></div></div></div>
-                        <div class="unit-type-card" data-type="3bed"><div class="unit-type-icon">&#9632;&#9632;&#9632;&#9632;</div><div class="unit-type-info"><div class="unit-type-name">3 Bedroom</div><div class="unit-type-count" id="count-3bed"></div></div></div>
+                        <div class="unit-type-card" data-type="1bed"><div class="unit-type-icon">&#9632;</div><div class="unit-type-info"><div class="unit-type-name">1 Bedroom</div><div class="unit-type-count" id="count-1bed"></div></div></div>
+                        <div class="unit-type-card" data-type="2bed"><div class="unit-type-icon">&#9632;&#9632;</div><div class="unit-type-info"><div class="unit-type-name">2 Bedroom</div><div class="unit-type-count" id="count-2bed"></div></div></div>
+                        <div class="unit-type-card" data-type="3bed"><div class="unit-type-icon">&#9632;&#9632;&#9632;</div><div class="unit-type-info"><div class="unit-type-name">3 Bedroom</div><div class="unit-type-count" id="count-3bed"></div></div></div>
                     </div>
                     <div class="btn-row center"><button class="btn-next" id="btn-step1-next"><span>Next</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
                 </div>
@@ -294,7 +294,7 @@
         function initializePage(){
             populatePropertyDropdown();
             document.getElementById('tour-movein-date').min=new Date().toISOString().split('T')[0];
-            selectedProperty='Quil Creek Crossing Apartments';
+            selectedProperty='Quil Crossing Apartments';
             document.getElementById('property-select-section').style.display='none';
             document.getElementById('tour-property').value=selectedProperty;
             updateUnitTypeCounts(selectedProperty);
@@ -328,7 +328,7 @@
             const c={studio:0,'1bed':0,'2bed':0,'3bed':0};
             listings.forEach(l=>{const b=l.bedrooms;if(b==='Studio'||b===0)c.studio++;else if(b===1)c['1bed']++;else if(b===2)c['2bed']++;else if(b>=3)c['3bed']++;});
             // Quil Crossing: always show unit types as available even without active listings
-            if(property==='Quil Creek Crossing Apartments'){c['1bed']=Math.max(c['1bed'],1);c['2bed']=Math.max(c['2bed'],1);c['3bed']=Math.max(c['3bed'],1);}
+            if(property==='Quil Crossing Apartments'){c['1bed']=Math.max(c['1bed'],1);c['2bed']=Math.max(c['2bed'],1);c['3bed']=Math.max(c['3bed'],1);}
             var el=document.getElementById('count-studio');if(el)el.textContent=c.studio+' available';
             document.getElementById('count-1bed').textContent=c['1bed']?c['1bed']+' available':'Available';
             document.getElementById('count-2bed').textContent=c['2bed']?c['2bed']+' available':'Available';
@@ -439,7 +439,7 @@
             selectedUnitTypes=[];selectedSlot=null;slotsData=[];currentWeekStart=getMondayOfWeek(new Date());fallbackMode=false;fallbackDate='';fallbackTime='';
             document.querySelectorAll('.unit-type-card').forEach(c=>c.classList.remove('active'));
             document.getElementById('selected-slot-bar').classList.remove('active');document.getElementById('btn-step2-next').disabled=true;document.getElementById('fallback-section').classList.remove('active');document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));
-            // Property stays as Quil Creek Crossing
+            // Property stays as Quil Crossing
             hideError();updateWeekLabel();renderCalendar();goToStep(1);
         }
 
