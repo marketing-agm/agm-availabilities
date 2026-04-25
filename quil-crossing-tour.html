@@ -294,7 +294,7 @@
         function initializePage(){
             populatePropertyDropdown();
             document.getElementById('tour-movein-date').min=new Date().toISOString().split('T')[0];
-            selectedProperty='Quil Crossing Apartments';
+            selectedProperty='Quil Creek Crossing Apartments';
             document.getElementById('property-select-section').style.display='none';
             document.getElementById('tour-property').value=selectedProperty;
             updateUnitTypeCounts(selectedProperty);
@@ -328,7 +328,7 @@
             const c={studio:0,'1bed':0,'2bed':0,'3bed':0};
             listings.forEach(l=>{const b=l.bedrooms;if(b==='Studio'||b===0)c.studio++;else if(b===1)c['1bed']++;else if(b===2)c['2bed']++;else if(b>=3)c['3bed']++;});
             // Quil Crossing: always show unit types as available even without active listings
-            if(property==='Quil Crossing Apartments'){c['1bed']=Math.max(c['1bed'],1);c['2bed']=Math.max(c['2bed'],1);c['3bed']=Math.max(c['3bed'],1);}
+            if(property==='Quil Creek Crossing Apartments'){c['1bed']=Math.max(c['1bed'],1);c['2bed']=Math.max(c['2bed'],1);c['3bed']=Math.max(c['3bed'],1);}
             var el=document.getElementById('count-studio');if(el)el.textContent=c.studio+' available';
             document.getElementById('count-1bed').textContent=c['1bed']?c['1bed']+' available':'Available';
             document.getElementById('count-2bed').textContent=c['2bed']?c['2bed']+' available':'Available';
@@ -394,7 +394,7 @@
         }
 
         function populateReview(){
-            document.getElementById('review-property').textContent=selectedProperty||'\u2014';
+            document.getElementById('review-property').textContent=selectedProperty?(selectedProperty==='Quil Creek Crossing Apartments'?'Quil Crossing Apartments':selectedProperty):'\u2014';
             const tl={'studio':'Studio','1bed':'1 Bed','2bed':'2 Bed','3bed':'3 Bed'};
             document.getElementById('review-units').textContent=selectedUnitTypes.length>0?selectedUnitTypes.map(t=>tl[t]).join(', '):'Any';
             if(fallbackMode){document.getElementById('review-time').textContent=formatDateLong(fallbackDate)+' at '+fallbackTime+' (requested)';}else if(selectedSlot)document.getElementById('review-time').textContent=formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time)+'\u2013'+formatTime12(selectedSlot.end_time);
