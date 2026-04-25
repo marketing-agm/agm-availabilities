@@ -76,7 +76,7 @@
 
         /* Calendar */
         .calendar-card{background:var(--card);border-radius:var(--radius-lg);border:1px solid var(--border-light);box-shadow:var(--shadow);overflow:hidden}
-        .cal-grid{display:grid;grid-template-columns:72px repeat(7,1fr);min-height:500px}
+        .cal-grid{display:grid;grid-template-columns:72px repeat(7,1fr)}
         .cal-header-cell{padding:14px 6px;text-align:center;border-bottom:2px solid var(--border);border-left:1px solid var(--border-light);background:var(--gray-100)}
         .cal-header-cell:first-child{border-left:none}
         .cal-day-name{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-500)}
@@ -98,6 +98,8 @@
         .slot-time{font-weight:600;font-size:.72rem}.slot-label{font-size:.68rem;opacity:.85;margin-top:1px}
         .cal-day-col .click-zone{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;cursor:pointer}
         .cal-day-col .click-zone:hover{background:rgba(17,17,17,.02)}
+        .now-line{position:absolute;left:0;right:0;height:2px;background:var(--danger);z-index:4;pointer-events:none}
+        .now-line::before{content:'';position:absolute;left:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--danger)}
 
         /* Modals */
         .modal-overlay{display:none;position:fixed;inset:0;background:rgba(17,17,17,.45);z-index:200;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(3px)}
@@ -206,6 +208,7 @@
         populateDashPropertyDropdown();
         setCurrentWeekStart(getMondayOfWeek(new Date()));
         checkSavedSession();
+        setInterval(updateNowLine,60000);
     });
 
     function populateDashPropertyDropdown(){
@@ -287,6 +290,21 @@
             for(let h=0;h<=END_HOUR-START_HOUR;h++){const line=document.createElement('div');line.className='cal-hour-line';line.style.top=(h*HOUR_HEIGHT)+'px';col.appendChild(line);}
             const zone=document.createElement('div');zone.className='click-zone';zone.onclick=()=>openAddModal(formatDateISO(d));col.appendChild(zone);body.appendChild(col);});
         renderSlots();
+        updateNowLine();
+    }
+
+    function updateNowLine(){
+        document.querySelectorAll('.now-line').forEach(el=>el.remove());
+        const now=new Date();
+        const todayISO=formatDateISO(now);
+        const col=document.querySelector('.cal-day-col[data-date="'+todayISO+'"]');
+        if(!col)return;
+        const minutes=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
+        const startMin=START_HOUR*60,endMin=END_HOUR*60;
+        if(minutes<startMin||minutes>endMin)return;
+        const top=((minutes-startMin)/60)*HOUR_HEIGHT;
+        const line=document.createElement('div');line.className='now-line';line.style.top=top+'px';
+        col.appendChild(line);
     }
 
     function renderSlots(){
