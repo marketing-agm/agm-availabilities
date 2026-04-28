@@ -1704,7 +1704,7 @@
         }
 
         function getFilteredListings(filters = currentFilters) {
-            let filtered = agmListings;
+            let filtered = singlePropertyMode ? agmListings : agmListings.filter(l => l.property !== 'Quil Creek Crossing Apartments');
             if (filters.property !== 'all') filtered = filtered.filter(l => l.property === filters.property);
             if (filters.neighborhood !== 'all') filtered = filtered.filter(l => l.neighborhood === filters.neighborhood);
             if (filters.type === 'studio') filtered = filtered.filter(l => l.bedrooms === 'Studio');
