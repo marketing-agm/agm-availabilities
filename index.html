@@ -2285,6 +2285,7 @@
                 groupedByProperty[listing.property].push(listing);
             });
             Object.entries(groupedByProperty).forEach(([propertyName, units]) => {
+                if (propertyName === 'Quil Creek Crossing Apartments') return;
                 const coords = propertyCoordinates[propertyName];
                 if (!coords) return;
                 const el = createMarkerElement(units.length);
