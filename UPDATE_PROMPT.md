@@ -75,15 +75,12 @@ Each AppFolio listing title contains the property name embedded in marketing tex
 | "De Selm" | De Selm Apartments |
 | "East Union" | East Union Apartments |
 | "Fairlake" | Fairlake Quads |
-| "Fremont Village" | Fremont Village |
 | "Golden Inca" | Golden Inca |
 | "Hill Town" | Hill Town Apartments |
 | "Highway Place" | Highway Place |
 | "Lorelei" | Lorelei Apartments |
 | "Mercer Tower" | Mercer Tower |
 | "Niwa" | Niwa Apartments |
-| "Ondine" | Ondine Eastlake |
-| "Reverie" | Reverie Apartments |
 | "Rialto" | Rialto Court |
 | "Skandi" | Skandi Villa |
 | "Viewmont" | Viewmont Apartments |
@@ -109,12 +106,10 @@ If a listing title doesn't match ANY known property, it's a **new property**. ST
 - "Hill Town Apartments" → "Hill Town"
 - "Lorelei Apartments" → "Lorelei"
 - "Niwa Apartments" → "Niwa"
-- "Ondine Eastlake" → "Ondine"
-- "Reverie Apartments" → "Reverie"
 - "Viewmont Apartments" → "Viewmont"
 - "White Heather Apartments" → "White Heather"
 - "Willow Creek Apartments" → "Willow Creek"
-- All others keep their full canonical name as the short name (e.g., "BalCro", "Fremont Village", "Highway Place", "Mercer Tower", etc.)
+- All others keep their full canonical name as the short name (e.g., "BalCro", "Highway Place", "Mercer Tower", etc.)
 
 ---
 
@@ -192,15 +187,12 @@ Crestview Townhomes → Lynnwood
 De Selm Apartments → Capitol Hill
 East Union Apartments → Capitol Hill
 Fairlake Quads → Bellevue
-Fremont Village → Fremont
 Golden Inca → Capitol Hill
 Hill Town Apartments → Central District
 Highway Place → Everett
 Lorelei Apartments → Capitol Hill
 Mercer Tower → Mercer Island
 Niwa Apartments → Lower Queen Anne
-Ondine Eastlake → Eastlake
-Reverie Apartments → Beacon Hill
 Rialto Court → Capitol Hill
 Skandi Villa → Edmonds
 Viewmont Apartments → Capitol Hill
@@ -234,15 +226,12 @@ The file `/home/user/agm-availabilities/index.html` has four data structures to 
 "De Selm Apartments": { lat: 47.6223, lng: -122.3110 }
 "East Union Apartments": { lat: 47.6144, lng: -122.3175 }
 "Fairlake Quads": { lat: 47.5973, lng: -122.1465 }
-"Fremont Village": { lat: 47.6565, lng: -122.3501 }
 "Golden Inca": { lat: 47.6203, lng: -122.3112 }
 "Highway Place": { lat: 47.9335, lng: -122.2276 }
 "Hill Town Apartments": { lat: 47.5921, lng: -122.3039 }
 "Lorelei Apartments": { lat: 47.6270, lng: -122.3219 }
 "Mercer Tower": { lat: 47.5686, lng: -122.2224 }
 "Niwa Apartments": { lat: 47.6240, lng: -122.3565 }
-"Ondine Eastlake": { lat: 47.6413, lng: -122.3252 }
-"Reverie Apartments": { lat: 47.5713, lng: -122.3117 }
 "Rialto Court": { lat: 47.6186, lng: -122.3098 }
 "Skandi Villa": { lat: 47.8127, lng: -122.3654 }
 "Viewmont Apartments": { lat: 47.6239, lng: -122.3242 }
@@ -264,15 +253,12 @@ The file `/home/user/agm-availabilities/index.html` has four data structures to 
 "De Selm Apartments": "https://www.deselmapartments.com/"
 "East Union Apartments": "https://www.eastunionapts.com/"
 "Fairlake Quads": "https://www.fairlakequadsapartments.com/"
-"Fremont Village": "https://www.fremontvillageapts.com/"
 "Golden Inca": "https://www.goldenincaapartments.com/"
 "Highway Place": "https://agmrealestategroup.appfolio.com/listings"
 "Hill Town Apartments": "https://www.hilltownapartments.com/"
 "Lorelei Apartments": "https://www.theloreleiapartments.com/"
 "Mercer Tower": "https://www.mercertowerapartments.com/"
 "Niwa Apartments": "https://www.niwaseattle.com/"
-"Ondine Eastlake": "https://www.ondineeastlake.com/"
-"Reverie Apartments": "https://www.reveriebeaconhill.com/"
 "Rialto Court": "https://www.rialtocourtapartments.com/"
 "Skandi Villa": "https://www.skandivillaapartments.com/"
 "Viewmont Apartments": "https://www.viewmontapts.com/"
