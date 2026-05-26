@@ -365,11 +365,18 @@ This report lets the user verify correctness at a glance without diffing files, 
 
 ---
 
-### STEP 11: Commit and push
+### STEP 11: Commit, push, and merge to main
 
+```
 git add index.html
 git commit -m "Update property availabilities from AppFolio"
-git push
+git push -u origin <current-branch>
+```
+
+Then, using the GitHub MCP tools:
+1. Create a pull request targeting `main` in the `marketing-agm/agm-availabilities` repo with title "Update listings from AppFolio — [Month Year]"
+2. Immediately merge it using the squash merge method
+3. Report the merge SHA to the user
 
 ---
 
