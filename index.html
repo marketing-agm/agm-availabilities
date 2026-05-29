@@ -1569,12 +1569,9 @@
             const urlParams = getUrlParams();
             
             if (urlParams.property) {
-                // Verify the property exists in our listings
-                const propertyExists = agmListings.some(l => l.property === urlParams.property);
-                
-                if (propertyExists) {
-                    singlePropertyMode = true;
-                    urlPropertyFilter = urlParams.property;
+                singlePropertyMode = true;
+                urlPropertyFilter = urlParams.property;
+                {
                     
                     // Apply single property mode to both html and body for mobile scroll fix
                     document.documentElement.classList.add('single-property-mode');
@@ -1643,8 +1640,6 @@
                     mapViewActive = false;
 
                     console.log('Single Property Mode activated for:', urlPropertyFilter);
-                } else {
-                    console.warn('Property not found in listings:', urlParams.property);
                 }
             }
         }
