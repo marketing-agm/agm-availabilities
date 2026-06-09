@@ -13,6 +13,42 @@ Follow this exact workflow:
 
 ---
 
+### ⚠️ IMPORTANT: Preserve manual placeholder listings (Quil Crossing)
+
+**Quil Creek Crossing Apartments** is maintained manually and does NOT appear in the
+AppFolio listings feed. It has three placeholder unit cards (1 Bed / 2 Bed / 3 Bed) that
+power the URL-parameter embed at `?property=Quil Creek Crossing Apartments`.
+
+These entries WILL be missing from the AppFolio HTML you download — that is expected and
+correct. Do NOT treat them as "removed" listings. You must preserve, untouched:
+
+1. The three `"property": "Quil Creek Crossing Apartments"` objects in the `agmListings` array.
+2. The `"Quil Creek Crossing Apartments"` entries in `propertyLeasingAgents`,
+   `propertyCoordinates`, and `propertyWebsites`.
+3. The Quil-specific display logic in `getFilteredListings` (the `singlePropertyMode`
+   filter that hides Quil from the default list/map), the `isQuilCrossing` branches in the
+   card-rendering function, and the "Quil Crossing custom branding" IIFE near the end of
+   the script.
+
+When replacing the `agmListings` array contents, re-add the three Quil objects exactly as
+they were. When pruning "orphan" properties from the supporting objects (Steps 7 & 9),
+EXCLUDE Quil Creek Crossing from that pruning — it is intentionally an orphan relative to
+the AppFolio feed. Do NOT count Quil's three units in the "removed listings" change report.
+
+If the three Quil objects are absent from the current `index.html` (e.g. a previous run
+stripped them), restore them. Reference values:
+
+```json
+{"property": "Quil Creek Crossing Apartments", "neighborhood": "Marysville", "unit": "Unit A", "title": "1 Bedroom | Quil Crossing", "bedrooms": 1, "bathrooms": 1.0, "rent": 1500, "sqft": 900, "available": "Now", "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271", "features": ["On-Site Laundry"], "detailsUrl": "#", "applyUrl": "https://agmrealestategroup.appfolio.com/apply/c62263d2-347e-4137-98f5-64f3817bea7d/start"}
+{"property": "Quil Creek Crossing Apartments", "neighborhood": "Marysville", "unit": "Unit B", "title": "2 Bedrooms | Quil Crossing", "bedrooms": 2, "bathrooms": 2.0, "rent": 1800, "sqft": 1330, "available": "Now", "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271", "features": ["On-Site Laundry"], "detailsUrl": "#", "applyUrl": "https://agmrealestategroup.appfolio.com/apply/dba566ce-5df8-444a-a511-8ac313b84d61/start"}
+{"property": "Quil Creek Crossing Apartments", "neighborhood": "Marysville", "unit": "Unit C", "title": "3 Bedrooms | Quil Crossing", "bedrooms": 3, "bathrooms": 2.0, "rent": 2100, "sqft": 1500, "available": "Now", "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271", "features": ["On-Site Laundry"], "detailsUrl": "#", "applyUrl": "https://agmrealestategroup.appfolio.com/apply/37ba5d3c-0b92-4ddb-b9ba-6ab3253b793d/start"}
+```
+Plus: `propertyLeasingAgents` → `"leasing@agmrealestategroup.com"`;
+`propertyCoordinates` → `{ lat: 48.0809, lng: -122.1518 }`;
+`propertyWebsites` → `"https://agmrealestategroup.appfolio.com/listings"`.
+
+---
+
 ### STEP 1: Download the full AppFolio HTML
 
 IMPORTANT: Do NOT use WebFetch — it truncates large pages. Use curl instead:
@@ -208,7 +244,7 @@ If a new property appears, ask the user for the neighborhood.
 
 The file `/home/user/agm-availabilities/index.html` has four data structures to update:
 
-1. **`agmListings` array** (~line 1386): Replace the entire array contents with all listings, sorted alphabetically by property then unit.
+1. **`agmListings` array** (~line 1386): Replace the entire array contents with all listings, sorted alphabetically by property then unit. **Keep the three Quil Creek Crossing Apartments placeholder objects** (see the preservation note above) — they are not in the AppFolio feed and must be re-added.
 
 2. **`propertyLeasingAgents` object** (~line 1481): Ensure all properties from the new listings are present. All map to `"leasing@agmrealestategroup.com"`. Remove any property no longer in listings. Keep alphabetical order.
 
@@ -279,10 +315,11 @@ The app has a "Book a Tour" form that sends emails via EmailJS to the leasing ag
 ### STEP 9: Verify
 
 After updating, verify:
-1. Count listings in the agmListings array matches the AppFolio count
+1. Count listings in the agmListings array matches the AppFolio count **plus the 3 Quil Creek Crossing placeholders** (i.e. array length = AppFolio count + 3)
 2. Every property in agmListings exists in propertyLeasingAgents, propertyCoordinates, and propertyWebsites
-3. No orphan properties in the three supporting objects (removed from listings but still in objects)
-4. All UIDs are present in both detailsUrl and applyUrl for every listing
+3. No orphan properties in the three supporting objects (removed from listings but still in objects) — **Quil Creek Crossing Apartments is the one allowed exception and must remain in all three objects**
+4. All UIDs are present in both detailsUrl and applyUrl for every listing (Quil placeholders use a literal `#` detailsUrl and an `/apply/.../start` applyUrl — leave them as-is)
+5. The three Quil Creek Crossing placeholder units are still present, and the `isQuilCrossing` rendering logic + custom-branding IIFE are intact
 
 ---
 
@@ -388,4 +425,5 @@ git push
 12. **Unit "Not Specified"** — when no unit pattern found in address (not empty string, not null)
 13. **Tour booking** — powered by `propertyLeasingAgents`, not per-listing URLs. Ensure every property has an entry.
 14. **Change report comparison** — compare by UUID from `detailsUrl` between `git show HEAD~1:index.html` (old) and the updated file (new). This correctly identifies added, removed, changed, and unchanged listings.
+15. **Quil Crossing is manual** — the three Quil Creek Crossing Apartments placeholder units are NOT in the AppFolio feed. Always preserve them (listings + supporting objects + display logic) and never report them as removed. See the preservation note at the top of this prompt.
 ```
