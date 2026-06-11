@@ -6,265 +6,387 @@
     <title>Book a Tour - AGM Real Estate Group</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box!important}
-        html{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
-        :root{--black:#111;--off-white:#f5f3ef;--white:#fff;--gray-100:#fafaf8;--gray-200:#eceae4;--gray-300:#d4d1ca;--gray-400:#a8a49c;--gray-500:#7a766e;--gray-600:#5a5750;--text:#1a1a1a;--text-light:#6b6760;--border:#e5e1da;--border-light:#eceae4;--error:#c0392b;--success:#2d6a4f}
-        body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--text);line-height:1.6;min-height:100vh;width:100%!important;overflow-x:hidden!important;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
-        .page-wrapper{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 24px 80px}
-        .page-header{text-align:center;margin-bottom:48px;max-width:720px}
-        .page-header h1{font-family:'DM Serif Display',serif;font-size:2.8rem;font-weight:400;color:var(--black);letter-spacing:-.02em;line-height:1.15;margin-bottom:12px}
-        .page-header .subtitle{font-size:1.05rem;color:var(--text-light);font-weight:300}
-        .property-badge{display:none;align-items:center;gap:8px;margin-top:20px;justify-content:center}
-        .property-badge-inner{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--black);color:var(--white);border-radius:100px;font-size:.9rem;font-weight:500}
-        .property-badge-dot{width:6px;height:6px;background:var(--gray-400);border-radius:50%}
-        .steps-indicator{display:flex;align-items:center;justify-content:center;margin-bottom:48px;max-width:480px;width:100%}
-        .step-item{display:flex;align-items:center;gap:10px;white-space:nowrap}
-        .step-number{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600;border:2px solid var(--gray-300);color:var(--gray-400);transition:all .4s;flex-shrink:0}
-        .step-label{font-size:.85rem;color:var(--gray-400);font-weight:500;transition:color .4s}
-        .step-line{flex:1;height:1px;background:var(--gray-300);margin:0 16px;min-width:32px;transition:background .4s}
+        html{width:100%!important;overflow-x:hidden!important}
+        :root{--black:#222222;--off-white:#f4f1ea;--white:#fff;--gray-100:#faf8f3;--gray-200:#ebe7df;--gray-300:#d8d3c8;--gray-400:#a8a195;--gray-500:#7c7568;--gray-600:#544f45;--text:#2a2a2a;--text-light:#6b6660;--border:#e5e1da;--border-light:#ebe7df;--error:#c0392b}
+        body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--text);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+        /* ─── 50/50 Layout ─── */
+        .layout{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;max-width:1120px;margin:0 auto;gap:0}
+
+        /* ─── Left Column ─── */
+        .left-col{padding:80px 32px 60px 48px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+        .left-brand{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--gray-500);margin-bottom:48px}
+        .left-title{font-family:'DM Serif Display',serif;font-size:2.6rem;font-weight:400;color:var(--black);line-height:1.15;margin-bottom:10px;letter-spacing:-.02em}
+        .left-subtitle{font-size:1rem;color:var(--text-light);font-weight:300;margin-bottom:56px;line-height:1.6}
+
+        /* Vertical step nav */
+        .side-steps{display:flex;flex-direction:column;gap:0}
+        .side-step{display:flex;align-items:center;gap:16px;padding:14px 0;cursor:default}
+        .side-step-num{width:36px;height:36px;border-radius:50%;border:2px solid var(--gray-300);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:600;color:var(--gray-400);flex-shrink:0;transition:all .3s}
+        .side-step-label{font-size:.95rem;font-weight:400;color:var(--gray-400);transition:color .3s}
+        .side-step.active .side-step-num{background:var(--black);border-color:var(--black);color:var(--white)}
+        .side-step.active .side-step-label{color:var(--black);font-weight:500}
+        .side-step.completed .side-step-num{background:var(--black);border-color:var(--black);color:var(--white)}
+        .side-step.completed .side-step-label{color:var(--text-light)}
+        .side-step-connector{width:2px;height:16px;background:var(--gray-300);margin-left:17px}
+
+        /* ─── Right Column ─── */
+        .right-col{padding:80px 48px 80px 32px;overflow-y:auto}
+
+        /* Mobile step indicator (hidden on desktop) */
+        .steps-indicator{display:none;align-items:center;justify-content:center;margin-bottom:32px}
+        .step-item{display:flex;align-items:center;gap:8px;white-space:nowrap}
+        .step-number{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;border:2px solid var(--gray-300);color:var(--gray-400);transition:all .4s;flex-shrink:0}
+        .step-label{font-size:.8rem;color:var(--gray-400);font-weight:500}
+        .step-line{flex:1;height:1px;background:var(--gray-300);margin:0 12px;min-width:20px}
         .step-item.active .step-number{background:var(--black);border-color:var(--black);color:var(--white)}
         .step-item.active .step-label{color:var(--black)}
         .step-item.completed .step-number{background:var(--black);border-color:var(--black);color:var(--white)}
-        .step-item.completed .step-label{color:var(--text-light)}
         .step-line.completed{background:var(--black)}
-        .form-container{width:100%;max-width:720px}
-        .step-panel{display:none;animation:fadeUp .4s ease}
-        .step-panel.active{display:block}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-        .step-title{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;color:var(--black);text-align:center;margin-bottom:8px}
-        .step-subtitle{font-size:.95rem;color:var(--text-light);text-align:center;margin-bottom:40px;font-weight:300}
-        .property-select-section{margin-bottom:36px}
-        .property-select-label{font-size:.85rem;font-weight:500;color:var(--text);margin-bottom:10px;text-align:center}
-        .property-select{display:block;width:100%;max-width:400px;margin:0 auto;padding:14px 20px;font-size:1rem;font-family:'DM Sans',sans-serif;border:2px solid var(--gray-200);border-radius:12px;background:var(--white);color:var(--text);appearance:none;cursor:pointer;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236b6760' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:44px}
-        .property-select:focus{outline:none;border-color:var(--black)}
-        .unit-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:560px;margin:0 auto}
-        .unit-type-card{background:var(--white);border:2px solid var(--gray-200);border-radius:14px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .25s}
-        .unit-type-card:hover:not(.disabled){border-color:var(--gray-400);transform:translateY(-2px)}
-        .unit-type-card.active{border-color:var(--black);background:var(--black);color:var(--white)}
-        .unit-type-card.disabled{opacity:.35;cursor:not-allowed}
-        .unit-type-icon{font-size:1.6rem;margin-bottom:10px}
-        .unit-type-name{font-size:1rem;font-weight:500}
-        .unit-type-count{font-size:.8rem;color:var(--gray-500);margin-top:4px;font-weight:300}
-        .unit-type-card.active .unit-type-count{color:var(--gray-400)}
-        .calendar-wrapper{background:var(--white);border-radius:16px;padding:28px;border:1px solid var(--gray-200)}
-        .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-        .cal-nav-arrows{display:flex;align-items:center;gap:8px}
-        .cal-nav-btn{width:36px;height:36px;border:1px solid var(--gray-200);background:transparent;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--text);transition:all .2s;font-family:'DM Sans',sans-serif;line-height:1}
-        .cal-nav-btn:hover{background:var(--gray-100);border-color:var(--gray-300)}
-        .cal-week-label{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--black)}
-        .cal-today-btn{padding:8px 16px;border:1px solid var(--gray-200);background:transparent;border-radius:8px;font-size:.8rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text);transition:all .2s}
-        .cal-today-btn:hover{background:var(--gray-100);border-color:var(--gray-300)}
-        .cal-days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+
+        /* Panels */
+        .form-container{width:100%}
+        .step-panel{display:none;animation:fadeUp .4s ease}.step-panel.active{display:block}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+        .step-title{font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:var(--black);margin-bottom:6px}
+        .step-subtitle{font-size:.88rem;color:var(--text-light);margin-bottom:32px;font-weight:300}
+
+        /* Property select */
+        .property-select-section{margin-bottom:28px}
+        .property-select-label{font-size:.8rem;font-weight:500;color:var(--text);margin-bottom:8px}
+        .property-select{display:block;width:100%;padding:12px 16px;font-size:.95rem;font-family:'DM Sans',sans-serif;border:none;border-bottom:1.5px solid var(--gray-300);border-radius:0;background:transparent;color:var(--text);appearance:none;cursor:pointer;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%237c7568' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;padding-right:32px}
+        .property-select:focus{outline:none;border-bottom-color:var(--black)}
+
+        /* Specific unit list */
+        .unit-list{display:flex;flex-direction:column;gap:0}
+        .unit-card{width:100%;background:transparent;border:none;border-bottom:1px solid var(--gray-300);padding:18px 4px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s;text-align:left;font-family:'DM Sans',sans-serif}
+        .unit-card:last-child{border-bottom:none}
+        .unit-card:hover:not(.disabled){background:rgba(34,34,34,.04);padding-left:12px;padding-right:12px}
+        .unit-card.active{background:var(--black);color:var(--white);padding-left:12px;padding-right:12px;border-radius:10px;border-bottom-color:transparent;margin:-1px 0}
+        .unit-card.active+.unit-card{border-top:none}
+        .unit-card-body{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+        .unit-card-type{font-size:.95rem;font-weight:500}
+        .unit-card-meta{font-size:.78rem;color:var(--gray-500);font-weight:300}
+        .unit-card.active .unit-card-meta{color:rgba(255,255,255,.65)}
+        .unit-card-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
+        .unit-card-rent{font-size:.95rem;font-weight:600}
+        .unit-card-avail{font-size:.72rem;color:var(--gray-500);font-weight:400}
+        .unit-card.active .unit-card-avail{color:rgba(255,255,255,.6)}
+        .unit-card-check{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--gray-300);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+        .unit-card-check svg{width:12px;height:12px;opacity:0;transition:opacity .2s}
+        .unit-card.active .unit-card-check{background:var(--white);border-color:var(--white)}
+        .unit-card.active .unit-card-check svg{opacity:1;color:var(--black)}
+        .unit-empty-note{display:none;padding:20px 0;font-size:.85rem;color:var(--text-light);font-weight:300;line-height:1.6;border-top:1px solid var(--gray-300);border-bottom:1px solid var(--gray-300)}
+        .unit-hint{font-size:.76rem;color:var(--gray-500);font-weight:300;margin-top:14px}
+
+        /* Calendar */
+        .calendar-wrapper{padding:0}
+        .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+        .cal-nav-arrows{display:flex;align-items:center;gap:6px}
+        .cal-nav-btn{width:32px;height:32px;border:none;background:transparent;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--gray-500);transition:all .2s;font-family:'DM Sans',sans-serif;line-height:1}
+        .cal-nav-btn:hover{background:rgba(34,34,34,.08);color:var(--black)}
+        .cal-week-label{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--black)}
+        .cal-today-btn{padding:5px 12px;border:none;background:transparent;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--gray-500);transition:all .2s;text-decoration:underline}
+        .cal-today-btn:hover{color:var(--black)}
+        .cal-days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
         .cal-day-col{min-width:0}
-        .cal-day-header{text-align:center;padding:8px 4px;background:var(--gray-100);border-radius:8px 8px 0 0;border:1px solid var(--border-light);border-bottom:none}
-        .cal-day-name{font-size:.7rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em}
-        .cal-day-num{font-size:1.05rem;font-weight:700;color:var(--text);margin-top:1px}
-        .cal-day-header.today .cal-day-num{background:var(--black);color:white;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.92rem}
-        .cal-day-body{background:white;border:1px solid var(--border-light);border-radius:0 0 8px 8px;min-height:110px;padding:4px}
-        .cal-day-body.past{opacity:.45}
-        .slot-pill{display:block;width:100%;padding:7px 4px;margin-bottom:4px;background:var(--gray-100);border:1.5px solid var(--gray-300);border-radius:7px;font-size:.7rem;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;text-align:center;line-height:1.3;font-family:'DM Sans',sans-serif}
-        .slot-pill:hover{background:var(--black);color:white;border-color:var(--black);transform:scale(1.03)}
-        .slot-pill.selected{background:var(--black);color:white;border-color:var(--black);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        .cal-day-header{text-align:center;padding:5px 2px;border-radius:6px 6px 0 0}
+        .cal-day-name{font-size:.6rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.04em}
+        .cal-day-num{font-size:.88rem;font-weight:700;color:var(--text);margin-top:1px}
+        .cal-day-header.today .cal-day-num{background:var(--black);color:white;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.78rem}
+        .cal-day-body{border-top:1px solid var(--gray-300);border-radius:0;min-height:80px;padding:4px 2px}
+        .cal-day-body.past{opacity:.4}
+        .slot-pill{display:block;width:100%;padding:5px 2px;margin-bottom:3px;background:transparent;border:1.5px solid var(--gray-300);border-radius:5px;font-size:.6rem;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;text-align:center;line-height:1.2;font-family:'DM Sans',sans-serif}
+        .slot-pill:hover{background:var(--black);color:var(--off-white);border-color:var(--black)}
+        .slot-pill.selected{background:var(--black);color:white;border-color:var(--black);box-shadow:0 2px 6px rgba(34,34,34,.25)}
         .slot-pill.booked{background:#f3f3f3;border-color:#e0e0e0;color:#bbb;cursor:not-allowed;text-decoration:line-through}
         .slot-pill.booked:hover{transform:none;box-shadow:none;background:#f3f3f3;color:#bbb}
-        .no-slots-msg{text-align:center;padding:30px 16px;color:var(--text-light);font-size:.9rem;background:var(--gray-100);border-radius:10px;border:1px dashed var(--gray-300);margin-top:8px}
-        .no-slots-msg .icon{font-size:2rem;margin-bottom:10px;display:block}
-        .no-slots-msg .contact-line{margin-top:12px;font-size:.84rem}
+        .no-slots-msg{text-align:center;padding:24px 12px;color:var(--text-light);font-size:.82rem;border-top:1px solid var(--gray-300);margin-top:6px}
+        .no-slots-msg .icon{font-size:1.6rem;margin-bottom:6px;display:block}
+        .no-slots-msg .contact-line{margin-top:8px;font-size:.78rem}
         .no-slots-msg .contact-line a{color:var(--black);text-decoration:underline;font-weight:600}
-        .selected-slot-bar{display:none;background:var(--gray-100);border:2px solid var(--black);border-radius:12px;padding:14px 18px;margin-top:16px;align-items:center;justify-content:space-between}
+        .selected-slot-bar{display:none;border-top:2px solid var(--black);border-radius:0;padding:12px 0;margin-top:12px;align-items:center;justify-content:space-between}
         .selected-slot-bar.active{display:flex}
-        .selected-slot-info{font-weight:600;font-size:.95rem}
-        .selected-slot-info .date{font-weight:400;font-size:.85rem;color:var(--text-light);margin-top:2px}
-        .clear-slot-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--gray-300);background:var(--white);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-light);transition:all .2s}
-        .clear-slot-btn:hover{background:var(--gray-100);color:var(--black)}
-        .fallback-section{display:none;animation:fadeUp .4s ease}.fallback-section.active{display:block}
-.fallback-note{text-align:center;font-size:.85rem;color:var(--text-light);margin-bottom:28px;font-weight:300;line-height:1.6;padding:16px 20px;background:var(--gray-100);border-radius:12px;border:1px solid var(--gray-200)}
-.fallback-date-group{margin-bottom:28px;text-align:center}
-.fallback-date-label{font-size:.85rem;font-weight:500;color:var(--text);margin-bottom:10px}
-.fallback-date-input{padding:14px 18px;font-size:1rem;font-family:'DM Sans',sans-serif;border:2px solid var(--gray-200);border-radius:12px;background:var(--white);color:var(--text);transition:border-color .2s;max-width:280px;width:100%;text-align:center}
-.fallback-date-input:focus{outline:none;border-color:var(--black)}
-.fallback-time-label{font-size:.85rem;font-weight:500;color:var(--text);margin-bottom:14px;text-align:center}
-.fallback-time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:420px;margin:0 auto}
-.fb-time-chip{padding:14px 8px;border:2px solid var(--gray-200);border-radius:12px;background:var(--white);font-size:.9rem;font-weight:500;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;transition:all .2s;text-align:center}
-.fb-time-chip:hover{border-color:var(--gray-400);background:var(--gray-100)}
-.fb-time-chip.active{background:var(--black);color:var(--white);border-color:var(--black)}
-        .calendar-loading{text-align:center;padding:40px;color:var(--text-light);font-size:.9rem}
-        .spin{width:28px;height:28px;border:3px solid var(--gray-200);border-top-color:var(--black);border-radius:50%;margin:0 auto 12px;animation:spin .7s linear infinite}
+        .selected-slot-info{font-weight:600;font-size:.88rem}
+        .selected-slot-info .date{font-weight:400;font-size:.8rem;color:var(--text-light);margin-top:1px}
+        .clear-slot-btn{width:28px;height:28px;border-radius:50%;border:none;background:transparent;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-500);transition:all .2s}
+        .clear-slot-btn:hover{color:var(--black);background:rgba(34,34,34,.08)}
+        .calendar-loading{text-align:center;padding:36px;color:var(--text-light);font-size:.88rem}
+        .spin{width:24px;height:24px;border:3px solid var(--gray-200);border-top-color:var(--black);border-radius:50%;margin:0 auto 10px;animation:spin .7s linear infinite}
         @keyframes spin{to{transform:rotate(360deg)}}
-        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+        /* Fallback */
+        .fallback-section{display:none;animation:fadeUp .4s ease}.fallback-section.active{display:block}
+        .fallback-note{font-size:.82rem;color:var(--text-light);margin-bottom:24px;font-weight:300;line-height:1.6;padding:0 0 16px;border-bottom:1px solid var(--gray-300)}
+        .fallback-date-group{margin-bottom:20px}
+        .fallback-date-label{font-size:.82rem;font-weight:500;color:var(--text);margin-bottom:6px}
+        .fallback-date-input{padding:10px 14px;font-size:.95rem;font-family:'DM Sans',sans-serif;border:none;border-bottom:2px solid var(--gray-300);border-radius:0;background:transparent;color:var(--text);transition:border-color .2s;width:100%;max-width:220px}
+        .fallback-date-input:focus{outline:none;border-bottom-color:var(--black)}
+        .fallback-time-label{font-size:.82rem;font-weight:500;color:var(--text);margin-bottom:10px}
+        .fallback-time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+        .fb-time-chip{padding:10px 4px;border:1.5px solid var(--gray-300);border-radius:8px;background:transparent;font-size:.82rem;font-weight:500;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;transition:all .2s;text-align:center}
+        .fb-time-chip:hover{border-color:var(--black);color:var(--black)}
+        .fb-time-chip.active{background:var(--black);color:var(--white);border-color:var(--black)}
+
+        /* Contact */
+        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
         .contact-grid .full-width{grid-column:1/-1}
-        .form-field{display:flex;flex-direction:column;gap:8px}
-        .form-label{font-size:.85rem;font-weight:500;color:var(--text)}
-        .form-label .req{color:var(--error)}
-        .form-input{padding:14px 18px;font-size:1rem;font-family:'DM Sans',sans-serif;border:2px solid var(--gray-200);border-radius:12px;background:var(--white);color:var(--text);transition:border-color .2s}
-        .form-input:focus{outline:none;border-color:var(--black)}
-        .form-input::placeholder{color:var(--gray-400)}
-        .movein-section{margin-top:24px;padding-top:24px;border-top:1px solid var(--gray-200)}
-        .movein-hint{font-size:.85rem;color:var(--text-light);font-weight:300;margin-bottom:12px}
-        .review-summary{background:var(--white);border:1px solid var(--gray-200);border-radius:16px;padding:24px 28px;margin-bottom:28px}
-        .review-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--gray-200)}
-        .review-row:last-child{border-bottom:none}
-        .review-label{font-size:.85rem;color:var(--text-light)}
-        .review-value{font-size:.95rem;font-weight:500;color:var(--text);text-align:right}
-        .btn-row{display:flex;justify-content:space-between;align-items:center;margin-top:40px;gap:16px}
-        .btn-row.center{justify-content:center}
-        .btn-back{display:flex;align-items:center;gap:8px;padding:14px 24px;background:transparent;border:2px solid var(--gray-200);border-radius:12px;font-size:.95rem;font-family:'DM Sans',sans-serif;font-weight:500;color:var(--text);cursor:pointer;transition:all .2s}
+        .form-field{display:flex;flex-direction:column;gap:5px}
+        .form-label{font-size:.8rem;font-weight:500;color:var(--text)}.form-label .req{color:var(--error)}
+        .form-input{padding:11px 0;font-size:.92rem;font-family:'DM Sans',sans-serif;border:none;border-bottom:1.5px solid var(--gray-300);border-radius:0;background:transparent;color:var(--text);transition:border-color .2s}
+        .form-input:focus{outline:none;border-bottom-color:var(--black)}.form-input::placeholder{color:var(--gray-400)}
+        .movein-section{margin-top:18px;padding-top:18px;border-top:1px solid var(--gray-200)}
+        .movein-hint{font-size:.8rem;color:var(--text-light);font-weight:300;margin-bottom:8px}
+        .review-summary{padding:0 0 16px;margin-bottom:24px;border-bottom:1px solid var(--gray-300)}
+        .review-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200);font-size:.85rem;gap:16px}
+        .review-row:last-child{border-bottom:none}.review-label{color:var(--gray-500);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;font-weight:500;flex-shrink:0}.review-value{font-weight:500;color:var(--text);text-align:right}
+
+        /* Buttons */
+        .btn-row{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:14px}
+        .btn-row.center{justify-content:flex-end}
+        .btn-back{display:flex;align-items:center;gap:6px;padding:11px 20px;background:transparent;border:2px solid var(--gray-200);border-radius:10px;font-size:.88rem;font-family:'DM Sans',sans-serif;font-weight:500;color:var(--text);cursor:pointer;transition:all .2s}
         .btn-back:hover{border-color:var(--gray-400);background:var(--white)}
-        .btn-next{display:flex;align-items:center;gap:10px;padding:16px 36px;background:var(--black);border:2px solid var(--black);border-radius:12px;font-size:.95rem;font-family:'DM Sans',sans-serif;font-weight:500;color:var(--white);cursor:pointer;transition:all .25s}
-        .btn-next:hover{background:#2a2a2a;border-color:#2a2a2a}
-        .btn-next:disabled{opacity:.3;cursor:not-allowed}
-        .btn-next svg,.btn-back svg{width:16px;height:16px}
-        .btn-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:18px 36px;background:var(--black);border:2px solid var(--black);border-radius:14px;font-size:1.05rem;font-family:'DM Sans',sans-serif;font-weight:500;color:var(--white);cursor:pointer;transition:all .25s;margin-top:32px}
-        .btn-submit:hover{background:#2a2a2a}
-        .btn-submit:disabled{opacity:.4;cursor:not-allowed}
-        .submit-spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;display:inline-block;animation:spin .6s linear infinite}
-        .privacy-note{text-align:center;font-size:.8rem;color:var(--gray-500);margin-top:16px;font-weight:300}
-        .error-msg{display:none;text-align:center;padding:14px 20px;background:#fef2f2;border:1px solid #fecaca;border-radius:12px;color:var(--error);font-size:.9rem;margin-bottom:20px}
-        .error-msg.active{display:block}
-        .success-panel{display:none;text-align:center;animation:fadeUp .5s ease}
-        .success-panel.active{display:block}
-        .success-check{width:72px;height:72px;border-radius:50%;background:var(--black);display:flex;align-items:center;justify-content:center;margin:0 auto 28px}
-        .success-check svg{width:32px;height:32px;color:var(--white)}
-        .success-title{font-family:'DM Serif Display',serif;font-size:2rem;font-weight:400;color:var(--black);margin-bottom:12px}
-        .success-msg{font-size:1.05rem;color:var(--text-light);margin-bottom:40px;font-weight:300;line-height:1.7}
-        .success-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-        .success-btn{padding:14px 28px;border-radius:12px;font-size:.95rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-        .success-btn-primary{background:var(--black);color:var(--white);border:2px solid var(--black)}
-        .success-btn-primary:hover{background:#2a2a2a}
-        .success-btn-secondary{background:transparent;color:var(--text);border:2px solid var(--gray-200)}
-        .success-btn-secondary:hover{border-color:var(--gray-400);background:var(--white)}
-        .not-found-state{display:none;text-align:center;padding:60px 20px}
-        .not-found-state h2{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--black);margin-bottom:12px}
-        .not-found-state p{color:var(--text-light);margin-bottom:28px}
-        @media(max-width:640px){.page-wrapper{padding:32px 16px 60px}.page-header h1{font-size:2rem}.step-label{display:none}.step-line{min-width:24px;margin:0 8px}.calendar-wrapper{padding:16px 10px}.cal-days-grid{gap:3px}.cal-day-body{min-height:80px;padding:3px 2px}.slot-pill{font-size:.62rem;padding:5px 2px}.cal-day-name{font-size:.6rem}.cal-day-num{font-size:.9rem}.unit-type-grid{gap:10px}.contact-grid{grid-template-columns:1fr}.btn-row{flex-direction:column-reverse;gap:12px}.btn-back,.btn-next{width:100%;justify-content:center}.review-row{flex-direction:column;gap:4px}.review-value{text-align:left}.selected-slot-bar{padding:12px 14px}.fallback-time-grid{gap:8px}.fb-time-chip{padding:12px 6px;font-size:.82rem}}
+        .btn-next{display:flex;align-items:center;gap:8px;padding:12px 28px;background:var(--black);border:2px solid var(--black);border-radius:10px;font-size:.88rem;font-family:'DM Sans',sans-serif;font-weight:500;color:var(--white);cursor:pointer;transition:all .2s}
+        .btn-next:hover{background:#3a3a3a;border-color:#3a3a3a}.btn-next:disabled{opacity:.3;cursor:not-allowed}
+        .btn-next svg,.btn-back svg{width:14px;height:14px}
+        .btn-submit{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 28px;background:var(--black);border:2px solid var(--black);border-radius:10px;font-size:.95rem;font-family:'DM Sans',sans-serif;font-weight:500;color:var(--white);cursor:pointer;transition:all .2s;margin-top:24px}
+        .btn-submit:hover{background:#3a3a3a}.btn-submit:disabled{opacity:.4;cursor:not-allowed}
+        .submit-spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;display:inline-block;animation:spin .6s linear infinite}
+        .privacy-note{font-size:.75rem;color:var(--gray-500);margin-top:12px;font-weight:300}
+        .error-msg{display:none;padding:0 0 12px;background:transparent;border:none;border-bottom:2px solid var(--error);border-radius:0;color:var(--error);font-size:.82rem;margin-bottom:16px}.error-msg.active{display:block}
+
+        /* Success */
+        .success-panel{display:none;animation:fadeUp .5s ease}.success-panel.active{display:block}
+        .success-check{width:56px;height:56px;border-radius:50%;background:var(--black);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+        .success-check svg{width:24px;height:24px;color:var(--white)}
+        .success-title{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;color:var(--black);margin-bottom:8px}
+        .success-msg{font-size:.95rem;color:var(--text-light);margin-bottom:32px;font-weight:300;line-height:1.7}
+        .success-actions{display:flex;gap:10px;flex-wrap:wrap}
+        .success-btn{padding:11px 22px;border-radius:10px;font-size:.88rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+        .success-btn-primary{background:var(--black);color:var(--white);border:2px solid var(--black)}.success-btn-primary:hover{background:#3a3a3a}
+        .success-btn-secondary{background:transparent;color:var(--text);border:2px solid var(--gray-200)}.success-btn-secondary:hover{border-color:var(--gray-400)}
+        .not-found-state{display:none}
+        .not-found-state h2{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--black);margin-bottom:10px;font-weight:400}
+        .not-found-state p{color:var(--text-light);margin-bottom:24px;font-weight:300}
+
+        .page-footer{margin-top:auto;padding-top:24px;border-top:1px solid var(--gray-300);font-size:.7rem;color:var(--gray-400);letter-spacing:.02em;font-weight:400;line-height:1.5}
+
+        /* ─── Mobile ─── */
+        @media(max-width:860px){
+            .layout{grid-template-columns:1fr}
+            .left-col{display:none!important}
+            .steps-indicator{display:flex}
+            .right-col{padding:32px 20px 60px}
+            .step-title{text-align:center}.step-subtitle{text-align:center}
+            .contact-grid{grid-template-columns:1fr}
+            .btn-row{flex-direction:column-reverse;gap:10px}
+            .btn-back,.btn-next{width:100%;justify-content:center}
+            .btn-row.center{justify-content:center}
+            .cal-day-body{min-height:65px;padding:2px}.slot-pill{font-size:.55rem;padding:4px 1px}
+            .cal-day-name{font-size:.5rem}.cal-day-num{font-size:.78rem}
+            .fallback-time-grid{gap:6px}.fb-time-chip{padding:8px 3px;font-size:.75rem}
+        }
     </style>
 </head>
 <body>
-    <div class="page-wrapper">
-        <header class="page-header">
-            <h1>Book your tour</h1>
-            <p class="subtitle">Schedule a visit and see your future home in person</p>
-            <div class="property-badge" id="property-badge"><span class="property-badge-inner"><span class="property-badge-dot"></span><span id="property-name-display"></span></span></div>
-        </header>
-        <div class="steps-indicator" id="steps-indicator">
-            <div class="step-item active" data-step="1"><div class="step-number">1</div><span class="step-label">Unit type</span></div>
-            <div class="step-line" data-line="1"></div>
-            <div class="step-item" data-step="2"><div class="step-number">2</div><span class="step-label">Tour time</span></div>
-            <div class="step-line" data-line="2"></div>
-            <div class="step-item" data-step="3"><div class="step-number">3</div><span class="step-label">Your details</span></div>
+    <div class="layout">
+        <!-- LEFT -->
+        <div class="left-col" id="left-col">
+            <div class="left-brand" id="left-brand">AGM Real Estate Group</div>
+            <h1 class="left-title">Book<br>your tour</h1>
+            <p class="left-subtitle" id="left-subtitle">Schedule a visit and see your future home in person.</p>
+
+            <div class="side-steps">
+                <div class="side-step active" data-step="1"><div class="side-step-num">1</div><span class="side-step-label">Choose a unit</span></div>
+                <div class="side-step-connector"></div>
+                <div class="side-step" data-step="2"><div class="side-step-num">2</div><span class="side-step-label">Tour time</span></div>
+                <div class="side-step-connector"></div>
+                <div class="side-step" data-step="3"><div class="side-step-num">3</div><span class="side-step-label">Your details</span></div>
+            </div>
+
+            <div class="page-footer">Powered by AGM Real Estate Group | Marketing &amp; Leasing</div>
         </div>
-        <div class="form-container" id="form-container">
-            <!-- STEP 1 -->
-            <div class="step-panel active" id="step-1">
-                <h2 class="step-title">What are you looking for?</h2>
-                <p class="step-subtitle">Select the property and unit types you&#8217;re interested in</p>
-                <div class="property-select-section" id="property-select-section">
-                    <p class="property-select-label">Property of interest <span style="color:var(--error)">*</span></p>
-                    <select class="property-select" id="tour-property"><option value="">Select a property...</option></select>
-                </div>
-                <div class="unit-type-grid" id="unit-type-grid">
-                    <div class="unit-type-card" data-type="studio"><div class="unit-type-icon">&#9632;</div><div class="unit-type-name">Studio</div><div class="unit-type-count" id="count-studio"></div></div>
-                    <div class="unit-type-card" data-type="1bed"><div class="unit-type-icon">&#9632;&#9632;</div><div class="unit-type-name">1 Bedroom</div><div class="unit-type-count" id="count-1bed"></div></div>
-                    <div class="unit-type-card" data-type="2bed"><div class="unit-type-icon">&#9632;&#9632;&#9632;</div><div class="unit-type-name">2 Bedroom</div><div class="unit-type-count" id="count-2bed"></div></div>
-                    <div class="unit-type-card" data-type="3bed"><div class="unit-type-icon">&#9632;&#9632;&#9632;&#9632;</div><div class="unit-type-name">3+ Bedroom</div><div class="unit-type-count" id="count-3bed"></div></div>
-                </div>
-                <div class="btn-row center"><button class="btn-next" id="btn-step1-next"><span>Next</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
+
+        <!-- RIGHT -->
+        <div class="right-col">
+            <div class="steps-indicator" id="steps-indicator">
+                <div class="step-item active" data-step="1"><div class="step-number">1</div><span class="step-label">Unit</span></div>
+                <div class="step-line" data-line="1"></div>
+                <div class="step-item" data-step="2"><div class="step-number">2</div><span class="step-label">Time</span></div>
+                <div class="step-line" data-line="2"></div>
+                <div class="step-item" data-step="3"><div class="step-number">3</div><span class="step-label">Details</span></div>
             </div>
-            <!-- STEP 2 -->
-            <div class="step-panel" id="step-2">
-                <h2 class="step-title">Pick a tour time</h2>
-                <p class="step-subtitle">Choose an available slot from the calendar</p>
-                <div class="calendar-wrapper">
-                    <div class="calendar-loading" id="cal-loading"><div class="spin"></div><div>Loading available times...</div></div>
-                    <div id="cal-content" style="display:none;">
-                        <div class="cal-nav"><div class="cal-nav-arrows"><button class="cal-nav-btn" onclick="changeWeek(-1)">&#8249;</button><span class="cal-week-label" id="cal-week-label"></span><button class="cal-nav-btn" onclick="changeWeek(1)">&#8250;</button></div><button class="cal-today-btn" onclick="goToday()">Today</button></div>
-                        <div class="cal-days-grid" id="cal-days-grid"></div>
-                        <div class="no-slots-msg" id="no-slots-msg" style="display:none;"><span class="icon">&#128197;</span><div>No tour times available this week.</div><div style="margin-top:6px;font-size:.84rem">Try another week, or contact us directly.</div><div class="contact-line">&#9993; <a id="contact-email-link" href="/cdn-cgi/l/email-protection#e08c858193898e87a081878d9285818c85939481948587928f9590ce838f8d"><span class="__cf_email__" data-cfemail="721e1713011b1c153213151f0017131e17010613061715001d07025c111d1f">[email&#160;protected]</span></a></div></div>
+
+            <div class="form-container" id="form-container">
+                <!-- STEP 1 -->
+                <div class="step-panel active" id="step-1">
+                    <h2 class="step-title">What would you like to tour?</h2>
+                    <p class="step-subtitle">Pick the specific units you&#8217;re interested in seeing</p>
+                    <div class="property-select-section" id="property-select-section">
+                        <p class="property-select-label">Property of interest <span style="color:var(--error)">*</span></p>
+                        <select class="property-select" id="tour-property"><option value="">Select a property...</option></select>
                     </div>
-                    <div class="selected-slot-bar" id="selected-slot-bar"><div class="selected-slot-info"><span id="selected-time-display"></span><div class="date" id="selected-date-display"></div></div><button class="clear-slot-btn" onclick="clearSelectedSlot()">&times;</button></div>
+                    <div class="unit-list" id="unit-list"></div>
+                    <div class="unit-empty-note" id="unit-empty-note">No specific units are listed for this property right now. You can still request a tour and our leasing team will share what&#8217;s available.</div>
+                    <p class="unit-hint" id="unit-hint">Select one or more units, or continue to request a general tour.</p>
+                    <div class="btn-row center"><button class="btn-next" id="btn-step1-next"><span>Next</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
                 </div>
-                <div class="fallback-section" id="fallback-section">
-                    <div class="fallback-note">This property hasn&#8217;t set up specific tour times yet. Pick a preferred date and time below, and our leasing team will reach out to confirm.</div>
-                    <div class="fallback-date-group"><p class="fallback-date-label">Preferred tour date</p><input type="date" class="fallback-date-input" id="fallback-date"></div>
-                    <p class="fallback-time-label">Preferred time</p>
-                    <div class="fallback-time-grid" id="fallback-time-grid">
-                        <button class="fb-time-chip" data-time="9:00 AM">9:00 AM</button>
-                        <button class="fb-time-chip" data-time="10:00 AM">10:00 AM</button>
-                        <button class="fb-time-chip" data-time="11:00 AM">11:00 AM</button>
-                        <button class="fb-time-chip" data-time="12:00 PM">12:00 PM</button>
-                        <button class="fb-time-chip" data-time="1:00 PM">1:00 PM</button>
-                        <button class="fb-time-chip" data-time="2:00 PM">2:00 PM</button>
-                        <button class="fb-time-chip" data-time="3:00 PM">3:00 PM</button>
-                        <button class="fb-time-chip" data-time="4:00 PM">4:00 PM</button>
-                        <button class="fb-time-chip" data-time="5:00 PM">5:00 PM</button>
+
+                <!-- STEP 2 -->
+                <div class="step-panel" id="step-2">
+                    <h2 class="step-title">Pick a tour time</h2>
+                    <p class="step-subtitle">Choose an available slot from the calendar</p>
+                    <div class="calendar-wrapper">
+                        <div class="calendar-loading" id="cal-loading"><div class="spin"></div><div>Loading available times...</div></div>
+                        <div id="cal-content" style="display:none;">
+                            <div class="cal-nav"><div class="cal-nav-arrows"><button class="cal-nav-btn" onclick="changeWeek(-1)">&#8249;</button><span class="cal-week-label" id="cal-week-label"></span><button class="cal-nav-btn" onclick="changeWeek(1)">&#8250;</button></div><button class="cal-today-btn" onclick="goToday()">Today</button></div>
+                            <div class="cal-days-grid" id="cal-days-grid"></div>
+                            <div class="no-slots-msg" id="no-slots-msg" style="display:none;"><span class="icon">&#128197;</span><div>No tour times available this week.</div><div style="margin-top:6px;font-size:.78rem">Try another week, or contact us directly.</div><div class="contact-line">&#9993; <a id="contact-email-link" href="mailto:leasing@agmrealestategroup.com">leasing@agmrealestategroup.com</a></div></div>
+                        </div>
+                        <div class="selected-slot-bar" id="selected-slot-bar"><div class="selected-slot-info"><span id="selected-time-display"></span><div class="date" id="selected-date-display"></div></div><button class="clear-slot-btn" onclick="clearSelectedSlot()">&times;</button></div>
                     </div>
+                    <div class="fallback-section" id="fallback-section">
+                        <div class="fallback-note">This property hasn&#8217;t set up specific tour times yet. Pick a preferred date and time below, and our leasing team will reach out to confirm.</div>
+                        <div class="fallback-date-group"><p class="fallback-date-label">Preferred tour date</p><input type="date" class="fallback-date-input" id="fallback-date"></div>
+                        <p class="fallback-time-label">Preferred time</p>
+                        <div class="fallback-time-grid"><button class="fb-time-chip" data-time="9:00 AM">9:00 AM</button><button class="fb-time-chip" data-time="10:00 AM">10:00 AM</button><button class="fb-time-chip" data-time="11:00 AM">11:00 AM</button><button class="fb-time-chip" data-time="12:00 PM">12:00 PM</button><button class="fb-time-chip" data-time="1:00 PM">1:00 PM</button><button class="fb-time-chip" data-time="2:00 PM">2:00 PM</button><button class="fb-time-chip" data-time="3:00 PM">3:00 PM</button><button class="fb-time-chip" data-time="4:00 PM">4:00 PM</button><button class="fb-time-chip" data-time="5:00 PM">5:00 PM</button></div>
+                    </div>
+                    <div class="btn-row"><button class="btn-back" id="btn-step2-back"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg><span>Back</span></button><button class="btn-next" id="btn-step2-next" disabled><span>Next</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
                 </div>
-                <div class="btn-row"><button class="btn-back" id="btn-step2-back"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg><span>Back</span></button><button class="btn-next" id="btn-step2-next" disabled><span>Next</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
-            </div>
-            <!-- STEP 3 -->
-            <div class="step-panel" id="step-3">
-                <h2 class="step-title">Almost there</h2>
-                <p class="step-subtitle">Tell us how to reach you and we&#8217;ll confirm your tour</p>
-                <div class="review-summary"><div class="review-row"><span class="review-label">Property</span><span class="review-value" id="review-property">&#8212;</span></div><div class="review-row"><span class="review-label">Unit types</span><span class="review-value" id="review-units">&#8212;</span></div><div class="review-row"><span class="review-label">Tour time</span><span class="review-value" id="review-time">&#8212;</span></div></div>
-                <div class="error-msg" id="error-message"></div>
-                <div class="contact-grid">
-                    <div class="form-field"><label class="form-label">First name <span class="req">*</span></label><input type="text" class="form-input" id="tour-first-name" placeholder="First name" required></div>
-                    <div class="form-field"><label class="form-label">Last name</label><input type="text" class="form-input" id="tour-last-name" placeholder="Last name"></div>
-                    <div class="form-field"><label class="form-label">Email <span class="req">*</span></label><input type="email" class="form-input" id="tour-email" placeholder="you@example.com" required></div>
-                    <div class="form-field"><label class="form-label">Phone <span class="req">*</span></label><input type="tel" class="form-input" id="tour-phone" placeholder="(555) 123-4567" required></div>
-                    <div class="form-field full-width movein-section"><label class="form-label">Desired move-in date</label><p class="movein-hint">Optional &#8212; helps us find the best options for you</p><input type="date" class="form-input" id="tour-movein-date"></div>
+
+                <!-- STEP 3 -->
+                <div class="step-panel" id="step-3">
+                    <h2 class="step-title">Almost there</h2>
+                    <p class="step-subtitle">Tell us how to reach you</p>
+                    <div class="review-summary"><div class="review-row"><span class="review-label">Property</span><span class="review-value" id="review-property">&#8212;</span></div><div class="review-row"><span class="review-label">Units</span><span class="review-value" id="review-units">&#8212;</span></div><div class="review-row"><span class="review-label">Tour time</span><span class="review-value" id="review-time">&#8212;</span></div></div>
+                    <div class="error-msg" id="error-message"></div>
+                    <div class="contact-grid">
+                        <div class="form-field"><label class="form-label">First name <span class="req">*</span></label><input type="text" class="form-input" id="tour-first-name" placeholder="First name" required></div>
+                        <div class="form-field"><label class="form-label">Last name</label><input type="text" class="form-input" id="tour-last-name" placeholder="Last name"></div>
+                        <div class="form-field"><label class="form-label">Email <span class="req">*</span></label><input type="email" class="form-input" id="tour-email" placeholder="you@example.com" required></div>
+                        <div class="form-field"><label class="form-label">Phone <span class="req">*</span></label><input type="tel" class="form-input" id="tour-phone" placeholder="(555) 123-4567" required></div>
+                        <div class="form-field full-width movein-section"><label class="form-label">Desired move-in date</label><p class="movein-hint">Optional &#8212; helps us find the best options</p><input type="date" class="form-input" id="tour-movein-date"></div>
+                    </div>
+                    <div class="btn-row" style="margin-top:16px"><button class="btn-back" id="btn-step3-back"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg><span>Back</span></button></div>
+                    <button class="btn-submit" id="submit-btn" onclick="handleSubmit()"><span>Book This Tour</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+                    <p class="privacy-note">By submitting, you agree to be contacted by our leasing team.</p>
                 </div>
-                <div class="btn-row" style="margin-top:24px"><button class="btn-back" id="btn-step3-back"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg><span>Back</span></button></div>
-                <button class="btn-submit" id="submit-btn" onclick="handleSubmit()"><span>Book This Tour</span><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
-                <p class="privacy-note">By submitting, you agree to be contacted by our leasing team.</p>
             </div>
+
+            <!-- Success -->
+            <div class="success-panel" id="success-state">
+                <div class="success-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+                <h2 class="success-title">Tour booked!</h2>
+                <p class="success-msg" id="success-message">Your tour has been confirmed.</p>
+                <div class="success-actions"><button class="success-btn success-btn-primary" onclick="resetForm()">Request Another Tour</button><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-secondary" target="_blank">View All Listings</a></div>
+            </div>
+            <div class="not-found-state" id="not-found-state"><h2>Property not found</h2><p>The property you&#8217;re looking for isn&#8217;t in our system.</p><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-primary" target="_blank">View All Listings</a></div>
         </div>
-        <div class="success-panel" id="success-state"><div class="success-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div><h2 class="success-title">Tour booked!</h2><p class="success-msg" id="success-message">Your tour has been confirmed.</p><div class="success-actions"><button class="success-btn success-btn-primary" onclick="resetForm()">Request Another Tour</button><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-secondary" target="_blank">View All Listings</a></div></div>
-        <div class="not-found-state" id="not-found-state"><h2>Property not found</h2><p>The property you&#8217;re looking for isn&#8217;t in our system.</p><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-primary" target="_blank">View All Listings</a></div>
     </div>
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         const API_BASE='/api';
         const DAY_NAMES_SHORT=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         const MONTH_NAMES_LONG=['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-        const agmListings=[{"property":"Seward Park","neighborhood":"Seward Park","unit":"Unit 01","bedrooms":1},{"property":"The Palms","neighborhood":"Eastlake","unit":"#7","bedrooms":2},{"property":"The Palms","neighborhood":"Eastlake","unit":"#12-5","bedrooms":1},{"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 214","bedrooms":2},{"property":"Cedar Lane Apartments","neighborhood":"Greenwood","unit":"Apt 15","bedrooms":1},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 301","bedrooms":2},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 611","bedrooms":2},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 311","bedrooms":2},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 308","bedrooms":2},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 313","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 416","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 803","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 704","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 405","bedrooms":"Studio"},{"property":"Willow Creek","neighborhood":"Bothell","unit":"#206","bedrooms":1},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#A4","bedrooms":1},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#B3","bedrooms":1},{"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 118","bedrooms":2},{"property":"Seward Park","neighborhood":"Seward Park","unit":"Unit 03","bedrooms":1},{"property":"Seward Park","neighborhood":"Seward Park","unit":"#09","bedrooms":2},{"property":"Rialto Court","neighborhood":"Capitol Hill","unit":"#201","bedrooms":1},{"property":"Rialto Court","neighborhood":"Capitol Hill","unit":"#210","bedrooms":1},{"property":"Rialto Court","neighborhood":"Capitol Hill","unit":"#106","bedrooms":"Studio"},{"property":"Lorelei Apartments","neighborhood":"Capitol Hill","unit":"#23","bedrooms":1},{"property":"Gilmanor Apartments","neighborhood":"Magnolia","unit":"#206","bedrooms":2},{"property":"301 Apartments","neighborhood":"Central District","unit":"Apt 13","bedrooms":1},{"property":"301 Apartments","neighborhood":"Central District","unit":"Apt 15","bedrooms":2},{"property":"Cedar Lane Apartments","neighborhood":"Greenwood","unit":"Apt 1","bedrooms":1},{"property":"White Heather Apartments","neighborhood":"Lake City","unit":"Unit","bedrooms":1},{"property":"White Heather Apartments","neighborhood":"Lake City","unit":"Unit","bedrooms":2},{"property":"6113 Apartments","neighborhood":"Roosevelt","unit":"Unit 103","bedrooms":1},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"Unit C2","bedrooms":1},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#C1","bedrooms":1},{"property":"Golden Inca","neighborhood":"Capitol Hill","unit":"#204","bedrooms":1},{"property":"De Selm Apartments","neighborhood":"Seattle","unit":"Apt 33","bedrooms":1},{"property":"Mercer Tower","neighborhood":"Mercer Island","unit":"Apt 25","bedrooms":1},{"property":"Arbor Heights","neighborhood":"North Seattle","unit":"Apt 205","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 612","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 605","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 606","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 513","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 319","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 201","bedrooms":1},{"property":"De Selm Apartments","neighborhood":"Seattle","unit":"Unit","bedrooms":"Studio"},{"property":"Gary Apartments","neighborhood":"Bellevue","unit":"Apt 3","bedrooms":2},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#A2","bedrooms":1},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 102","bedrooms":1},{"property":"Arbor Heights","neighborhood":"North Seattle","unit":"Apt 103","bedrooms":1},{"property":"301 Apartments","neighborhood":"Central District","unit":"Apt 12","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 806","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 805","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 701","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 516","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 412","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 314","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 212","bedrooms":"Studio"},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt B","bedrooms":"Studio"},{"property":"Crestview Townhomes","neighborhood":"Lynnwood","unit":"Unit","bedrooms":2},{"property":"Golden Inca","neighborhood":"Capitol Hill","unit":"#303","bedrooms":"Studio"},{"property":"East Union Apartments","neighborhood":"Capitol Hill","unit":"Unit","bedrooms":1},{"property":"Royal View Apartments","neighborhood":"Milton","unit":"Unit","bedrooms":2},{"property":"Viewmont Apartments","neighborhood":"Capitol Hill","unit":"#301","bedrooms":2},{"property":"Viewmont Apartments","neighborhood":"Capitol Hill","unit":"#102","bedrooms":1},{"property":"Mercer Tower","neighborhood":"Mercer Island","unit":"Apt 2","bedrooms":2},{"property":"Bayview Apartments","neighborhood":"Beacon Hill","unit":"Apt 304","bedrooms":1},{"property":"Highway Place","neighborhood":"Everett","unit":"Apt 301","bedrooms":1},{"property":"Highway Place","neighborhood":"Everett","unit":"Apt 302","bedrooms":1},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 8","bedrooms":1},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 202","bedrooms":1},{"property":"Marianne Apartments","neighborhood":"Queen Anne","unit":"#103","bedrooms":"Studio"},{"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 120","bedrooms":1},{"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 108","bedrooms":1},{"property":"The Palms","neighborhood":"Eastlake","unit":"#9","bedrooms":1},{"property":"Hill Town Apartments","neighborhood":"Central District","unit":"Unit","bedrooms":1},{"property":"BalCro","neighborhood":"Ballard","unit":"Apt 103","bedrooms":1},{"property":"Mercer Tower","neighborhood":"Mercer Island","unit":"Apt 46","bedrooms":1},{"property":"Fairlake Quads","neighborhood":"Bellevue","unit":"3","bedrooms":3},{"property":"The Palms","neighborhood":"Eastlake","unit":"#1","bedrooms":1},{"property":"Highway Place","neighborhood":"Everett","unit":"Apt 102","bedrooms":1},{"property":"Winslow Place","neighborhood":"Fremont","unit":"Unit","bedrooms":1},{"property":"Marianne Apartments","neighborhood":"Queen Anne","unit":"#204","bedrooms":"Studio"}];
-
-        const propertyLeasingAgents={"301 Apartments":"leasing@agmrealestategroup.com","6113 Apartments":"leasing@agmrealestategroup.com","Arbor Heights":"leasing@agmrealestategroup.com","Avia Apartments":"leasing@agmrealestategroup.com","BalCro":"leasing@agmrealestategroup.com","Bayview Apartments":"leasing@agmrealestategroup.com","Cedar Lane Apartments":"leasing@agmrealestategroup.com","Clift House Apartments":"leasing@agmrealestategroup.com","Crestview Townhomes":"leasing@agmrealestategroup.com","De Selm Apartments":"leasing@agmrealestategroup.com","East Union Apartments":"leasing@agmrealestategroup.com","Fairlake Quads":"leasing@agmrealestategroup.com","Gary Apartments":"leasing@agmrealestategroup.com","Gilmanor Apartments":"leasing@agmrealestategroup.com","Golden Inca":"leasing@agmrealestategroup.com","Highway Place":"leasing@agmrealestategroup.com","Hill Town Apartments":"leasing@agmrealestategroup.com","Lorelei Apartments":"leasing@agmrealestategroup.com","Marianne Apartments":"leasing@agmrealestategroup.com","Mercer Tower":"leasing@agmrealestategroup.com","Niwa Apartments":"leasing@agmrealestategroup.com","Rialto Court":"leasing@agmrealestategroup.com","Royal View Apartments":"leasing@agmrealestategroup.com","Seward Park":"leasing@agmrealestategroup.com","Skandi Villa":"leasing@agmrealestategroup.com","The Palms":"leasing@agmrealestategroup.com","Viewmont Apartments":"leasing@agmrealestategroup.com","White Heather Apartments":"leasing@agmrealestategroup.com","Willow Creek":"leasing@agmrealestategroup.com","Winslow Place":"leasing@agmrealestategroup.com"};
-
-        const allProperties=[...new Set([...agmListings.map(l=>l.property),...Object.keys(propertyLeasingAgents)])].sort();
-        let currentStep=1,selectedProperty='',selectedUnitTypes=[],selectedSlot=null,slotsData=[],pollTimer=null,currentWeekStart=getMondayOfWeek(new Date());
+        let agmListings=[],propertyLeasingAgents={},allProperties=[];
+        let currentStep=1,selectedProperty='',currentUnits=[],selectedUnits=[],selectedSlot=null,slotsData=[],pollTimer=null,currentWeekStart=getMondayOfWeek(new Date());
         let fallbackMode=false,fallbackDate='',fallbackTime='';
 
         emailjs.init('oVeCEKCpUsDe3_ba2');
 
         function getUrlParams(){return{property:new URLSearchParams(window.location.search).get('property')};}
 
-        function initializePage(){
-            const p=getUrlParams();populatePropertyDropdown();
+        async function loadData(){
+            try{
+                const res=await fetch('/listings.json',{cache:'no-cache'});
+                const data=await res.json();
+                agmListings=data.listings||[];
+                propertyLeasingAgents=data.leasingAgents||{};
+            }catch(e){agmListings=[];propertyLeasingAgents={};}
+            allProperties=[...new Set([...agmListings.map(l=>l.property),...Object.keys(propertyLeasingAgents)])].sort();
+        }
+
+        async function initializePage(){
+            await loadData();
+            populatePropertyDropdown();
             document.getElementById('tour-movein-date').min=new Date().toISOString().split('T')[0];
+            const p=getUrlParams();
             if(p.property){
                 if(allProperties.includes(p.property)){
                     selectedProperty=p.property;
                     document.title='Book a Tour - '+selectedProperty+' | AGM Real Estate Group';
-                    document.getElementById('property-badge').style.display='flex';
-                    document.getElementById('property-name-display').textContent=selectedProperty;
                     document.getElementById('property-select-section').style.display='none';
                     document.getElementById('tour-property').value=selectedProperty;
-                    updateUnitTypeCounts(selectedProperty);
+                    setBrand(selectedProperty);
+                    renderUnits(selectedProperty);
                 }else{
                     document.getElementById('form-container').style.display='none';
                     document.getElementById('steps-indicator').style.display='none';
                     document.getElementById('not-found-state').style.display='block';
                 }
-            }else{updateUnitTypeCounts(null);}
+            }else{
+                renderUnits(null);
+            }
             updateWeekLabel();renderCalendar();
         }
 
+        function setBrand(property){
+            document.getElementById('left-brand').textContent=property||'AGM Real Estate Group';
+            document.getElementById('left-subtitle').textContent=property
+                ?('Book a private tour at '+property+'. Pick a time that works for you.')
+                :'Schedule a visit and see your future home in person.';
+        }
+
         function populatePropertyDropdown(){const s=document.getElementById('tour-property');allProperties.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;s.appendChild(o);});}
+
+        function bedLabel(b){return(b==='Studio'||b===0)?'Studio':(b===1?'1 Bedroom':b+' Bedrooms');}
+        function unitLabel(unit){if(!unit||unit==='Not Specified')return '';return /^(unit|apt|apartment|suite|ste|#)\b|^#/i.test(unit)?unit:('Unit '+unit);}
+
+        function unitDescriptor(u){
+            const parts=[bedLabel(u.bedrooms)];
+            const ul=unitLabel(u.unit);if(ul)parts.push(ul);
+            if(u.rent)parts.push('$'+u.rent.toLocaleString());
+            return parts.join(' · ');
+        }
+
+        function renderUnits(property){
+            const container=document.getElementById('unit-list');
+            const emptyNote=document.getElementById('unit-empty-note');
+            const hint=document.getElementById('unit-hint');
+            selectedUnits=[];
+            container.innerHTML='';
+            if(!property){emptyNote.style.display='none';hint.style.display='none';currentUnits=[];return;}
+            currentUnits=agmListings.filter(l=>l.property===property);
+            if(currentUnits.length===0){emptyNote.style.display='block';hint.style.display='none';return;}
+            emptyNote.style.display='none';hint.style.display='block';
+            container.innerHTML=currentUnits.map((u,i)=>{
+                const meta=[];
+                const ul=unitLabel(u.unit);if(ul)meta.push(ul);
+                if(u.sqft)meta.push(u.sqft.toLocaleString()+' sqft');
+                const rent=u.rent?'$'+u.rent.toLocaleString():'Call';
+                const avail=u.available?(u.available==='Now'?'Available now':'Avail. '+u.available):'';
+                return '<button type="button" class="unit-card" data-idx="'+i+'">'
+                    +'<div class="unit-card-body"><span class="unit-card-type">'+bedLabel(u.bedrooms)+'</span>'
+                    +(meta.length?'<span class="unit-card-meta">'+meta.join(' · ')+'</span>':'')+'</div>'
+                    +'<div class="unit-card-right"><span class="unit-card-rent">'+rent+'</span>'
+                    +(avail?'<span class="unit-card-avail">'+avail+'</span>':'')+'</div>'
+                    +'<span class="unit-card-check"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l3.5 3.5L13 5"/></svg></span>'
+                    +'</button>';
+            }).join('');
+            container.querySelectorAll('.unit-card').forEach(card=>{
+                card.addEventListener('click',()=>{
+                    const u=currentUnits[parseInt(card.dataset.idx)];
+                    card.classList.toggle('active');
+                    if(card.classList.contains('active')){if(!selectedUnits.includes(u))selectedUnits.push(u);}
+                    else{selectedUnits=selectedUnits.filter(x=>x!==u);}
+                });
+            });
+        }
 
         function goToStep(step){
             currentStep=step;
@@ -272,40 +394,28 @@
             document.getElementById('step-'+step).classList.add('active');
             document.querySelectorAll('.step-item').forEach(item=>{const s=parseInt(item.dataset.step);item.classList.remove('active','completed');if(s===step)item.classList.add('active');else if(s<step)item.classList.add('completed');});
             document.querySelectorAll('.step-line').forEach(line=>{line.classList.toggle('completed',parseInt(line.dataset.line)<step);});
+            document.querySelectorAll('.side-step').forEach(item=>{const s=parseInt(item.dataset.step);item.classList.remove('active','completed');if(s===step)item.classList.add('active');else if(s<step)item.classList.add('completed');});
             if(step===2&&selectedProperty)loadSlots();
             if(step===3){populateReview();document.getElementById('submit-btn').querySelector('span').textContent=fallbackMode?'Request Tour':'Book This Tour';}
             window.scrollTo({top:0,behavior:'smooth'});
         }
 
         document.getElementById('btn-step1-next').addEventListener('click',()=>{
-            const prop=document.getElementById('tour-property').value;
-            if(!prop){document.getElementById('tour-property').focus();document.getElementById('tour-property').style.borderColor='var(--error)';setTimeout(()=>{document.getElementById('tour-property').style.borderColor='';},2000);return;}
+            const prop=document.getElementById('tour-property').value||selectedProperty;
+            if(!prop){const sel=document.getElementById('tour-property');sel.focus();sel.style.borderBottomColor='var(--error)';setTimeout(()=>{sel.style.borderBottomColor='';},2000);return;}
             selectedProperty=prop;goToStep(2);
         });
         document.getElementById('btn-step2-back').addEventListener('click',()=>{clearInterval(pollTimer);goToStep(1);});
         document.getElementById('btn-step2-next').addEventListener('click',()=>{if(selectedSlot||(fallbackMode&&fallbackDate&&fallbackTime))goToStep(3);});
         document.getElementById('btn-step3-back').addEventListener('click',()=>goToStep(2));
-        document.getElementById('tour-property').addEventListener('change',(e)=>{selectedProperty=e.target.value;updateUnitTypeCounts(selectedProperty);});
-
-        function updateUnitTypeCounts(property){
-            const listings=property?agmListings.filter(l=>l.property===property):agmListings;
-            const c={studio:0,'1bed':0,'2bed':0,'3bed':0};
-            listings.forEach(l=>{const b=l.bedrooms;if(b==='Studio'||b===0)c.studio++;else if(b===1)c['1bed']++;else if(b===2)c['2bed']++;else if(b>=3)c['3bed']++;});
-            document.getElementById('count-studio').textContent=c.studio+' available';
-            document.getElementById('count-1bed').textContent=c['1bed']+' available';
-            document.getElementById('count-2bed').textContent=c['2bed']+' available';
-            document.getElementById('count-3bed').textContent=c['3bed']+' available';
-            document.querySelectorAll('.unit-type-card').forEach(card=>{const t=card.dataset.type;card.classList.toggle('disabled',c[t]===0);if(c[t]===0)card.classList.remove('active');});
-        }
-
-        document.querySelectorAll('.unit-type-card').forEach(card=>{card.addEventListener('click',()=>{if(card.classList.contains('disabled'))return;card.classList.toggle('active');const t=card.dataset.type;if(card.classList.contains('active')){if(!selectedUnitTypes.includes(t))selectedUnitTypes.push(t);}else{selectedUnitTypes=selectedUnitTypes.filter(x=>x!==t);}});});
+        document.getElementById('tour-property').addEventListener('change',(e)=>{selectedProperty=e.target.value;setBrand(selectedProperty);renderUnits(selectedProperty);});
 
         function getMondayOfWeek(date){const d=new Date(date);const day=d.getDay();const diff=d.getDate()-day+(day===0?-6:1);d.setDate(diff);d.setHours(0,0,0,0);return d;}
         function setCurrentWeekStart(m){currentWeekStart=new Date(m);updateWeekLabel();renderCalendar();}
         function changeWeek(delta){const d=new Date(currentWeekStart);d.setDate(d.getDate()+delta*7);if(d<getMondayOfWeek(new Date()))return;setCurrentWeekStart(d);if(selectedProperty)loadSlots();}
         function goToday(){setCurrentWeekStart(getMondayOfWeek(new Date()));if(selectedProperty)loadSlots();}
         function formatDateISO(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-        function updateWeekLabel(){const e=new Date(currentWeekStart);e.setDate(e.getDate()+6);document.getElementById('cal-week-label').textContent=MONTH_NAMES[currentWeekStart.getMonth()]+' '+currentWeekStart.getDate()+' \u2013 '+MONTH_NAMES[e.getMonth()]+' '+e.getDate();}
+        function updateWeekLabel(){const e=new Date(currentWeekStart);e.setDate(e.getDate()+6);document.getElementById('cal-week-label').textContent=MONTH_NAMES[currentWeekStart.getMonth()]+' '+currentWeekStart.getDate()+' – '+MONTH_NAMES[e.getMonth()]+' '+e.getDate();}
         function getWeekDates(){const d=[];for(let i=0;i<7;i++){const x=new Date(currentWeekStart);x.setDate(x.getDate()+i);d.push(x);}return d;}
 
         function renderCalendar(){
@@ -330,7 +440,7 @@
                 const body=document.querySelector('.cal-day-body[data-date="'+slot.date+'"]');if(!body)return;
                 const isPast=new Date(slot.date+'T00:00:00')<today;
                 const pill=document.createElement('button');pill.className='slot-pill';
-                pill.textContent=formatTime12(slot.start_time)+'\u2013'+formatTime12(slot.end_time);
+                pill.textContent=formatTime12(slot.start_time)+'–'+formatTime12(slot.end_time);
                 if(slot.status==='booked'||isPast){pill.classList.add('booked');pill.disabled=true;}
                 else{if(selectedSlot&&selectedSlot.id===slot.id)pill.classList.add('selected');pill.onclick=()=>selectSlot(slot);}
                 body.appendChild(pill);
@@ -341,7 +451,7 @@
             else{noMsg.style.display='none';}
         }
 
-        function selectSlot(slot){selectedSlot=slot;document.getElementById('selected-time-display').textContent=formatTime12(slot.start_time)+' \u2013 '+formatTime12(slot.end_time);document.getElementById('selected-date-display').textContent=formatDateLong(slot.date);document.getElementById('selected-slot-bar').classList.add('active');document.getElementById('btn-step2-next').disabled=false;renderSlots();document.getElementById('selected-slot-bar').scrollIntoView({behavior:'smooth',block:'center'});}
+        function selectSlot(slot){selectedSlot=slot;document.getElementById('selected-time-display').textContent=formatTime12(slot.start_time)+' – '+formatTime12(slot.end_time);document.getElementById('selected-date-display').textContent=formatDateLong(slot.date);document.getElementById('selected-slot-bar').classList.add('active');document.getElementById('btn-step2-next').disabled=false;renderSlots();document.getElementById('selected-slot-bar').scrollIntoView({behavior:'smooth',block:'center'});}
         function clearSelectedSlot(){selectedSlot=null;document.getElementById('selected-slot-bar').classList.remove('active');document.getElementById('btn-step2-next').disabled=true;document.getElementById('fallback-section').classList.remove('active');document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));renderSlots();}
 
         async function loadSlots(){
@@ -355,53 +465,54 @@
             clearInterval(pollTimer);pollTimer=setInterval(async()=>{try{const r=await fetch(API_BASE+'/slots?property='+encodeURIComponent(selectedProperty)+'&from='+from+'&to='+to);const d=await r.json();slotsData=d.slots||[];renderSlots();}catch(e){}},30000);
         }
 
+        function selectedUnitsText(){
+            if(selectedUnits.length===0)return 'Any available unit';
+            return selectedUnits.map(unitDescriptor).join(', ');
+        }
+
         function populateReview(){
-            document.getElementById('review-property').textContent=selectedProperty||'\u2014';
-            const tl={'studio':'Studio','1bed':'1 Bed','2bed':'2 Bed','3bed':'3+ Bed'};
-            document.getElementById('review-units').textContent=selectedUnitTypes.length>0?selectedUnitTypes.map(t=>tl[t]).join(', '):'Any';
-            if(fallbackMode){document.getElementById('review-time').textContent=formatDateLong(fallbackDate)+' at '+fallbackTime+' (requested)';}else if(selectedSlot)document.getElementById('review-time').textContent=formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time)+'\u2013'+formatTime12(selectedSlot.end_time);
+            document.getElementById('review-property').textContent=selectedProperty||'—';
+            document.getElementById('review-units').textContent=selectedUnitsText();
+            if(fallbackMode){document.getElementById('review-time').textContent=formatDateLong(fallbackDate)+' at '+fallbackTime+' (requested)';}else if(selectedSlot)document.getElementById('review-time').textContent=formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time)+'–'+formatTime12(selectedSlot.end_time);
         }
 
         async function handleSubmit(){
             const property=selectedProperty,firstName=document.getElementById('tour-first-name').value.trim(),lastName=document.getElementById('tour-last-name').value.trim(),email=document.getElementById('tour-email').value.trim(),phone=document.getElementById('tour-phone').value.trim(),moveInDate=document.getElementById('tour-movein-date').value;
             if(!property)return showError('Please select a property.');if(!firstName)return showError('Please enter your first name.');if(!email)return showError('Please enter your email.');if(!phone)return showError('Please enter your phone number.');if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return showError('Please enter a valid email address.');if(!fallbackMode&&!selectedSlot)return showError('Please select a tour time.');if(fallbackMode&&(!fallbackDate||!fallbackTime))return showError('Please select a date and time.');
             hideError();const btn=document.getElementById('submit-btn');btn.disabled=true;btn.innerHTML='<span class="submit-spinner"></span><span>Booking...</span>';
+            const unitStr=selectedUnitsText();
             try{
                 if(fallbackMode){
-                    const tl={studio:'Studio','1bed':'1 Bedroom','2bed':'2 Bedroom','3bed':'3+ Bedroom'};
-                    const unitStr=selectedUnitTypes.length>0?selectedUnitTypes.map(t=>tl[t]).join(', '):'Not specified';
                     const now=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
                     const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:formatDateLong(fallbackDate),tour_times:fallbackTime+' (preferred)',unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
                     const ep=[emailjs.send('service_mwnzq3g','template_ris04ko',tp),emailjs.send('service_mwnzq3g','template_lhvuk2q',tp)];
                     if(property==='Niwa Apartments'){ep.push(emailjs.send('service_mwnzq3g','template_ris04ko',Object.assign({},tp,{to_email:'leasing@niwaapartments.com'})));}
                     await Promise.all(ep);
                     document.getElementById('success-message').textContent='Thank you for your interest in '+property+'! We received your preferred time of '+fallbackTime+' on '+formatDateLong(fallbackDate)+'. Our leasing team will reach out within 24 hours to confirm.';
-                    document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');
+                    document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');document.getElementById('left-col').style.display='none';
                 }else{
-                const bookRes=await fetch(API_BASE+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slot_id:selectedSlot.id,first_name:firstName,last_name:lastName,email:email,phone:phone,move_in_date:moveInDate,unit_types:selectedUnitTypes.join(',')})});
+                const bookRes=await fetch(API_BASE+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slot_id:selectedSlot.id,first_name:firstName,last_name:lastName,email:email,phone:phone,move_in_date:moveInDate,unit_types:unitStr})});
                 const bookData=await bookRes.json();
-                if(!bookRes.ok){if(bookRes.status===409){showError('This time slot was just booked by someone else. Please pick another.');clearSelectedSlot();goToStep(2);await loadSlots();btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';return;}throw new Error(bookData.error||'Booking failed.');}
-                const tl={studio:'Studio','1bed':'1 Bedroom','2bed':'2 Bedroom','3bed':'3+ Bedroom'};
-                const unitStr=selectedUnitTypes.length>0?selectedUnitTypes.map(t=>tl[t]).join(', '):'Not specified';
+                if(!bookRes.ok){if(bookRes.status===409){showError('This time slot was just booked by someone else. Please pick another.');clearSelectedSlot();goToStep(2);await loadSlots();btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';return;}throw new Error(bookData.error||'Booking failed.');}
                 const now=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
-                const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:bookData.booking?bookData.booking.date_formatted:formatDateLong(selectedSlot.date),tour_times:bookData.booking?bookData.booking.time_formatted:formatTime12(selectedSlot.start_time)+'\u2013'+formatTime12(selectedSlot.end_time),unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
+                const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:bookData.booking?bookData.booking.date_formatted:formatDateLong(selectedSlot.date),tour_times:bookData.booking?bookData.booking.time_formatted:formatTime12(selectedSlot.start_time)+'–'+formatTime12(selectedSlot.end_time),unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
                 const ep=[emailjs.send('service_mwnzq3g','template_ris04ko',tp),emailjs.send('service_mwnzq3g','template_lhvuk2q',tp)];
                 if(property==='Niwa Apartments'){const np=Object.assign({},tp,{to_email:'leasing@niwaapartments.com'});ep.push(emailjs.send('service_mwnzq3g','template_ris04ko',np));}
                 await Promise.all(ep);
                 const tourTime=bookData.booking?bookData.booking.date_formatted+' at '+bookData.booking.time_formatted:formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time);
                 document.getElementById('success-message').textContent='Your tour at '+property+' is confirmed for '+tourTime+'. Our leasing team will reach out to confirm details.';
-                document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');clearInterval(pollTimer);
+                document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');document.getElementById('left-col').style.display='none';clearInterval(pollTimer);
             }}catch(err){showError(err.message||'Something went wrong. Please try again.');}
-            finally{btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';}
+            finally{btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';}
         }
 
         function resetForm(){
-            document.getElementById('form-container').style.display='block';document.getElementById('steps-indicator').style.display='flex';document.getElementById('success-state').classList.remove('active');
+            document.getElementById('form-container').style.display='block';document.getElementById('steps-indicator').style.display='flex';document.getElementById('success-state').classList.remove('active');document.getElementById('left-col').style.display='flex';
             ['tour-first-name','tour-last-name','tour-email','tour-phone','tour-movein-date'].forEach(id=>document.getElementById(id).value='');
-            selectedUnitTypes=[];selectedSlot=null;slotsData=[];currentWeekStart=getMondayOfWeek(new Date());fallbackMode=false;fallbackDate='';fallbackTime='';
-            document.querySelectorAll('.unit-type-card').forEach(c=>c.classList.remove('active'));
+            selectedSlot=null;slotsData=[];currentWeekStart=getMondayOfWeek(new Date());fallbackMode=false;fallbackDate='';fallbackTime='';
             document.getElementById('selected-slot-bar').classList.remove('active');document.getElementById('btn-step2-next').disabled=true;document.getElementById('fallback-section').classList.remove('active');document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));
-            if(!getUrlParams().property){document.getElementById('tour-property').value='';updateUnitTypeCounts(null);}
+            if(!getUrlParams().property){document.getElementById('tour-property').value='';selectedProperty='';setBrand(null);}
+            renderUnits(selectedProperty||null);
             hideError();updateWeekLabel();renderCalendar();goToStep(1);
         }
 
@@ -410,7 +521,7 @@
         function showError(msg){const e=document.getElementById('error-message');e.textContent=msg;e.classList.add('active');e.scrollIntoView({behavior:'smooth',block:'center'});}
         function hideError(){const e=document.getElementById('error-message');e.textContent='';e.classList.remove('active');}
 
-                document.querySelectorAll('.fb-time-chip').forEach(chip=>{chip.addEventListener('click',()=>{document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));chip.classList.add('active');fallbackTime=chip.dataset.time;if(fallbackDate)document.getElementById('btn-step2-next').disabled=false;});});
+        document.querySelectorAll('.fb-time-chip').forEach(chip=>{chip.addEventListener('click',()=>{document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));chip.classList.add('active');fallbackTime=chip.dataset.time;if(fallbackDate)document.getElementById('btn-step2-next').disabled=false;});});
         document.getElementById('fallback-date').addEventListener('change',(e)=>{fallbackDate=e.target.value;if(fallbackTime)document.getElementById('btn-step2-next').disabled=false;});
 
         initializePage();

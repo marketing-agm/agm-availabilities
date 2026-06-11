@@ -312,6 +312,28 @@ The app has a "Book a Tour" form that sends emails via EmailJS to the leasing ag
 
 ---
 
+### STEP 8.5: Regenerate `listings.json` (REQUIRED — keeps the Book-a-Tour page in sync)
+
+`index.html` is the single source of truth for availabilities. The standalone
+**Book-a-Tour page** (`book-a-tour.html`) reads `listings.json` at runtime so it
+shows the *specific units* available to tour for each property. That file is
+generated FROM `index.html`, so it must be rebuilt every time the `agmListings`
+array changes — otherwise the tour page will show stale units.
+
+After updating `index.html`, run:
+
+```
+node scripts/build-listings-json.js
+```
+
+This rewrites `listings.json` (the `agmListings` data + `propertyLeasingAgents`)
+and prints the listing/agent counts. Do NOT hand-edit `listings.json` — always
+regenerate it with the script so it stays a faithful mirror of `index.html`
+(including the 3 Quil Creek Crossing placeholders). Commit `listings.json`
+alongside `index.html`.
+
+---
+
 ### STEP 9: Verify
 
 After updating, verify:
@@ -320,6 +342,7 @@ After updating, verify:
 3. No orphan properties in the three supporting objects (removed from listings but still in objects) — **Quil Creek Crossing Apartments is the one allowed exception and must remain in all three objects**
 4. All UIDs are present in both detailsUrl and applyUrl for every listing (Quil placeholders use a literal `#` detailsUrl and an `/apply/.../start` applyUrl — leave them as-is)
 5. The three Quil Creek Crossing placeholder units are still present, and the `isQuilCrossing` rendering logic + custom-branding IIFE are intact
+6. `listings.json` was regenerated (Step 8.5) and its listing count matches the `agmListings` array. The `node scripts/build-listings-json.js` run reports no "missing leasing agent" warnings.
 
 ---
 
@@ -404,9 +427,12 @@ This report lets the user verify correctness at a glance without diffing files, 
 
 ### STEP 11: Commit and push
 
-git add index.html
+git add index.html listings.json
 git commit -m "Update property availabilities from AppFolio"
 git push
+
+(Always stage `listings.json` too — it is regenerated in Step 8.5 and must ship
+with the matching `index.html` so the Book-a-Tour page stays in sync.)
 
 ---
 
@@ -426,4 +452,5 @@ git push
 13. **Tour booking** — powered by `propertyLeasingAgents`, not per-listing URLs. Ensure every property has an entry.
 14. **Change report comparison** — compare by UUID from `detailsUrl` between `git show HEAD~1:index.html` (old) and the updated file (new). This correctly identifies added, removed, changed, and unchanged listings.
 15. **Quil Crossing is manual** — the three Quil Creek Crossing Apartments placeholder units are NOT in the AppFolio feed. Always preserve them (listings + supporting objects + display logic) and never report them as removed. See the preservation note at the top of this prompt.
+16. **Regenerate `listings.json`** — after editing `index.html`, always run `node scripts/build-listings-json.js` and commit the result (Step 8.5). The Book-a-Tour page reads it at runtime to show the specific units available to tour; skipping this leaves the tour page showing stale units.
 ```
