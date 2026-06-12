@@ -54,21 +54,34 @@
         @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         .step-title{font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:var(--black);margin-bottom:6px}
         .step-subtitle{font-size:.88rem;color:var(--text-light);margin-bottom:32px;font-weight:300}
-        .property-select-section{display:none}
 
-        /* Unit types */
-        .unit-type-grid{display:grid;grid-template-columns:1fr;gap:0}
-        .unit-type-card{background:transparent;border:none;border-bottom:1px solid var(--gray-300);padding:20px 4px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .2s;border-radius:0}
-        .unit-type-card:last-child{border-bottom:none}
-        .unit-type-card:hover:not(.disabled){background:rgba(44,64,66,.04);padding-left:12px}
-        .unit-type-card.active{background:var(--black);color:var(--white);padding-left:12px;padding-right:12px;border-radius:10px;border-bottom-color:transparent;margin:-1px 0}
-        .unit-type-card.active+.unit-type-card{border-top:none}
-        .unit-type-card.disabled{opacity:.35;cursor:not-allowed}
-        .unit-type-icon{font-size:1.2rem;flex-shrink:0;width:40px;text-align:center}
-        .unit-type-info{display:flex;flex-direction:column}
-        .unit-type-name{font-size:.95rem;font-weight:500}
-        .unit-type-count{font-size:.78rem;color:var(--gray-500);margin-top:2px;font-weight:300}
-        .unit-type-card.active .unit-type-count{color:rgba(255,255,255,.6)}
+        /* Property select */
+        .property-select-section{margin-bottom:28px}
+        .property-select-label{font-size:.8rem;font-weight:500;color:var(--text);margin-bottom:8px}
+        .property-select{display:block;width:100%;padding:12px 16px;font-size:.95rem;font-family:'DM Sans',sans-serif;border:none;border-bottom:1.5px solid var(--gray-300);border-radius:0;background:transparent;color:var(--text);appearance:none;cursor:pointer;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%237a7264' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;padding-right:32px}
+        .property-select:focus{outline:none;border-bottom-color:var(--black)}
+
+        /* Specific unit list */
+        .unit-list{display:flex;flex-direction:column;gap:0}
+        .unit-card{width:100%;background:transparent;border:none;border-bottom:1px solid var(--gray-300);padding:18px 4px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s;text-align:left;font-family:'DM Sans',sans-serif}
+        .unit-card:last-child{border-bottom:none}
+        .unit-card:hover:not(.disabled){background:rgba(44,64,66,.04);padding-left:12px;padding-right:12px}
+        .unit-card.active{background:var(--black);color:var(--white);padding-left:12px;padding-right:12px;border-radius:10px;border-bottom-color:transparent;margin:-1px 0}
+        .unit-card.active+.unit-card{border-top:none}
+        .unit-card-body{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+        .unit-card-type{font-size:.95rem;font-weight:500}
+        .unit-card-meta{font-size:.78rem;color:var(--gray-500);font-weight:300}
+        .unit-card.active .unit-card-meta{color:rgba(255,255,255,.65)}
+        .unit-card-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
+        .unit-card-rent{font-size:.95rem;font-weight:600}
+        .unit-card-avail{font-size:.72rem;color:var(--gray-500);font-weight:400}
+        .unit-card.active .unit-card-avail{color:rgba(255,255,255,.6)}
+        .unit-card-check{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--gray-300);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+        .unit-card-check svg{width:12px;height:12px;opacity:0;transition:opacity .2s}
+        .unit-card.active .unit-card-check{background:var(--white);border-color:var(--white)}
+        .unit-card.active .unit-card-check svg{opacity:1;color:var(--black)}
+        .unit-empty-note{display:none;padding:20px 0;font-size:.85rem;color:var(--text-light);font-weight:300;line-height:1.6;border-top:1px solid var(--gray-300);border-bottom:1px solid var(--gray-300)}
+        .unit-hint{font-size:.76rem;color:var(--gray-500);font-weight:300;margin-top:14px}
 
         /* Calendar */
         .calendar-wrapper{padding:0}
@@ -129,8 +142,8 @@
         .movein-section{margin-top:18px;padding-top:18px;border-top:1px solid var(--gray-200)}
         .movein-hint{font-size:.8rem;color:var(--text-light);font-weight:300;margin-bottom:8px}
         .review-summary{padding:0 0 16px;margin-bottom:24px;border-bottom:1px solid var(--gray-300)}
-        .review-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200);font-size:.85rem}
-        .review-row:last-child{border-bottom:none}.review-label{color:var(--gray-500);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;font-weight:500}.review-value{font-weight:500;color:var(--text);text-align:right}
+        .review-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200);font-size:.85rem;gap:16px}
+        .review-row:last-child{border-bottom:none}.review-label{color:var(--gray-500);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;font-weight:500;flex-shrink:0}.review-value{font-weight:500;color:var(--text);text-align:right}
 
         /* Buttons */
         .btn-row{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:14px}
@@ -157,6 +170,8 @@
         .success-btn-primary{background:var(--black);color:var(--white);border:2px solid var(--black)}.success-btn-primary:hover{background:#3d5658}
         .success-btn-secondary{background:transparent;color:var(--text);border:2px solid var(--gray-200)}.success-btn-secondary:hover{border-color:var(--gray-400)}
         .not-found-state{display:none}
+        .not-found-state h2{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--black);margin-bottom:10px;font-weight:400}
+        .not-found-state p{color:var(--text-light);margin-bottom:24px;font-weight:300}
 
         .page-footer{margin-top:auto;padding-top:24px;border-top:1px solid var(--gray-300);font-size:.7rem;color:var(--gray-400);letter-spacing:.02em;font-weight:400;line-height:1.5}
 
@@ -167,7 +182,6 @@
             .steps-indicator{display:flex}
             .right-col{padding:32px 20px 60px}
             .step-title{text-align:center}.step-subtitle{text-align:center}
-            .unit-type-grid{grid-template-columns:1fr}
             .contact-grid{grid-template-columns:1fr}
             .btn-row{flex-direction:column-reverse;gap:10px}
             .btn-back,.btn-next{width:100%;justify-content:center}
@@ -182,12 +196,12 @@
     <div class="layout">
         <!-- LEFT -->
         <div class="left-col" id="left-col">
-            <div class="left-brand">Quil Crossing Apartments</div>
+            <div class="left-brand" id="left-brand">Quil Crossing Apartments</div>
             <h1 class="left-title">Schedule<br>your visit</h1>
-            <p class="left-subtitle">Experience modern living at Quil Crossing. Pick a time and we&#8217;ll show you around.</p>
+            <p class="left-subtitle" id="left-subtitle">Experience modern living at Quil Crossing. Pick a time and we&#8217;ll show you around.</p>
 
             <div class="side-steps">
-                <div class="side-step active" data-step="1"><div class="side-step-num">1</div><span class="side-step-label">Unit type</span></div>
+                <div class="side-step active" data-step="1"><div class="side-step-num">1</div><span class="side-step-label">Choose a unit</span></div>
                 <div class="side-step-connector"></div>
                 <div class="side-step" data-step="2"><div class="side-step-num">2</div><span class="side-step-label">Tour time</span></div>
                 <div class="side-step-connector"></div>
@@ -200,25 +214,24 @@
         <!-- RIGHT -->
         <div class="right-col">
             <div class="steps-indicator" id="steps-indicator">
-                <div class="step-item active" data-step="1"><div class="step-number">1</div><span class="step-label">Unit type</span></div>
+                <div class="step-item active" data-step="1"><div class="step-number">1</div><span class="step-label">Unit</span></div>
                 <div class="step-line" data-line="1"></div>
-                <div class="step-item" data-step="2"><div class="step-number">2</div><span class="step-label">Tour time</span></div>
+                <div class="step-item" data-step="2"><div class="step-number">2</div><span class="step-label">Time</span></div>
                 <div class="step-line" data-line="2"></div>
-                <div class="step-item" data-step="3"><div class="step-number">3</div><span class="step-label">Your details</span></div>
+                <div class="step-item" data-step="3"><div class="step-number">3</div><span class="step-label">Details</span></div>
             </div>
 
             <div class="form-container" id="form-container">
                 <!-- STEP 1 -->
                 <div class="step-panel active" id="step-1">
-                    <h2 class="step-title">What are you looking for?</h2>
-                    <p class="step-subtitle">Select the unit types you&#8217;re interested in</p>
-                    <select class="property-select" id="tour-property" style="display:none"><option value="">Select...</option></select>
-                    <div class="property-select-section" id="property-select-section"></div>
-                    <div class="unit-type-grid" id="unit-type-grid">
-                        <div class="unit-type-card" data-type="1bed"><div class="unit-type-icon">&#9632;</div><div class="unit-type-info"><div class="unit-type-name">1 Bedroom</div><div class="unit-type-count" id="count-1bed"></div></div></div>
-                        <div class="unit-type-card" data-type="2bed"><div class="unit-type-icon">&#9632;&#9632;</div><div class="unit-type-info"><div class="unit-type-name">2 Bedroom</div><div class="unit-type-count" id="count-2bed"></div></div></div>
-                        <div class="unit-type-card" data-type="3bed"><div class="unit-type-icon">&#9632;&#9632;&#9632;</div><div class="unit-type-info"><div class="unit-type-name">3 Bedroom</div><div class="unit-type-count" id="count-3bed"></div></div></div>
+                    <h2 class="step-title">What would you like to tour?</h2>
+                    <p class="step-subtitle">Pick the specific units you&#8217;re interested in seeing</p>
+                    <div class="property-select-section" id="property-select-section" style="display:none">
+                        <select class="property-select" id="tour-property"><option value="">Select a property...</option></select>
                     </div>
+                    <div class="unit-list" id="unit-list"></div>
+                    <div class="unit-empty-note" id="unit-empty-note">No specific units are listed for this property right now. You can still request a tour and our leasing team will share what&#8217;s available.</div>
+                    <p class="unit-hint" id="unit-hint">Select one or more units, or continue to request a general tour.</p>
                     <div class="btn-row center"><button class="btn-next" id="btn-step1-next"><span>Next</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
                 </div>
 
@@ -231,7 +244,7 @@
                         <div id="cal-content" style="display:none;">
                             <div class="cal-nav"><div class="cal-nav-arrows"><button class="cal-nav-btn" onclick="changeWeek(-1)">&#8249;</button><span class="cal-week-label" id="cal-week-label"></span><button class="cal-nav-btn" onclick="changeWeek(1)">&#8250;</button></div><button class="cal-today-btn" onclick="goToday()">Today</button></div>
                             <div class="cal-days-grid" id="cal-days-grid"></div>
-                            <div class="no-slots-msg" id="no-slots-msg" style="display:none;"><span class="icon">&#128197;</span><div>No tour times available this week.</div><div style="margin-top:6px;font-size:.78rem">Try another week, or contact us directly.</div><div class="contact-line">&#9993; <a id="contact-email-link" href="/cdn-cgi/l/email-protection#670b0206140e09002706000a1502060b02141306130200150812174904080a"><span class="__cf_email__" data-cfemail="c7aba2a6b4aea9a087a6a0aab5a2a6aba2b4b3a6b3a2a0b5a8b2b7e9a4a8aa">[email&#160;protected]</span></a></div></div>
+                            <div class="no-slots-msg" id="no-slots-msg" style="display:none;"><span class="icon">&#128197;</span><div>No tour times available this week.</div><div style="margin-top:6px;font-size:.78rem">Try another week, or contact us directly.</div><div class="contact-line">&#9993; <a id="contact-email-link" href="mailto:leasing@agmrealestategroup.com">leasing@agmrealestategroup.com</a></div></div>
                         </div>
                         <div class="selected-slot-bar" id="selected-slot-bar"><div class="selected-slot-info"><span id="selected-time-display"></span><div class="date" id="selected-date-display"></div></div><button class="clear-slot-btn" onclick="clearSelectedSlot()">&times;</button></div>
                     </div>
@@ -248,7 +261,7 @@
                 <div class="step-panel" id="step-3">
                     <h2 class="step-title">Almost there</h2>
                     <p class="step-subtitle">Tell us how to reach you</p>
-                    <div class="review-summary"><div class="review-row"><span class="review-label">Property</span><span class="review-value" id="review-property">&#8212;</span></div><div class="review-row"><span class="review-label">Unit types</span><span class="review-value" id="review-units">&#8212;</span></div><div class="review-row"><span class="review-label">Tour time</span><span class="review-value" id="review-time">&#8212;</span></div></div>
+                    <div class="review-summary"><div class="review-row"><span class="review-label">Property</span><span class="review-value" id="review-property">&#8212;</span></div><div class="review-row"><span class="review-label">Units</span><span class="review-value" id="review-units">&#8212;</span></div><div class="review-row"><span class="review-label">Tour time</span><span class="review-value" id="review-time">&#8212;</span></div></div>
                     <div class="error-msg" id="error-message"></div>
                     <div class="contact-grid">
                         <div class="form-field"><label class="form-label">First name <span class="req">*</span></label><input type="text" class="form-input" id="tour-first-name" placeholder="First name" required></div>
@@ -270,38 +283,96 @@
                 <p class="success-msg" id="success-message">Your tour has been confirmed.</p>
                 <div class="success-actions"><button class="success-btn success-btn-primary" onclick="resetForm()">Request Another Tour</button><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-secondary" target="_blank">View All Listings</a></div>
             </div>
-            <div class="not-found-state" id="not-found-state"></div>
+            <div class="not-found-state" id="not-found-state"><h2>Property not found</h2><p>The property you&#8217;re looking for isn&#8217;t in our system.</p><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-primary" target="_blank">View All Listings</a></div>
         </div>
     </div>
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         const API_BASE='/api';
         const DAY_NAMES_SHORT=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         const MONTH_NAMES_LONG=['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-        const agmListings=[{"property":"Seward Park","neighborhood":"Seward Park","unit":"Unit 01","bedrooms":1},{"property":"The Palms","neighborhood":"Eastlake","unit":"#7","bedrooms":2},{"property":"The Palms","neighborhood":"Eastlake","unit":"#12-5","bedrooms":1},{"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 214","bedrooms":2},{"property":"Cedar Lane Apartments","neighborhood":"Greenwood","unit":"Apt 15","bedrooms":1},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 301","bedrooms":2},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 611","bedrooms":2},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 311","bedrooms":2},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 308","bedrooms":2},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 313","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 416","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 803","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 704","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 405","bedrooms":"Studio"},{"property":"Willow Creek","neighborhood":"Bothell","unit":"#206","bedrooms":1},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#A4","bedrooms":1},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#B3","bedrooms":1},{"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 118","bedrooms":2},{"property":"Seward Park","neighborhood":"Seward Park","unit":"Unit 03","bedrooms":1},{"property":"Seward Park","neighborhood":"Seward Park","unit":"#09","bedrooms":2},{"property":"Rialto Court","neighborhood":"Capitol Hill","unit":"#201","bedrooms":1},{"property":"Rialto Court","neighborhood":"Capitol Hill","unit":"#210","bedrooms":1},{"property":"Rialto Court","neighborhood":"Capitol Hill","unit":"#106","bedrooms":"Studio"},{"property":"Lorelei Apartments","neighborhood":"Capitol Hill","unit":"#23","bedrooms":1},{"property":"Gilmanor Apartments","neighborhood":"Magnolia","unit":"#206","bedrooms":2},{"property":"301 Apartments","neighborhood":"Central District","unit":"Apt 13","bedrooms":1},{"property":"301 Apartments","neighborhood":"Central District","unit":"Apt 15","bedrooms":2},{"property":"Cedar Lane Apartments","neighborhood":"Greenwood","unit":"Apt 1","bedrooms":1},{"property":"White Heather Apartments","neighborhood":"Lake City","unit":"Unit","bedrooms":1},{"property":"White Heather Apartments","neighborhood":"Lake City","unit":"Unit","bedrooms":2},{"property":"6113 Apartments","neighborhood":"Roosevelt","unit":"Unit 103","bedrooms":1},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"Unit C2","bedrooms":1},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#C1","bedrooms":1},{"property":"Golden Inca","neighborhood":"Capitol Hill","unit":"#204","bedrooms":1},{"property":"De Selm Apartments","neighborhood":"Seattle","unit":"Apt 33","bedrooms":1},{"property":"Mercer Tower","neighborhood":"Mercer Island","unit":"Apt 25","bedrooms":1},{"property":"Arbor Heights","neighborhood":"North Seattle","unit":"Apt 205","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 612","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 605","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 606","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 513","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 319","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 201","bedrooms":1},{"property":"De Selm Apartments","neighborhood":"Seattle","unit":"Unit","bedrooms":"Studio"},{"property":"Gary Apartments","neighborhood":"Bellevue","unit":"Apt 3","bedrooms":2},{"property":"Clift House Apartments","neighborhood":"Seattle","unit":"#A2","bedrooms":1},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 102","bedrooms":1},{"property":"Arbor Heights","neighborhood":"North Seattle","unit":"Apt 103","bedrooms":1},{"property":"301 Apartments","neighborhood":"Central District","unit":"Apt 12","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 806","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 805","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 701","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 516","bedrooms":1},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 412","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 314","bedrooms":"Studio"},{"property":"Niwa Apartments","neighborhood":"Queen Anne","unit":"Apt 212","bedrooms":"Studio"},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt B","bedrooms":"Studio"},{"property":"Crestview Townhomes","neighborhood":"Lynnwood","unit":"Unit","bedrooms":2},{"property":"Golden Inca","neighborhood":"Capitol Hill","unit":"#303","bedrooms":"Studio"},{"property":"East Union Apartments","neighborhood":"Capitol Hill","unit":"Unit","bedrooms":1},{"property":"Royal View Apartments","neighborhood":"Milton","unit":"Unit","bedrooms":2},{"property":"Viewmont Apartments","neighborhood":"Capitol Hill","unit":"#301","bedrooms":2},{"property":"Viewmont Apartments","neighborhood":"Capitol Hill","unit":"#102","bedrooms":1},{"property":"Mercer Tower","neighborhood":"Mercer Island","unit":"Apt 2","bedrooms":2},{"property":"Bayview Apartments","neighborhood":"Beacon Hill","unit":"Apt 304","bedrooms":1},{"property":"Highway Place","neighborhood":"Everett","unit":"Apt 301","bedrooms":1},{"property":"Highway Place","neighborhood":"Everett","unit":"Apt 302","bedrooms":1},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 8","bedrooms":1},{"property":"Avia Apartments","neighborhood":"Greenwood","unit":"Apt 202","bedrooms":1},{"property":"Marianne Apartments","neighborhood":"Queen Anne","unit":"#103","bedrooms":"Studio"},{"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 120","bedrooms":1},{"property":"Skandi Villa","neighborhood":"Edmonds","unit":"Apt 108","bedrooms":1},{"property":"The Palms","neighborhood":"Eastlake","unit":"#9","bedrooms":1},{"property":"Hill Town Apartments","neighborhood":"Central District","unit":"Unit","bedrooms":1},{"property":"BalCro","neighborhood":"Ballard","unit":"Apt 103","bedrooms":1},{"property":"Mercer Tower","neighborhood":"Mercer Island","unit":"Apt 46","bedrooms":1},{"property":"Fairlake Quads","neighborhood":"Bellevue","unit":"3","bedrooms":3},{"property":"The Palms","neighborhood":"Eastlake","unit":"#1","bedrooms":1},{"property":"Highway Place","neighborhood":"Everett","unit":"Apt 102","bedrooms":1},{"property":"Winslow Place","neighborhood":"Fremont","unit":"Unit","bedrooms":1},{"property":"Marianne Apartments","neighborhood":"Queen Anne","unit":"#204","bedrooms":"Studio"}];
-
-        const propertyLeasingAgents={"301 Apartments":"leasing@agmrealestategroup.com","6113 Apartments":"leasing@agmrealestategroup.com","Arbor Heights":"leasing@agmrealestategroup.com","Avia Apartments":"leasing@agmrealestategroup.com","BalCro":"leasing@agmrealestategroup.com","Bayview Apartments":"leasing@agmrealestategroup.com","Cedar Lane Apartments":"leasing@agmrealestategroup.com","Clift House Apartments":"leasing@agmrealestategroup.com","Crestview Townhomes":"leasing@agmrealestategroup.com","De Selm Apartments":"leasing@agmrealestategroup.com","East Union Apartments":"leasing@agmrealestategroup.com","Fairlake Quads":"leasing@agmrealestategroup.com","Gary Apartments":"leasing@agmrealestategroup.com","Gilmanor Apartments":"leasing@agmrealestategroup.com","Golden Inca":"leasing@agmrealestategroup.com","Highway Place":"leasing@agmrealestategroup.com","Hill Town Apartments":"leasing@agmrealestategroup.com","Lorelei Apartments":"leasing@agmrealestategroup.com","Marianne Apartments":"leasing@agmrealestategroup.com","Mercer Tower":"leasing@agmrealestategroup.com","Niwa Apartments":"leasing@agmrealestategroup.com","Rialto Court":"leasing@agmrealestategroup.com","Royal View Apartments":"leasing@agmrealestategroup.com","Seward Park":"leasing@agmrealestategroup.com","Skandi Villa":"leasing@agmrealestategroup.com","The Palms":"leasing@agmrealestategroup.com","Viewmont Apartments":"leasing@agmrealestategroup.com","White Heather Apartments":"leasing@agmrealestategroup.com","Willow Creek":"leasing@agmrealestategroup.com","Winslow Place":"leasing@agmrealestategroup.com"};
-
-        const allProperties=[...new Set([...agmListings.map(l=>l.property),...Object.keys(propertyLeasingAgents)])].sort();
-        let currentStep=1,selectedProperty='',selectedUnitTypes=[],selectedSlot=null,slotsData=[],pollTimer=null,currentWeekStart=getMondayOfWeek(new Date());
+        let agmListings=[],propertyLeasingAgents={},allProperties=[];
+        let currentStep=1,selectedProperty='',currentUnits=[],selectedUnits=[],selectedSlot=null,slotsData=[],pollTimer=null,currentWeekStart=getMondayOfWeek(new Date());
         let fallbackMode=false,fallbackDate='',fallbackTime='';
 
         emailjs.init('oVeCEKCpUsDe3_ba2');
 
         function getUrlParams(){return{property:new URLSearchParams(window.location.search).get('property')};}
 
-        function initializePage(){
+        async function loadData(){
+            try{
+                const res=await fetch('/listings.json',{cache:'no-cache'});
+                const data=await res.json();
+                agmListings=data.listings||[];
+                propertyLeasingAgents=data.leasingAgents||{};
+            }catch(e){agmListings=[];propertyLeasingAgents={};}
+            allProperties=[...new Set([...agmListings.map(l=>l.property),...Object.keys(propertyLeasingAgents)])].sort();
+        }
+
+        // This page is dedicated to Quil Crossing. It always books that property,
+        // hides the property selector, and pulls Quil's units from listings.json.
+        const PROPERTY_NAME='Quil Creek Crossing Apartments';
+        const DISPLAY_NAME='Quil Crossing Apartments';
+
+        async function initializePage(){
+            await loadData();
             populatePropertyDropdown();
             document.getElementById('tour-movein-date').min=new Date().toISOString().split('T')[0];
-            selectedProperty='Quil Creek Crossing Apartments';
+            selectedProperty=PROPERTY_NAME;
             document.getElementById('property-select-section').style.display='none';
             document.getElementById('tour-property').value=selectedProperty;
-            updateUnitTypeCounts(selectedProperty);
+            renderUnits(selectedProperty);
             updateWeekLabel();renderCalendar();
         }
 
+        function displayProperty(){return selectedProperty===PROPERTY_NAME?DISPLAY_NAME:selectedProperty;}
+
         function populatePropertyDropdown(){const s=document.getElementById('tour-property');allProperties.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;s.appendChild(o);});}
+
+        function bedLabel(b){return(b==='Studio'||b===0)?'Studio':(b===1?'1 Bedroom':b+' Bedrooms');}
+        function unitLabel(unit){if(!unit||unit==='Not Specified')return '';return /^(unit|apt|apartment|suite|ste|#)\b|^#/i.test(unit)?unit:('Unit '+unit);}
+
+        function unitDescriptor(u){
+            const parts=[bedLabel(u.bedrooms)];
+            const ul=unitLabel(u.unit);if(ul)parts.push(ul);
+            if(u.rent)parts.push('$'+u.rent.toLocaleString());
+            return parts.join(' · ');
+        }
+
+        function renderUnits(property){
+            const container=document.getElementById('unit-list');
+            const emptyNote=document.getElementById('unit-empty-note');
+            const hint=document.getElementById('unit-hint');
+            selectedUnits=[];
+            container.innerHTML='';
+            if(!property){emptyNote.style.display='none';hint.style.display='none';currentUnits=[];return;}
+            currentUnits=agmListings.filter(l=>l.property===property);
+            if(currentUnits.length===0){emptyNote.style.display='block';hint.style.display='none';return;}
+            emptyNote.style.display='none';hint.style.display='block';
+            container.innerHTML=currentUnits.map((u,i)=>{
+                const meta=[];
+                const ul=unitLabel(u.unit);if(ul)meta.push(ul);
+                if(u.sqft)meta.push(u.sqft.toLocaleString()+' sqft');
+                const rent=u.rent?'$'+u.rent.toLocaleString():'Call';
+                const avail=u.available?(u.available==='Now'?'Available now':'Avail. '+u.available):'';
+                return '<button type="button" class="unit-card" data-idx="'+i+'">'
+                    +'<div class="unit-card-body"><span class="unit-card-type">'+bedLabel(u.bedrooms)+'</span>'
+                    +(meta.length?'<span class="unit-card-meta">'+meta.join(' · ')+'</span>':'')+'</div>'
+                    +'<div class="unit-card-right"><span class="unit-card-rent">'+rent+'</span>'
+                    +(avail?'<span class="unit-card-avail">'+avail+'</span>':'')+'</div>'
+                    +'<span class="unit-card-check"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l3.5 3.5L13 5"/></svg></span>'
+                    +'</button>';
+            }).join('');
+            container.querySelectorAll('.unit-card').forEach(card=>{
+                card.addEventListener('click',()=>{
+                    const u=currentUnits[parseInt(card.dataset.idx)];
+                    card.classList.toggle('active');
+                    if(card.classList.contains('active')){if(!selectedUnits.includes(u))selectedUnits.push(u);}
+                    else{selectedUnits=selectedUnits.filter(x=>x!==u);}
+                });
+            });
+        }
 
         function goToStep(step){
             currentStep=step;
@@ -316,34 +387,21 @@
         }
 
         document.getElementById('btn-step1-next').addEventListener('click',()=>{
-            goToStep(2);
+            const prop=document.getElementById('tour-property').value||selectedProperty;
+            if(!prop){const sel=document.getElementById('tour-property');sel.focus();sel.style.borderBottomColor='var(--error)';setTimeout(()=>{sel.style.borderBottomColor='';},2000);return;}
+            selectedProperty=prop;goToStep(2);
         });
         document.getElementById('btn-step2-back').addEventListener('click',()=>{clearInterval(pollTimer);goToStep(1);});
         document.getElementById('btn-step2-next').addEventListener('click',()=>{if(selectedSlot||(fallbackMode&&fallbackDate&&fallbackTime))goToStep(3);});
         document.getElementById('btn-step3-back').addEventListener('click',()=>goToStep(2));
-        document.getElementById('tour-property').addEventListener('change',(e)=>{selectedProperty=e.target.value;updateUnitTypeCounts(selectedProperty);});
-
-        function updateUnitTypeCounts(property){
-            const listings=property?agmListings.filter(l=>l.property===property):agmListings;
-            const c={studio:0,'1bed':0,'2bed':0,'3bed':0};
-            listings.forEach(l=>{const b=l.bedrooms;if(b==='Studio'||b===0)c.studio++;else if(b===1)c['1bed']++;else if(b===2)c['2bed']++;else if(b>=3)c['3bed']++;});
-            // Quil Crossing: always show unit types as available even without active listings
-            if(property==='Quil Creek Crossing Apartments'){c['1bed']=Math.max(c['1bed'],1);c['2bed']=Math.max(c['2bed'],1);c['3bed']=Math.max(c['3bed'],1);}
-            var el=document.getElementById('count-studio');if(el)el.textContent=c.studio+' available';
-            document.getElementById('count-1bed').textContent=c['1bed']?c['1bed']+' available':'Available';
-            document.getElementById('count-2bed').textContent=c['2bed']?c['2bed']+' available':'Available';
-            document.getElementById('count-3bed').textContent=c['3bed']?c['3bed']+' available':'Available';
-            document.querySelectorAll('.unit-type-card').forEach(card=>{const t=card.dataset.type;card.classList.toggle('disabled',c[t]===0);if(c[t]===0)card.classList.remove('active');});
-        }
-
-        document.querySelectorAll('.unit-type-card').forEach(card=>{card.addEventListener('click',()=>{if(card.classList.contains('disabled'))return;card.classList.toggle('active');const t=card.dataset.type;if(card.classList.contains('active')){if(!selectedUnitTypes.includes(t))selectedUnitTypes.push(t);}else{selectedUnitTypes=selectedUnitTypes.filter(x=>x!==t);}});});
+        document.getElementById('tour-property').addEventListener('change',(e)=>{selectedProperty=e.target.value;renderUnits(selectedProperty);});
 
         function getMondayOfWeek(date){const d=new Date(date);const day=d.getDay();const diff=d.getDate()-day+(day===0?-6:1);d.setDate(diff);d.setHours(0,0,0,0);return d;}
         function setCurrentWeekStart(m){currentWeekStart=new Date(m);updateWeekLabel();renderCalendar();}
         function changeWeek(delta){const d=new Date(currentWeekStart);d.setDate(d.getDate()+delta*7);if(d<getMondayOfWeek(new Date()))return;setCurrentWeekStart(d);if(selectedProperty)loadSlots();}
         function goToday(){setCurrentWeekStart(getMondayOfWeek(new Date()));if(selectedProperty)loadSlots();}
         function formatDateISO(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-        function updateWeekLabel(){const e=new Date(currentWeekStart);e.setDate(e.getDate()+6);document.getElementById('cal-week-label').textContent=MONTH_NAMES[currentWeekStart.getMonth()]+' '+currentWeekStart.getDate()+' \u2013 '+MONTH_NAMES[e.getMonth()]+' '+e.getDate();}
+        function updateWeekLabel(){const e=new Date(currentWeekStart);e.setDate(e.getDate()+6);document.getElementById('cal-week-label').textContent=MONTH_NAMES[currentWeekStart.getMonth()]+' '+currentWeekStart.getDate()+' – '+MONTH_NAMES[e.getMonth()]+' '+e.getDate();}
         function getWeekDates(){const d=[];for(let i=0;i<7;i++){const x=new Date(currentWeekStart);x.setDate(x.getDate()+i);d.push(x);}return d;}
 
         function renderCalendar(){
@@ -368,7 +426,7 @@
                 const body=document.querySelector('.cal-day-body[data-date="'+slot.date+'"]');if(!body)return;
                 const isPast=new Date(slot.date+'T00:00:00')<today;
                 const pill=document.createElement('button');pill.className='slot-pill';
-                pill.textContent=formatTime12(slot.start_time)+'\u2013'+formatTime12(slot.end_time);
+                pill.textContent=formatTime12(slot.start_time)+'–'+formatTime12(slot.end_time);
                 if(slot.status==='booked'||isPast){pill.classList.add('booked');pill.disabled=true;}
                 else{if(selectedSlot&&selectedSlot.id===slot.id)pill.classList.add('selected');pill.onclick=()=>selectSlot(slot);}
                 body.appendChild(pill);
@@ -379,7 +437,7 @@
             else{noMsg.style.display='none';}
         }
 
-        function selectSlot(slot){selectedSlot=slot;document.getElementById('selected-time-display').textContent=formatTime12(slot.start_time)+' \u2013 '+formatTime12(slot.end_time);document.getElementById('selected-date-display').textContent=formatDateLong(slot.date);document.getElementById('selected-slot-bar').classList.add('active');document.getElementById('btn-step2-next').disabled=false;renderSlots();document.getElementById('selected-slot-bar').scrollIntoView({behavior:'smooth',block:'center'});}
+        function selectSlot(slot){selectedSlot=slot;document.getElementById('selected-time-display').textContent=formatTime12(slot.start_time)+' – '+formatTime12(slot.end_time);document.getElementById('selected-date-display').textContent=formatDateLong(slot.date);document.getElementById('selected-slot-bar').classList.add('active');document.getElementById('btn-step2-next').disabled=false;renderSlots();document.getElementById('selected-slot-bar').scrollIntoView({behavior:'smooth',block:'center'});}
         function clearSelectedSlot(){selectedSlot=null;document.getElementById('selected-slot-bar').classList.remove('active');document.getElementById('btn-step2-next').disabled=true;document.getElementById('fallback-section').classList.remove('active');document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));renderSlots();}
 
         async function loadSlots(){
@@ -393,53 +451,54 @@
             clearInterval(pollTimer);pollTimer=setInterval(async()=>{try{const r=await fetch(API_BASE+'/slots?property='+encodeURIComponent(selectedProperty)+'&from='+from+'&to='+to);const d=await r.json();slotsData=d.slots||[];renderSlots();}catch(e){}},30000);
         }
 
+        function selectedUnitsText(){
+            if(selectedUnits.length===0)return 'Any available unit';
+            return selectedUnits.map(unitDescriptor).join(', ');
+        }
+
         function populateReview(){
-            document.getElementById('review-property').textContent=selectedProperty?(selectedProperty==='Quil Creek Crossing Apartments'?'Quil Crossing Apartments':selectedProperty):'\u2014';
-            const tl={'studio':'Studio','1bed':'1 Bed','2bed':'2 Bed','3bed':'3 Bed'};
-            document.getElementById('review-units').textContent=selectedUnitTypes.length>0?selectedUnitTypes.map(t=>tl[t]).join(', '):'Any';
-            if(fallbackMode){document.getElementById('review-time').textContent=formatDateLong(fallbackDate)+' at '+fallbackTime+' (requested)';}else if(selectedSlot)document.getElementById('review-time').textContent=formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time)+'\u2013'+formatTime12(selectedSlot.end_time);
+            document.getElementById('review-property').textContent=displayProperty()||'—';
+            document.getElementById('review-units').textContent=selectedUnitsText();
+            if(fallbackMode){document.getElementById('review-time').textContent=formatDateLong(fallbackDate)+' at '+fallbackTime+' (requested)';}else if(selectedSlot)document.getElementById('review-time').textContent=formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time)+'–'+formatTime12(selectedSlot.end_time);
         }
 
         async function handleSubmit(){
             const property=selectedProperty,firstName=document.getElementById('tour-first-name').value.trim(),lastName=document.getElementById('tour-last-name').value.trim(),email=document.getElementById('tour-email').value.trim(),phone=document.getElementById('tour-phone').value.trim(),moveInDate=document.getElementById('tour-movein-date').value;
             if(!property)return showError('Please select a property.');if(!firstName)return showError('Please enter your first name.');if(!email)return showError('Please enter your email.');if(!phone)return showError('Please enter your phone number.');if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return showError('Please enter a valid email address.');if(!fallbackMode&&!selectedSlot)return showError('Please select a tour time.');if(fallbackMode&&(!fallbackDate||!fallbackTime))return showError('Please select a date and time.');
             hideError();const btn=document.getElementById('submit-btn');btn.disabled=true;btn.innerHTML='<span class="submit-spinner"></span><span>Booking...</span>';
+            const unitStr=selectedUnitsText();
             try{
                 if(fallbackMode){
-                    const tl={studio:'Studio','1bed':'1 Bedroom','2bed':'2 Bedroom','3bed':'3 Bedroom'};
-                    const unitStr=selectedUnitTypes.length>0?selectedUnitTypes.map(t=>tl[t]).join(', '):'Not specified';
                     const now=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
-                    const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:formatDateLong(fallbackDate),tour_times:fallbackTime+' (preferred)',unit_types:unitStr,submitted_at:now,to_email:'leasing@agmrealestategroup.com'};
+                    const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:formatDateLong(fallbackDate),tour_times:fallbackTime+' (preferred)',unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
                     const ep=[emailjs.send('service_mwnzq3g','template_ris04ko',tp),emailjs.send('service_mwnzq3g','template_lhvuk2q',tp)];
                     if(property==='Niwa Apartments'){ep.push(emailjs.send('service_mwnzq3g','template_ris04ko',Object.assign({},tp,{to_email:'leasing@niwaapartments.com'})));}
                     await Promise.all(ep);
-                    document.getElementById('success-message').textContent='Thank you for your interest in Quil Crossing! We received your preferred time of '+fallbackTime+' on '+formatDateLong(fallbackDate)+'. Our leasing team will reach out within 24 hours to confirm.';
+                    document.getElementById('success-message').textContent='Thank you for your interest in '+DISPLAY_NAME+'! We received your preferred time of '+fallbackTime+' on '+formatDateLong(fallbackDate)+'. Our leasing team will reach out within 24 hours to confirm.';
                     document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');document.getElementById('left-col').style.display='none';
                 }else{
-                const bookRes=await fetch(API_BASE+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slot_id:selectedSlot.id,first_name:firstName,last_name:lastName,email:email,phone:phone,move_in_date:moveInDate,unit_types:selectedUnitTypes.join(',')})});
+                const bookRes=await fetch(API_BASE+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slot_id:selectedSlot.id,first_name:firstName,last_name:lastName,email:email,phone:phone,move_in_date:moveInDate,unit_types:unitStr})});
                 const bookData=await bookRes.json();
-                if(!bookRes.ok){if(bookRes.status===409){showError('This time slot was just booked by someone else. Please pick another.');clearSelectedSlot();goToStep(2);await loadSlots();btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';return;}throw new Error(bookData.error||'Booking failed.');}
-                const tl={studio:'Studio','1bed':'1 Bedroom','2bed':'2 Bedroom','3bed':'3 Bedroom'};
-                const unitStr=selectedUnitTypes.length>0?selectedUnitTypes.map(t=>tl[t]).join(', '):'Not specified';
+                if(!bookRes.ok){if(bookRes.status===409){showError('This time slot was just booked by someone else. Please pick another.');clearSelectedSlot();goToStep(2);await loadSlots();btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';return;}throw new Error(bookData.error||'Booking failed.');}
                 const now=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
-                const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:bookData.booking?bookData.booking.date_formatted:formatDateLong(selectedSlot.date),tour_times:bookData.booking?bookData.booking.time_formatted:formatTime12(selectedSlot.start_time)+'\u2013'+formatTime12(selectedSlot.end_time),unit_types:unitStr,submitted_at:now,to_email:'leasing@agmrealestategroup.com'};
+                const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:bookData.booking?bookData.booking.date_formatted:formatDateLong(selectedSlot.date),tour_times:bookData.booking?bookData.booking.time_formatted:formatTime12(selectedSlot.start_time)+'–'+formatTime12(selectedSlot.end_time),unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
                 const ep=[emailjs.send('service_mwnzq3g','template_ris04ko',tp),emailjs.send('service_mwnzq3g','template_lhvuk2q',tp)];
                 if(property==='Niwa Apartments'){const np=Object.assign({},tp,{to_email:'leasing@niwaapartments.com'});ep.push(emailjs.send('service_mwnzq3g','template_ris04ko',np));}
                 await Promise.all(ep);
                 const tourTime=bookData.booking?bookData.booking.date_formatted+' at '+bookData.booking.time_formatted:formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time);
-                document.getElementById('success-message').textContent='Your tour at Quil Crossing is confirmed for '+tourTime+'. Our leasing team will reach out to confirm details.';
+                document.getElementById('success-message').textContent='Your tour at '+DISPLAY_NAME+' is confirmed for '+tourTime+'. Our leasing team will reach out to confirm details.';
                 document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');document.getElementById('left-col').style.display='none';clearInterval(pollTimer);
             }}catch(err){showError(err.message||'Something went wrong. Please try again.');}
-            finally{btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';}
+            finally{btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';}
         }
 
         function resetForm(){
             document.getElementById('form-container').style.display='block';document.getElementById('steps-indicator').style.display='flex';document.getElementById('success-state').classList.remove('active');document.getElementById('left-col').style.display='flex';
             ['tour-first-name','tour-last-name','tour-email','tour-phone','tour-movein-date'].forEach(id=>document.getElementById(id).value='');
-            selectedUnitTypes=[];selectedSlot=null;slotsData=[];currentWeekStart=getMondayOfWeek(new Date());fallbackMode=false;fallbackDate='';fallbackTime='';
-            document.querySelectorAll('.unit-type-card').forEach(c=>c.classList.remove('active'));
+            selectedSlot=null;slotsData=[];currentWeekStart=getMondayOfWeek(new Date());fallbackMode=false;fallbackDate='';fallbackTime='';
             document.getElementById('selected-slot-bar').classList.remove('active');document.getElementById('btn-step2-next').disabled=true;document.getElementById('fallback-section').classList.remove('active');document.querySelectorAll('.fb-time-chip').forEach(c=>c.classList.remove('active'));
-            // Property stays as Quil Crossing
+            selectedProperty=PROPERTY_NAME;
+            renderUnits(selectedProperty);
             hideError();updateWeekLabel();renderCalendar();goToStep(1);
         }
 
