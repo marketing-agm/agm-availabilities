@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-14",
+  "updatedAt": "2026-06-16",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -315,7 +315,7 @@
       "bedrooms": 2,
       "bathrooms": 1.5,
       "rent": 2595,
-      "sqft": 0,
+      "sqft": 1060,
       "available": "Jul 15, 2026",
       "address": "3708 188TH SW #9, LYNNWOOD, WA 98037",
       "features": [
@@ -333,7 +333,7 @@
       "bathrooms": 1,
       "rent": 1750,
       "sqft": 495,
-      "available": "Jun 15, 2026",
+      "available": "Now",
       "address": "403 14th Ave E, Apt 7, Seattle, WA 98112",
       "features": [
         "On-Site Laundry"
@@ -383,7 +383,7 @@
       "bedrooms": 3,
       "bathrooms": 2,
       "rent": 2795,
-      "sqft": 0,
+      "sqft": 1081,
       "available": "Now",
       "address": "4051 GILMAN AVE W #101, SEATTLE, WA 98199",
       "features": [
@@ -485,7 +485,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 2195,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2701 W Manor Pl, Apt 301, Seattle, WA 98199",
       "features": [
@@ -502,7 +502,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2701 W Manor Pl, Apt 307, Seattle, WA 98199",
       "features": [
@@ -519,7 +519,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2701 W Manor Pl, Apt 402, Seattle, WA 98199",
       "features": [
@@ -536,7 +536,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2701 W Manor Pl, Apt 407, Seattle, WA 98199",
       "features": [
@@ -587,7 +587,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2710 W Manor Pl, Apt 106, Seattle, WA 98199",
       "features": [
@@ -604,7 +604,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 2195,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2710 W Manor Pl, Apt 306, Seattle, WA 98199",
       "features": [
@@ -621,7 +621,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "3711 27th Pl W, Apt 307, Seattle, WA 98199",
       "features": [
@@ -672,8 +672,8 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 3150,
-      "sqft": 0,
-      "available": "Jun 15, 2026",
+      "sqft": 1000,
+      "available": "Now",
       "address": "2805 75th Pl SE, Apt 1, Mercer Island, WA 98040",
       "features": [
         "On-Site Laundry"
@@ -707,7 +707,7 @@
       "bathrooms": 1,
       "rent": 2350,
       "sqft": 700,
-      "available": "Jun 15, 2026",
+      "available": "Now",
       "address": "2805 75th Pl SE, Apt 26, Mercer Island, WA 98040",
       "features": [
         "On-Site Laundry"
@@ -775,7 +775,7 @@
       "bathrooms": 1,
       "rent": 1750,
       "sqft": 360,
-      "available": "Jun 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 406, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -1048,7 +1048,7 @@
       "bathrooms": 2,
       "rent": 1995,
       "sqft": 980,
-      "available": "Jun 15, 2026",
+      "available": "Now",
       "address": "23809 84th Ave W, Apt 209, Edmonds, WA 98026",
       "features": [
         "On-Site Laundry"
@@ -1167,7 +1167,7 @@
       "bathrooms": 1,
       "rent": 1795,
       "sqft": 735,
-      "available": "Jun 15, 2026",
+      "available": "Now",
       "address": "12556 15TH AVE NE #104, SEATTLE, WA 98125",
       "features": [
         "On-Site Laundry"
