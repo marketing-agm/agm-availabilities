@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-14",
+  "updatedAt": "2026-06-18",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -246,9 +246,9 @@
       "title": "1 Bedroom | Clift House",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1700,
+      "rent": 1875,
       "sqft": 600,
-      "available": "Now",
+      "available": "Jul 15, 2026",
       "address": "301 EAST THOMAS ST #A4, SEATTLE, WA 98102",
       "features": [
         "On-Site Laundry"
@@ -259,47 +259,13 @@
     {
       "property": "Clift House Apartments",
       "neighborhood": "Capitol Hill",
-      "unit": "B3",
-      "title": "1 Bedroom | Clift House",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1695,
-      "sqft": 604,
-      "available": "Now",
-      "address": "301 EAST THOMAS ST #B3, SEATTLE, WA 98102",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/74adbe9e-0727-4041-9dec-b757f5ba45dd",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=74adbe9e-0727-4041-9dec-b757f5ba45dd&source=Website"
-    },
-    {
-      "property": "Clift House Apartments",
-      "neighborhood": "Capitol Hill",
-      "unit": "C1",
-      "title": "1 Bedroom | Clift House",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1550,
-      "sqft": 586,
-      "available": "Now",
-      "address": "301 EAST THOMAS ST #C1, SEATTLE, WA 98102",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/410f87e4-b4ad-4dfa-b172-af9e3c75cd9b",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=410f87e4-b4ad-4dfa-b172-af9e3c75cd9b&source=Website"
-    },
-    {
-      "property": "Clift House Apartments",
-      "neighborhood": "Capitol Hill",
       "unit": "C2",
       "title": "1 Bedroom | Clift House",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1600,
+      "rent": 1775,
       "sqft": 586,
-      "available": "Now",
+      "available": "Jul 15, 2026",
       "address": "301 EAST THOMAS ST Unit C2, SEATTLE, WA 98102",
       "features": [
         "On-Site Laundry"
@@ -310,12 +276,29 @@
     {
       "property": "Crestview Townhomes",
       "neighborhood": "Lynnwood",
+      "unit": "7",
+      "title": "2 Bedrooms | Crestview",
+      "bedrooms": 2,
+      "bathrooms": 1.5,
+      "rent": 2550,
+      "sqft": 1060,
+      "available": "Sep 15, 2026",
+      "address": "3712 188TH SW #7, LYNNWOOD, WA 98037",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/96464fb7-9eb4-4328-8bda-bfc4fc567b77",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=96464fb7-9eb4-4328-8bda-bfc4fc567b77&source=Website"
+    },
+    {
+      "property": "Crestview Townhomes",
+      "neighborhood": "Lynnwood",
       "unit": "9",
       "title": "2 Bedrooms | Crestview",
       "bedrooms": 2,
       "bathrooms": 1.5,
       "rent": 2595,
-      "sqft": 0,
+      "sqft": 1060,
       "available": "Jul 15, 2026",
       "address": "3708 188TH SW #9, LYNNWOOD, WA 98037",
       "features": [
@@ -333,13 +316,30 @@
       "bathrooms": 1,
       "rent": 1750,
       "sqft": 495,
-      "available": "Jun 15, 2026",
+      "available": "Jul 01, 2026",
       "address": "403 14th Ave E, Apt 7, Seattle, WA 98112",
       "features": [
         "On-Site Laundry"
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/6f324690-994a-4446-a97f-138f597783fb",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=6f324690-994a-4446-a97f-138f597783fb&source=Website"
+    },
+    {
+      "property": "De Selm Apartments",
+      "neighborhood": "Capitol Hill",
+      "unit": "31",
+      "title": "Studio | De Selm",
+      "bedrooms": "Studio",
+      "bathrooms": 1,
+      "rent": 1750,
+      "sqft": 495,
+      "available": "Aug 15, 2026",
+      "address": "403 14th Ave E, Apt 31, Seattle, WA 98112",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/567980ce-7991-4e5f-b751-4ed605dbce4c",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=567980ce-7991-4e5f-b751-4ed605dbce4c&source=Website"
     },
     {
       "property": "East Union Apartments",
@@ -383,7 +383,7 @@
       "bedrooms": 3,
       "bathrooms": 2,
       "rent": 2795,
-      "sqft": 0,
+      "sqft": 1081,
       "available": "Now",
       "address": "4051 GILMAN AVE W #101, SEATTLE, WA 98199",
       "features": [
@@ -416,7 +416,7 @@
       "title": "Studio | Golden Inca",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1625,
+      "rent": 1525,
       "sqft": 400,
       "available": "Now",
       "address": "230 14TH AVE E #103, SEATTLE, WA 98112",
@@ -485,7 +485,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 2195,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2701 W Manor Pl, Apt 301, Seattle, WA 98199",
       "features": [
@@ -502,7 +502,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2701 W Manor Pl, Apt 307, Seattle, WA 98199",
       "features": [
@@ -519,7 +519,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2701 W Manor Pl, Apt 402, Seattle, WA 98199",
       "features": [
@@ -536,7 +536,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2701 W Manor Pl, Apt 407, Seattle, WA 98199",
       "features": [
@@ -587,7 +587,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2710 W Manor Pl, Apt 106, Seattle, WA 98199",
       "features": [
@@ -604,7 +604,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 2195,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "2710 W Manor Pl, Apt 306, Seattle, WA 98199",
       "features": [
@@ -621,7 +621,7 @@
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 1995,
-      "sqft": 0,
+      "sqft": 1000,
       "available": "Now",
       "address": "3711 27th Pl W, Apt 307, Seattle, WA 98199",
       "features": [
@@ -667,23 +667,6 @@
     {
       "property": "Mercer Tower",
       "neighborhood": "Mercer Island",
-      "unit": "1",
-      "title": "2 Bedrooms | Mercer Tower",
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "rent": 3150,
-      "sqft": 0,
-      "available": "Jun 15, 2026",
-      "address": "2805 75th Pl SE, Apt 1, Mercer Island, WA 98040",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/78a0ef1a-29bf-4cfc-85ac-0479cd843393",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=78a0ef1a-29bf-4cfc-85ac-0479cd843393&source=Website"
-    },
-    {
-      "property": "Mercer Tower",
-      "neighborhood": "Mercer Island",
       "unit": "3",
       "title": "2 Bedrooms | Mercer Tower",
       "bedrooms": 2,
@@ -707,7 +690,7 @@
       "bathrooms": 1,
       "rent": 2350,
       "sqft": 700,
-      "available": "Jun 15, 2026",
+      "available": "Now",
       "address": "2805 75th Pl SE, Apt 26, Mercer Island, WA 98040",
       "features": [
         "On-Site Laundry"
@@ -775,7 +758,7 @@
       "bathrooms": 1,
       "rent": 1750,
       "sqft": 360,
-      "available": "Jun 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 406, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -912,7 +895,7 @@
       "bathrooms": 1,
       "rent": 1795,
       "sqft": 360,
-      "available": "Aug 8, 2026",
+      "available": "Aug 08, 2026",
       "address": "513 1st Ave N, Apt 807, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -1040,32 +1023,15 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=00b98250-e62e-408c-a2c2-1b1f2da88d44&source=Website"
     },
     {
-      "property": "Skandi Villa",
-      "neighborhood": "Edmonds",
-      "unit": "209",
-      "title": "2 Bedrooms | Skandi Villa",
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "rent": 1995,
-      "sqft": 980,
-      "available": "Jun 15, 2026",
-      "address": "23809 84th Ave W, Apt 209, Edmonds, WA 98026",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/d9ba101f-500e-4d46-a288-a0e43e6c2e74",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=d9ba101f-500e-4d46-a288-a0e43e6c2e74&source=Website"
-    },
-    {
       "property": "The Palms in Eastlake",
       "neighborhood": "Eastlake",
       "unit": "Not Specified",
       "title": "1 Bedroom | The Palms in Eastlake",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1895,
+      "rent": 1995,
       "sqft": 0,
-      "available": "Aug 31, 2026",
+      "available": "Jul 01, 2026",
       "address": "2712 Franklin Ave E, SEATTLE, WA 98102",
       "features": [
         "On-Site Laundry"
@@ -1165,9 +1131,9 @@
       "title": "1 Bedroom | White Heather",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1795,
+      "rent": 1625,
       "sqft": 735,
-      "available": "Jun 15, 2026",
+      "available": "Now",
       "address": "12556 15TH AVE NE #104, SEATTLE, WA 98125",
       "features": [
         "On-Site Laundry"
@@ -1178,13 +1144,30 @@
     {
       "property": "White Heather Apartments",
       "neighborhood": "Lake City",
+      "unit": "105",
+      "title": "1 Bedroom | White Heather",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1650,
+      "sqft": 735,
+      "available": "Now",
+      "address": "12556 15TH AVE NE #105, SEATTLE, WA 98125",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a2ff1b88-4b0d-448e-87e4-bf2c2b154548",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a2ff1b88-4b0d-448e-87e4-bf2c2b154548&source=Website"
+    },
+    {
+      "property": "White Heather Apartments",
+      "neighborhood": "Lake City",
       "unit": "202",
       "title": "2 Bedrooms | White Heather",
       "bedrooms": 2,
       "bathrooms": 2,
       "rent": 2295,
       "sqft": 985,
-      "available": "Now",
+      "available": "Sep 01, 2026",
       "address": "12556 15TH AVE NE #202, SEATTLE, WA 98125",
       "features": [
         "On-Site Laundry"
@@ -1268,7 +1251,6 @@
     "Queens Court": "leasing@agmrealestategroup.com",
     "Rialto Court": "leasing@agmrealestategroup.com",
     "Seward Park Court": "leasing@agmrealestategroup.com",
-    "Skandi Villa": "leasing@agmrealestategroup.com",
     "The Palms in Eastlake": "leasing@agmrealestategroup.com",
     "Viewmont Apartments": "leasing@agmrealestategroup.com",
     "White Heather Apartments": "leasing@agmrealestategroup.com",
