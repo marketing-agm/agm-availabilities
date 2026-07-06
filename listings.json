@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01",
+  "updatedAt": "2026-07-06",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -429,23 +429,6 @@
     {
       "property": "Magnolia Crestview",
       "neighborhood": "Magnolia",
-      "unit": "301",
-      "title": "2 Bedrooms | Magnolia Crestview",
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "rent": 2195,
-      "sqft": 1000,
-      "available": "Now",
-      "address": "2701 W Manor Pl, Apt 301, Seattle, WA 98199",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/c1c5dfd9-030e-4b47-a123-d6aa5166bf3d",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=c1c5dfd9-030e-4b47-a123-d6aa5166bf3d&source=Website"
-    },
-    {
-      "property": "Magnolia Crestview",
-      "neighborhood": "Magnolia",
       "unit": "307",
       "title": "2 Bedrooms | Magnolia Crestview",
       "bedrooms": 2,
@@ -637,7 +620,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1650,
+      "rent": 1595,
       "sqft": 367,
       "available": "Aug 10, 2026",
       "address": "513 1st Ave N, Apt 207, Seattle, WA 98109",
@@ -646,6 +629,40 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/85e58b1a-b34d-40a5-809d-3e6e8fd8d5e5",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=85e58b1a-b34d-40a5-809d-3e6e8fd8d5e5&source=Website"
+    },
+    {
+      "property": "Niwa Apartments",
+      "neighborhood": "Lower Queen Anne",
+      "unit": "214",
+      "title": "Studio | Niwa",
+      "bedrooms": "Studio",
+      "bathrooms": 1,
+      "rent": 1490,
+      "sqft": 350,
+      "available": "Oct 08, 2026",
+      "address": "513 1st Ave N, Apt 214, Seattle, WA 98109",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/cf04620c-06fd-4822-85b6-8d704deb15a4",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=cf04620c-06fd-4822-85b6-8d704deb15a4&source=Website"
+    },
+    {
+      "property": "Niwa Apartments",
+      "neighborhood": "Lower Queen Anne",
+      "unit": "217",
+      "title": "Studio | Niwa",
+      "bedrooms": "Studio",
+      "bathrooms": 1,
+      "rent": 1520,
+      "sqft": 350,
+      "available": "Sep 09, 2026",
+      "address": "513 1st Ave N, Apt 217, Seattle, WA 98109",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/06141794-f8e1-475e-8f59-154f405acac1",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=06141794-f8e1-475e-8f59-154f405acac1&source=Website"
     },
     {
       "property": "Niwa Apartments",
@@ -671,7 +688,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1695,
+      "rent": 1550,
       "sqft": 350,
       "available": "Aug 25, 2026",
       "address": "513 1st Ave N, Apt 316, Seattle, WA 98109",
@@ -688,7 +705,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1750,
+      "rent": 1625,
       "sqft": 360,
       "available": "Now",
       "address": "513 1st Ave N, Apt 406, Seattle, WA 98109",
@@ -701,11 +718,28 @@
     {
       "property": "Niwa Apartments",
       "neighborhood": "Lower Queen Anne",
+      "unit": "505",
+      "title": "Studio | Niwa",
+      "bedrooms": "Studio",
+      "bathrooms": 1,
+      "rent": 1660,
+      "sqft": 360,
+      "available": "Aug 15, 2026",
+      "address": "513 1st Ave N, Apt 505, Seattle, WA 98109",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/5090264a-c7e7-403e-88e0-9ef169b86a30",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=5090264a-c7e7-403e-88e0-9ef169b86a30&source=Website"
+    },
+    {
+      "property": "Niwa Apartments",
+      "neighborhood": "Lower Queen Anne",
       "unit": "509",
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1750,
+      "rent": 1770,
       "sqft": 384,
       "available": "Jul 15, 2026",
       "address": "513 1st Ave N, Apt 509, Seattle, WA 98109",
@@ -739,7 +773,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1765,
+      "rent": 1690,
       "sqft": 360,
       "available": "Sep 15, 2026",
       "address": "513 1st Ave N, Apt 606, Seattle, WA 98109",
@@ -756,7 +790,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1725,
+      "rent": 1720,
       "sqft": 360,
       "available": "Aug 15, 2026",
       "address": "513 1st Ave N, Apt 704, Seattle, WA 98109",
@@ -790,7 +824,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1795,
+      "rent": 1755,
       "sqft": 360,
       "available": "Sep 15, 2026",
       "address": "513 1st Ave N, Apt 803, Seattle, WA 98109",
@@ -807,7 +841,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1795,
+      "rent": 1755,
       "sqft": 360,
       "available": "Aug 15, 2026",
       "address": "513 1st Ave N, Apt 805, Seattle, WA 98109",
@@ -824,7 +858,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1795,
+      "rent": 1755,
       "sqft": 360,
       "available": "Aug 08, 2026",
       "address": "513 1st Ave N, Apt 807, Seattle, WA 98109",
