@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-06",
+  "updatedAt": "2026-07-08",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -10,7 +10,7 @@
       "bathrooms": 1,
       "rent": 1995,
       "sqft": 0,
-      "available": "Aug 31, 2026",
+      "available": "Sep 30, 2026",
       "address": "6113 ROOSEVELT WAY NE, SEATTLE, WA 98115",
       "features": [
         "On-Site Laundry"
@@ -25,7 +25,7 @@
       "title": "1 Bedroom | Arbor Heights",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1595,
+      "rent": 1695,
       "sqft": 690,
       "available": "Now",
       "address": "625 N 130th St, Apt 202, Seattle, WA 98133",
@@ -72,23 +72,6 @@
     {
       "property": "Avia Apartments",
       "neighborhood": "Greenwood",
-      "unit": "5",
-      "title": "2 Bedrooms | Avia",
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "rent": 1995,
-      "sqft": 875,
-      "available": "Now",
-      "address": "11540 Greenwood Ave N, Apt 5, Seattle, WA 98133",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/2458b76d-86ec-401e-95a6-7001fb217538",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=2458b76d-86ec-401e-95a6-7001fb217538&source=Website"
-    },
-    {
-      "property": "Avia Apartments",
-      "neighborhood": "Greenwood",
       "unit": "201",
       "title": "2 Bedrooms | Avia",
       "bedrooms": 2,
@@ -121,6 +104,23 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=782cf34e-643c-4387-b287-cc9fb36b484d&source=Website"
     },
     {
+      "property": "Avia Apartments",
+      "neighborhood": "Greenwood",
+      "unit": "5",
+      "title": "2 Bedrooms | Avia",
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "rent": 1995,
+      "sqft": 875,
+      "available": "Now",
+      "address": "11540 Greenwood Ave N, Apt 5, Seattle, WA 98133",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/2458b76d-86ec-401e-95a6-7001fb217538",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=2458b76d-86ec-401e-95a6-7001fb217538&source=Website"
+    },
+    {
       "property": "BalCro",
       "neighborhood": "Ballard",
       "unit": "201",
@@ -129,7 +129,7 @@
       "bathrooms": 1,
       "rent": 1195,
       "sqft": 250,
-      "available": "Jul 15, 2026",
+      "available": "Now",
       "address": "8509 14th Ave NW, Apt 201, Seattle, WA 98117",
       "features": [
         "On-Site Laundry"
@@ -157,23 +157,6 @@
     {
       "property": "Cedar Lane Apartments",
       "neighborhood": "Greenwood",
-      "unit": "9",
-      "title": "1 Bedroom | Cedar Lane",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1495,
-      "sqft": 550,
-      "available": "Now",
-      "address": "12536 Greenwood Ave N, Apt 9, Seattle, WA 98133",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/6d713e66-bd31-49c5-855a-c7f6a9d341f5",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=6d713e66-bd31-49c5-855a-c7f6a9d341f5&source=Website"
-    },
-    {
-      "property": "Cedar Lane Apartments",
-      "neighborhood": "Greenwood",
       "unit": "12",
       "title": "2 Bedrooms | Cedar Lane",
       "bedrooms": 2,
@@ -189,21 +172,21 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=98dc0a0e-7839-45f9-88d6-136528bd5cfb&source=Website"
     },
     {
-      "property": "Clift House Apartments",
-      "neighborhood": "Capitol Hill",
-      "unit": "A2",
-      "title": "1 Bedroom | Clift House",
+      "property": "Cedar Lane Apartments",
+      "neighborhood": "Greenwood",
+      "unit": "9",
+      "title": "1 Bedroom | Cedar Lane",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1675,
-      "sqft": 600,
+      "rent": 1495,
+      "sqft": 550,
       "available": "Now",
-      "address": "301 EAST THOMAS ST #A2, SEATTLE, WA 98102",
+      "address": "12536 Greenwood Ave N, Apt 9, Seattle, WA 98133",
       "features": [
         "On-Site Laundry"
       ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/d7d88c46-9e19-4443-888a-a6db09c7a1d8",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=d7d88c46-9e19-4443-888a-a6db09c7a1d8&source=Website"
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/6d713e66-bd31-49c5-855a-c7f6a9d341f5",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=6d713e66-bd31-49c5-855a-c7f6a9d341f5&source=Website"
     },
     {
       "property": "Clift House Apartments",
@@ -257,21 +240,21 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=96464fb7-9eb4-4328-8bda-bfc4fc567b77&source=Website"
     },
     {
-      "property": "Crestview Townhomes",
-      "neighborhood": "Lynnwood",
-      "unit": "9",
-      "title": "2 Bedrooms | Crestview",
-      "bedrooms": 2,
-      "bathrooms": 1.5,
-      "rent": 2595,
-      "sqft": 1060,
-      "available": "Jul 15, 2026",
-      "address": "3708 188TH SW #9, LYNNWOOD, WA 98037",
+      "property": "De Selm Apartments",
+      "neighborhood": "Capitol Hill",
+      "unit": "31",
+      "title": "Studio | De Selm",
+      "bedrooms": "Studio",
+      "bathrooms": 1,
+      "rent": 1750,
+      "sqft": 495,
+      "available": "Aug 15, 2026",
+      "address": "403 14th Ave E, Apt 31, Seattle, WA 98112",
       "features": [
         "On-Site Laundry"
       ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/96179913-4d61-48d1-b442-dcb7a0fe16a0",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=96179913-4d61-48d1-b442-dcb7a0fe16a0&source=Website"
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/567980ce-7991-4e5f-b751-4ed605dbce4c",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=567980ce-7991-4e5f-b751-4ed605dbce4c&source=Website"
     },
     {
       "property": "De Selm Apartments",
@@ -291,55 +274,21 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=6f324690-994a-4446-a97f-138f597783fb&source=Website"
     },
     {
-      "property": "De Selm Apartments",
+      "property": "East Union Apartments",
       "neighborhood": "Capitol Hill",
-      "unit": "31",
-      "title": "Studio | De Selm",
-      "bedrooms": "Studio",
-      "bathrooms": 1,
-      "rent": 1750,
-      "sqft": 495,
-      "available": "Aug 15, 2026",
-      "address": "403 14th Ave E, Apt 31, Seattle, WA 98112",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/567980ce-7991-4e5f-b751-4ed605dbce4c",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=567980ce-7991-4e5f-b751-4ed605dbce4c&source=Website"
-    },
-    {
-      "property": "Gilmanor Apartments",
-      "neighborhood": "Magnolia",
-      "unit": "101",
-      "title": "3 Bedrooms | Gilmanor",
-      "bedrooms": 3,
-      "bathrooms": 2,
-      "rent": 2795,
-      "sqft": 1081,
-      "available": "Now",
-      "address": "4051 GILMAN AVE W #101, SEATTLE, WA 98199",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/5355d158-c693-4008-9b87-2543184b41f7",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=5355d158-c693-4008-9b87-2543184b41f7&source=Website"
-    },
-    {
-      "property": "Gilmanor Apartments",
-      "neighborhood": "Magnolia",
-      "unit": "303",
-      "title": "1 Bedroom | Gilmanor",
+      "unit": "Not Specified",
+      "title": "1 Bedroom | East Union",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1795,
-      "sqft": 566,
-      "available": "Now",
-      "address": "4051 GILMAN AVE W #303, SEATTLE, WA 98199",
+      "rent": 1495,
+      "sqft": 0,
+      "available": "Sep 30, 2026",
+      "address": "506 E Union St, Seattle, WA 98122",
       "features": [
         "On-Site Laundry"
       ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/bfb17b81-c7e0-4a29-a445-0a04e2d9cc39",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=bfb17b81-c7e0-4a29-a445-0a04e2d9cc39&source=Website"
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/d78e624a-dbe8-4faa-9333-65a6ecb5b768",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=d78e624a-dbe8-4faa-9333-65a6ecb5b768&source=Website"
     },
     {
       "property": "Golden Inca",
@@ -374,40 +323,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/aad34d3e-ceb2-474c-8daf-41cab321002a",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=aad34d3e-ceb2-474c-8daf-41cab321002a&source=Website"
-    },
-    {
-      "property": "Hill Town Apartments",
-      "neighborhood": "Central District",
-      "unit": "102",
-      "title": "1 Bedroom | Hill Town",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1595,
-      "sqft": 565,
-      "available": "Now",
-      "address": "2201 S MAIN ST #102, SEATTLE, WA 98144",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/d1953758-dc2a-47c7-ac33-c96132a0fc56",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=d1953758-dc2a-47c7-ac33-c96132a0fc56&source=Website"
-    },
-    {
-      "property": "Lorelei Apartments",
-      "neighborhood": "Capitol Hill",
-      "unit": "06",
-      "title": "1 Bedroom | Lorelei",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1850,
-      "sqft": 500,
-      "available": "Now",
-      "address": "501 SUMMIT AVENUE EAST #06, SEATTLE, WA 98102",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/79111d4f-36cd-451f-9d02-3c011e350bdd",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=79111d4f-36cd-451f-9d02-3c011e350bdd&source=Website"
     },
     {
       "property": "Lorelei Apartments",
@@ -582,23 +497,6 @@
     {
       "property": "Mercer Tower",
       "neighborhood": "Mercer Island",
-      "unit": "3",
-      "title": "2 Bedrooms | Mercer Tower",
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "rent": 2495,
-      "sqft": 850,
-      "available": "Now",
-      "address": "2805 75th Pl SE, Apt 3, Mercer Island, WA 98040",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/fb1fc441-52af-4c95-923f-e9f436aaca6e",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=fb1fc441-52af-4c95-923f-e9f436aaca6e&source=Website"
-    },
-    {
-      "property": "Mercer Tower",
-      "neighborhood": "Mercer Island",
       "unit": "26",
       "title": "1 Bedroom | Mercer Tower",
       "bedrooms": 1,
@@ -612,6 +510,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/05b913aa-47c5-439c-955b-404061618b3f",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=05b913aa-47c5-439c-955b-404061618b3f&source=Website"
+    },
+    {
+      "property": "Mercer Tower",
+      "neighborhood": "Mercer Island",
+      "unit": "3",
+      "title": "2 Bedrooms | Mercer Tower",
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "rent": 2495,
+      "sqft": 850,
+      "available": "Now",
+      "address": "2805 75th Pl SE, Apt 3, Mercer Island, WA 98040",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/fb1fc441-52af-4c95-923f-e9f436aaca6e",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=fb1fc441-52af-4c95-923f-e9f436aaca6e&source=Website"
     },
     {
       "property": "Niwa Apartments",
@@ -962,7 +877,7 @@
       "bathrooms": 1,
       "rent": 1695,
       "sqft": 0,
-      "available": "Aug 31, 2026",
+      "available": "Sep 30, 2026",
       "address": "5108 S. DAWSON, SEATTLE, WA 98118",
       "features": [
         "On-Site Laundry"
@@ -971,21 +886,38 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=00b98250-e62e-408c-a2c2-1b1f2da88d44&source=Website"
     },
     {
+      "property": "Skandi Villa",
+      "neighborhood": "Edmonds",
+      "unit": "Not Specified",
+      "title": "1 Bedroom | Skandi Villa",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1695,
+      "sqft": 0,
+      "available": "Sep 30, 2026",
+      "address": "23809 84th Avenue W, Edmonds, WA 98026",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a46e1bc9-49c9-4919-98d5-eeb158d07244",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a46e1bc9-49c9-4919-98d5-eeb158d07244&source=Website"
+    },
+    {
       "property": "The Palms in Eastlake",
       "neighborhood": "Eastlake",
       "unit": "Not Specified",
       "title": "1 Bedroom | The Palms in Eastlake",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1995,
+      "rent": 1895,
       "sqft": 0,
-      "available": "Now",
+      "available": "Aug 14, 2026",
       "address": "2712 Franklin Ave E, SEATTLE, WA 98102",
       "features": [
         "On-Site Laundry"
       ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/51a0d080-b568-40f6-bfe3-6a0090cff1ba",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=51a0d080-b568-40f6-bfe3-6a0090cff1ba&source=Website"
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a22e7497-f503-4c51-8eb1-172a36cbea07",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a22e7497-f503-4c51-8eb1-172a36cbea07&source=Website"
     },
     {
       "property": "Viewmont Apartments",
@@ -1151,10 +1083,9 @@
     "Clift House Apartments": "leasing@agmrealestategroup.com",
     "Crestview Townhomes": "leasing@agmrealestategroup.com",
     "De Selm Apartments": "leasing@agmrealestategroup.com",
-    "Gilmanor Apartments": "leasing@agmrealestategroup.com",
+    "East Union Apartments": "leasing@agmrealestategroup.com",
     "Golden Inca": "leasing@agmrealestategroup.com",
     "Highway Place": "leasing@agmrealestategroup.com",
-    "Hill Town Apartments": "leasing@agmrealestategroup.com",
     "Lorelei Apartments": "leasing@agmrealestategroup.com",
     "Magnolia Crestview": "leasing@agmrealestategroup.com",
     "Magnolia Vista & Manor": "leasing@agmrealestategroup.com",
@@ -1162,12 +1093,13 @@
     "Mercer Tower": "leasing@agmrealestategroup.com",
     "Niwa Apartments": "leasing@agmrealestategroup.com",
     "Queens Court": "leasing@agmrealestategroup.com",
+    "Quil Creek Crossing Apartments": "leasing@agmrealestategroup.com",
     "Rialto Court": "leasing@agmrealestategroup.com",
     "Seward Park Court": "leasing@agmrealestategroup.com",
+    "Skandi Villa": "leasing@agmrealestategroup.com",
     "The Palms in Eastlake": "leasing@agmrealestategroup.com",
     "Viewmont Apartments": "leasing@agmrealestategroup.com",
     "White Heather Apartments": "leasing@agmrealestategroup.com",
-    "Willow Creek Apartments": "leasing@agmrealestategroup.com",
-    "Quil Creek Crossing Apartments": "leasing@agmrealestategroup.com"
+    "Willow Creek Apartments": "leasing@agmrealestategroup.com"
   }
 }
