@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-14",
+  "updatedAt": "2026-07-20",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -17,6 +17,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/8c99558f-bf1a-4c31-8166-4babdab42f89",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=8c99558f-bf1a-4c31-8166-4babdab42f89&source=Website"
+    },
+    {
+      "property": "Arbor Heights",
+      "neighborhood": "North Seattle",
+      "unit": "101",
+      "title": "2 Bedrooms | Arbor Heights",
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "rent": 2095,
+      "sqft": 810,
+      "available": "Sep 1, 2026",
+      "address": "625 N 130th St, Apt 101, Seattle, WA 98133",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/97db3668-78a9-4408-b7d0-dab9e62c44bd",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=97db3668-78a9-4408-b7d0-dab9e62c44bd&source=Website"
     },
     {
       "property": "Arbor Heights",
@@ -42,66 +59,15 @@
       "title": "1 Bedroom | Arbor Heights",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1595,
+      "rent": 1695,
       "sqft": 690,
-      "available": "Aug 15, 2026",
+      "available": "Aug 1, 2026",
       "address": "625 N 130th St, Apt 203, Seattle, WA 98133",
       "features": [
         "On-Site Laundry"
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a838ad44-8b58-4f09-a634-a5fbc9b24f8e",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a838ad44-8b58-4f09-a634-a5fbc9b24f8e&source=Website"
-    },
-    {
-      "property": "Avia Apartments",
-      "neighborhood": "Greenwood",
-      "unit": "2",
-      "title": "2 Bedrooms | Avia",
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "rent": 1995,
-      "sqft": 875,
-      "available": "Now",
-      "address": "11540 Greenwood Ave N, Apt 2, Seattle, WA 98133",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/b38164d2-3cbd-4e43-b872-b1edc6ec07b5",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=b38164d2-3cbd-4e43-b872-b1edc6ec07b5&source=Website"
-    },
-    {
-      "property": "Avia Apartments",
-      "neighborhood": "Greenwood",
-      "unit": "5",
-      "title": "2 Bedrooms | Avia",
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "rent": 1995,
-      "sqft": 875,
-      "available": "Now",
-      "address": "11540 Greenwood Ave N, Apt 5, Seattle, WA 98133",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/2458b76d-86ec-401e-95a6-7001fb217538",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=2458b76d-86ec-401e-95a6-7001fb217538&source=Website"
-    },
-    {
-      "property": "Avia Apartments",
-      "neighborhood": "Greenwood",
-      "unit": "201",
-      "title": "2 Bedrooms | Avia",
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "rent": 1995,
-      "sqft": 875,
-      "available": "Now",
-      "address": "11534 Greenwood Ave N, Apt 201, Seattle, WA 98133",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a91d2f24-809f-4ab5-b88e-d0809901bcf9",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a91d2f24-809f-4ab5-b88e-d0809901bcf9&source=Website"
     },
     {
       "property": "Avia Apartments",
@@ -119,23 +85,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/782cf34e-643c-4387-b287-cc9fb36b484d",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=782cf34e-643c-4387-b287-cc9fb36b484d&source=Website"
-    },
-    {
-      "property": "BalCro",
-      "neighborhood": "Ballard",
-      "unit": "201",
-      "title": "Studio | BalCro",
-      "bedrooms": "Studio",
-      "bathrooms": 1,
-      "rent": 1195,
-      "sqft": 250,
-      "available": "Now",
-      "address": "8509 14th Ave NW, Apt 201, Seattle, WA 98117",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/f001cc55-a06c-4581-a11a-c733a5193e8f",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=f001cc55-a06c-4581-a11a-c733a5193e8f&source=Website"
     },
     {
       "property": "Blanche Clare Apartments",
@@ -191,6 +140,23 @@
     {
       "property": "Clift House Apartments",
       "neighborhood": "Capitol Hill",
+      "unit": "A4",
+      "title": "1 Bedroom | Clift House",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1875,
+      "sqft": 600,
+      "available": "Aug 15, 2026",
+      "address": "301 EAST THOMAS ST #A4, SEATTLE, WA 98102",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/143db1c0-cd46-42e0-8e69-157db67289ef",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=143db1c0-cd46-42e0-8e69-157db67289ef&source=Website"
+    },
+    {
+      "property": "Clift House Apartments",
+      "neighborhood": "Capitol Hill",
       "unit": "C1",
       "title": "1 Bedroom | Clift House",
       "bedrooms": 1,
@@ -221,23 +187,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/2ab53f35-66e8-4e24-9d7f-b51a39b731e8",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=2ab53f35-66e8-4e24-9d7f-b51a39b731e8&source=Website"
-    },
-    {
-      "property": "Clift House Apartments",
-      "neighborhood": "Capitol Hill",
-      "unit": "A4",
-      "title": "1 Bedroom | Clift House",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1875,
-      "sqft": 600,
-      "available": "Aug 15, 2026",
-      "address": "301 EAST THOMAS ST #A4, SEATTLE, WA 98102",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/143db1c0-cd46-42e0-8e69-157db67289ef",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=143db1c0-cd46-42e0-8e69-157db67289ef&source=Website"
     },
     {
       "property": "Crestview Townhomes",
@@ -486,7 +435,7 @@
       "bathrooms": 1,
       "rent": 1675,
       "sqft": 600,
-      "available": "Jul 15, 2026",
+      "available": "Now",
       "address": "633 4th Avenue West #101, Seattle, WA 98119",
       "features": [
         "On-Site Laundry"
@@ -554,7 +503,7 @@
       "bathrooms": 1,
       "rent": 1490,
       "sqft": 350,
-      "available": "Oct 08, 2026",
+      "available": "Oct 8, 2026",
       "address": "513 1st Ave N, Apt 214, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -571,7 +520,7 @@
       "bathrooms": 1,
       "rent": 1520,
       "sqft": 350,
-      "available": "Sep 09, 2026",
+      "available": "Sep 9, 2026",
       "address": "513 1st Ave N, Apt 217, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -656,7 +605,7 @@
       "bathrooms": 1,
       "rent": 1770,
       "sqft": 384,
-      "available": "Jul 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 509, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -775,7 +724,7 @@
       "bathrooms": 1,
       "rent": 1755,
       "sqft": 360,
-      "available": "Aug 08, 2026",
+      "available": "Aug 8, 2026",
       "address": "513 1st Ave N, Apt 807, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -905,23 +854,6 @@
     {
       "property": "The Palms in Eastlake",
       "neighborhood": "Eastlake",
-      "unit": "Not Specified",
-      "title": "1 Bedroom | The Palms in Eastlake",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1895,
-      "sqft": 0,
-      "available": "Aug 14, 2026",
-      "address": "2712 Franklin Ave E, SEATTLE, WA 98102",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a22e7497-f503-4c51-8eb1-172a36cbea07",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a22e7497-f503-4c51-8eb1-172a36cbea07&source=Website"
-    },
-    {
-      "property": "The Palms in Eastlake",
-      "neighborhood": "Eastlake",
       "unit": "9",
       "title": "1 Bedroom | The Palms in Eastlake",
       "bedrooms": 1,
@@ -935,6 +867,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/beb2c8d8-7d6a-4427-911a-5aae7a3614bd",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=beb2c8d8-7d6a-4427-911a-5aae7a3614bd&source=Website"
+    },
+    {
+      "property": "The Palms in Eastlake",
+      "neighborhood": "Eastlake",
+      "unit": "Not Specified",
+      "title": "1 Bedroom | The Palms in Eastlake",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1895,
+      "sqft": 0,
+      "available": "Aug 14, 2026",
+      "address": "2712 Franklin Ave E, SEATTLE, WA 98102",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a22e7497-f503-4c51-8eb1-172a36cbea07",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a22e7497-f503-4c51-8eb1-172a36cbea07&source=Website"
     },
     {
       "property": "Viewmont Apartments",
@@ -996,7 +945,7 @@
       "bathrooms": 1,
       "rent": 1050,
       "sqft": 290,
-      "available": "Jul 20, 2026",
+      "available": "Now",
       "address": "219 BELLEVUE AVE E #209, SEATTLE, WA 98102",
       "features": [
         "On-Site Laundry"
@@ -1041,11 +990,28 @@
     {
       "property": "Willow Creek Apartments",
       "neighborhood": "Bothell",
+      "unit": "102",
+      "title": "1 Bedroom | Willow Creek",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1575,
+      "sqft": 685,
+      "available": "Now",
+      "address": "19306 BOTHELL WAY NE Unit 102, BOTHELL, WA 98011",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/0c082873-4bfd-4737-b353-c364ffc2f1aa",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=0c082873-4bfd-4737-b353-c364ffc2f1aa&source=Website"
+    },
+    {
+      "property": "Willow Creek Apartments",
+      "neighborhood": "Bothell",
       "unit": "206",
       "title": "1 Bedroom | Willow Creek",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1695,
+      "rent": 1625,
       "sqft": 685,
       "available": "Now",
       "address": "19308 BOTHELL WAY NE #206, BOTHELL, WA 98011",
@@ -1060,7 +1026,6 @@
     "6113 Apartments": "leasing@agmrealestategroup.com",
     "Arbor Heights": "leasing@agmrealestategroup.com",
     "Avia Apartments": "leasing@agmrealestategroup.com",
-    "BalCro": "leasing@agmrealestategroup.com",
     "Blanche Clare Apartments": "leasing@agmrealestategroup.com",
     "Cedar Lane Apartments": "leasing@agmrealestategroup.com",
     "Clift House Apartments": "leasing@agmrealestategroup.com",
