@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-22",
+  "updatedAt": "2026-07-24",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -145,7 +145,7 @@
       "bedrooms": 1,
       "bathrooms": 1,
       "rent": 1875,
-      "sqft": 600,
+      "sqft": 604,
       "available": "Aug 15, 2026",
       "address": "301 EAST THOMAS ST #A4, SEATTLE, WA 98102",
       "features": [
@@ -264,7 +264,7 @@
       "bedrooms": "Studio",
       "bathrooms": 1,
       "rent": 1525,
-      "sqft": 400,
+      "sqft": 360,
       "available": "Now",
       "address": "230 14TH AVE E #103, SEATTLE, WA 98112",
       "features": [
@@ -605,7 +605,7 @@
       "bathrooms": 1,
       "rent": 1660,
       "sqft": 361,
-      "available": "Aug 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 505, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -741,30 +741,13 @@
       "bathrooms": 1,
       "rent": 1755,
       "sqft": 360,
-      "available": "Aug 8, 2026",
+      "available": "Aug 15, 2026",
       "address": "513 1st Ave N, Apt 807, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/39ca39a1-20c0-44d0-ba0f-93156d68fc16",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=39ca39a1-20c0-44d0-ba0f-93156d68fc16&source=Website"
-    },
-    {
-      "property": "Queens Court",
-      "neighborhood": "Lower Queen Anne",
-      "unit": "209",
-      "title": "1 Bedroom | Queens Court",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1675,
-      "sqft": 543,
-      "available": "Now",
-      "address": "124 Warren Ave N, Unit 209, Seattle, WA 98109",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/71d7fc0d-0103-465d-96af-d8b30084f8f4",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=71d7fc0d-0103-465d-96af-d8b30084f8f4&source=Website"
     },
     {
       "property": "Quil Creek Crossing Apartments",
@@ -1003,40 +986,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a2ff1b88-4b0d-448e-87e4-bf2c2b154548",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a2ff1b88-4b0d-448e-87e4-bf2c2b154548&source=Website"
-    },
-    {
-      "property": "Willow Creek Apartments",
-      "neighborhood": "Bothell",
-      "unit": "102",
-      "title": "1 Bedroom | Willow Creek",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1575,
-      "sqft": 685,
-      "available": "Now",
-      "address": "19306 BOTHELL WAY NE Unit 102, BOTHELL, WA 98011",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/0c082873-4bfd-4737-b353-c364ffc2f1aa",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=0c082873-4bfd-4737-b353-c364ffc2f1aa&source=Website"
-    },
-    {
-      "property": "Willow Creek Apartments",
-      "neighborhood": "Bothell",
-      "unit": "206",
-      "title": "1 Bedroom | Willow Creek",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1625,
-      "sqft": 685,
-      "available": "Now",
-      "address": "19308 BOTHELL WAY NE #206, BOTHELL, WA 98011",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/0d220759-6e59-4ae8-92b9-899fa7cd02c9",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=0d220759-6e59-4ae8-92b9-899fa7cd02c9&source=Website"
     }
   ],
   "leasingAgents": {
@@ -1055,14 +1004,12 @@
     "Marianne Apartments": "leasing@agmrealestategroup.com",
     "Mercer Tower": "leasing@agmrealestategroup.com",
     "Niwa Apartments": "leasing@agmrealestategroup.com",
-    "Queens Court": "leasing@agmrealestategroup.com",
     "Quil Creek Crossing Apartments": "leasing@agmrealestategroup.com",
     "Rialto Court": "leasing@agmrealestategroup.com",
     "Seward Park Court": "leasing@agmrealestategroup.com",
     "Skandi Villa": "leasing@agmrealestategroup.com",
     "The Palms in Eastlake": "leasing@agmrealestategroup.com",
     "Viewmont Apartments": "leasing@agmrealestategroup.com",
-    "White Heather Apartments": "leasing@agmrealestategroup.com",
-    "Willow Creek Apartments": "leasing@agmrealestategroup.com"
+    "White Heather Apartments": "leasing@agmrealestategroup.com"
   }
 }
