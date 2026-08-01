@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-29",
+  "updatedAt": "2026-08-01",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -61,7 +61,7 @@
       "bathrooms": 1,
       "rent": 1695,
       "sqft": 690,
-      "available": "Aug 1, 2026",
+      "available": "Now",
       "address": "625 N 130th St, Apt 203, Seattle, WA 98133",
       "features": [
         "On-Site Laundry"
@@ -361,23 +361,6 @@
     {
       "property": "Magnolia Vista & Manor",
       "neighborhood": "Magnolia",
-      "unit": "106",
-      "title": "2 Bedrooms | Magnolia Vista & Manor",
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "rent": 1995,
-      "sqft": 1000,
-      "available": "Now",
-      "address": "2710 W Manor Pl, Apt 106, Seattle, WA 98199",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/50220731-9d0e-4436-8b8a-a850b3b5c32d",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=50220731-9d0e-4436-8b8a-a850b3b5c32d&source=Website"
-    },
-    {
-      "property": "Magnolia Vista & Manor",
-      "neighborhood": "Magnolia",
       "unit": "306",
       "title": "2 Bedrooms | Magnolia Vista & Manor",
       "bedrooms": 2,
@@ -600,8 +583,8 @@
       "property": "Niwa Apartments",
       "neighborhood": "Lower Queen Anne",
       "unit": "519",
-      "title": "1 Bedroom | Niwa",
-      "bedrooms": 1,
+      "title": "2 Bedrooms | Niwa",
+      "bedrooms": 2,
       "bathrooms": 1,
       "rent": 2795,
       "sqft": 730,
@@ -765,23 +748,6 @@
       ],
       "detailsUrl": "#",
       "applyUrl": "https://agmrealestategroup.appfolio.com/apply/37ba5d3c-0b92-4ddb-b9ba-6ab3253b793d/start"
-    },
-    {
-      "property": "Rialto Court",
-      "neighborhood": "Capitol Hill",
-      "unit": "102",
-      "title": "Studio | Rialto Court",
-      "bedrooms": "Studio",
-      "bathrooms": 1,
-      "rent": 1325,
-      "sqft": 525,
-      "available": "Now",
-      "address": "1729 BOYLSTON AVE #102, SEATTLE, WA 98122",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/cf263c17-6018-4b49-99e0-963c9c0bbccb",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=cf263c17-6018-4b49-99e0-963c9c0bbccb&source=Website"
     },
     {
       "property": "Seward Park Court",
@@ -970,7 +936,6 @@
     "Mercer Tower": "leasing@agmrealestategroup.com",
     "Niwa Apartments": "leasing@agmrealestategroup.com",
     "Quil Creek Crossing Apartments": "leasing@agmrealestategroup.com",
-    "Rialto Court": "leasing@agmrealestategroup.com",
     "Seward Park Court": "leasing@agmrealestategroup.com",
     "Skandi Villa": "leasing@agmrealestategroup.com",
     "The Palms in Eastlake": "leasing@agmrealestategroup.com",
