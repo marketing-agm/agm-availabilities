@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07",
+  "updatedAt": "2026-08-08",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -476,23 +476,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/66eea076-0718-47a4-9110-0322e1844130",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=66eea076-0718-47a4-9110-0322e1844130&source=Website"
-    },
-    {
-      "property": "Mercer Tower",
-      "neighborhood": "Mercer Island",
-      "unit": "3",
-      "title": "2 Bedrooms | Mercer Tower",
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "rent": 2495,
-      "sqft": 850,
-      "available": "Now",
-      "address": "2805 75th Pl SE, Apt 3, Mercer Island, WA 98040",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/fb1fc441-52af-4c95-923f-e9f436aaca6e",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=fb1fc441-52af-4c95-923f-e9f436aaca6e&source=Website"
     },
     {
       "property": "Mercer Tower",
