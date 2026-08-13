@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07",
+  "updatedAt": "2026-08-13",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -310,23 +310,6 @@
     {
       "property": "Magnolia Crestview",
       "neighborhood": "Magnolia",
-      "unit": "301",
-      "title": "2 Bedrooms | Magnolia Crestview",
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "rent": 2195,
-      "sqft": 1000,
-      "available": "Now",
-      "address": "2701 W Manor Pl, Apt 301, Seattle, WA 98199",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/c1c5dfd9-030e-4b47-a123-d6aa5166bf3d",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=c1c5dfd9-030e-4b47-a123-d6aa5166bf3d&source=Website"
-    },
-    {
-      "property": "Magnolia Crestview",
-      "neighborhood": "Magnolia",
       "unit": "307",
       "title": "2 Bedrooms | Magnolia Crestview",
       "bedrooms": 2,
@@ -480,23 +463,6 @@
     {
       "property": "Mercer Tower",
       "neighborhood": "Mercer Island",
-      "unit": "3",
-      "title": "2 Bedrooms | Mercer Tower",
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "rent": 2495,
-      "sqft": 850,
-      "available": "Now",
-      "address": "2805 75th Pl SE, Apt 3, Mercer Island, WA 98040",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/fb1fc441-52af-4c95-923f-e9f436aaca6e",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=fb1fc441-52af-4c95-923f-e9f436aaca6e&source=Website"
-    },
-    {
-      "property": "Mercer Tower",
-      "neighborhood": "Mercer Island",
       "unit": "26",
       "title": "1 Bedroom | Mercer Tower",
       "bedrooms": 1,
@@ -538,7 +504,7 @@
       "bathrooms": 1,
       "rent": 1595,
       "sqft": 367,
-      "available": "Aug 10, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 207, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -802,6 +768,57 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=30910287-2669-417a-81a7-b9fa785263b4&source=Website"
     },
     {
+      "property": "Quil Creek Crossing Apartments",
+      "neighborhood": "Marysville",
+      "unit": "Unit A",
+      "title": "1 Bedroom | Quil Crossing",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1500,
+      "sqft": 900,
+      "available": "Now",
+      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "#",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/c62263d2-347e-4137-98f5-64f3817bea7d/start"
+    },
+    {
+      "property": "Quil Creek Crossing Apartments",
+      "neighborhood": "Marysville",
+      "unit": "Unit B",
+      "title": "2 Bedrooms | Quil Crossing",
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "rent": 1800,
+      "sqft": 1330,
+      "available": "Now",
+      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "#",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/dba566ce-5df8-444a-a511-8ac313b84d61/start"
+    },
+    {
+      "property": "Quil Creek Crossing Apartments",
+      "neighborhood": "Marysville",
+      "unit": "Unit C",
+      "title": "3 Bedrooms | Quil Crossing",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "rent": 2100,
+      "sqft": 1500,
+      "available": "Now",
+      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "#",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/37ba5d3c-0b92-4ddb-b9ba-6ab3253b793d/start"
+    },
+    {
       "property": "Seward Park Court",
       "neighborhood": "Seward Park",
       "unit": "Not Specified",
@@ -970,57 +987,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a2ff1b88-4b0d-448e-87e4-bf2c2b154548",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a2ff1b88-4b0d-448e-87e4-bf2c2b154548&source=Website"
-    },
-    {
-      "property": "Quil Creek Crossing Apartments",
-      "neighborhood": "Marysville",
-      "unit": "Unit A",
-      "title": "1 Bedroom | Quil Crossing",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1500,
-      "sqft": 900,
-      "available": "Now",
-      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "#",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/c62263d2-347e-4137-98f5-64f3817bea7d/start"
-    },
-    {
-      "property": "Quil Creek Crossing Apartments",
-      "neighborhood": "Marysville",
-      "unit": "Unit B",
-      "title": "2 Bedrooms | Quil Crossing",
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "rent": 1800,
-      "sqft": 1330,
-      "available": "Now",
-      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "#",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/dba566ce-5df8-444a-a511-8ac313b84d61/start"
-    },
-    {
-      "property": "Quil Creek Crossing Apartments",
-      "neighborhood": "Marysville",
-      "unit": "Unit C",
-      "title": "3 Bedrooms | Quil Crossing",
-      "bedrooms": 3,
-      "bathrooms": 2,
-      "rent": 2100,
-      "sqft": 1500,
-      "available": "Now",
-      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "#",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/37ba5d3c-0b92-4ddb-b9ba-6ab3253b793d/start"
     }
   ],
   "leasingAgents": {
