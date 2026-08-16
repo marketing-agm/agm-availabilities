@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14",
+  "updatedAt": "2026-08-16",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -146,7 +146,7 @@
       "bathrooms": 1,
       "rent": 1875,
       "sqft": 604,
-      "available": "Aug 15, 2026",
+      "available": "Now",
       "address": "301 EAST THOMAS ST #A4, SEATTLE, WA 98102",
       "features": [
         "On-Site Laundry"
@@ -180,7 +180,7 @@
       "bathrooms": 1,
       "rent": 1775,
       "sqft": 586,
-      "available": "Aug 15, 2026",
+      "available": "Now",
       "address": "301 EAST THOMAS ST Unit C2, SEATTLE, WA 98102",
       "features": [
         "On-Site Laundry"
@@ -231,7 +231,7 @@
       "bathrooms": 1,
       "rent": 1750,
       "sqft": 505,
-      "available": "Aug 15, 2026",
+      "available": "Now",
       "address": "403 14th Ave E, Apt 31, Seattle, WA 98112",
       "features": [
         "On-Site Laundry"
@@ -606,7 +606,7 @@
       "bathrooms": 1,
       "rent": 2945,
       "sqft": 730,
-      "available": "Aug 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 519, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -657,7 +657,7 @@
       "bathrooms": 1,
       "rent": 1725,
       "sqft": 360,
-      "available": "Aug 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 704, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -708,7 +708,7 @@
       "bathrooms": 1,
       "rent": 1755,
       "sqft": 360,
-      "available": "Aug 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 805, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -725,7 +725,7 @@
       "bathrooms": 1,
       "rent": 1755,
       "sqft": 360,
-      "available": "Aug 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 807, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -800,23 +800,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a46e1bc9-49c9-4919-98d5-eeb158d07244",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a46e1bc9-49c9-4919-98d5-eeb158d07244&source=Website"
-    },
-    {
-      "property": "The Palms in Eastlake",
-      "neighborhood": "Eastlake",
-      "unit": "9",
-      "title": "1 Bedroom | The Palms in Eastlake",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1995,
-      "sqft": 420,
-      "available": "Now",
-      "address": "2718 FRANKLIN AVE E #9, SEATTLE, WA 98102",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/beb2c8d8-7d6a-4427-911a-5aae7a3614bd",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=beb2c8d8-7d6a-4427-911a-5aae7a3614bd&source=Website"
     },
     {
       "property": "The Palms in Eastlake",
