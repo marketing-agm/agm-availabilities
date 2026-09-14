@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11",
+  "updatedAt": "2026-09-14",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -157,23 +157,6 @@
     {
       "property": "Clift House Apartments",
       "neighborhood": "Capitol Hill",
-      "unit": "A4",
-      "title": "1 Bedroom | Clift House",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1875,
-      "sqft": 604,
-      "available": "Now",
-      "address": "301 EAST THOMAS ST #A4, SEATTLE, WA 98102",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/143db1c0-cd46-42e0-8e69-157db67289ef",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=143db1c0-cd46-42e0-8e69-157db67289ef&source=Website"
-    },
-    {
-      "property": "Clift House Apartments",
-      "neighborhood": "Capitol Hill",
       "unit": "C1",
       "title": "1 Bedroom | Clift House",
       "bedrooms": 1,
@@ -204,6 +187,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/2ab53f35-66e8-4e24-9d7f-b51a39b731e8",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=2ab53f35-66e8-4e24-9d7f-b51a39b731e8&source=Website"
+    },
+    {
+      "property": "Clift House Apartments",
+      "neighborhood": "Capitol Hill",
+      "unit": "A4",
+      "title": "1 Bedroom | Clift House",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1875,
+      "sqft": 604,
+      "available": "Now",
+      "address": "301 EAST THOMAS ST #A4, SEATTLE, WA 98102",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/143db1c0-cd46-42e0-8e69-157db67289ef",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=143db1c0-cd46-42e0-8e69-157db67289ef&source=Website"
     },
     {
       "property": "Crestview Townhomes",
@@ -333,7 +333,7 @@
       "bathrooms": 1,
       "rent": 2395,
       "sqft": 864,
-      "available": "Now",
+      "available": "Oct 1, 2026",
       "address": "16 Valley St, Apt 32, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -510,6 +510,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/13027206-04fe-47b9-bc33-7cc1d1d57bf7",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=13027206-04fe-47b9-bc33-7cc1d1d57bf7&source=Website"
+    },
+    {
+      "property": "Lorelei Apartments",
+      "neighborhood": "Capitol Hill",
+      "unit": "35",
+      "title": "1 Bedroom | Lorelei",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 2295,
+      "sqft": 601,
+      "available": "Sep 15, 2026",
+      "address": "501 SUMMIT AVENUE EAST #35, SEATTLE, WA 98102",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/e6dcf3d2-5039-4a2a-819d-0ac49207f1fa",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=e6dcf3d2-5039-4a2a-819d-0ac49207f1fa&source=Website"
     },
     {
       "property": "Magnolia Crestview",
@@ -705,7 +722,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1625,
+      "rent": 1595,
       "sqft": 349,
       "available": "Oct 8, 2026",
       "address": "513 1st Ave N, Apt 214, Seattle, WA 98109",
@@ -739,7 +756,7 @@
       "title": "1 Bedroom | Niwa",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 2820,
+      "rent": 2795,
       "sqft": 703,
       "available": "Now",
       "address": "513 1st Ave N, Apt 320, Seattle, WA 98109",
@@ -773,7 +790,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1650,
+      "rent": 1645,
       "sqft": 361,
       "available": "Sep 15, 2026",
       "address": "513 1st Ave N, Apt 606, Seattle, WA 98109",
@@ -824,7 +841,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1650,
+      "rent": 1645,
       "sqft": 360,
       "available": "Sep 15, 2026",
       "address": "513 1st Ave N, Apt 803, Seattle, WA 98109",
@@ -935,23 +952,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a46e1bc9-49c9-4919-98d5-eeb158d07244",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a46e1bc9-49c9-4919-98d5-eeb158d07244&source=Website"
-    },
-    {
-      "property": "The Palms in Eastlake",
-      "neighborhood": "Eastlake",
-      "unit": "12-2",
-      "title": "1 Bedroom | The Palms in Eastlake",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1995,
-      "sqft": 600,
-      "available": "Now",
-      "address": "2712 FRANKLIN AVE E #12-2, SEATTLE, WA 98102",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/6014e824-347f-4d08-bdb4-1b974da5fef3",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=6014e824-347f-4d08-bdb4-1b974da5fef3&source=Website"
     },
     {
       "property": "The Palms in Eastlake",
