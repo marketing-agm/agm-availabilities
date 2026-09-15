@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11",
+  "updatedAt": "2026-09-15",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -95,7 +95,7 @@
       "bathrooms": 1,
       "rent": 1195,
       "sqft": 322,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "8509 14th Ave NW, Apt 202, Seattle, WA 98117",
       "features": [
         "On-Site Laundry"
@@ -231,7 +231,7 @@
       "bathrooms": 1.5,
       "rent": 2550,
       "sqft": 1060,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "3712 188TH SW #7, LYNNWOOD, WA 98037",
       "features": [
         "On-Site Laundry"
@@ -248,7 +248,7 @@
       "bathrooms": 1.5,
       "rent": 2350,
       "sqft": 1060,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "3708 188TH SW #11, LYNNWOOD, WA 98037",
       "features": [
         "On-Site Laundry"
@@ -314,9 +314,9 @@
       "title": "2 Bedrooms | Ella Robert",
       "bedrooms": 2,
       "bathrooms": 1,
-      "rent": 2295,
+      "rent": 1995,
       "sqft": 687,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "16 Valley St, Apt 24, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -333,7 +333,7 @@
       "bathrooms": 1,
       "rent": 2395,
       "sqft": 864,
-      "available": "Now",
+      "available": "Oct 1, 2026",
       "address": "16 Valley St, Apt 32, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -401,7 +401,7 @@
       "bathrooms": 1,
       "rent": 2195,
       "sqft": 575,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "230 14TH AVE E #305, SEATTLE, WA 98112",
       "features": [
         "On-Site Laundry"
@@ -486,7 +486,7 @@
       "bathrooms": 1,
       "rent": 2295,
       "sqft": 635,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "113 Lake St S, Unit 5, Kirkland, WA 98033",
       "features": [
         "On-Site Laundry"
@@ -510,6 +510,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/13027206-04fe-47b9-bc33-7cc1d1d57bf7",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=13027206-04fe-47b9-bc33-7cc1d1d57bf7&source=Website"
+    },
+    {
+      "property": "Lorelei Apartments",
+      "neighborhood": "Capitol Hill",
+      "unit": "35",
+      "title": "1 Bedroom | Lorelei",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 2295,
+      "sqft": 601,
+      "available": "Now",
+      "address": "501 SUMMIT AVENUE EAST #35, SEATTLE, WA 98102",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/e6dcf3d2-5039-4a2a-819d-0ac49207f1fa",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=e6dcf3d2-5039-4a2a-819d-0ac49207f1fa&source=Website"
     },
     {
       "property": "Magnolia Crestview",
@@ -582,23 +599,6 @@
     {
       "property": "Magnolia Vista & Manor",
       "neighborhood": "Magnolia",
-      "unit": "306",
-      "title": "2 Bedrooms | Magnolia Vista & Manor",
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "rent": 2195,
-      "sqft": 1000,
-      "available": "Now",
-      "address": "2710 W Manor Pl, Apt 306, Seattle, WA 98199",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/4ff7bb3a-353e-4b8d-8bd2-a902b68e934e",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=4ff7bb3a-353e-4b8d-8bd2-a902b68e934e&source=Website"
-    },
-    {
-      "property": "Magnolia Vista & Manor",
-      "neighborhood": "Magnolia",
       "unit": "307",
       "title": "2 Bedrooms | Magnolia Vista & Manor",
       "bedrooms": 2,
@@ -639,7 +639,7 @@
       "bathrooms": 1,
       "rent": 1425,
       "sqft": 575,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "633 4th Ave W, #306, SEATTLE, WA 98119",
       "features": [
         "On-Site Laundry"
@@ -690,7 +690,7 @@
       "bathrooms": 1,
       "rent": 2825,
       "sqft": 787,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 211, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -705,7 +705,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1625,
+      "rent": 1595,
       "sqft": 349,
       "available": "Oct 8, 2026",
       "address": "513 1st Ave N, Apt 214, Seattle, WA 98109",
@@ -739,7 +739,7 @@
       "title": "1 Bedroom | Niwa",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 2820,
+      "rent": 2795,
       "sqft": 703,
       "available": "Now",
       "address": "513 1st Ave N, Apt 320, Seattle, WA 98109",
@@ -773,9 +773,9 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1650,
+      "rent": 1645,
       "sqft": 361,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 606, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -824,9 +824,9 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1650,
+      "rent": 1645,
       "sqft": 360,
-      "available": "Sep 15, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 803, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -935,23 +935,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/a46e1bc9-49c9-4919-98d5-eeb158d07244",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=a46e1bc9-49c9-4919-98d5-eeb158d07244&source=Website"
-    },
-    {
-      "property": "The Palms in Eastlake",
-      "neighborhood": "Eastlake",
-      "unit": "12-2",
-      "title": "1 Bedroom | The Palms in Eastlake",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1995,
-      "sqft": 600,
-      "available": "Now",
-      "address": "2712 FRANKLIN AVE E #12-2, SEATTLE, WA 98102",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/6014e824-347f-4d08-bdb4-1b974da5fef3",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=6014e824-347f-4d08-bdb4-1b974da5fef3&source=Website"
     },
     {
       "property": "The Palms in Eastlake",
