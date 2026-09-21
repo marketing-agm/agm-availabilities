@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-17",
+  "updatedAt": "2026-09-21",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -656,7 +656,7 @@
       "bathrooms": 1,
       "rent": 1495,
       "sqft": 359,
-      "available": "Sep 21, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 206, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -741,30 +741,13 @@
       "bathrooms": 1,
       "rent": 1695,
       "sqft": 369,
-      "available": "Sep 21, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 603, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/fb0782bd-b568-4bcd-bffc-8e2e5dca6ea0",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=fb0782bd-b568-4bcd-bffc-8e2e5dca6ea0&source=Website"
-    },
-    {
-      "property": "Niwa Apartments",
-      "neighborhood": "Lower Queen Anne",
-      "unit": "606",
-      "title": "Studio | Niwa",
-      "bedrooms": "Studio",
-      "bathrooms": 1,
-      "rent": 1645,
-      "sqft": 361,
-      "available": "Now",
-      "address": "513 1st Ave N, Apt 606, Seattle, WA 98109",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/c71b21e7-5ac4-426e-97b3-75d0b7cd24f2",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=c71b21e7-5ac4-426e-97b3-75d0b7cd24f2&source=Website"
     },
     {
       "property": "Niwa Apartments",
