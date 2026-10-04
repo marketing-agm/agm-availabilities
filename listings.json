@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-04",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -112,7 +112,7 @@
       "bathrooms": 1,
       "rent": 1195,
       "sqft": 285,
-      "available": "Oct 1, 2026",
+      "available": "Now",
       "address": "8509 14th Ave NW, Apt 204, Seattle, WA 98117",
       "features": [
         "On-Site Laundry"
@@ -129,7 +129,7 @@
       "bathrooms": 1,
       "rent": 1195,
       "sqft": 322,
-      "available": "Oct 1, 2026",
+      "available": "Now",
       "address": "8509 14th Ave NW, Apt 302, Seattle, WA 98117",
       "features": [
         "On-Site Laundry"
@@ -240,6 +240,23 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=410f87e4-b4ad-4dfa-b172-af9e3c75cd9b&source=Website"
     },
     {
+      "property": "Crestview Townhomes",
+      "neighborhood": "Lynnwood",
+      "unit": "6",
+      "title": "2 Bedrooms | Crestview",
+      "bedrooms": 2,
+      "bathrooms": 1.5,
+      "rent": 2500,
+      "sqft": 1060,
+      "available": "Nov 15, 2026",
+      "address": "3712 188TH SW #6, LYNNWOOD, WA 98037",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/e6b9e556-27f2-4629-a4a1-6ce0a45fd5e0",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=e6b9e556-27f2-4629-a4a1-6ce0a45fd5e0&source=Website"
+    },
+    {
       "property": "De Selm Apartments",
       "neighborhood": "Capitol Hill",
       "unit": "7",
@@ -333,7 +350,7 @@
       "bathrooms": 1,
       "rent": 2395,
       "sqft": 864,
-      "available": "Oct 1, 2026",
+      "available": "Now",
       "address": "16 Valley St, Apt 32, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -632,7 +649,7 @@
     },
     {
       "property": "Marianne Apartments",
-      "neighborhood": "Lower Queen Anne",
+      "neighborhood": "Queen Anne",
       "unit": "101",
       "title": "1 Bedroom | Marianne",
       "bedrooms": 1,
@@ -649,7 +666,7 @@
     },
     {
       "property": "Marianne Apartments",
-      "neighborhood": "Lower Queen Anne",
+      "neighborhood": "Queen Anne",
       "unit": "306",
       "title": "Studio | Marianne",
       "bedrooms": "Studio",
@@ -671,7 +688,7 @@
       "title": "1 Bedroom | Mercer Tower",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 2300,
+      "rent": 2175,
       "sqft": 700,
       "available": "Now",
       "address": "2805 75th Pl SE, Apt 26, Mercer Island, WA 98040",
@@ -680,6 +697,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/05b913aa-47c5-439c-955b-404061618b3f",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=05b913aa-47c5-439c-955b-404061618b3f&source=Website"
+    },
+    {
+      "property": "Mercer Tower",
+      "neighborhood": "Mercer Island",
+      "unit": "35",
+      "title": "1 Bedroom | Mercer Tower",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 2375,
+      "sqft": 800,
+      "available": "Nov 15, 2026",
+      "address": "2805 75th Pl SE, Apt 35, Mercer Island, WA 98040",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/4b2c288b-4a07-4097-a393-ca1fa7dd09c5",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=4b2c288b-4a07-4097-a393-ca1fa7dd09c5&source=Website"
     },
     {
       "property": "Niwa Apartments",
@@ -841,7 +875,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1700,
+      "rent": 1695,
       "sqft": 388,
       "available": "Now",
       "address": "513 1st Ave N, Apt 509, Seattle, WA 98109",
@@ -926,7 +960,7 @@
       "title": "2 Bedrooms | Niwa",
       "bedrooms": 2,
       "bathrooms": 1,
-      "rent": 3195,
+      "rent": 2795,
       "sqft": 745,
       "available": "Now",
       "address": "513 1st Ave N, Apt 711, Seattle, WA 98109",
@@ -1064,7 +1098,7 @@
       "bathrooms": 1,
       "rent": 1595,
       "sqft": 550,
-      "available": "Now",
+      "available": "Nov 15, 2026",
       "address": "1729 BOYLSTON AVE #310, SEATTLE, WA 98122",
       "features": [
         "On-Site Laundry"
@@ -1241,6 +1275,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/f45f1640-1d7e-41a1-ac36-890bdea5df9c",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=f45f1640-1d7e-41a1-ac36-890bdea5df9c&source=Website"
+    },
+    {
+      "property": "Willow Creek Apartments",
+      "neighborhood": "Bothell",
+      "unit": "210",
+      "title": "1 Bedroom | Willow Creek",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1795,
+      "sqft": 685,
+      "available": "Oct 15, 2026",
+      "address": "19308 BOTHELL WAY NE #210, BOTHELL, WA 98011",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/ca08e49d-8d61-4cd6-aacd-1fd523836cee",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=ca08e49d-8d61-4cd6-aacd-1fd523836cee&source=Website"
     }
   ],
   "leasingAgents": {
@@ -1251,6 +1302,7 @@
     "Blanche Clare Apartments": "leasing@agmrealestategroup.com",
     "Cedar Lane Apartments": "leasing@agmrealestategroup.com",
     "Clift House Apartments": "leasing@agmrealestategroup.com",
+    "Crestview Townhomes": "leasing@agmrealestategroup.com",
     "De Selm Apartments": "leasing@agmrealestategroup.com",
     "East Union Apartments": "leasing@agmrealestategroup.com",
     "Ella Robert": "leasing@agmrealestategroup.com",
@@ -1270,6 +1322,7 @@
     "Skandi Villa": "leasing@agmrealestategroup.com",
     "The Palms in Eastlake": "leasing@agmrealestategroup.com",
     "Viewmont Apartments": "leasing@agmrealestategroup.com",
-    "White Heather Apartments": "leasing@agmrealestategroup.com"
+    "White Heather Apartments": "leasing@agmrealestategroup.com",
+    "Willow Creek Apartments": "leasing@agmrealestategroup.com"
   }
 }
