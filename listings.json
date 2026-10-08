@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-08",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -112,7 +112,7 @@
       "bathrooms": 1,
       "rent": 1195,
       "sqft": 285,
-      "available": "Oct 1, 2026",
+      "available": "Now",
       "address": "8509 14th Ave NW, Apt 204, Seattle, WA 98117",
       "features": [
         "On-Site Laundry"
@@ -129,7 +129,7 @@
       "bathrooms": 1,
       "rent": 1195,
       "sqft": 322,
-      "available": "Oct 1, 2026",
+      "available": "Now",
       "address": "8509 14th Ave NW, Apt 302, Seattle, WA 98117",
       "features": [
         "On-Site Laundry"
@@ -240,6 +240,23 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=410f87e4-b4ad-4dfa-b172-af9e3c75cd9b&source=Website"
     },
     {
+      "property": "Crestview Townhomes",
+      "neighborhood": "Lynnwood",
+      "unit": "6",
+      "title": "2 Bedrooms | Crestview",
+      "bedrooms": 2,
+      "bathrooms": 1.5,
+      "rent": 2500,
+      "sqft": 1060,
+      "available": "Nov 15, 2026",
+      "address": "3712 188TH SW #6, LYNNWOOD, WA 98037",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/e6b9e556-27f2-4629-a4a1-6ce0a45fd5e0",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=e6b9e556-27f2-4629-a4a1-6ce0a45fd5e0&source=Website"
+    },
+    {
       "property": "De Selm Apartments",
       "neighborhood": "Capitol Hill",
       "unit": "7",
@@ -323,23 +340,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/2a39a97f-6890-4da7-ba35-4964e29dbbff",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=2a39a97f-6890-4da7-ba35-4964e29dbbff&source=Website"
-    },
-    {
-      "property": "Ella Robert",
-      "neighborhood": "Lower Queen Anne",
-      "unit": "32",
-      "title": "2 Bedrooms | Ella Robert",
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "rent": 2395,
-      "sqft": 864,
-      "available": "Oct 1, 2026",
-      "address": "16 Valley St, Apt 32, Seattle, WA 98109",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/bc6ea3b5-4860-4014-8784-1a5ee6ebd135",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=bc6ea3b5-4860-4014-8784-1a5ee6ebd135&source=Website"
     },
     {
       "property": "Gilmanor Apartments",
@@ -671,7 +671,7 @@
       "title": "1 Bedroom | Mercer Tower",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 2300,
+      "rent": 2175,
       "sqft": 700,
       "available": "Now",
       "address": "2805 75th Pl SE, Apt 26, Mercer Island, WA 98040",
@@ -680,6 +680,40 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/05b913aa-47c5-439c-955b-404061618b3f",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=05b913aa-47c5-439c-955b-404061618b3f&source=Website"
+    },
+    {
+      "property": "Mercer Tower",
+      "neighborhood": "Mercer Island",
+      "unit": "35",
+      "title": "1 Bedroom | Mercer Tower",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 2375,
+      "sqft": 800,
+      "available": "Nov 15, 2026",
+      "address": "2805 75th Pl SE, Apt 35, Mercer Island, WA 98040",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/4b2c288b-4a07-4097-a393-ca1fa7dd09c5",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=4b2c288b-4a07-4097-a393-ca1fa7dd09c5&source=Website"
+    },
+    {
+      "property": "Niwa Apartments",
+      "neighborhood": "Lower Queen Anne",
+      "unit": "205",
+      "title": "Studio | Niwa",
+      "bedrooms": "Studio",
+      "bathrooms": 1,
+      "rent": 1595,
+      "sqft": 359,
+      "available": "Oct 15, 2026",
+      "address": "513 1st Ave N, Apt 205, Seattle, WA 98109",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/f758b90b-d2fb-424e-a62f-5c518f5512bb",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=f758b90b-d2fb-424e-a62f-5c518f5512bb&source=Website"
     },
     {
       "property": "Niwa Apartments",
@@ -702,10 +736,10 @@
       "property": "Niwa Apartments",
       "neighborhood": "Lower Queen Anne",
       "unit": "211",
-      "title": "2 Bedrooms | Niwa",
-      "bedrooms": 2,
+      "title": "Studio | Niwa",
+      "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 2825,
+      "rent": 2795,
       "sqft": 787,
       "available": "Now",
       "address": "513 1st Ave N, Apt 211, Seattle, WA 98109",
@@ -724,7 +758,7 @@
       "bathrooms": 1,
       "rent": 1595,
       "sqft": 349,
-      "available": "Oct 8, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 214, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
@@ -769,6 +803,23 @@
     {
       "property": "Niwa Apartments",
       "neighborhood": "Lower Queen Anne",
+      "unit": "315",
+      "title": "Studio | Niwa",
+      "bedrooms": "Studio",
+      "bathrooms": 1,
+      "rent": 1595,
+      "sqft": 349,
+      "available": "Dec 1, 2026",
+      "address": "513 1st Ave N, Apt 315, Seattle, WA 98109",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/5b9cd762-fc96-4054-9ce9-d6966ed3bfbb",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=5b9cd762-fc96-4054-9ce9-d6966ed3bfbb&source=Website"
+    },
+    {
+      "property": "Niwa Apartments",
+      "neighborhood": "Lower Queen Anne",
       "unit": "317",
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
@@ -782,6 +833,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/fd36164c-5ffb-4a8a-b7f3-8ee678d25bbe",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=fd36164c-5ffb-4a8a-b7f3-8ee678d25bbe&source=Website"
+    },
+    {
+      "property": "Niwa Apartments",
+      "neighborhood": "Lower Queen Anne",
+      "unit": "319",
+      "title": "1 Bedroom | Niwa",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 2195,
+      "sqft": 550,
+      "available": "Jan 15, 2027",
+      "address": "513 1st Ave N, Apt 319, Seattle, WA 98109",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/eee5fd8a-5d8b-4f05-8969-17bc75f1281d",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=eee5fd8a-5d8b-4f05-8969-17bc75f1281d&source=Website"
     },
     {
       "property": "Niwa Apartments",
@@ -804,8 +872,8 @@
       "property": "Niwa Apartments",
       "neighborhood": "Lower Queen Anne",
       "unit": "415",
-      "title": "1 Bedroom | Niwa",
-      "bedrooms": 1,
+      "title": "Studio | Niwa",
+      "bedrooms": "Studio",
       "bathrooms": 1,
       "rent": 1795,
       "sqft": 438,
@@ -821,8 +889,8 @@
       "property": "Niwa Apartments",
       "neighborhood": "Lower Queen Anne",
       "unit": "501",
-      "title": "1 Bedroom | Niwa",
-      "bedrooms": 1,
+      "title": "Studio | Niwa",
+      "bedrooms": "Studio",
       "bathrooms": 1,
       "rent": 1835,
       "sqft": 625,
@@ -841,7 +909,7 @@
       "title": "Studio | Niwa",
       "bedrooms": "Studio",
       "bathrooms": 1,
-      "rent": 1700,
+      "rent": 1695,
       "sqft": 388,
       "available": "Now",
       "address": "513 1st Ave N, Apt 509, Seattle, WA 98109",
@@ -926,7 +994,7 @@
       "title": "2 Bedrooms | Niwa",
       "bedrooms": 2,
       "bathrooms": 1,
-      "rent": 3195,
+      "rent": 2795,
       "sqft": 745,
       "available": "Now",
       "address": "513 1st Ave N, Apt 711, Seattle, WA 98109",
@@ -988,57 +1056,6 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=32c90ee3-69c6-4b4a-af12-ecc94e6f99a6&source=Website"
     },
     {
-      "property": "Quil Creek Crossing Apartments",
-      "neighborhood": "Marysville",
-      "unit": "Unit A",
-      "title": "1 Bedroom | Quil Crossing",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1500,
-      "sqft": 900,
-      "available": "Now",
-      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "#",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/c62263d2-347e-4137-98f5-64f3817bea7d/start"
-    },
-    {
-      "property": "Quil Creek Crossing Apartments",
-      "neighborhood": "Marysville",
-      "unit": "Unit B",
-      "title": "2 Bedrooms | Quil Crossing",
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "rent": 1800,
-      "sqft": 1330,
-      "available": "Now",
-      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "#",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/dba566ce-5df8-444a-a511-8ac313b84d61/start"
-    },
-    {
-      "property": "Quil Creek Crossing Apartments",
-      "neighborhood": "Marysville",
-      "unit": "Unit C",
-      "title": "3 Bedrooms | Quil Crossing",
-      "bedrooms": 3,
-      "bathrooms": 2,
-      "rent": 2100,
-      "sqft": 1500,
-      "available": "Now",
-      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "#",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/37ba5d3c-0b92-4ddb-b9ba-6ab3253b793d/start"
-    },
-    {
       "property": "Rialto Court",
       "neighborhood": "Capitol Hill",
       "unit": "109",
@@ -1064,7 +1081,7 @@
       "bathrooms": 1,
       "rent": 1595,
       "sqft": 550,
-      "available": "Now",
+      "available": "Nov 15, 2026",
       "address": "1729 BOYLSTON AVE #310, SEATTLE, WA 98122",
       "features": [
         "On-Site Laundry"
@@ -1241,6 +1258,74 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/f45f1640-1d7e-41a1-ac36-890bdea5df9c",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=f45f1640-1d7e-41a1-ac36-890bdea5df9c&source=Website"
+    },
+    {
+      "property": "Willow Creek Apartments",
+      "neighborhood": "Bothell",
+      "unit": "210",
+      "title": "1 Bedroom | Willow Creek",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1795,
+      "sqft": 685,
+      "available": "Oct 15, 2026",
+      "address": "19308 BOTHELL WAY NE #210, BOTHELL, WA 98011",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/ca08e49d-8d61-4cd6-aacd-1fd523836cee",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=ca08e49d-8d61-4cd6-aacd-1fd523836cee&source=Website"
+    },
+    {
+      "property": "Quil Creek Crossing Apartments",
+      "neighborhood": "Marysville",
+      "unit": "Unit A",
+      "title": "1 Bedroom | Quil Crossing",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1500,
+      "sqft": 900,
+      "available": "Now",
+      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "#",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/c62263d2-347e-4137-98f5-64f3817bea7d/start"
+    },
+    {
+      "property": "Quil Creek Crossing Apartments",
+      "neighborhood": "Marysville",
+      "unit": "Unit B",
+      "title": "2 Bedrooms | Quil Crossing",
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "rent": 1800,
+      "sqft": 1330,
+      "available": "Now",
+      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "#",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/dba566ce-5df8-444a-a511-8ac313b84d61/start"
+    },
+    {
+      "property": "Quil Creek Crossing Apartments",
+      "neighborhood": "Marysville",
+      "unit": "Unit C",
+      "title": "3 Bedrooms | Quil Crossing",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "rent": 2100,
+      "sqft": 1500,
+      "available": "Now",
+      "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "#",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/apply/37ba5d3c-0b92-4ddb-b9ba-6ab3253b793d/start"
     }
   ],
   "leasingAgents": {
@@ -1251,6 +1336,7 @@
     "Blanche Clare Apartments": "leasing@agmrealestategroup.com",
     "Cedar Lane Apartments": "leasing@agmrealestategroup.com",
     "Clift House Apartments": "leasing@agmrealestategroup.com",
+    "Crestview Townhomes": "leasing@agmrealestategroup.com",
     "De Selm Apartments": "leasing@agmrealestategroup.com",
     "East Union Apartments": "leasing@agmrealestategroup.com",
     "Ella Robert": "leasing@agmrealestategroup.com",
@@ -1270,6 +1356,7 @@
     "Skandi Villa": "leasing@agmrealestategroup.com",
     "The Palms in Eastlake": "leasing@agmrealestategroup.com",
     "Viewmont Apartments": "leasing@agmrealestategroup.com",
-    "White Heather Apartments": "leasing@agmrealestategroup.com"
+    "White Heather Apartments": "leasing@agmrealestategroup.com",
+    "Willow Creek Apartments": "leasing@agmrealestategroup.com"
   }
 }
