@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"></script>
     <style>
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box!important}
         html{width:100%!important;overflow-x:hidden!important}
@@ -281,9 +281,9 @@
                 <div class="success-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
                 <h2 class="success-title">Tour booked!</h2>
                 <p class="success-msg" id="success-message">Your tour has been confirmed.</p>
-                <div class="success-actions"><button class="success-btn success-btn-primary" onclick="resetForm()">Request Another Tour</button><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-secondary" target="_blank">View All Listings</a></div>
+                <div class="success-actions"><button class="success-btn success-btn-primary" onclick="resetForm()">Request Another Tour</button><a href="https://agm-availabilities.pages.dev/" class="success-btn success-btn-secondary" target="_blank">View All Listings</a></div>
             </div>
-            <div class="not-found-state" id="not-found-state"><h2>Property not found</h2><p>The property you&#8217;re looking for isn&#8217;t in our system.</p><a href="https://agmrealestategroup.appfolio.com/listings" class="success-btn success-btn-primary" target="_blank">View All Listings</a></div>
+            <div class="not-found-state" id="not-found-state"><h2>Property not found</h2><p>The property you&#8217;re looking for isn&#8217;t in our system.</p><a href="https://agm-availabilities.pages.dev/" class="success-btn success-btn-primary" target="_blank">View All Listings</a></div>
         </div>
     </div>
     <script>
@@ -470,10 +470,8 @@
             try{
                 if(fallbackMode){
                     const now=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
-                    const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:formatDateLong(fallbackDate),tour_times:fallbackTime+' (preferred)',unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
-                    const ep=[emailjs.send('service_mwnzq3g','template_ris04ko',tp),emailjs.send('service_mwnzq3g','template_lhvuk2q',tp)];
-                    if(property==='Niwa Apartments'){ep.push(emailjs.send('service_mwnzq3g','template_ris04ko',Object.assign({},tp,{to_email:'leasing@niwaapartments.com'})));}
-                    await Promise.all(ep);
+                    const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:formatDateLong(fallbackDate),tour_times:fallbackTime+' (preferred)',unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
+                    if(!(await sendTourEmails(tp,property)))throw new Error('We couldn\'t send your request. Please try again or email '+tp.to_email+'.');
                     document.getElementById('success-message').textContent='Thank you for your interest in '+DISPLAY_NAME+'! We received your preferred time of '+fallbackTime+' on '+formatDateLong(fallbackDate)+'. Our leasing team will reach out within 24 hours to confirm.';
                     document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');document.getElementById('left-col').style.display='none';
                 }else{
@@ -481,15 +479,22 @@
                 const bookData=await bookRes.json();
                 if(!bookRes.ok){if(bookRes.status===409){showError('This time slot was just booked by someone else. Please pick another.');clearSelectedSlot();goToStep(2);await loadSlots();btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';return;}throw new Error(bookData.error||'Booking failed.');}
                 const now=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
-                const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:bookData.booking?bookData.booking.date_formatted:formatDateLong(selectedSlot.date),tour_times:bookData.booking?bookData.booking.time_formatted:formatTime12(selectedSlot.start_time)+'–'+formatTime12(selectedSlot.end_time),unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
-                const ep=[emailjs.send('service_mwnzq3g','template_ris04ko',tp),emailjs.send('service_mwnzq3g','template_lhvuk2q',tp)];
-                if(property==='Niwa Apartments'){const np=Object.assign({},tp,{to_email:'leasing@niwaapartments.com'});ep.push(emailjs.send('service_mwnzq3g','template_ris04ko',np));}
-                await Promise.all(ep);
+                const tp={property:property,name:firstName+(lastName?' '+lastName:''),email:email,phone:phone,movein_date:moveInDate?new Date(moveInDate+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not specified',tour_dates:bookData.booking?bookData.booking.date_formatted:formatDateLong(selectedSlot.date),tour_times:bookData.booking?bookData.booking.time_formatted:formatTime12(selectedSlot.start_time)+'–'+formatTime12(selectedSlot.end_time),unit_types:unitStr,submitted_at:now,to_email:propertyLeasingAgents[property]||'leasing@agmrealestategroup.com'};
+                await sendTourEmails(tp,property);
                 const tourTime=bookData.booking?bookData.booking.date_formatted+' at '+bookData.booking.time_formatted:formatDateLong(selectedSlot.date)+' at '+formatTime12(selectedSlot.start_time);
                 document.getElementById('success-message').textContent='Your tour at '+DISPLAY_NAME+' is confirmed for '+tourTime+'. Our leasing team will reach out to confirm details.';
                 document.getElementById('form-container').style.display='none';document.getElementById('steps-indicator').style.display='none';document.getElementById('success-state').classList.add('active');document.getElementById('left-col').style.display='none';clearInterval(pollTimer);
-            }}catch(err){showError(err.message||'Something went wrong. Please try again.');}
+            }}catch(err){console.error('Tour submission failed:',err);showError((err&&(err.message||err.text))||'Something went wrong. Please try again.');}
             finally{btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';}
+        }
+
+        // Sends the team notification(s) and the prospect auto-reply. Resolves true if at least one team notification went out.
+        async function sendTourEmails(tp,property){
+            const team=[emailjs.send('service_mwnzq3g','template_ris04ko',tp)];
+            if(property==='Niwa Apartments')team.push(emailjs.send('service_mwnzq3g','template_ris04ko',Object.assign({},tp,{to_email:'leasing@niwaapartments.com'})));
+            const results=await Promise.allSettled([...team,emailjs.send('service_mwnzq3g','template_lhvuk2q',tp)]);
+            results.forEach(r=>{if(r.status==='rejected')console.error('EmailJS send failed:',r.reason);});
+            return results.slice(0,team.length).some(r=>r.status==='fulfilled');
         }
 
         function resetForm(){
