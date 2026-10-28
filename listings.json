@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26",
+  "updatedAt": "2026-10-28",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -170,23 +170,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/ee8339e1-e153-40ea-8916-2964783dc64a",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=ee8339e1-e153-40ea-8916-2964783dc64a&source=Website"
-    },
-    {
-      "property": "Cedar Lane Apartments",
-      "neighborhood": "Greenwood",
-      "unit": "4",
-      "title": "1 Bedroom | Cedar Lane",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1595,
-      "sqft": 557,
-      "available": "Nov 01, 2026",
-      "address": "12536 Greenwood Ave N, Apt 4, Seattle, WA 98133",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/9aa8be0e-e332-4fa9-a5f9-16fb653eee0d",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=9aa8be0e-e332-4fa9-a5f9-16fb653eee0d&source=Website"
     },
     {
       "property": "Cedar Lane Apartments",
@@ -736,8 +719,8 @@
       "property": "Niwa Apartments",
       "neighborhood": "Lower Queen Anne",
       "unit": "211",
-      "title": "Studio | Niwa",
-      "bedrooms": "Studio",
+      "title": "2 Bedrooms | Niwa",
+      "bedrooms": 2,
       "bathrooms": 1,
       "rent": 2695,
       "sqft": 787,
