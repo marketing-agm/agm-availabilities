@@ -502,11 +502,11 @@
             finally{btn.disabled=false;btn.innerHTML='<span>Book This Tour</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';}
         }
 
-        // Sends the team notification(s) and the prospect auto-reply. Resolves true if at least one team notification went out.
+        // Sends the team notification(s) and the prospect auto-reply (to_email is the leasing inbox for team emails, the prospect for the auto-reply). Resolves true if at least one team notification went out.
         async function sendTourEmails(tp,property){
             const team=[emailjs.send('service_mwnzq3g','template_ris04ko',tp)];
             if(property==='Niwa Apartments')team.push(emailjs.send('service_mwnzq3g','template_ris04ko',Object.assign({},tp,{to_email:'leasing@niwaapartments.com'})));
-            const results=await Promise.allSettled([...team,emailjs.send('service_mwnzq3g','template_lhvuk2q',tp)]);
+            const results=await Promise.allSettled([...team,emailjs.send('service_mwnzq3g','template_lhvuk2q',Object.assign({},tp,{to_email:tp.email,reply_to:tp.to_email}))]);
             results.forEach(r=>{if(r.status==='rejected')console.error('EmailJS send failed:',r.reason);});
             return results.slice(0,team.length).some(r=>r.status==='fulfilled');
         }

@@ -1938,7 +1938,7 @@
             // Send emails via EmailJS (notification to team + auto-reply to customer)
             Promise.all([
                 emailjs.send('service_mwnzq3g', 'template_ris04ko', templateParams), // Team notification
-                emailjs.send('service_mwnzq3g', 'template_lhvuk2q', templateParams)  // Auto-reply to customer
+                emailjs.send('service_mwnzq3g', 'template_lhvuk2q', Object.assign({}, templateParams, { to_email: email, reply_to: templateParams.to_email }))  // Auto-reply to customer
             ])
                 .then(function(responses) {
                     console.log('Emails sent successfully:', responses);
@@ -2070,7 +2070,7 @@
 
             Promise.all([
                 emailjs.send('service_mwnzq3g', 'template_ris04ko', templateParams),
-                emailjs.send('service_mwnzq3g', 'template_lhvuk2q', templateParams)
+                emailjs.send('service_mwnzq3g', 'template_lhvuk2q', Object.assign({}, templateParams, { to_email: email, reply_to: templateParams.to_email }))
             ])
                 .then(function(responses) {
                     console.log('Inline tour emails sent:', responses);
