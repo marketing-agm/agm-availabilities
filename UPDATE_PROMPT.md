@@ -25,7 +25,7 @@ correct. Do NOT treat them as "removed" listings. You must preserve, untouched:
 1. The three `"property": "Quil Creek Crossing Apartments"` objects in the `agmListings` array.
 2. The `"Quil Creek Crossing Apartments"` entries in `propertyLeasingAgents`,
    `propertyCoordinates`, and `propertyWebsites`.
-3. The Quil-specific display logic in `getFilteredListings` (the `singlePropertyMode`
+3. The Quil-specific display logic in `getBaseListings` (the `singlePropertyMode`
    filter that hides Quil from the default list/map), the `isQuilCrossing` branches in the
    card-rendering function, and the "Quil Crossing custom branding" IIFE near the end of
    the script.
@@ -334,6 +334,30 @@ alongside `index.html`.
 
 ---
 
+### STEP 8.6: Rebuild the transit data — ONLY when a property is added or removed
+
+`transit-data.js` and `transit-routes.json` hold the light rail / Sounder map
+layers and the bus stops and routes near each property. They are keyed off
+`propertyCoordinates`, NOT off individual units, so a normal daily availabilities
+sync does NOT need to touch them. Leave both files alone unless this run added a
+property to, or removed one from, `propertyCoordinates`.
+
+If it did, run:
+
+```
+python3 scripts/build-transit-data.py
+```
+
+It downloads the Sound Transit rail GTFS and queries the OneBusAway regional API,
+so it needs network access and takes about 5 minutes. It caches its downloads in
+`.transit-cache/` (git-ignored); delete that directory to force a fresh pull of
+service data. Commit the regenerated `transit-data.js` and `transit-routes.json`.
+
+Worth re-running every few months regardless, so the bus and light rail data
+keeps up with service changes.
+
+---
+
 ### STEP 9: Verify
 
 After updating, verify:
@@ -343,6 +367,7 @@ After updating, verify:
 4. All UIDs are present in both detailsUrl and applyUrl for every listing (Quil placeholders use a literal `#` detailsUrl and an `/apply/.../start` applyUrl — leave them as-is)
 5. The three Quil Creek Crossing placeholder units are still present, and the `isQuilCrossing` rendering logic + custom-branding IIFE are intact
 6. `listings.json` was regenerated (Step 8.5) and its listing count matches the `agmListings` array. The `node scripts/build-listings-json.js` run reports no "missing leasing agent" warnings.
+7. If (and only if) a property was added to or removed from `propertyCoordinates`, `transit-data.js` was regenerated (Step 8.6) and every property in `propertyCoordinates` has an entry under its `properties` key.
 
 ---
 
@@ -452,5 +477,6 @@ with the matching `index.html` so the Book-a-Tour page stays in sync.)
 13. **Tour booking** — powered by `propertyLeasingAgents`, not per-listing URLs. Ensure every property has an entry.
 14. **Change report comparison** — compare by UUID from `detailsUrl` between `git show HEAD~1:index.html` (old) and the updated file (new). This correctly identifies added, removed, changed, and unchanged listings.
 15. **Quil Crossing is manual** — the three Quil Creek Crossing Apartments placeholder units are NOT in the AppFolio feed. Always preserve them (listings + supporting objects + display logic) and never report them as removed. See the preservation note at the top of this prompt.
-16. **Regenerate `listings.json`** — after editing `index.html`, always run `node scripts/build-listings-json.js` and commit the result (Step 8.5). The Book-a-Tour page reads it at runtime to show the specific units available to tour; skipping this leaves the tour page showing stale units.
+16. **Only rebuild the transit data when the property list changes** — `transit-data.js` / `transit-routes.json` are keyed off `propertyCoordinates`, not off units. Rebuilding them on a routine availabilities sync is wasted time and churns the diff.
+17. **Regenerate `listings.json`** — after editing `index.html`, always run `node scripts/build-listings-json.js` and commit the result (Step 8.5). The Book-a-Tour page reads it at runtime to show the specific units available to tour; skipping this leaves the tour page showing stale units.
 ```
