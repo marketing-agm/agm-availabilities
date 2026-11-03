@@ -15,14 +15,28 @@
         :root {
             --primary: #18181b;
             --accent: #18181b;
+            --accent-text: #ffffff;
+            --accent-hover: #3f3f46;
             --bg: #f6f6f7;
             --card-bg: #ffffff;
+            --surface-hover: #f4f4f5;
             --text: #27272a;
             --text-light: #71717a;
             --border: #e4e4e7;
             --border-strong: #d4d4d8;
+            --control-hover-border: #a1a1aa;
             --green: #1f7a3f;
             --green-dark: #17612f;
+            --green-text: #1f7a3f;
+            --danger: #b91c1c;
+            --danger-bg: #fef2f2;
+            --shadow-pin: 0 1px 3px rgba(0,0,0,0.18);
+            --pin-bg: #ffffff;
+            --pin-text: #18181b;
+            --pin-border: rgba(0,0,0,0.22);
+            --pin-count-bg: #f4f4f5;
+            --shadow-pop: 0 2px 10px rgba(0,0,0,0.12);
+            color-scheme: light;
 
             /* Flat surfaces, small radii - no pill shapes, no shadows. */
             --r-sm: 4px;
@@ -35,8 +49,57 @@
             --fs-sm: clamp(0.72rem, 0.66rem + 0.2vw, 0.84rem);
             --fs-md: clamp(0.8rem, 0.73rem + 0.22vw, 0.94rem);
             --fs-lg: clamp(0.92rem, 0.83rem + 0.3vw, 1.12rem);
-            --control-h: clamp(28px, 1.1rem + 1vw, 34px);
+            --control-h: clamp(30px, 1.1rem + 1vw, 36px);
         }
+
+        /* DARK MODE - same structure, inverted surfaces. Driven by a
+           data-theme attribute so the switch is explicit and remembered. */
+        html[data-theme="dark"] {
+            --primary: #fafafa;
+            --accent: #fafafa;
+            --accent-text: #18181b;
+            --accent-hover: #d4d4d8;
+            --bg: #18181b;
+            --card-bg: #1f1f23;
+            --surface-hover: #27272a;
+            --text: #e4e4e7;
+            --text-light: #a1a1aa;
+            --border: #2e2e33;
+            --border-strong: #3f3f46;
+            --control-hover-border: #71717a;
+            --green: #2e9e58;
+            --green-dark: #27854a;
+            --green-text: #4ade80;
+            --danger: #f87171;
+            --danger-bg: #2a1a1a;
+            --shadow-pin: 0 1px 4px rgba(0,0,0,0.6);
+            --pin-bg: #2a2a2f;
+            --pin-text: #fafafa;
+            --pin-border: rgba(255,255,255,0.3);
+            --pin-count-bg: rgba(255,255,255,0.14);
+            --shadow-pop: 0 4px 16px rgba(0,0,0,0.5);
+            color-scheme: dark;
+        }
+        html[data-theme="dark"] body { background: var(--bg); }
+
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--control-h);
+            height: var(--control-h);
+            padding: 0;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--r-md);
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.12s ease, border-color 0.12s ease;
+        }
+        .theme-toggle:hover { background: var(--surface-hover); border-color: var(--control-hover-border); }
         body {
             font-family: 'Work Sans', sans-serif;
             background: var(--bg);
@@ -90,10 +153,11 @@
             flex-shrink: 0;
             transition: background 0.12s ease, border-color 0.12s ease;
         }
-        .view-toggle:hover { background: var(--bg); border-color: #a1a1aa; }
+        .view-toggle:hover { background: var(--surface-hover); border-color: var(--control-hover-border); }
         .view-toggle .map-icon { font-size: 0.9em; }
 
         .results-indicator {
+            display: none;
             font-size: var(--fs-sm);
             color: var(--text-light);
             white-space: nowrap;
@@ -135,7 +199,7 @@
         .tour-modal-overlay.active { display: flex; align-items: flex-end; justify-content: center; }
         .tour-modal-overlay.visible { opacity: 1; }
         .tour-modal {
-            background: white;
+            background: var(--card-bg);
             border-radius: var(--r-md) var(--r-md) 0 0;
             width: 100%;
             max-width: 600px;
@@ -155,7 +219,7 @@
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            background: white;
+            background: var(--card-bg);
             z-index: 10;
         }
         .tour-modal-header { padding: 24px 28px 20px; }
@@ -186,7 +250,7 @@
             font-size: 1rem;
             font-weight: 500;
             font-family: 'Work Sans', sans-serif;
-            background: white;
+            background: var(--card-bg);
             color: var(--text);
             cursor: pointer;
             transition: all 0.2s ease;
@@ -219,7 +283,7 @@
             font-size: 1rem;
             font-weight: 400;
             font-family: 'Work Sans', sans-serif;
-            background: white;
+            background: var(--card-bg);
             color: var(--text);
             transition: all 0.2s ease;
             box-sizing: border-box;
@@ -248,7 +312,7 @@
         }
         .tour-modal-footer {
             padding: 20px 28px 28px;
-            background: white;
+            background: var(--card-bg);
         }
         .tour-submit-btn {
             width: 100%;
@@ -315,10 +379,10 @@
         /* MAP VIEW STYLES */
         .view-container { display: none; gap: 0; margin: 0; height: calc(100dvh - var(--appbar-h, 50px)); min-height: 440px; position: relative; opacity: 0; transition: opacity 0.3s ease; flex-direction: row; }
         .view-container.active { display: flex; opacity: 1; }
-        .map-container { flex: 1; min-width: 0; border-radius: 0; overflow: hidden; box-shadow: none; display: none; position: relative; background: #ececed; }
+        .map-container { flex: 1; min-width: 0; border-radius: 0; overflow: hidden; box-shadow: none; display: none; position: relative; background: var(--bg); }
         .map-container.active { display: block; }
         #map { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
-        .map-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #666; font-size: 1rem; }
+        .map-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: var(--text-light); font-size: var(--fs-md); }
         
         /* ============================================================
            RESULTS PANEL
@@ -330,7 +394,7 @@
             position: relative;
             top: auto; bottom: auto; left: auto; right: auto;
             z-index: auto;
-            width: clamp(320px, 26vw, 460px);
+            width: clamp(360px, 40vw, 760px);
             height: 100%;
             max-height: none;
             display: none;
@@ -371,14 +435,14 @@
             justify-content: space-between;
             gap: 10px;
             flex-shrink: 0;
-            padding: 10px 14px;
-            background: white;
+            padding: 11px clamp(14px, 1.1vw, 20px);
+            background: var(--card-bg);
             border-bottom: 1px solid var(--border);
         }
         .sidebar-heading-group { min-width: 0; }
         .sidebar-title {
             font-family: 'Work Sans', sans-serif;
-            font-size: 0.9rem;
+            font-size: var(--fs-lg);
             font-weight: 600;
             color: var(--primary);
             line-height: 1.3;
@@ -386,9 +450,9 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .sidebar-subtitle { font-size: 0.72rem; color: var(--text-light); line-height: 1.45; }
+        .sidebar-subtitle { font-size: var(--fs-sm); color: var(--text-light); line-height: 1.45; }
         .sidebar-filter-tags {
-            font-size: 0.72rem;
+            font-size: var(--fs-md);
             font-weight: 600;
             color: var(--accent);
             white-space: nowrap;
@@ -399,17 +463,17 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            margin-bottom: 1px;
+            margin-bottom: 2px;
             padding: 0;
             border: none;
             background: none;
             cursor: pointer;
             font-family: 'Work Sans', sans-serif;
-            font-size: 0.71rem;
+            font-size: var(--fs-sm);
             font-weight: 600;
             color: var(--text-light);
         }
-        .sidebar-back:hover { color: var(--accent); }
+        .sidebar-back:hover { color: var(--text); }
         .sidebar-sort { flex-shrink: 0; }
         .sidebar-sort select {
             appearance: none;
@@ -418,36 +482,37 @@
             padding: 6px 24px 6px 9px;
             border: 1px solid var(--border-strong);
             border-radius: var(--r-sm);
-            background: white url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E") no-repeat right 8px center/9px 6px;
+            background: var(--card-bg) url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E") no-repeat right 8px center/9px 6px;
             font-family: 'Work Sans', sans-serif;
-            font-size: 0.73rem;
+            font-size: var(--fs-sm);
             font-weight: 600;
             color: var(--text);
             cursor: pointer;
+            height: 32px;
         }
-        .sidebar-sort select:hover { border-color: #bbb; }
+        .sidebar-sort select:hover { border-color: var(--control-hover-border); }
         .sidebar-sort select:focus { outline: none; border-color: var(--accent); }
 
         /* One result = one row, separated by a hairline, no card chrome */
         .unit-row {
             display: block;
             width: 100%;
-            padding: 10px 14px;
+            padding: 13px clamp(14px, 1.1vw, 20px);
             border: none;
-            border-bottom: 1px solid #f0f0f0;
-            background: white;
+            border-bottom: 1px solid var(--border);
+            background: var(--card-bg);
             text-align: left;
             font-family: 'Work Sans', sans-serif;
             cursor: pointer;
             transition: background 0.12s ease;
         }
         .unit-row:last-child { border-bottom: none; }
-        .unit-row:hover { background: #fafafa; }
+        .unit-row:hover { background: var(--surface-hover); }
         .unit-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-        .unit-row.is-active { background: #f5f5f5; box-shadow: inset 3px 0 0 var(--accent); }
+        .unit-row.is-active { background: var(--surface-hover); box-shadow: inset 3px 0 0 var(--accent); }
         .unit-row-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
         .unit-row-name {
-            font-size: 0.86rem;
+            font-size: var(--fs-md);
             font-weight: 600;
             color: var(--primary);
             line-height: 1.35;
@@ -455,11 +520,11 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .unit-row-price { font-size: 0.9rem; font-weight: 700; color: var(--primary); white-space: nowrap; }
-        .unit-row-price .from { font-size: 0.66rem; font-weight: 500; color: var(--text-light); margin-right: 2px; }
-        .unit-row-price .call { font-size: 0.8rem; font-weight: 600; color: var(--text-light); }
+        .unit-row-price { font-size: var(--fs-lg); font-weight: 700; color: var(--primary); white-space: nowrap; }
+        .unit-row-price .from { font-size: var(--fs-xs); font-weight: 500; color: var(--text-light); margin-right: 3px; }
+        .unit-row-price .call { font-size: var(--fs-md); font-weight: 600; color: var(--text-light); }
         .unit-row-spec {
-            font-size: 0.74rem;
+            font-size: var(--fs-sm);
             color: var(--text-light);
             line-height: 1.45;
             white-space: nowrap;
@@ -470,24 +535,40 @@
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 2px 10px;
-            margin-top: 4px;
-            font-size: 0.69rem;
+            gap: 2px 12px;
+            margin-top: 6px;
+            font-size: var(--fs-sm);
             color: var(--text-light);
             line-height: 1.5;
         }
-        .unit-row-avail.is-now { color: #2e7d32; font-weight: 600; }
+        .unit-row-avail.is-now { color: var(--green-text); font-weight: 600; }
         .unit-row-transit { display: inline-flex; align-items: center; gap: 4px; }
-        .unit-row-flag { color: #2e7d32; font-weight: 600; }
-        .unit-row-links { display: flex; gap: 14px; margin-top: 7px; }
+        .unit-row-flag { color: var(--green-text); font-weight: 600; }
+        /* Real buttons - the text links were too small to aim at. */
+        .unit-row-links { display: flex; gap: 8px; margin-top: 11px; }
         .unit-row-link {
-            font-size: 0.73rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 88px;
+            height: 34px;
+            padding: 0 16px;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--r-sm);
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: var(--fs-sm);
             font-weight: 600;
-            color: var(--text-light);
             text-decoration: none;
+            transition: background 0.12s ease, border-color 0.12s ease;
         }
-        .unit-row-link:hover { color: var(--accent); text-decoration: underline; }
-        .unit-row-link.is-primary { color: var(--accent); }
+        .unit-row-link:hover { background: var(--surface-hover); border-color: var(--control-hover-border); }
+        .unit-row-link.is-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--accent-text);
+        }
+        .unit-row-link.is-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
         .sidebar-empty { padding: 48px 24px; text-align: center; color: var(--text-light); }
         .sidebar-empty h2 { font-family: 'Work Sans', sans-serif; font-size: 1rem; color: var(--primary); margin-bottom: 6px; }
         .sidebar-empty p { font-size: 0.8rem; }
@@ -495,21 +576,52 @@
         .map-placeholder { display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; color: var(--text-light); padding: 40px; flex-direction: column; gap: 15px; }
         .map-placeholder h3 { font-family: 'Work Sans', sans-serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
         .map-placeholder-icon { font-size: 3rem; margin-bottom: 10px; }
-        .mapboxgl-popup-content { padding: 0; border-radius: var(--r-md); border: 1px solid var(--border-strong); box-shadow: 0 2px 10px rgba(0,0,0,0.12); }
-        .mapboxgl-popup-close-button { width: 26px; height: 26px; font-size: 19px; line-height: 24px; padding: 0; color: var(--text-light); background: white; border: 1px solid var(--border-strong); border-radius: var(--r-sm); box-shadow: none; right: -9px; top: -9px; transition: background 0.15s ease; font-weight: 300; cursor: pointer; }
-        .mapboxgl-popup-close-button:hover { background: var(--bg); color: var(--text); }
-        .map-popup-card { width: 258px; padding: 16px 16px 14px; }
-        .map-popup-card .popup-header { margin-bottom: 10px; }
-        .map-popup-card .listing-title { font-size: 0.98rem; margin-bottom: 2px; line-height: 1.3; }
-        .map-popup-card .popup-neighborhood { font-size: 0.73rem; color: var(--text-light); margin-bottom: 0; }
-        .map-popup-card .popup-units { display: inline-block; font-size: 0.68rem; font-weight: 600; color: #2e7d32; background: #e8f5e9; padding: 2px 8px; border-radius: 4px; }
-        .map-popup-card .popup-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; padding: 9px 10px; background: var(--bg); border-radius: 7px; }
-        .map-popup-card .popup-stat { text-align: center; }
-        .map-popup-card .popup-stat-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); margin-bottom: 2px; }
-        .map-popup-card .popup-stat-value { font-size: 0.82rem; font-weight: 600; color: var(--primary); }
-        .map-popup-card .popup-stat-value.rent { font-family: 'Work Sans', sans-serif; font-size: 1rem; color: var(--accent); }
-        .map-popup-card .listing-actions { display: block; }
-        .map-popup-card .btn { display: block; width: 100%; padding: 9px 14px; font-size: 0.82rem; text-align: center; }
+        .mapboxgl-popup-content { padding: 0; border-radius: var(--r-md); border: 1px solid var(--border-strong); background: var(--card-bg); box-shadow: var(--shadow-pop); }
+        .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip { border-top-color: var(--card-bg); }
+        .mapboxgl-popup-anchor-top .mapboxgl-popup-tip { border-bottom-color: var(--card-bg); }
+        .mapboxgl-popup-anchor-left .mapboxgl-popup-tip { border-right-color: var(--card-bg); }
+        .mapboxgl-popup-anchor-right .mapboxgl-popup-tip { border-left-color: var(--card-bg); }
+        .mapboxgl-ctrl-group { background: var(--card-bg); border: 1px solid var(--border-strong); box-shadow: none; }
+        .mapboxgl-ctrl-group button + button { border-top-color: var(--border); }
+        .mapboxgl-ctrl-group button .mapboxgl-ctrl-icon { filter: var(--ctrl-icon-filter, none); }
+        html[data-theme="dark"] { --ctrl-icon-filter: invert(1); }
+        html[data-theme="dark"] .mapboxgl-ctrl-attrib { background: rgba(0,0,0,0.6); }
+        html[data-theme="dark"] .mapboxgl-ctrl-attrib a { color: #d4d4d8; }
+        .mapboxgl-popup-close-button { width: 26px; height: 26px; font-size: 19px; line-height: 24px; padding: 0; color: var(--text-light); background: var(--card-bg); border: 1px solid var(--border-strong); border-radius: var(--r-sm); box-shadow: none; right: -9px; top: -9px; transition: background 0.15s ease; font-weight: 300; cursor: pointer; }
+        .mapboxgl-popup-close-button:hover { background: var(--surface-hover); color: var(--text); }
+        .map-popup-card { width: 262px; padding: 14px 15px 13px; font-family: 'Work Sans', sans-serif; }
+        .map-popup-card .popup-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+        .map-popup-card .popup-id { min-width: 0; }
+        .map-popup-card .popup-name { font-size: var(--fs-md); font-weight: 600; color: var(--primary); line-height: 1.3; margin: 0; }
+        .map-popup-card .popup-neighborhood { font-size: var(--fs-xs); color: var(--text-light); margin: 1px 0 0; }
+        .map-popup-card .popup-price { font-size: var(--fs-lg); font-weight: 700; color: var(--primary); white-space: nowrap; }
+        .map-popup-card .popup-price .from { font-size: var(--fs-xs); font-weight: 500; color: var(--text-light); margin-right: 3px; }
+        .map-popup-card .popup-price .call { font-size: var(--fs-md); font-weight: 600; color: var(--text-light); }
+        .map-popup-card .popup-spec { font-size: var(--fs-sm); color: var(--text-light); margin-top: 7px; }
+        .map-popup-card .popup-meta { display: flex; flex-direction: column; gap: 3px; margin-top: 7px; font-size: var(--fs-sm); color: var(--text-light); }
+        .map-popup-card .popup-action {
+            display: block;
+            margin-top: 12px;
+            padding: 9px 14px;
+            border-radius: var(--r-sm);
+            background: var(--accent);
+            color: var(--accent-text);
+            font-size: var(--fs-sm);
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.12s ease;
+        }
+        .map-popup-card .popup-action:hover { background: var(--accent-hover); }
+        .route-chip {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: var(--r-sm);
+            font-size: var(--fs-xs);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.5;
+        }
 
         /* LISTINGS GRID */
         #listings-container { padding: var(--gutter); }
@@ -531,14 +643,14 @@
         .listing-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; }
         .listing-actions.listing-actions-single { grid-template-columns: 1fr; }
         .btn { padding: 8px 14px; border: none; border-radius: var(--r-sm); font-size: var(--fs-sm); font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: all 0.2s ease; font-family: 'Work Sans', sans-serif; display: inline-block; }
-        .btn-primary { background: var(--accent); color: white; }
-        .btn-primary:hover { background: #3f3f46; }
-        .btn-secondary { background: white; color: var(--primary); border: 1px solid var(--border-strong); }
-        .btn-secondary:hover { background: var(--bg); }
-        .btn-property { background: #000; color: white; width: 100%; }
-        .btn-property:hover { background: #3f3f46; }
+        .btn-primary { background: var(--accent); color: var(--accent-text); }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-secondary { background: var(--card-bg); color: var(--text); border: 1px solid var(--border-strong); }
+        .btn-secondary:hover { background: var(--surface-hover); }
+        .btn-property { background: var(--accent); color: var(--accent-text); width: 100%; }
+        .btn-property:hover { background: var(--accent-hover); }
         .availability-line { font-size: var(--fs-xs); color: var(--text-light); margin-bottom: 12px; }
-        .availability-line.is-now { color: var(--green); font-weight: 600; }
+        .availability-line.is-now { color: var(--green-text); font-weight: 600; }
         .no-listings { text-align: center; padding: 80px 20px; color: var(--text-light); }
         .no-listings h2 { font-family: 'Work Sans', sans-serif; font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
 
@@ -566,7 +678,9 @@
                 position: static;
             }
             .appbar-rule { display: none; }
-            .appbar .appbar-actions { order: 1; }
+            /* With the view switch gone, the count balances the actions row. */
+            .appbar .appbar-actions { order: 1; width: 100%; margin-left: 0; }
+            .appbar .results-indicator { display: inline; margin-right: auto; }
             .appbar .view-toggle { order: 0; }
             .appbar .filter-bar { order: 2; flex: 1 0 100%; }
             .book-tour-btn .tour-icon { display: none; }
@@ -603,7 +717,7 @@
                 height: 70vh;
                 max-height: 70vh;
                 border: none;
-                background: rgba(250, 250, 250, 0.995);
+                background: color-mix(in srgb, var(--bg) 99.5%, transparent);
                 border-radius: 20px 20px 0 0;
                 box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
                 z-index: 50;
@@ -631,7 +745,7 @@
                 padding: 12px 15px 8px;
                 cursor: grab;
                 flex-shrink: 0;
-                background: rgba(250, 250, 250, 0.995);
+                background: color-mix(in srgb, var(--bg) 99.5%, transparent);
                 position: relative;
                 touch-action: none;
                 user-select: none;
@@ -675,7 +789,7 @@
                 margin: 0;
                 padding: 2px 14px 10px;
                 border-radius: 0;
-                background: rgba(250, 250, 250, 0.995);
+                background: color-mix(in srgb, var(--bg) 99.5%, transparent);
                 border-bottom: 1px solid var(--border);
                 touch-action: none;
                 user-select: none;
@@ -692,7 +806,7 @@
                 overscroll-behavior: contain;
                 padding: 0 0 24px 0;
                 touch-action: pan-y;
-                background: rgba(255, 255, 255, 0.995);
+                background: color-mix(in srgb, var(--card-bg) 99.5%, transparent);
             }
             .unit-row { padding: 11px 14px; }
             .unit-row-links { margin-top: 9px; gap: 18px; }
@@ -709,7 +823,8 @@
         body.single-property-mode .view-toggle { display: none; }
         body.single-property-mode .view-container { display: none !important; }
         body.single-property-mode #listings-container { display: block !important; opacity: 1 !important; }
-        body.single-property-mode .appbar-rule { display: none; }
+        body.single-property-mode .results-indicator { display: inline; }
+        body.single-property-mode .theme-toggle { display: none; }
         body.single-property-mode .appbar-actions { margin-left: 0; width: 100%; justify-content: space-between; }
         /* Simplified cards for single property mode */
         body.single-property-mode .listing-address { display: none; }
@@ -724,7 +839,7 @@
             gap: clamp(10px, 1vw, 20px);
             margin: 0;
             padding: 8px var(--gutter);
-            background: white;
+            background: var(--card-bg);
             border-radius: 0;
             border-bottom: 1px solid var(--border);
             box-shadow: none;
@@ -747,7 +862,7 @@
             border-radius: var(--r-sm) !important;
             padding: 10px 20px;
             border: 2px solid var(--border);
-            background: white;
+            background: var(--card-bg);
             border-radius: 8px;
             font-size: 0.9rem;
             font-weight: 500;
@@ -756,8 +871,9 @@
             font-family: 'Work Sans', sans-serif;
             color: var(--text);
         }
-        .sp-filter-btn:hover { border-color: var(--accent); background: var(--bg); }
-        .sp-filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .sp-filter-btn:hover { border-color: var(--control-hover-border); background: var(--surface-hover); }
+        .sp-filter-btn.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+        .sp-filter-btn.active:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-text); }
         
         /* MFTE Filter Tab Styles */
         .mfte-filter-group { display: none; }
@@ -775,8 +891,9 @@
             border-color: #81c784; 
             color: #2e7d32; 
         }
-        .sp-filter-btn.mfte-btn:hover { background: #c8e6c9; border-color: #66bb6a; }
-        .sp-filter-btn.mfte-btn.active { background: #2e7d32; color: white; border-color: #2e7d32; }
+        .sp-filter-btn.mfte-btn:hover { background: #c8e6c9; border-color: #66bb6a; color: #1b5e20; }
+        .sp-filter-btn.mfte-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+        .sp-filter-btn.mfte-btn.active:hover { background: var(--green-dark); border-color: var(--green-dark); color: #fff; }
         
         /* MFTE Badge on Cards */
         .mfte-badge {
@@ -816,7 +933,7 @@
             font-size: 0.9rem;
             font-weight: 500;
             font-family: 'Work Sans', sans-serif;
-            background: white;
+            background: var(--card-bg);
             color: var(--text);
             cursor: pointer;
             appearance: none;
@@ -946,7 +1063,7 @@
         .inline-tour-section {
             display: none;
             margin: 0 var(--gutter) 20px;
-            background: white;
+            background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: var(--r-md);
             box-shadow: none;
@@ -1075,7 +1192,7 @@
 
         /* Below this width the controls cannot share one line without being
            cut off, so the filters take a full second row instead. */
-        @media (max-width: 1499px) {
+        @media (max-width: 1359px) {
             .appbar .filter-bar { order: 1; flex: 1 0 100%; }
             .appbar .appbar-actions { order: 0; }
             .appbar-rule { display: none; }
@@ -1112,8 +1229,12 @@
             cursor: pointer;
             transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
         }
-        .fb-pill:hover:not(:disabled) { background: var(--bg); border-color: #a1a1aa; }
-        .fb-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+        .fb-pill:hover:not(:disabled) { background: var(--surface-hover); border-color: var(--control-hover-border); }
+        /* Hovering a selected pill kept the light surface colour, which left
+           white text on a near-white background. */
+        .fb-pill.active:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-text); }
+        .fb-pill-transit.active:hover:not(:disabled) { background: var(--green-dark); border-color: var(--green-dark); color: #fff; }
+        .fb-pill.active { background: var(--accent); border-color: var(--accent); color: var(--accent-text); font-weight: 600; }
         .fb-pill:disabled { opacity: 0.4; cursor: not-allowed; }
         .fb-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
         .fb-count {
@@ -1122,13 +1243,13 @@
             color: var(--text-light);
             font-variant-numeric: tabular-nums;
         }
-        .fb-pill.active .fb-count { color: rgba(255,255,255,0.72); }
+        .fb-pill.active .fb-count { color: var(--accent-text); opacity: 0.72; }
         .fb-pill .fb-count:empty { display: none; }
         .fb-pill-icon { font-size: 0.95em; line-height: 1; }
         .fb-pill-transit.active { background: var(--green); border-color: var(--green); }
         .fb-select {
             height: var(--control-h);
-            max-width: clamp(118px, 11vw, 182px);
+            max-width: clamp(116px, 10vw, 158px);
             padding: 0 26px 0 clamp(8px, 0.6vw, 11px);
             border: 1px solid var(--border-strong);
             border-radius: var(--r-sm);
@@ -1144,16 +1265,17 @@
             flex-shrink: 0;
             transition: border-color 0.12s ease;
         }
-        .fb-select:hover { border-color: #a1a1aa; }
+        .fb-select:hover { border-color: var(--control-hover-border); }
+        .fb-select.is-set:hover { background-color: var(--accent-hover); border-color: var(--accent-hover); }
         .fb-select:focus { outline: none; border-color: var(--accent); }
         .fb-select.is-set {
             background-color: var(--accent);
-            color: #fff;
+            color: var(--accent-text);
             border-color: var(--accent);
             font-weight: 600;
             background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23fff' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
         }
-        .fb-select.is-set option { background: #fff; color: var(--text); }
+        .fb-select.is-set option { background: var(--card-bg); color: var(--text); }
         .fb-clear {
             display: none;
             align-items: center;
@@ -1172,7 +1294,7 @@
             transition: color 0.12s ease, background 0.12s ease;
         }
         .filter-bar.has-filters .fb-clear { display: inline-flex; }
-        .fb-clear:hover { color: #b91c1c; background: #fef2f2; }
+        .fb-clear:hover { color: var(--danger); background: var(--danger-bg); }
 
         /* ============================================================
            TRANSIT PANEL (map overlay)
@@ -1183,7 +1305,7 @@
             left: 12px;
             z-index: 5;
             width: 258px;
-            background: white;
+            background: var(--card-bg);
             border-radius: var(--r-md);
             border: 1px solid var(--border-strong);
             box-shadow: 0 1px 4px rgba(0,0,0,0.08);
@@ -1197,11 +1319,11 @@
             width: 100%;
             padding: 11px 13px;
             border: none;
-            background: white;
+            background: var(--card-bg);
             cursor: pointer;
             font-family: inherit;
         }
-        .transit-panel-head:hover { background: #f7f7f7; }
+        .transit-panel-head:hover { background: var(--surface-hover); }
         .transit-panel-title { display: flex; align-items: center; gap: 7px; font-size: 0.88rem; font-weight: 700; color: var(--primary); }
         .transit-panel-icon { font-size: 1rem; }
         .transit-panel-chevron { font-size: 0.6rem; color: var(--text-light); transition: transform 0.2s ease; }
@@ -1262,45 +1384,6 @@
         .transit-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: var(--text-light); }
         .transit-legend-swatch { width: 13px; height: 3px; border-radius: 2px; }
 
-        /* Transit info inside listing cards + popups */
-        .transit-note {
-            display: flex;
-            align-items: flex-start;
-            gap: 6px;
-            padding: 0;
-            margin-bottom: 12px;
-            font-size: 0.73rem;
-            line-height: 1.45;
-            color: var(--text-light);
-        }
-        .transit-note strong { color: #1d6530; }
-        .transit-note-icon { flex-shrink: 0; font-size: 0.85rem; line-height: 1.3; }
-        .transit-note strong { font-weight: 600; }
-        .transit-routes { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
-        .transit-route-chip {
-            font-size: 0.66rem;
-            font-weight: 700;
-            color: white;
-            background: #666;
-            border-radius: 4px;
-            padding: 2px 6px;
-            line-height: 1.5;
-            white-space: nowrap;
-        }
-        .commute-note {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            padding: 0;
-            margin-bottom: 12px;
-            font-size: 0.73rem;
-            color: var(--text-light);
-        }
-        .commute-note a { color: #4b3f8f; font-weight: 700; white-space: nowrap; }
-        .map-popup-card .transit-note, .map-popup-card .commute-note { margin-bottom: 10px; }
-        .map-popup-card .popup-units { margin-bottom: 10px; }
-
         /* Price markers: the scannable unit on the map is the rent, not a count */
         .price-marker {
             display: inline-flex;
@@ -1308,13 +1391,13 @@
             gap: 5px;
             padding: 4px 8px;
             border-radius: var(--r-sm);
-            background: white;
-            border: 1px solid rgba(0,0,0,0.22);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+            background: var(--pin-bg);
+            border: 1px solid var(--pin-border);
+            box-shadow: var(--shadow-pin);
             font-family: 'Work Sans', sans-serif;
-            font-size: 0.78rem;
+            font-size: var(--fs-sm);
             font-weight: 700;
-            color: var(--primary);
+            color: var(--pin-text);
             white-space: nowrap;
             cursor: pointer;
             transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease;
@@ -1327,18 +1410,19 @@
         .price-marker.is-selected {
             background: var(--accent);
             border-color: var(--accent);
-            color: white;
+            color: var(--accent-text);
             z-index: 4;
         }
         .price-marker-count {
-            font-size: 0.62rem;
+            font-size: var(--fs-xs);
             font-weight: 700;
-            color: var(--text-light);
-            background: var(--bg);
+            color: inherit;
+            opacity: 0.65;
+            background: var(--pin-count-bg);
             border-radius: 2px;
             padding: 1px 4px;
         }
-        .price-marker.is-selected .price-marker-count { background: rgba(255,255,255,0.25); color: white; }
+        .price-marker.is-selected .price-marker-count { background: rgba(127,127,127,0.3); }
 
         .cluster-marker {
             display: flex;
@@ -1348,9 +1432,9 @@
             height: 38px;
             border-radius: 50%;
             background: var(--accent);
-            border: 2px solid white;
-            color: white;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+            border: 2px solid var(--accent-text);
+            color: var(--accent-text);
+            box-shadow: var(--shadow-pin);
             font-family: 'Work Sans', sans-serif;
             font-size: 0.85rem;
             font-weight: 700;
@@ -1364,7 +1448,7 @@
         .link-station-marker {
             width: 13px; height: 13px;
             border-radius: 50%;
-            background: white;
+            background: var(--pin-bg);
             border: 3px solid #28813F;
             box-shadow: 0 1px 4px rgba(0,0,0,0.35);
             cursor: pointer;
@@ -1393,15 +1477,11 @@
              One flat strip: view switch, every filter inline, actions on the
              right. Group labels are gone - the controls say what they are. -->
         <div class="appbar">
-            <button class="view-toggle" id="map-toggle" title="Switch views (M for Map, L for List)">
-                <span class="map-icon">&#128203;</span>
-                <span class="toggle-text">List</span>
-            </button>
-
-            <div class="appbar-rule"></div>
-
             <div class="appbar-actions">
                 <span class="results-indicator" id="results-indicator"><strong id="results-count">0</strong> units</span>
+                <button type="button" class="theme-toggle" id="theme-toggle" title="Switch between light and dark" aria-label="Switch between light and dark">
+                    <span class="theme-toggle-icon" id="theme-toggle-icon">&#9790;</span>
+                </button>
                 <button class="book-tour-btn" id="book-tour-btn">Book a tour</button>
             </div>
 
@@ -1410,9 +1490,9 @@
                     <div class="fb-pills">
                         <button type="button" class="fb-pill active" data-filter="type" data-value="all">Any beds</button>
                         <button type="button" class="fb-pill" data-filter="type" data-value="studio">Studio<span class="fb-count"></span></button>
-                        <button type="button" class="fb-pill" data-filter="type" data-value="1bed">1 bed<span class="fb-count"></span></button>
-                        <button type="button" class="fb-pill" data-filter="type" data-value="2bed">2 bed<span class="fb-count"></span></button>
-                        <button type="button" class="fb-pill" data-filter="type" data-value="3bed">3+ bed<span class="fb-count"></span></button>
+                        <button type="button" class="fb-pill" data-filter="type" data-value="1bed">1 bd<span class="fb-count"></span></button>
+                        <button type="button" class="fb-pill" data-filter="type" data-value="2bed">2 bd<span class="fb-count"></span></button>
+                        <button type="button" class="fb-pill" data-filter="type" data-value="3bed">3+ bd<span class="fb-count"></span></button>
                     </div>
                     <div class="fb-pills">
                         <button type="button" class="fb-pill active" data-filter="price" data-value="all">Any price</button>
@@ -1423,11 +1503,11 @@
                     </div>
                     <div class="fb-pills">
                         <button type="button" class="fb-pill fb-pill-transit" data-filter="nearLink" data-value="1" title="Properties within about a 15 minute walk of a Link light rail station">
-                            <span class="fb-pill-icon">&#128649;</span>Near light rail<span class="fb-count"></span>
+                            <span class="fb-pill-icon">&#128649;</span>Light rail<span class="fb-count"></span>
                         </button>
                     </div>
-                    <select class="fb-select" id="neighborhood-select" aria-label="Filter by neighborhood"><option value="all">All neighborhoods</option></select>
-                    <select class="fb-select" id="property-select" aria-label="Filter by property"><option value="all">All properties</option></select>
+                    <select class="fb-select" id="neighborhood-select" aria-label="Filter by neighborhood"><option value="all">Neighborhood</option></select>
+                    <select class="fb-select" id="property-select" aria-label="Filter by property"><option value="all">Property</option></select>
                 </div>
                 <button type="button" class="fb-clear" id="fb-clear" title="Clear all filters">Clear</button>
             </div>
@@ -1920,10 +2000,43 @@
         let currentFilters = { ...FILTER_DEFAULTS };
         let map = null;
         let markers = [];
-        let mapViewActive = true;
+        const mapViewActive = true;
         let currentSidebarProperty = undefined;
         let markerJustClicked = false;
         
+        // ============================================================
+        // THEME
+        // data-theme on <html> drives every colour token; the map style is
+        // swapped to match. Remembered per browser, seeded from the OS.
+        // ============================================================
+        let currentTheme = 'light';
+
+        function setTheme(theme, persist) {
+            currentTheme = theme === 'dark' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            const icon = document.getElementById('theme-toggle-icon');
+            if (icon) icon.innerHTML = currentTheme === 'dark' ? '&#9728;' : '&#9790;';
+            const btn = document.getElementById('theme-toggle');
+            if (btn) btn.title = currentTheme === 'dark' ? 'Switch to light' : 'Switch to dark';
+            if (persist) {
+                try { localStorage.setItem('agm-theme', currentTheme); } catch (e) { /* private mode */ }
+            }
+            if (typeof applyMapTheme === 'function') applyMapTheme();
+        }
+
+        (function initTheme() {
+            // The single-property view is embedded in a light host page, so it
+            // always renders light whatever the visitor picked on the map.
+            if (new URLSearchParams(window.location.search).get('property')) {
+                setTheme('light', false);
+                return;
+            }
+            let stored = null;
+            try { stored = localStorage.getItem('agm-theme'); } catch (e) { /* private mode */ }
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTheme(stored || (prefersDark ? 'dark' : 'light'), false);
+        })();
+
         // ============================================================
         // TRANSIT
         // Data comes from transit-data.js (see scripts/build-transit-data.py):
@@ -1986,51 +2099,8 @@
             ));
         }
 
-        // A short "how do I get around from here" block for cards and popups.
-        function transitNoteHtml(propertyName, options) {
-            const opts = options || {};
-            const near = nearestLightRailStation(propertyName);
-            const routes = transitRoutesFor(propertyName).slice(0, opts.maxRoutes || 5);
-            const railIsRelevant = near && near.meters <= 4800;
-            if (!railIsRelevant && routes.length === 0) return '';
-
-            let rail = '';
-            if (railIsRelevant && near.meters <= 1600) {
-                rail = '<strong>' + walkMinutes(near.meters) + ' min walk</strong> to ' +
-                    escapeHtml(near.station.name) + ' Station (' +
-                    escapeHtml(near.station.lines.join(', ')) + ')';
-            } else if (railIsRelevant) {
-                rail = escapeHtml(near.station.name) + ' Station (' +
-                    escapeHtml(near.station.lines.join(', ')) + ') is ' +
-                    (near.meters / 1609.34).toFixed(1) + ' mi away';
-            }
-
-            let chips = '';
-            if (routes.length) {
-                chips = '<div class="transit-routes">' + routes.map(r =>
-                    '<span class="transit-route-chip" style="background:' + r.c + '">' +
-                    escapeHtml(r.n) + '</span>').join('') + '</div>';
-            }
-
-            const lead = rail || 'Bus service nearby';
-            return '<div class="transit-note"><span class="transit-note-icon">&#128649;</span><div>' +
-                lead + chips + '</div></div>';
-        }
-
         // Workplace set through the map's commute box.
         let workLocation = null;
-
-        function commuteNoteHtml(listing) {
-            if (!workLocation) return '';
-            const coords = propertyCoordinates[listing.property];
-            if (!coords) return '';
-            const miles = metersBetween(coords.lat, coords.lng, workLocation.lat, workLocation.lng) / 1609.34;
-            const url = 'https://www.google.com/maps/dir/?api=1&origin=' +
-                encodeURIComponent(listing.address) + '&destination=' +
-                encodeURIComponent(workLocation.label) + '&travelmode=transit';
-            return '<div class="commute-note"><span>' + miles.toFixed(1) + ' mi to work</span>' +
-                '<a href="' + url + '" target="_blank" rel="noopener">Transit directions &#8594;</a></div>';
-        }
 
         // URL Parameter Detection for Single Property Mode
         let singlePropertyMode = false;
@@ -2113,9 +2183,6 @@
                         if (val === '2bed' && !has2Bed) btn.style.display = 'none';
                         if (val === '3bed' && !has3Bed) btn.style.display = 'none';
                     });
-
-                    // Disable map view in single property mode
-                    mapViewActive = false;
 
                     console.log('Single Property Mode activated for:', urlPropertyFilter);
                 }
@@ -2467,6 +2534,9 @@
         }
 
         // Event Listeners for Tour Modal
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
+        });
         document.getElementById('book-tour-btn').addEventListener('click', () => openTourModal());
         document.getElementById('tour-modal-close').addEventListener('click', closeTourModal);
         document.getElementById('tour-submit-btn').addEventListener('click', handleTourSubmit);
@@ -2659,9 +2729,7 @@
                 if (tourOverlay.classList.contains('active')) closeTourModal();
             }
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
-            if (e.key === 'm' || e.key === 'M') { if (!mapViewActive) document.getElementById('map-toggle').click(); }
-            else if (e.key === 'l' || e.key === 'L') { if (mapViewActive) document.getElementById('map-toggle').click(); }
-            else if (e.key === 't' || e.key === 'T') { if (!tourOverlay.classList.contains('active')) openTourModal(); }
+            if (e.key === 't' || e.key === 'T') { if (!tourOverlay.classList.contains('active')) openTourModal(); }
         });
 
     </script>
@@ -2680,7 +2748,8 @@
             const loadingEl = document.getElementById('map-loading');
             try {
                 loadingEl.innerHTML = 'Loading map...';
-                map = new mapboxgl.Map({ container: 'map', style: 'mapbox://styles/mapbox/streets-v12', center: [-122.3321, 47.6062], zoom: 10 });
+                appliedMapStyle = MAP_STYLES[currentTheme] || MAP_STYLES.light;
+                map = new mapboxgl.Map({ container: 'map', style: appliedMapStyle, center: [-122.3321, 47.6062], zoom: 10 });
                 map.on('load', () => {
                     if (loadingEl) loadingEl.style.display = 'none';
                     mapReady = true;
@@ -2753,6 +2822,30 @@
         let stationMarkers = [];
         let workMarker = null;
 
+        const MAP_STYLES = {
+            light: 'mapbox://styles/mapbox/streets-v12',
+            dark: 'mapbox://styles/mapbox/dark-v11'
+        };
+        let appliedMapStyle = MAP_STYLES.light;
+
+        // Swapping the Mapbox style tears down our sources and layers, so they
+        // are rebuilt once the new style reports in.
+        function applyMapTheme() {
+            if (!map || !mapReady) return;
+            const wanted = MAP_STYLES[currentTheme] || MAP_STYLES.light;
+            if (wanted === appliedMapStyle) return;
+            appliedMapStyle = wanted;
+            const busWasLoaded = busRoutesLoaded;
+            transitLayersReady = false;
+            busRoutesLoaded = false;
+            map.setStyle(wanted);
+            map.once('style.load', () => {
+                setupTransitLayers();
+                renderMapMarkers();
+                if (busWasLoaded) ensureBusRoutes();
+            });
+        }
+
         function setupTransitLayers() {
             if (!map || transitLayersReady) return;
             transitLayersReady = true;
@@ -2812,10 +2905,10 @@
                 if (!f) return;
                 new mapboxgl.Popup({ offset: 8, maxWidth: '260px' })
                     .setLngLat(e.lngLat)
-                    .setHTML('<div class="map-popup-card" style="width:220px;padding:14px 16px">' +
-                        '<div class="transit-route-chip" style="background:' + f.properties.c + '">' +
-                        escapeHtml(f.properties.n) + '</div>' +
-                        '<p class="popup-neighborhood" style="margin-top:8px">' +
+                    .setHTML('<div class="map-popup-card" style="width:216px">' +
+                        '<span class="route-chip" style="background:' + f.properties.c + '">' +
+                        escapeHtml(f.properties.n) + '</span>' +
+                        '<p class="popup-neighborhood" style="margin-top:7px">' +
                         escapeHtml(f.properties.d || f.properties.a) + '</p></div>')
                     .addTo(map);
             });
@@ -3035,48 +3128,62 @@
             return el;
         }
 
+        // The popup is a preview, not a second results card: price, what you
+        // get for it, one transit line, one action.
         function createPopupContent(propertyUnits) {
             const firstUnit = propertyUnits[0];
-            const minRent = Math.min(...propertyUnits.map(u => u.rent));
+            const cheapest = cheapestUnit(propertyUnits);
             const propertyUrl = propertyWebsites[firstUnit.property] || 'https://agmrealestategroup.appfolio.com/listings';
-            const beds = propertyUnits.map(u => u.bedrooms === 'Studio' ? 0 : u.bedrooms).sort((a, b) => a - b);
-            const minBed = beds[0];
-            const maxBed = beds[beds.length - 1];
-            const bedRange = minBed === maxBed 
-                ? (minBed === 0 ? 'Studio' : minBed + ' Bed') 
-                : (minBed === 0 ? 'Studio' : minBed + '') + '-' + maxBed + ' Bed';
-            const sqfts = propertyUnits.map(u => u.sqft).filter(s => s).sort((a, b) => a - b);
-            const sqftRange = sqfts.length > 0 
-                ? (sqfts[0] === sqfts[sqfts.length - 1] 
-                    ? sqfts[0].toLocaleString() 
-                    : sqfts[0].toLocaleString() + '-' + sqfts[sqfts.length - 1].toLocaleString())
-                : 'N/A';
-            
+
+            const beds = propertyUnits.map(u => (u.bedrooms === 'Studio' ? 0 : u.bedrooms)).sort((a, b) => a - b);
+            const bedName = n => (n === 0 ? 'Studio' : n + ' bd');
+            const bedRange = beds[0] === beds[beds.length - 1]
+                ? bedName(beds[0])
+                : bedName(beds[0]) + '\u2013' + bedName(beds[beds.length - 1]);
+
+            const sqfts = propertyUnits.map(u => u.sqft).filter(Boolean).sort((a, b) => a - b);
+            const sqftRange = sqfts.length
+                ? (sqfts[0] === sqfts[sqfts.length - 1]
+                    ? sqfts[0].toLocaleString()
+                    : sqfts[0].toLocaleString() + '\u2013' + sqfts[sqfts.length - 1].toLocaleString()) + ' sqft'
+                : null;
+
+            const price = cheapest.rent
+                ? (propertyUnits.length > 1 ? '<span class="from">from</span>' : '') + '$' + cheapest.rent.toLocaleString()
+                : '<span class="call">Call</span>';
+
+            const near = nearestLightRailStation(firstUnit.property);
+            let transit = '';
+            if (near && near.meters <= 1600) {
+                transit = '&#128649; ' + walkMinutes(near.meters) + ' min walk to ' + escapeHtml(near.station.name);
+            } else {
+                const routes = transitRoutesFor(firstUnit.property).slice(0, 4);
+                if (routes.length) transit = '&#128652; ' + escapeHtml(routes.map(r => r.n).join(', '));
+            }
+
+            const commute = workLocation
+                ? '&#128188; ' + (commuteMeters(firstUnit.property) / 1609.34).toFixed(1) + ' mi to work'
+                : '';
+
             return '<div class="map-popup-card">' +
-                '<div class="popup-header">' +
-                    '<h3 class="listing-title">' + firstUnit.property + '</h3>' +
-                    '<p class="popup-neighborhood">' + firstUnit.neighborhood + '</p>' +
-                '</div>' +
-                '<div class="popup-units">' + propertyUnits.length + ' unit' + (propertyUnits.length > 1 ? 's' : '') + ' available</div>' +
-                transitNoteHtml(firstUnit.property, { maxRoutes: 4 }) +
-                commuteNoteHtml(firstUnit) +
-                '<div class="popup-stats">' +
-                    '<div class="popup-stat">' +
-                        '<div class="popup-stat-label">From</div>' +
-                        '<div class="popup-stat-value rent">$' + minRent.toLocaleString() + '</div>' +
+                '<div class="popup-top">' +
+                    '<div class="popup-id">' +
+                        '<h3 class="popup-name">' + escapeHtml(firstUnit.property) + '</h3>' +
+                        '<p class="popup-neighborhood">' + escapeHtml(firstUnit.neighborhood) + '</p>' +
                     '</div>' +
-                    '<div class="popup-stat">' +
-                        '<div class="popup-stat-label">Beds</div>' +
-                        '<div class="popup-stat-value">' + bedRange + '</div>' +
-                    '</div>' +
-                    '<div class="popup-stat">' +
-                        '<div class="popup-stat-label">Sq Ft</div>' +
-                        '<div class="popup-stat-value">' + sqftRange + '</div>' +
-                    '</div>' +
+                    '<div class="popup-price">' + price + '</div>' +
                 '</div>' +
-                '<div class="listing-actions">' +
-                    '<a href="' + propertyUrl + '" class="btn btn-property" target="_blank">View Property</a>' +
+                '<div class="popup-spec">' +
+                    [bedRange, sqftRange, propertyUnits.length + (propertyUnits.length > 1 ? ' units' : ' unit')]
+                        .filter(Boolean).join(' \u00b7 ') +
                 '</div>' +
+                (transit || commute
+                    ? '<div class="popup-meta">' +
+                        (transit ? '<span>' + transit + '</span>' : '') +
+                        (commute ? '<span>' + commute + '</span>' : '') +
+                      '</div>'
+                    : '') +
+                '<a href="' + propertyUrl + '" class="popup-action" target="_blank" rel="noopener">View property</a>' +
             '</div>';
         }
 
@@ -3697,49 +3804,6 @@
                 }
             });
         }
-
-        // Map View Toggle
-        document.getElementById('map-toggle').addEventListener('click', async () => {
-            mapViewActive = !mapViewActive;
-            const viewContainer = document.querySelector('.view-container');
-            const mapContainer = document.getElementById('map-container');
-            const sidebar = document.getElementById('listings-sidebar');
-            const listingsContainer = document.getElementById('listings-container');
-            const toggleBtn = document.getElementById('map-toggle');
-
-            if (mapViewActive) {
-                toggleBtn.querySelector('.map-icon').innerHTML = '&#128203;';
-                toggleBtn.querySelector('.toggle-text').textContent = 'List';
-                listingsContainer.style.opacity = '0';
-                listingsContainer.style.transition = 'opacity 0.2s ease';
-                setTimeout(() => {
-                    viewContainer.classList.add('active');
-                    mapContainer.classList.add('active');
-                    sidebar.classList.add('active');
-                    listingsContainer.style.display = 'none';
-                    viewContainer.style.opacity = '0';
-                    viewContainer.style.transition = 'opacity 0.3s ease';
-                    setTimeout(() => { viewContainer.style.opacity = '1'; }, 10);
-                }, 200);
-                setTimeout(async () => {
-                    if (!map) await initializeMap();
-                    else { map.resize(); updateMapMarkers(); }
-                    updateSidebarListings();
-                }, 300);
-            } else {
-                toggleBtn.querySelector('.map-icon').innerHTML = '&#128506;';
-                toggleBtn.querySelector('.toggle-text').textContent = 'Map';
-                viewContainer.style.opacity = '0';
-                setTimeout(() => {
-                    viewContainer.classList.remove('active');
-                    mapContainer.classList.remove('active');
-                    sidebar.classList.remove('active');
-                    listingsContainer.style.display = 'block';
-                    listingsContainer.style.opacity = '0';
-                    setTimeout(() => { listingsContainer.style.opacity = '1'; }, 10);
-                }, 200);
-            }
-        });
 
         // Override displayListings to update map when active
         const originalDisplayListings = displayListings;
