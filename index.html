@@ -302,26 +302,26 @@
         #map { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
         .map-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #666; font-size: 1rem; }
         
-        /* DESKTOP SIDEBAR - Base/Default styles */
-        .listings-sidebar { 
+        /* ============================================================
+           RESULTS PANEL
+           A dense, scannable list rather than a stack of cards - the
+           pattern Zillow's "Available units" table and Turo's result rows
+           use when there is no photo to anchor each entry.
+           ============================================================ */
+        .listings-sidebar {
             position: relative;
-            top: auto;
-            bottom: auto;
-            left: auto;
-            right: auto;
+            top: auto; bottom: auto; left: auto; right: auto;
             z-index: auto;
-            width: 450px; 
+            width: 380px;
             height: 100%;
             max-height: none;
-            overflow-y: auto; 
-            overflow-x: hidden;
-            display: none; 
-            flex-direction: column; 
-            align-items: stretch;
-            justify-content: flex-start;
-            gap: 15px; 
-            padding: 15px; 
-            background: var(--bg); 
+            display: none;
+            flex-direction: column;
+            gap: 0;
+            padding: 0;
+            overflow: hidden;
+            background: white;
+            border: 1px solid var(--border);
             border-radius: 12px;
             box-shadow: none;
             flex-shrink: 0;
@@ -331,72 +331,195 @@
         .listings-sidebar.active { display: flex; }
         .sidebar-handle { display: none; }
         .sidebar-close-btn { display: none; }
-        .sidebar-scroll-area { display: contents; }
-        .listings-sidebar::-webkit-scrollbar { width: 8px; }
-        .listings-sidebar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
-        .listings-sidebar::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
-        .listings-sidebar .listing-card { margin: 0; width: 100%; flex-shrink: 0; opacity: 0; transform: translateY(15px); animation: cardReveal 0.4s ease forwards; }
-        @keyframes cardReveal { to { opacity: 1; transform: translateY(0); } }
-        .listings-sidebar .listing-content { padding: 18px; }
-        .listings-sidebar .listing-title { font-size: 1rem; line-height: 1.3; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .listings-sidebar .listing-address { font-size: 0.72rem; margin-bottom: 10px; }
-        .listings-sidebar .listing-details { gap: 12px; margin-bottom: 10px; }
-        .listings-sidebar .detail-label { font-size: 0.65rem; }
-        .listings-sidebar .detail-value { font-size: 0.85rem; }
-        .listings-sidebar .rent-price { font-size: 1.2rem; }
-        .listings-sidebar .feature-tag { font-size: 0.68rem; padding: 4px 8px; }
-        .listings-sidebar .availability-badge { margin-bottom: 10px; font-size: 0.72rem; padding: 5px 12px; }
-        .listings-sidebar .btn { padding: 9px 14px; font-size: 0.8rem; }
-        .sidebar-header { padding: 12px 15px 8px; border-bottom: 1px solid var(--border); margin-bottom: 10px; background: white; border-radius: 8px; flex-shrink: 0; }
-        .sidebar-title { font-family: 'Work Sans', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--primary); margin-bottom: 2px; }
-        .sidebar-filter-tags { font-size: 0.85rem; font-weight: 600; color: var(--accent); margin-bottom: 2px; }
-        .sidebar-subtitle { font-size: 0.8rem; color: var(--text-light); }
+        .sidebar-scroll-area {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            overscroll-behavior: contain;
+            scrollbar-width: thin;
+            scrollbar-color: #d4d4d4 transparent;
+        }
+        .sidebar-scroll-area::-webkit-scrollbar { width: 6px; }
+        .sidebar-scroll-area::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-scroll-area::-webkit-scrollbar-thumb { background: #d6d6d6; border-radius: 3px; }
+        .sidebar-scroll-area::-webkit-scrollbar-thumb:hover { background: #b4b4b4; }
+
+        /* Sticky panel header: context on the left, sort on the right */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-shrink: 0;
+            padding: 10px 14px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar-heading-group { min-width: 0; }
+        .sidebar-title {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sidebar-subtitle { font-size: 0.72rem; color: var(--text-light); line-height: 1.45; }
+        .sidebar-filter-tags {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sidebar-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 1px;
+            padding: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.71rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        .sidebar-back:hover { color: var(--accent); }
+        .sidebar-sort { flex-shrink: 0; }
+        .sidebar-sort select {
+            appearance: none;
+            -webkit-appearance: none;
+            max-width: 150px;
+            padding: 6px 24px 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            background: white url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E") no-repeat right 8px center/9px 6px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.73rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+        }
+        .sidebar-sort select:hover { border-color: #bbb; }
+        .sidebar-sort select:focus { outline: none; border-color: var(--accent); }
+
+        /* One result = one row, separated by a hairline, no card chrome */
+        .unit-row {
+            display: block;
+            width: 100%;
+            padding: 10px 14px;
+            border: none;
+            border-bottom: 1px solid #f0f0f0;
+            background: white;
+            text-align: left;
+            font-family: 'Work Sans', sans-serif;
+            cursor: pointer;
+            transition: background 0.12s ease;
+        }
+        .unit-row:last-child { border-bottom: none; }
+        .unit-row:hover { background: #fafafa; }
+        .unit-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+        .unit-row.is-active { background: #f5f5f5; box-shadow: inset 3px 0 0 var(--accent); }
+        .unit-row-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+        .unit-row-name {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--primary);
+            line-height: 1.35;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .unit-row-price { font-size: 0.9rem; font-weight: 700; color: var(--primary); white-space: nowrap; }
+        .unit-row-price .from { font-size: 0.66rem; font-weight: 500; color: var(--text-light); margin-right: 2px; }
+        .unit-row-price .call { font-size: 0.8rem; font-weight: 600; color: var(--text-light); }
+        .unit-row-spec {
+            font-size: 0.74rem;
+            color: var(--text-light);
+            line-height: 1.45;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .unit-row-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2px 10px;
+            margin-top: 4px;
+            font-size: 0.69rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        .unit-row-avail.is-now { color: #2e7d32; font-weight: 600; }
+        .unit-row-transit { display: inline-flex; align-items: center; gap: 4px; }
+        .unit-row-flag { color: #2e7d32; font-weight: 600; }
+        .unit-row-links { display: flex; gap: 14px; margin-top: 7px; }
+        .unit-row-link {
+            font-size: 0.73rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        .unit-row-link:hover { color: var(--accent); text-decoration: underline; }
+        .unit-row-link.is-primary { color: var(--accent); }
+        .sidebar-empty { padding: 48px 24px; text-align: center; color: var(--text-light); }
+        .sidebar-empty h2 { font-family: 'Work Sans', sans-serif; font-size: 1rem; color: var(--primary); margin-bottom: 6px; }
+        .sidebar-empty p { font-size: 0.8rem; }
+
         .map-placeholder { display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; color: var(--text-light); padding: 40px; flex-direction: column; gap: 15px; }
         .map-placeholder h3 { font-family: 'Work Sans', sans-serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
         .map-placeholder-icon { font-size: 3rem; margin-bottom: 10px; }
         .mapboxgl-popup-content { padding: 0; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
         .mapboxgl-popup-close-button { width: 32px; height: 32px; font-size: 24px; line-height: 32px; padding: 0; color: #666; background: white; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.15); right: -12px; top: -12px; transition: all 0.2s ease; font-weight: 300; cursor: pointer; }
         .mapboxgl-popup-close-button:hover { background: #f5f5f5; color: #000; transform: scale(1.1); }
-        .map-popup-card { width: 280px; padding: 20px 20px 16px; }
-        .map-popup-card .popup-header { margin-bottom: 16px; }
-        .map-popup-card .listing-title { font-size: 1.15rem; margin-bottom: 4px; line-height: 1.3; }
-        .map-popup-card .popup-neighborhood { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0; }
-        .map-popup-card .popup-units { display: inline-block; font-size: 0.75rem; font-weight: 500; color: #2e7d32; background: #e8f5e9; padding: 4px 10px; border-radius: 4px; margin-bottom: 16px; }
-        .map-popup-card .popup-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; padding: 12px; background: var(--bg); border-radius: 8px; }
+        .map-popup-card { width: 258px; padding: 16px 16px 14px; }
+        .map-popup-card .popup-header { margin-bottom: 10px; }
+        .map-popup-card .listing-title { font-size: 0.98rem; margin-bottom: 2px; line-height: 1.3; }
+        .map-popup-card .popup-neighborhood { font-size: 0.73rem; color: var(--text-light); margin-bottom: 0; }
+        .map-popup-card .popup-units { display: inline-block; font-size: 0.68rem; font-weight: 600; color: #2e7d32; background: #e8f5e9; padding: 2px 8px; border-radius: 4px; }
+        .map-popup-card .popup-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; padding: 9px 10px; background: var(--bg); border-radius: 7px; }
         .map-popup-card .popup-stat { text-align: center; }
-        .map-popup-card .popup-stat-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); margin-bottom: 4px; }
-        .map-popup-card .popup-stat-value { font-size: 0.95rem; font-weight: 600; color: var(--primary); }
-        .map-popup-card .popup-stat-value.rent { font-family: 'Work Sans', sans-serif; font-size: 1.15rem; color: var(--accent); }
+        .map-popup-card .popup-stat-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); margin-bottom: 2px; }
+        .map-popup-card .popup-stat-value { font-size: 0.82rem; font-weight: 600; color: var(--primary); }
+        .map-popup-card .popup-stat-value.rent { font-family: 'Work Sans', sans-serif; font-size: 1rem; color: var(--accent); }
         .map-popup-card .listing-actions { display: block; }
-        .map-popup-card .btn { display: block; width: 100%; padding: 12px 16px; font-size: 0.9rem; text-align: center; }
+        .map-popup-card .btn { display: block; width: 100%; padding: 9px 14px; font-size: 0.82rem; text-align: center; }
 
         /* LISTINGS GRID */
-        .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; margin-bottom: 40px; animation: fadeIn 0.6s ease forwards; }
+        .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); align-items: start; gap: 16px; margin-bottom: 40px; animation: fadeIn 0.6s ease forwards; }
+        .listing-title-beds { font-weight: 400; color: var(--text-light); }
         @keyframes fadeIn { to { opacity: 1; } }
-        .listing-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: all 0.3s ease; display: flex; flex-direction: column; }
-        .listing-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-        .listing-content { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; }
-        .listing-header { margin-bottom: 20px; }
-        .listing-title { font-family: 'Work Sans', sans-serif; font-size: 1.4rem; font-weight: 600; color: var(--primary); margin-bottom: 10px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .listing-address { font-size: 0.85rem; color: var(--text-light); font-weight: 400; }
-        .listing-details { display: flex; gap: 25px; margin: 0 0 20px 0; }
+        .listing-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; }
+        .listing-card:hover { border-color: #d0d0d0; box-shadow: 0 3px 12px rgba(0,0,0,0.07); }
+        .listing-content { padding: 16px 18px; display: flex; flex-direction: column; flex-grow: 1; }
+        .listing-header { margin-bottom: 10px; }
+        .listing-title { font-family: 'Work Sans', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--primary); margin-bottom: 4px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .listing-address { font-size: 0.75rem; color: var(--text-light); font-weight: 400; }
+        .listing-details { display: flex; gap: 18px; margin: 0 0 10px 0; align-items: baseline; }
         .detail-item { display: flex; flex-direction: column; }
-        .detail-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-light); margin-bottom: 6px; font-weight: 500; }
-        .detail-value { font-size: 1rem; font-weight: 400; color: var(--primary); }
-        .rent-price { font-family: 'Work Sans', sans-serif; font-size: 1.6rem; font-weight: 600; color: var(--accent); }
-        .listing-features { margin: 20px 0; }
-        .features-list { display: flex; flex-wrap: wrap; gap: 8px; }
-        .feature-tag { font-size: 0.75rem; padding: 6px 14px; background: var(--bg); border-radius: 4px; color: var(--text); border: 1px solid var(--border); }
-        .listing-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+        .detail-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text-light); margin-bottom: 2px; font-weight: 600; }
+        .detail-value { font-size: 0.88rem; font-weight: 500; color: var(--primary); }
+        .rent-price { font-family: 'Work Sans', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+        .listing-features { margin: 0 0 10px; }
+        .features-list { display: flex; flex-wrap: wrap; gap: 5px; }
+        .feature-tag { font-size: 0.68rem; padding: 3px 9px; background: var(--bg); border-radius: 4px; color: var(--text-light); border: 1px solid var(--border); }
+        .listing-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; }
         .listing-actions.listing-actions-single { grid-template-columns: 1fr; }
-        .btn { padding: 14px 24px; border: none; border-radius: 4px; font-size: 0.9rem; font-weight: 500; cursor: pointer; text-decoration: none; text-align: center; transition: all 0.2s ease; font-family: 'Work Sans', sans-serif; display: inline-block; }
+        .btn { padding: 10px 18px; border: none; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: all 0.2s ease; font-family: 'Work Sans', sans-serif; display: inline-block; }
         .btn-primary { background: var(--accent); color: white; }
         .btn-primary:hover { background: #129AE5; transform: translateY(-2px); }
         .btn-secondary { background: white; color: var(--primary); border: 1px solid var(--border); }
         .btn-secondary:hover { background: var(--bg); border-color: var(--accent); }
         .btn-property { background: #000; color: white; width: 100%; }
         .btn-property:hover { background: #129AE5; transform: translateY(-2px); }
-        .availability-badge { display: inline-block; padding: 6px 14px; background: #e8f5e9; color: #2e7d32; border-radius: 4px; font-size: 0.8rem; font-weight: 500; margin-bottom: 20px; }
+        .availability-badge { display: inline-block; padding: 3px 9px; background: #e8f5e9; color: #2e7d32; border-radius: 4px; font-size: 0.7rem; font-weight: 600; margin-bottom: 12px; align-self: flex-start; }
         .no-listings { text-align: center; padding: 80px 20px; color: var(--text-light); }
         .no-listings h2 { font-family: 'Work Sans', sans-serif; font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
 
@@ -418,41 +541,37 @@
             
             /* Mobile toolbar - full width stacked buttons */
             .toolbar { 
-                flex-direction: column;
+                flex-direction: row;
+                align-items: center;
                 gap: 8px;
-                padding: 10px;
-                margin-bottom: 10px;
+                padding: 8px 10px;
+                margin-bottom: 8px;
                 flex-shrink: 0;
             }
             .toolbar-left { 
-                width: 100%; 
+                flex: 0 0 auto;
                 display: flex;
                 gap: 8px;
-                order: 1;
             }
             .toolbar-left .map-toggle-btn {
-                flex: 1;
                 justify-content: center;
-                padding: 10px 14px;
+                padding: 9px 12px;
             }
             .toolbar-right { 
-                width: 100%;
+                flex: 1;
                 display: flex;
+                justify-content: flex-end;
                 gap: 8px;
-                order: 2;
             }
             .toolbar-right .results-indicator {
-                flex: 1;
-                justify-content: center;
-                padding: 12px 12px;
-                font-size: 0.9rem;
-                border: 2px solid var(--border);
+                padding: 9px 12px;
+                font-size: 0.85rem;
+                border: 1.5px solid var(--border);
             }
             .toolbar-right .book-tour-btn {
-                flex: 1;
                 justify-content: center;
-                padding: 12px 12px;
-                font-size: 0.9rem;
+                padding: 9px 14px;
+                font-size: 0.85rem;
             }
             .book-tour-btn .tour-icon { display: none; }
             .map-toggle-btn { padding: 10px 12px; font-size: 0.85rem; }
@@ -475,6 +594,11 @@
                 flex-shrink: 0;
                 touch-action: pan-x pan-y;
             }
+            /* The sheet sits on top of the Mapbox WebGL canvas. A fully opaque
+               overlay lets Chromium occlusion-cull the canvas layer, which it
+               then composites short, leaving a blank strip across the top of
+               the map. A hair under full opacity keeps the canvas intact and
+               is indistinguishable on screen. */
             .listings-sidebar { 
                 position: absolute;
                 bottom: 0;
@@ -483,7 +607,8 @@
                 width: 100%; 
                 height: 70vh;
                 max-height: 70vh;
-                background: var(--bg);
+                border: none;
+                background: rgba(250, 250, 250, 0.995);
                 border-radius: 20px 20px 0 0;
                 box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
                 z-index: 50;
@@ -511,7 +636,7 @@
                 padding: 12px 15px 8px;
                 cursor: grab;
                 flex-shrink: 0;
-                background: var(--bg);
+                background: rgba(250, 250, 250, 0.995);
                 position: relative;
                 touch-action: none;
                 user-select: none;
@@ -552,38 +677,35 @@
             }
             .sidebar-header {
                 flex-shrink: 0;
-                margin: 0 15px 10px;
-                padding: 8px 12px;
-                border-radius: 8px;
-                background: white;
+                margin: 0;
+                padding: 2px 14px 10px;
+                border-radius: 0;
+                background: rgba(250, 250, 250, 0.995);
+                border-bottom: 1px solid var(--border);
                 touch-action: none;
                 user-select: none;
                 cursor: grab;
             }
-            .sidebar-header:active {
-                cursor: grabbing;
-            }
+            .sidebar-header:active { cursor: grabbing; }
+            /* the sort control has to stay tappable inside the drag area */
+            .sidebar-sort, .sidebar-sort select, .sidebar-back { touch-action: auto; }
             .sidebar-scroll-area {
                 flex: 1;
                 overflow-y: auto !important;
                 overflow-x: hidden;
                 -webkit-overflow-scrolling: touch;
                 overscroll-behavior: contain;
-                padding: 0 0 20px 0;
-                display: flex;
-                flex-direction: column;
-                gap: 0;
+                padding: 0 0 24px 0;
                 touch-action: pan-y;
+                background: rgba(255, 255, 255, 0.995);
             }
-            .listings-sidebar .listing-card {
-                margin: 0 15px 15px;
-                width: calc(100% - 30px);
-                flex-shrink: 0;
-            }
-            
-            .listings-grid { grid-template-columns: 1fr; gap: 16px; }
-            .listing-content { padding: 20px; }
-            .listing-title { font-size: 1.2rem; }
+            .unit-row { padding: 11px 14px; }
+            .unit-row-links { margin-top: 9px; gap: 18px; }
+            .unit-row-link { font-size: 0.78rem; }
+
+            .listings-grid { grid-template-columns: 1fr; gap: 12px; }
+            .listing-content { padding: 16px; }
+            .listing-title { font-size: 1rem; }
         }
         @keyframes viewPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
         .view-switching { animation: viewPulse 0.3s ease; }
@@ -1144,16 +1266,14 @@
         .transit-note {
             display: flex;
             align-items: flex-start;
-            gap: 7px;
-            background: #eef6f0;
-            border: 1px solid #cfe5d6;
-            border-radius: 7px;
-            padding: 7px 10px;
+            gap: 6px;
+            padding: 0;
             margin-bottom: 12px;
-            font-size: 0.75rem;
-            line-height: 1.4;
-            color: #1d6530;
+            font-size: 0.73rem;
+            line-height: 1.45;
+            color: var(--text-light);
         }
+        .transit-note strong { color: #1d6530; }
         .transit-note-icon { flex-shrink: 0; font-size: 0.85rem; line-height: 1.3; }
         .transit-note strong { font-weight: 600; }
         .transit-routes { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
@@ -1172,16 +1292,73 @@
             align-items: center;
             justify-content: space-between;
             gap: 8px;
-            background: #f3f1fb;
-            border: 1px solid #d9d3f0;
-            border-radius: 7px;
-            padding: 7px 10px;
+            padding: 0;
             margin-bottom: 12px;
-            font-size: 0.75rem;
-            color: #4b3f8f;
+            font-size: 0.73rem;
+            color: var(--text-light);
         }
         .commute-note a { color: #4b3f8f; font-weight: 700; white-space: nowrap; }
-        .map-popup-card .transit-note { margin-bottom: 14px; }
+        .map-popup-card .transit-note, .map-popup-card .commute-note { margin-bottom: 10px; }
+        .map-popup-card .popup-units { margin-bottom: 10px; }
+
+        /* Price markers: the scannable unit on the map is the rent, not a count */
+        .price-marker {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.14);
+            box-shadow: 0 1px 5px rgba(0,0,0,0.22);
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--primary);
+            white-space: nowrap;
+            cursor: pointer;
+            transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease;
+        }
+        .price-marker:hover, .price-marker.is-highlighted {
+            transform: scale(1.08);
+            border-color: var(--accent);
+            z-index: 3;
+        }
+        .price-marker.is-selected {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            z-index: 4;
+        }
+        .price-marker-count {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: var(--text-light);
+            background: var(--bg);
+            border-radius: 999px;
+            padding: 1px 5px;
+        }
+        .price-marker.is-selected .price-marker-count { background: rgba(255,255,255,0.25); color: white; }
+
+        .cluster-marker {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid white;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.12s ease;
+        }
+        .cluster-marker.is-large { width: 44px; height: 44px; font-size: 0.9rem; }
+        .cluster-marker:hover { transform: scale(1.09); }
 
         /* Light rail station marker */
         .link-station-marker {
@@ -2088,7 +2265,10 @@
                     const unitSuffix = isQuilCrossing ? '' : (' | ' + listing.unit);
                     displayTitle = bedroomText + unitSuffix + (isMFTE ? '<span class="mfte-badge">MFTE</span>' : '');
                 } else {
-                    displayTitle = listing.property + ' - ' + listing.title;
+                    const beds = listing.bedrooms === 'Studio' ? 'Studio'
+                        : (listing.bedrooms === 1 ? '1 Bedroom' : listing.bedrooms + ' Bedrooms');
+                    displayTitle = escapeHtml(listing.property) + ' <span class="listing-title-beds">' + beds + '</span>' +
+                        (isMFTE ? '<span class="mfte-badge">MFTE</span>' : '');
                 }
                 // MFTE info badge for single property mode
                 const mfteInfoBadge = (singlePropertyMode && isMFTE) ? '<div class="mfte-info-badge"><span class="mfte-icon">&#10003;</span> Income-Restricted Unit</div>' : '';
@@ -2544,6 +2724,36 @@
                     setupTransitLayers();
                     updateMapMarkers();
                 });
+
+                // The toolbar and filter bar can change height after the map is
+                // built (fonts, wrapping, orientation), which otherwise leaves
+                // the canvas the wrong size with a blank strip above it.
+                const mapContainerEl = document.getElementById('map-container');
+                let lastMapSize = '';
+                function resizeMapIfNeeded() {
+                    if (!map || !mapContainerEl) return;
+                    const rect = mapContainerEl.getBoundingClientRect();
+                    if (!rect.width || !rect.height) return;
+                    const size = Math.round(rect.width) + 'x' + Math.round(rect.height);
+                    // Reallocating the canvas for an unchanged size is wasted work.
+                    if (size === lastMapSize) return;
+                    lastMapSize = size;
+                    map.resize();
+                }
+                lastMapSize = (() => {
+                    const r = mapContainerEl ? mapContainerEl.getBoundingClientRect() : null;
+                    return r ? Math.round(r.width) + 'x' + Math.round(r.height) : '';
+                })();
+                if (window.ResizeObserver && mapContainerEl) {
+                    let pending = false;
+                    new ResizeObserver(() => {
+                        if (pending) return;
+                        pending = true;
+                        requestAnimationFrame(() => { pending = false; resizeMapIfNeeded(); });
+                    }).observe(mapContainerEl);
+                } else {
+                    window.addEventListener('resize', resizeMapIfNeeded);
+                }
                 map.on('error', (e) => { if (loadingEl) loadingEl.innerHTML = 'Map failed to load.'; });
                 map.addControl(new mapboxgl.NavigationControl());
                 
@@ -2559,16 +2769,14 @@
                         }
                     }, 50);
                 });
-                map.on('dragstart', () => { 
-                    resetSidebarToDefault();
-                    // Collapse sidebar on mobile when map is dragged
+                map.on('dragstart', () => {
+                    // Panning explores the map; it no longer discards the
+                    // property the visitor has open. Clicking empty map does.
                     if (window.innerWidth <= 768 && window.collapseBottomSheet) {
                         window.collapseBottomSheet();
                     }
                 });
-                map.on('zoomstart', (e) => { 
-                    if (e.originalEvent) resetSidebarToDefault(); 
-                });
+                map.on('moveend', () => renderMapMarkers());
             } catch (error) { if (loadingEl) loadingEl.innerHTML = 'Unable to load map.'; }
         }
 
@@ -2832,8 +3040,8 @@
             const head = document.getElementById('transit-panel-head');
             if (!panel || !head) return;
 
-            // Start collapsed on phones so the panel never covers the map.
-            if (window.innerWidth <= 768) panel.classList.add('collapsed');
+            // Starts collapsed so the map reads cleanly; one tap opens it.
+            panel.classList.add('collapsed');
             head.setAttribute('aria-expanded', panel.classList.contains('collapsed') ? 'false' : 'true');
             head.addEventListener('click', () => {
                 panel.classList.toggle('collapsed');
@@ -2853,9 +3061,14 @@
             });
         }
 
-        function createMarkerElement(count) {
+        function createMarkerElement(units) {
+            const minRent = Math.min(...units.map(u => u.rent).filter(r => r));
+            const label = isFinite(minRent) ? '$' + Math.round(minRent).toLocaleString() : 'Call';
             const el = document.createElement('div');
-            el.innerHTML = '<div style="background:#000;color:white;padding:6px 12px;border-radius:20px;font-weight:600;font-size:0.85rem;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;white-space:nowrap;font-family:Work Sans,sans-serif;">' + count + ' unit' + (count > 1 ? 's' : '') + '</div>';
+            el.className = 'price-marker';
+            el.innerHTML = '<span class="price-marker-label">' + label + '</span>' +
+                (units.length > 1 ? '<span class="price-marker-count">' + units.length + '</span>' : '');
+            el.title = units[0].property + ' \u00b7 ' + units.length + ' unit' + (units.length > 1 ? 's' : '');
             return el;
         }
 
@@ -2883,6 +3096,7 @@
                 '</div>' +
                 '<div class="popup-units">' + propertyUnits.length + ' unit' + (propertyUnits.length > 1 ? 's' : '') + ' available</div>' +
                 transitNoteHtml(firstUnit.property, { maxRoutes: 4 }) +
+                commuteNoteHtml(firstUnit) +
                 '<div class="popup-stats">' +
                     '<div class="popup-stat">' +
                         '<div class="popup-stat-label">From</div>' +
@@ -2903,43 +3117,158 @@
             '</div>';
         }
 
+        // ============================================================
+        // PROPERTY MARKERS
+        // Seattle packs a dozen properties into a few square miles, so pins
+        // that overlap at city zoom get collapsed into a count bubble and
+        // split apart again as you zoom in - the Zillow / Airbnb behaviour.
+        // ============================================================
+        let propertyGroups = [];
+        let clusterMarkers = [];
+        let popupOpenFor = null;
+        // Removing a marker closes its popup, which must not be mistaken for
+        // the visitor dismissing it while we are only redrawing.
+        let isRerenderingMarkers = false;
+        // Markers are wide and short, so overlap is mostly horizontal -
+        // these are roughly the bounding box of a price pill plus a gap.
+        const CLUSTER_GAP_X = 88;
+        const CLUSTER_GAP_Y = 40;
+
         function updateMapMarkers() {
             if (!map || !mapReady) return;
-            markers.forEach(marker => marker.remove());
-            markers = [];
             const filtered = getFilteredListings();
-            const groupedByProperty = {};
+            const grouped = {};
             filtered.forEach(listing => {
-                if (!groupedByProperty[listing.property]) groupedByProperty[listing.property] = [];
-                groupedByProperty[listing.property].push(listing);
+                (grouped[listing.property] = grouped[listing.property] || []).push(listing);
             });
-            Object.entries(groupedByProperty).forEach(([propertyName, units]) => {
-                const coords = propertyCoordinates[propertyName];
-                if (!coords) return;
-                const el = createMarkerElement(units.length);
-                const popup = new mapboxgl.Popup({ offset: 25, maxWidth: '320px' }).setHTML(createPopupContent(units));
-                const marker = new mapboxgl.Marker(el).setLngLat([coords.lng, coords.lat]).setPopup(popup).addTo(map);
-                el.addEventListener('click', (e) => { 
-                    e.stopPropagation();
-                    markerJustClicked = true;
-                    markers.forEach(m => {
-                        if (m.getPopup().isOpen()) m.getPopup().remove();
-                    });
-                    updateSidebarListings(propertyName);
-                    marker.togglePopup();
-                    // Auto-expand sidebar on mobile when property clicked
-                    if (window.innerWidth <= 768 && window.expandBottomSheet) {
-                        window.expandBottomSheet();
-                    }
-                    setTimeout(() => { markerJustClicked = false; }, 200);
-                });
-                markers.push(marker);
-            });
-            if (markers.length > 0) {
+            propertyGroups = Object.keys(grouped)
+                .filter(name => propertyCoordinates[name])
+                .map(name => ({ property: name, units: grouped[name], coords: propertyCoordinates[name] }));
+
+            if (currentSidebarProperty && !grouped[currentSidebarProperty]) popupOpenFor = null;
+
+            renderMapMarkers();
+
+            if (propertyGroups.length > 0) {
                 const bounds = new mapboxgl.LngLatBounds();
-                markers.forEach(marker => bounds.extend(marker.getLngLat()));
+                propertyGroups.forEach(g => bounds.extend([g.coords.lng, g.coords.lat]));
                 map.fitBounds(bounds, { padding: 80, maxZoom: 12, duration: 1000 });
             }
+        }
+
+        function clusterPropertyGroups() {
+            // Agglomerative: merge the closest overlapping pair, recompute its
+            // centre, repeat. One greedy pass is not enough, because two
+            // clusters can end up sitting on top of each other.
+            // The property the visitor has open always stays its own pin, so
+            // it never disappears into a bubble while its popup is showing.
+            const focused = propertyGroups.filter(g => g.property === popupOpenFor);
+            let nodes = propertyGroups.filter(g => g.property !== popupOpenFor).map(group => {
+                const point = map.project([group.coords.lng, group.coords.lat]);
+                return { members: [group], x: point.x, y: point.y };
+            });
+
+            let merged = true;
+            while (merged && nodes.length > 1) {
+                merged = false;
+                for (let i = 0; i < nodes.length && !merged; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        if (Math.abs(nodes[i].x - nodes[j].x) < CLUSTER_GAP_X &&
+                            Math.abs(nodes[i].y - nodes[j].y) < CLUSTER_GAP_Y) {
+                            const a = nodes[i];
+                            const b = nodes[j];
+                            const total = a.members.length + b.members.length;
+                            a.x = (a.x * a.members.length + b.x * b.members.length) / total;
+                            a.y = (a.y * a.members.length + b.y * b.members.length) / total;
+                            a.members = a.members.concat(b.members);
+                            nodes.splice(j, 1);
+                            merged = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            return focused.map(g => [g]).concat(nodes.map(n => n.members));
+        }
+
+        function renderMapMarkers() {
+            if (!map || !mapReady) return;
+            const keepOpenFor = popupOpenFor;
+            isRerenderingMarkers = true;
+            markers.forEach(m => m.remove());
+            clusterMarkers.forEach(m => m.remove());
+            markers = [];
+            clusterMarkers = [];
+            isRerenderingMarkers = false;
+            popupOpenFor = keepOpenFor;
+
+            clusterPropertyGroups().forEach(members => {
+                if (members.length === 1) {
+                    addPropertyMarker(members[0]);
+                } else {
+                    addClusterMarker(members);
+                }
+            });
+
+            // A marker that was showing a popup keeps showing it across zooms.
+            if (popupOpenFor) {
+                const marker = markers.find(m => m.agmProperty === popupOpenFor);
+                if (marker) {
+                    marker.getElement().classList.add('is-selected');
+                    if (!marker.getPopup().isOpen()) marker.togglePopup();
+                }
+            }
+        }
+
+        function addPropertyMarker(group) {
+            const el = createMarkerElement(group.units);
+            const popup = new mapboxgl.Popup({ offset: 20, maxWidth: '300px' }).setHTML(createPopupContent(group.units));
+            const marker = new mapboxgl.Marker(el).setLngLat([group.coords.lng, group.coords.lat]).setPopup(popup).addTo(map);
+            marker.agmProperty = group.property;
+            popup.on('close', () => {
+                if (!isRerenderingMarkers && popupOpenFor === group.property) popupOpenFor = null;
+            });
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                markerJustClicked = true;
+                markers.forEach(m => {
+                    if (m !== marker && m.getPopup().isOpen()) m.getPopup().remove();
+                    m.getElement().classList.remove('is-selected');
+                });
+                el.classList.add('is-selected');
+                popupOpenFor = group.property;
+                updateSidebarListings(group.property, true);
+                if (!popup.isOpen()) marker.togglePopup();
+                if (window.innerWidth <= 768 && window.expandBottomSheet) window.expandBottomSheet();
+                setTimeout(() => { markerJustClicked = false; }, 200);
+            });
+            markers.push(marker);
+        }
+
+        function addClusterMarker(members) {
+            const unitCount = members.reduce((sum, g) => sum + g.units.length, 0);
+            const lng = members.reduce((sum, g) => sum + g.coords.lng, 0) / members.length;
+            const lat = members.reduce((sum, g) => sum + g.coords.lat, 0) / members.length;
+            const rents = members.map(g => cheapestUnit(g.units).rent).filter(r => r);
+
+            const el = document.createElement('div');
+            el.className = 'cluster-marker';
+            if (members.length > 9) el.classList.add('is-large');
+            el.textContent = members.length;
+            el.title = members.length + ' properties, ' + unitCount + ' unit' + (unitCount > 1 ? 's' : '') +
+                (rents.length ? ', from $' + Math.min.apply(null, rents).toLocaleString() : '') +
+                ' \u2014 click to zoom in';
+
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                markerJustClicked = true;
+                const bounds = new mapboxgl.LngLatBounds();
+                members.forEach(g => bounds.extend([g.coords.lng, g.coords.lat]));
+                map.fitBounds(bounds, { padding: 120, maxZoom: 15, duration: 700 });
+                setTimeout(() => { markerJustClicked = false; }, 300);
+            });
+
+            clusterMarkers.push(new mapboxgl.Marker(el).setLngLat([lng, lat]).addTo(map));
         }
 
         function getFilterDescription() {
@@ -2958,94 +3287,293 @@
             return parts.length > 0 ? parts.join(' &#183; ') : null;
         }
 
+        // ============================================================
+        // RESULTS PANEL
+        // Two states: a list of properties, or the units inside one.
+        // Rows are deliberately plain so a long list stays scannable.
+        // ============================================================
+        let sidebarSort = 'price-asc';
+
+        const SORT_LABELS = {
+            'price-asc': 'Price: low to high',
+            'price-desc': 'Price: high to low',
+            'available': 'Available soonest',
+            'commute': 'Closest to work'
+        };
+
+        // "Now" first, then by date; anything unparseable sorts last.
+        function availabilityRank(listing) {
+            const value = (listing.available || '').trim();
+            if (/^now$/i.test(value)) return 0;
+            const parsed = Date.parse(value);
+            return isNaN(parsed) ? Number.MAX_SAFE_INTEGER - 1 : parsed;
+        }
+
+        function cheapestUnit(units) {
+            return units.reduce((min, u) => (priceAsc(u, min) < 0 ? u : min), units[0]);
+        }
+
+        function bedLabel(bedrooms) {
+            if (bedrooms === 'Studio') return 'Studio';
+            return bedrooms + ' bd';
+        }
+
+        function bedRangeLabel(units) {
+            const order = units.map(u => (u.bedrooms === 'Studio' ? 0 : u.bedrooms)).sort((a, b) => a - b);
+            const low = order[0];
+            const high = order[order.length - 1];
+            const name = n => (n === 0 ? 'Studio' : n + ' bd');
+            return low === high ? name(low) : name(low) + '\u2013' + name(high);
+        }
+
+        // Units with no published rent ("Call") sort to the bottom either way -
+        // a missing price is not a cheap one.
+        function priceAsc(a, b) {
+            if (!a.rent && !b.rent) return 0;
+            if (!a.rent) return 1;
+            if (!b.rent) return -1;
+            return a.rent - b.rent;
+        }
+
+        function sortComparator(mode) {
+            if (mode === 'price-desc') return (a, b) => {
+                if (!a.rent && !b.rent) return 0;
+                if (!a.rent) return 1;
+                if (!b.rent) return -1;
+                return b.rent - a.rent;
+            };
+            if (mode === 'available') return (a, b) => availabilityRank(a) - availabilityRank(b) || priceAsc(a, b);
+            if (mode === 'commute') return (a, b) => commuteMeters(a.property) - commuteMeters(b.property) || priceAsc(a, b);
+            return priceAsc;
+        }
+
+        function activeSortMode() {
+            // "Closest to work" only means something once a workplace is set.
+            if (sidebarSort === 'commute' && !workLocation) return 'price-asc';
+            return sidebarSort;
+        }
+
+        // One compact transit line, no chips - the detail view carries those.
+        function transitLineHtml(propertyName) {
+            const near = nearestLightRailStation(propertyName);
+            if (near && near.meters <= 1600) {
+                return '<span class="unit-row-transit">&#128649; ' + walkMinutes(near.meters) +
+                    ' min to ' + escapeHtml(near.station.name) + '</span>';
+            }
+            const routes = transitRoutesFor(propertyName);
+            if (routes.length) {
+                return '<span class="unit-row-transit">&#128652; ' +
+                    escapeHtml(routes.slice(0, 3).map(r => r.n).join(', ')) + '</span>';
+            }
+            return '';
+        }
+
+        function commuteLineHtml(propertyName) {
+            if (!workLocation) return '';
+            const meters = commuteMeters(propertyName);
+            if (meters === Number.MAX_SAFE_INTEGER) return '';
+            return '<span>&#128188; ' + (meters / 1609.34).toFixed(1) + ' mi to work</span>';
+        }
+
+        function availabilityHtml(listing) {
+            const isNow = /^now$/i.test((listing.available || '').trim());
+            return '<span class="unit-row-avail' + (isNow ? ' is-now' : '') + '">' +
+                (isNow ? 'Available now' : 'Available ' + escapeHtml(listing.available)) + '</span>';
+        }
+
+        function propertyRowHtml(group) {
+            const cheapest = cheapestUnit(group.units);
+            const price = cheapest.rent ? '$' + cheapest.rent.toLocaleString() : '<span class="call">Call</span>';
+            const fromPrefix = group.units.length > 1 && cheapest.rent ? '<span class="from">from</span>' : '';
+            const spec = [
+                escapeHtml(cheapest.neighborhood),
+                bedRangeLabel(group.units),
+                group.units.length + (group.units.length > 1 ? ' units' : ' unit')
+            ].filter(Boolean).join(' \u00b7 ');
+            const meta = [availabilityHtml(cheapest), commuteLineHtml(group.property), transitLineHtml(group.property)]
+                .filter(Boolean).join('');
+
+            return '<button type="button" class="unit-row" data-property="' + escapeHtml(group.property) + '">' +
+                '<span class="unit-row-top">' +
+                    '<span class="unit-row-name">' + escapeHtml(group.property) + '</span>' +
+                    '<span class="unit-row-price">' + fromPrefix + price + '</span>' +
+                '</span>' +
+                '<span class="unit-row-spec">' + spec + '</span>' +
+                '<span class="unit-row-meta">' + meta + '</span>' +
+            '</button>';
+        }
+
+        function unitRowHtml(listing) {
+            const price = listing.rent ? '$' + listing.rent.toLocaleString() : '<span class="call">Call</span>';
+            const isMFTE = listing.features && listing.features.includes('MFTE/MHA');
+            const unitLabel = listing.unit && listing.unit !== 'Not Specified'
+                ? bedLabel(listing.bedrooms) + ' \u00b7 Unit ' + escapeHtml(listing.unit)
+                : bedLabel(listing.bedrooms);
+            const spec = [
+                listing.bathrooms + ' ba',
+                listing.sqft ? listing.sqft.toLocaleString() + ' sqft' : null
+            ].filter(Boolean).join(' \u00b7 ');
+            const meta = [
+                availabilityHtml(listing),
+                isMFTE ? '<span class="unit-row-flag">Income-restricted</span>' : ''
+            ].filter(Boolean).join('');
+
+            return '<div class="unit-row">' +
+                '<span class="unit-row-top">' +
+                    '<span class="unit-row-name">' + unitLabel + '</span>' +
+                    '<span class="unit-row-price">' + price + '</span>' +
+                '</span>' +
+                '<span class="unit-row-spec">' + spec + '</span>' +
+                '<span class="unit-row-meta">' + meta + '</span>' +
+                '<span class="unit-row-links">' +
+                    '<a class="unit-row-link" href="' + listing.detailsUrl + '" target="_blank" rel="noopener">Details</a>' +
+                    '<a class="unit-row-link is-primary" href="' + listing.applyUrl + '" target="_blank" rel="noopener">Apply</a>' +
+                '</span>' +
+            '</div>';
+        }
+
+        function sortControlHtml() {
+            const mode = activeSortMode();
+            const options = ['price-asc', 'price-desc', 'available'];
+            if (workLocation) options.push('commute');
+            return '<label class="sidebar-sort"><select id="sidebar-sort-select" aria-label="Sort results">' +
+                options.map(value => '<option value="' + value + '"' + (value === mode ? ' selected' : '') + '>' +
+                    SORT_LABELS[value] + '</option>').join('') +
+                '</select></label>';
+        }
+
         function updateSidebarListings(specificProperty = null, forceUpdate = false) {
             const sidebar = document.getElementById('listings-sidebar');
             if (!forceUpdate && specificProperty === currentSidebarProperty) return;
             currentSidebarProperty = specificProperty;
-            
-            let listingsToShow = [];
-            
-            if (!specificProperty) {
-                const filtered = getFilteredListings();
-                const groupedByProperty = {};
-                filtered.forEach(listing => {
-                    if (!groupedByProperty[listing.property]) groupedByProperty[listing.property] = [];
-                    groupedByProperty[listing.property].push(listing);
-                });
-                Object.values(groupedByProperty).forEach(units => {
-                    const lowestPriced = units.reduce((min, unit) => unit.rent < min.rent ? unit : min, units[0]);
-                    listingsToShow.push(lowestPriced);
-                });
-                if (workLocation) {
-                    // With a workplace set, the closest commute is the most useful first card.
-                    listingsToShow.sort((a, b) => commuteMeters(a.property) - commuteMeters(b.property));
-                } else {
-                    listingsToShow.sort((a, b) => a.rent - b.rent);
-                }
-            } else {
-                listingsToShow = getFilteredListings().filter(l => l.property === specificProperty);
-            }
-            
-            if (listingsToShow.length === 0) { 
-                const isMobileEmpty = window.innerWidth <= 768;
-                if (isMobileEmpty) {
-                    sidebar.innerHTML = '<div class="sidebar-handle"><button class="sidebar-close-btn" id="sidebar-close-btn">&times;</button></div><div class="no-listings"><h2>No Units Available</h2><p>Try adjusting your filters.</p></div>';
-                    const closeBtn = document.getElementById('sidebar-close-btn');
-                    if (closeBtn) {
-                        closeBtn.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            if (window.collapseBottomSheet) window.collapseBottomSheet();
-                        });
-                    }
-                } else {
-                    sidebar.innerHTML = '<div class="no-listings"><h2>No Units Available</h2><p>Try adjusting your filters.</p></div>';
-                }
-                return; 
-            }
-            
-            let headerText = '';
-            const filterDesc = getFilterDescription();
-            if (specificProperty) {
-                headerText = '<div class="sidebar-header"><div class="sidebar-title">' + specificProperty + '</div><div class="sidebar-subtitle">' + listingsToShow.length + ' unit' + (listingsToShow.length > 1 ? 's' : '') + ' available</div></div>';
-            } else if (filterDesc) {
-                headerText = '<div class="sidebar-header"><div class="sidebar-filter-tags">' + filterDesc + '</div><div class="sidebar-subtitle">Lowest price at ' + listingsToShow.length + ' propert' + (listingsToShow.length > 1 ? 'ies' : 'y') + '</div></div>';
-            } else {
-                const sortNote = workLocation ? 'Closest to your workplace first' : 'Lowest price at ' + listingsToShow.length + ' properties';
-                headerText = '<div class="sidebar-header"><div class="sidebar-title">All Properties</div><div class="sidebar-subtitle">' + sortNote + '</div></div>';
-            }
-            
-            const listingsHTML = listingsToShow.map((listing, index) => {
-                const bedBath = listing.bedrooms + '/' + listing.bathrooms;
-                const sqft = listing.sqft ? listing.sqft.toLocaleString() : 'N/A';
-                const rent = listing.rent ? listing.rent.toLocaleString() : 'Call';
-                const delay = Math.min(index * 0.05, 0.5);
-                const transitHTML = transitNoteHtml(listing.property, { maxRoutes: 4 }) + commuteNoteHtml(listing);
-                return '<div class="listing-card" style="animation-delay: ' + delay + 's"><div class="listing-content"><div class="listing-header"><h2 class="listing-title">' + listing.property + ' - ' + listing.title + '</h2><p class="listing-address">' + listing.address + '</p></div>' + transitHTML + '<div class="listing-details"><div class="detail-item"><span class="detail-label">Rent</span><span class="detail-value rent-price">$' + rent + '</span></div><div class="detail-item"><span class="detail-label">Bed/Bath</span><span class="detail-value">' + bedBath + '</span></div><div class="detail-item"><span class="detail-label">Sq Ft</span><span class="detail-value">' + sqft + '</span></div></div>' + (listing.features && listing.features.length > 0 ? '<div class="listing-features"><div class="features-list">' + listing.features.slice(0, 3).map(f => '<span class="feature-tag">' + f + '</span>').join('') + '</div></div>' : '') + '<div class="availability-badge">Available ' + listing.available + '</div><div class="listing-actions"><a href="' + listing.detailsUrl + '" class="btn btn-secondary" target="_blank">View</a><a href="' + listing.applyUrl + '" class="btn btn-primary" target="_blank">Apply</a></div></div></div>';
-            }).join('');
-            
-            // Check if mobile (bottom sheet style)
+
             const isMobile = window.innerWidth <= 768;
-            if (isMobile) {
-                sidebar.innerHTML = '<div class="sidebar-handle"><button class="sidebar-close-btn" id="sidebar-close-btn">&times;</button></div>' + headerText + '<div class="sidebar-scroll-area">' + listingsHTML + '</div>';
-                // Add close button listener
-                const closeBtn = document.getElementById('sidebar-close-btn');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        if (window.collapseBottomSheet) window.collapseBottomSheet();
-                    });
+            const handle = isMobile
+                ? '<div class="sidebar-handle"><button class="sidebar-close-btn" id="sidebar-close-btn">&times;</button></div>'
+                : '';
+            const filtered = getFilteredListings();
+            const comparator = sortComparator(activeSortMode());
+
+            let header = '';
+            let rows = '';
+
+            if (specificProperty) {
+                const units = filtered.filter(l => l.property === specificProperty).sort(comparator);
+                if (units.length === 0) {
+                    // Filters no longer match this property, so fall back to the full list.
+                    currentSidebarProperty = null;
+                    return updateSidebarListings(null, true);
                 }
+                header = '<div class="sidebar-header">' +
+                    '<div class="sidebar-heading-group">' +
+                        '<button type="button" class="sidebar-back" id="sidebar-back">&#8592; All properties</button>' +
+                        '<div class="sidebar-title">' + escapeHtml(specificProperty) + '</div>' +
+                        '<div class="sidebar-subtitle">' + units.length + ' unit' + (units.length > 1 ? 's' : '') + ' available</div>' +
+                    '</div>' + sortControlHtml() + '</div>';
+                rows = units.map(unitRowHtml).join('');
             } else {
-                sidebar.innerHTML = headerText + listingsHTML;
+                const grouped = {};
+                filtered.forEach(listing => {
+                    (grouped[listing.property] = grouped[listing.property] || []).push(listing);
+                });
+                const groups = Object.keys(grouped).map(name => ({ property: name, units: grouped[name] }));
+                groups.sort((a, b) => comparator(cheapestUnit(a.units), cheapestUnit(b.units)));
+
+                if (groups.length === 0) {
+                    sidebar.innerHTML = handle +
+                        '<div class="sidebar-empty"><h2>No units match</h2><p>Try clearing a filter or two.</p></div>';
+                    wireSidebarChrome();
+                    return;
+                }
+
+                const filterDesc = getFilterDescription();
+                const title = filterDesc
+                    ? '<div class="sidebar-filter-tags">' + filterDesc + '</div>'
+                    : '<div class="sidebar-title">All properties</div>';
+                header = '<div class="sidebar-header">' +
+                    '<div class="sidebar-heading-group">' + title +
+                        '<div class="sidebar-subtitle">' + groups.length + ' propert' + (groups.length > 1 ? 'ies' : 'y') +
+                        ' \u00b7 ' + filtered.length + ' unit' + (filtered.length > 1 ? 's' : '') + '</div>' +
+                    '</div>' + sortControlHtml() + '</div>';
+                rows = groups.map(propertyRowHtml).join('');
             }
-            
-            sidebar.scrollTop = 0;
-            
-            // Reset scroll area if exists
+
+            sidebar.innerHTML = handle + header + '<div class="sidebar-scroll-area">' + rows + '</div>';
+            wireSidebarChrome();
+
             const scrollArea = sidebar.querySelector('.sidebar-scroll-area');
             if (scrollArea) scrollArea.scrollTop = 0;
         }
-        
+
+        // Re-attached on every render, since the panel is rebuilt wholesale.
+        function wireSidebarChrome() {
+            const sidebar = document.getElementById('listings-sidebar');
+
+            const closeBtn = sidebar.querySelector('#sidebar-close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (window.collapseBottomSheet) window.collapseBottomSheet();
+                });
+            }
+
+            const backBtn = sidebar.querySelector('#sidebar-back');
+            if (backBtn) {
+                backBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    popupOpenFor = null;
+                    updateSidebarListings(null, true);
+                    if (map) markers.forEach(m => {
+                        if (m.getPopup().isOpen()) m.getPopup().remove();
+                        m.getElement().classList.remove('is-selected');
+                    });
+                });
+            }
+
+            const sortSelect = sidebar.querySelector('#sidebar-sort-select');
+            if (sortSelect) {
+                sortSelect.addEventListener('change', (e) => {
+                    sidebarSort = e.target.value;
+                    updateSidebarListings(currentSidebarProperty, true);
+                });
+                sortSelect.addEventListener('click', (e) => e.stopPropagation());
+            }
+
+            sidebar.querySelectorAll('.unit-row[data-property]').forEach(row => {
+                const name = row.dataset.property;
+                row.addEventListener('click', () => focusProperty(name));
+                row.addEventListener('mouseenter', () => highlightPropertyMarker(name, true));
+                row.addEventListener('mouseleave', () => highlightPropertyMarker(name, false));
+            });
+        }
+
+        // Clicking a row drives the map, the way Zillow and Airbnb tie the
+        // two halves of the screen together.
+        function focusProperty(propertyName) {
+            updateSidebarListings(propertyName, true);
+            if (!map || !mapReady) return;
+
+            markers.forEach(m => {
+                if (m.getPopup().isOpen()) m.getPopup().remove();
+                m.getElement().classList.remove('is-selected');
+            });
+            popupOpenFor = propertyName;
+            markerJustClicked = true;
+
+            const coords = propertyCoordinates[propertyName];
+            if (coords) {
+                map.easeTo({ center: [coords.lng, coords.lat], zoom: Math.max(map.getZoom(), 13), duration: 700 });
+            }
+            // Covers the case where the camera does not actually move.
+            renderMapMarkers();
+            setTimeout(() => { markerJustClicked = false; }, 900);
+        }
+
+        function highlightPropertyMarker(propertyName, on) {
+            const marker = markers.find(m => m.agmProperty === propertyName);
+            if (marker) marker.getElement().classList.toggle('is-highlighted', on);
+        }
+
         function commuteMeters(propertyName) {
             const coords = propertyCoordinates[propertyName];
             if (!coords || !workLocation) return Number.MAX_SAFE_INTEGER;
@@ -3054,7 +3582,9 @@
 
         function resetSidebarToDefault() {
             if (currentSidebarProperty) {
-                updateSidebarListings(null);
+                popupOpenFor = null;
+                markers.forEach(m => m.getElement().classList.remove('is-selected'));
+                updateSidebarListings(null, true);
             }
         }
         
@@ -3065,7 +3595,7 @@
             
             // Bottom sheet configuration
             const sheetHeight = window.innerHeight * 0.7; // 70vh
-            const peekHeight = 160; // Collapsed state shows this much
+            const peekHeight = 232; // Collapsed state shows the header plus two rows
             const midPoint = sheetHeight * 0.5; // Halfway point (50% of sheet)
             
             // Snap positions (translateY values)
@@ -3084,6 +3614,8 @@
             sidebar.style.transform = `translateY(${COLLAPSED}px)`;
             
             function isHandleArea(target) {
+                // The header doubles as the drag handle, but its controls come first.
+                if (target.closest('.sidebar-sort') || target.closest('.sidebar-back')) return false;
                 return target.closest('.sidebar-handle') || target.closest('.sidebar-header');
             }
             
