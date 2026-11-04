@@ -21,7 +21,7 @@
             --card-bg: #ffffff;
             --surface-hover: #f4f4f5;
             --text: #27272a;
-            --text-light: #71717a;
+            --text-light: #5c5c66;
             --border: #e4e4e7;
             --border-strong: #d4d4d8;
             --control-hover-border: #a1a1aa;
@@ -63,7 +63,7 @@
             --card-bg: #1f1f23;
             --surface-hover: #27272a;
             --text: #e4e4e7;
-            --text-light: #a1a1aa;
+            --text-light: #a9a9b4;
             --border: #2e2e33;
             --border-strong: #3f3f46;
             --control-hover-border: #71717a;
@@ -118,6 +118,15 @@
         /* ============================================================
            APP BAR - one strip, edge to edge
            ============================================================ */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+            border: 0;
+        }
         .appbar {
             display: flex;
             align-items: center;
@@ -133,7 +142,6 @@
         }
         .appbar-rule { width: 1px; align-self: stretch; margin: 2px 0; background: var(--border); flex-shrink: 0; }
         .appbar-actions { display: flex; align-items: center; gap: clamp(8px, 0.7vw, 14px); margin-left: auto; flex-shrink: 0; }
-        .view-toggle { order: 0; }
 
         .view-toggle {
             display: inline-flex;
@@ -491,7 +499,8 @@
             height: 32px;
         }
         .sidebar-sort select:hover { border-color: var(--control-hover-border); }
-        .sidebar-sort select:focus { outline: none; border-color: var(--accent); }
+        .sidebar-sort select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+        .sidebar-sort select:focus { border-color: var(--accent); }
 
         /* One result = one row, separated by a hairline, no card chrome */
         .unit-row {
@@ -679,7 +688,7 @@
             }
             .appbar-rule { display: none; }
             /* With the view switch gone, the count balances the actions row. */
-            .appbar .appbar-actions { order: 1; width: 100%; margin-left: 0; }
+            .appbar .appbar-actions { width: 100%; margin-left: 0; }
             .appbar .results-indicator { display: inline; margin-right: auto; }
             .appbar .view-toggle { order: 0; }
             .appbar .filter-bar { order: 2; flex: 1 0 100%; }
@@ -1184,18 +1193,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            order: 2;
             flex: 1 1 auto;
             min-width: 0;
         }
-        .appbar-actions { order: 3; }
 
         /* Below this width the controls cannot share one line without being
            cut off, so the filters take a full second row instead. */
         @media (max-width: 1359px) {
-            .appbar .filter-bar { order: 1; flex: 1 0 100%; }
-            .appbar .appbar-actions { order: 0; }
-            .appbar-rule { display: none; }
+            .appbar .filter-bar { flex: 1 0 100%; }
         }
         body.single-property-mode .filter-bar { display: none; }
         .fb-scroll {
@@ -1267,7 +1272,8 @@
         }
         .fb-select:hover { border-color: var(--control-hover-border); }
         .fb-select.is-set:hover { background-color: var(--accent-hover); border-color: var(--accent-hover); }
-        .fb-select:focus { outline: none; border-color: var(--accent); }
+        .fb-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+        .fb-select:focus { border-color: var(--accent); }
         .fb-select.is-set {
             background-color: var(--accent);
             color: var(--accent-text);
@@ -1474,17 +1480,10 @@
 <body>
     <div class="container">
         <!-- APP BAR
-             One flat strip: view switch, every filter inline, actions on the
-             right. Group labels are gone - the controls say what they are. -->
-        <div class="appbar">
-            <div class="appbar-actions">
-                <span class="results-indicator" id="results-indicator"><strong id="results-count">0</strong> units</span>
-                <button type="button" class="theme-toggle" id="theme-toggle" title="Switch between light and dark" aria-label="Switch between light and dark">
-                    <span class="theme-toggle-icon" id="theme-toggle-icon">&#9790;</span>
-                </button>
-                <button class="book-tour-btn" id="book-tour-btn">Book a tour</button>
-            </div>
-
+             One flat strip: every filter inline, actions on the right.
+             Group labels are gone - the controls say what they are. -->
+        <h1 class="sr-only">AGM Real Estate Group — available apartments in the Seattle area</h1>
+        <header class="appbar">
             <div class="filter-bar" id="filter-bar" role="group" aria-label="Filter available units">
                 <div class="fb-scroll">
                     <div class="fb-pills">
@@ -1512,7 +1511,15 @@
                 <button type="button" class="fb-clear" id="fb-clear" title="Clear all filters">Clear</button>
             </div>
 
-        </div>
+            <div class="appbar-actions">
+                <span class="results-indicator" id="results-indicator"><strong id="results-count">0</strong> units</span>
+                <button type="button" class="theme-toggle" id="theme-toggle" title="Switch between light and dark" aria-label="Switch between light and dark">
+                    <span class="theme-toggle-icon" id="theme-toggle-icon">&#9790;</span>
+                </button>
+                <button class="book-tour-btn" id="book-tour-btn">Book a tour</button>
+            </div>
+
+        </header>
 
         <!-- SINGLE PROPERTY FILTER BAR (shown only in single property mode) -->
         <div class="single-property-filters" id="single-property-filters">
@@ -1677,7 +1684,7 @@
             </div>
         </div>
 
-        <div class="view-container active">
+        <main class="view-container active">
             <div class="map-container active" id="map-container">
                 <div id="map"></div>
                 <div class="map-loading" id="map-loading">Loading map...</div>
@@ -1716,9 +1723,10 @@
                     </div>
                 </div>
             </div>
-            <div class="listings-sidebar active" id="listings-sidebar"></div>
-        </div>
+            <div class="listings-sidebar active" id="listings-sidebar" aria-label="Search results"></div>
+        </main>
 
+        <p class="sr-only" role="status" aria-live="polite" id="results-announcer"></p>
         <div id="listings-container" style="display: none;"></div>
         
         <!-- INLINE TOUR FORM (Mobile Single Property Mode Only) -->
@@ -2248,6 +2256,21 @@
             return filtered;
         }
 
+        // Filtering changes the panel silently otherwise.
+        let announceTimer = null;
+        function announceResults(filtered) {
+            const node = document.getElementById('results-announcer');
+            if (!node) return;
+            clearTimeout(announceTimer);
+            announceTimer = setTimeout(() => {
+                const properties = new Set(filtered.map(l => l.property)).size;
+                node.textContent = filtered.length === 0
+                    ? 'No units match the current filters.'
+                    : filtered.length + ' unit' + (filtered.length === 1 ? '' : 's') +
+                      ' at ' + properties + ' propert' + (properties === 1 ? 'y' : 'ies') + '.';
+            }, 400);
+        }
+
         function countActiveFilters() {
             let count = 0;
             // In single property mode, don't count the property filter since it's locked
@@ -2263,6 +2286,7 @@
             const container = document.getElementById('listings-container');
             const filtered = getFilteredListings();
             document.getElementById('results-count').textContent = filtered.length;
+            announceResults(filtered);
             updateFilterBadge();
             if (filtered.length === 0) {
                 if (singlePropertyMode && urlPropertyFilter) {
