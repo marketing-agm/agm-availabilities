@@ -1,7 +1,34 @@
-# Master Prompt: AGM Availabilities App Update
+# AGM Availabilities App Update
+
+**This now runs itself.** `.github/workflows/sync-availabilities.yml` runs the
+sync at 16:12 UTC daily and commits straight to main, then deploys. There is
+no pull request to merge and nothing to approve.
+
+Use the prompt below when you want to run it by hand — investigating a
+problem, or after adding a property. You can also fire the workflow manually
+from the Actions tab ("Sync availabilities" -> Run workflow).
+
+### If the scheduled run fails
+
+The job fails loudly rather than publishing bad data, and main is left
+untouched. Open the failed run in the Actions tab: the step summary carries
+the full sync report, and the table in step 1 below says what each failure
+means. The usual cause is AppFolio changing its markup.
+
+Two things worth knowing about the automation:
+
+- A push made with `GITHUB_TOKEN` does not trigger other workflows, so
+  `deploy.yml` does **not** fire for the sync's commit. The sync workflow runs
+  the Cloudflare deploy itself. If you change how the site deploys, change it
+  in both files.
+- GitHub disables scheduled workflows in a repository with no activity for 60
+  days. If the sync goes quiet, check whether the workflow was disabled before
+  assuming the parser broke.
+
+---
 
 Copy and paste the prompt below into a new Claude Code session to update the
-availabilities app from the AppFolio listings page.
+availabilities app from the AppFolio listings page by hand.
 
 The scraping, mapping and validation now live in
 `scripts/sync-availabilities.py`. This prompt no longer restates CSS selectors
