@@ -1,482 +1,134 @@
 # Master Prompt: AGM Availabilities App Update
 
-Copy and paste the prompt below into a new Claude Code session to 1-shot update the availabilities app from the AppFolio listings page.
+Copy and paste the prompt below into a new Claude Code session to update the
+availabilities app from the AppFolio listings page.
+
+The scraping, mapping and validation now live in
+`scripts/sync-availabilities.py`. This prompt no longer restates CSS selectors
+or property tables — those drifted out of date and silently broke the sync.
+See **Why this is a script** at the bottom.
 
 ---
 
 ## The Prompt
 
 ```
-Update the AGM availabilities app at /home/user/agm-availabilities/index.html with the latest listings from https://agmrealestategroup.appfolio.com/listings
+Update the AGM availabilities app at /home/user/agm-availabilities from the
+latest AppFolio listings.
 
-Follow this exact workflow:
+### 1. See what would change
 
----
+    python3 scripts/sync-availabilities.py --dry-run
 
-### ⚠️ IMPORTANT: Preserve manual placeholder listings (Quil Crossing)
+This downloads https://agmrealestategroup.appfolio.com/listings, parses it,
+maps every listing to a known property, and prints an added / removed /
+changed report. It writes nothing.
 
-**Quil Creek Crossing Apartments** is maintained manually and does NOT appear in the
-AppFolio listings feed. It has three placeholder unit cards (1 Bed / 2 Bed / 3 Bed) that
-power the URL-parameter embed at `?property=Quil Creek Crossing Apartments`.
+If it exits non-zero, STOP and read the message. It refuses to publish when
+something looks wrong rather than writing bad data:
 
-These entries WILL be missing from the AppFolio HTML you download — that is expected and
-correct. Do NOT treat them as "removed" listings. You must preserve, untouched:
-
-1. The three `"property": "Quil Creek Crossing Apartments"` objects in the `agmListings` array.
-2. The `"Quil Creek Crossing Apartments"` entries in `propertyLeasingAgents`,
-   `propertyCoordinates`, and `propertyWebsites`.
-3. The Quil-specific display logic in `getBaseListings` (the `singlePropertyMode`
-   filter that hides Quil from the default list/map), the `isQuilCrossing` branches in the
-   card-rendering function, and the "Quil Crossing custom branding" IIFE near the end of
-   the script.
-
-When replacing the `agmListings` array contents, re-add the three Quil objects exactly as
-they were. When pruning "orphan" properties from the supporting objects (Steps 7 & 9),
-EXCLUDE Quil Creek Crossing from that pruning — it is intentionally an orphan relative to
-the AppFolio feed. Do NOT count Quil's three units in the "removed listings" change report.
-
-If the three Quil objects are absent from the current `index.html` (e.g. a previous run
-stripped them), restore them. Reference values:
-
-```json
-{"property": "Quil Creek Crossing Apartments", "neighborhood": "Marysville", "unit": "Unit A", "title": "1 Bedroom | Quil Crossing", "bedrooms": 1, "bathrooms": 1.0, "rent": 1500, "sqft": 900, "available": "Now", "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271", "features": ["On-Site Laundry"], "detailsUrl": "#", "applyUrl": "https://agmrealestategroup.appfolio.com/apply/c62263d2-347e-4137-98f5-64f3817bea7d/start"}
-{"property": "Quil Creek Crossing Apartments", "neighborhood": "Marysville", "unit": "Unit B", "title": "2 Bedrooms | Quil Crossing", "bedrooms": 2, "bathrooms": 2.0, "rent": 1800, "sqft": 1330, "available": "Now", "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271", "features": ["On-Site Laundry"], "detailsUrl": "#", "applyUrl": "https://agmrealestategroup.appfolio.com/apply/dba566ce-5df8-444a-a511-8ac313b84d61/start"}
-{"property": "Quil Creek Crossing Apartments", "neighborhood": "Marysville", "unit": "Unit C", "title": "3 Bedrooms | Quil Crossing", "bedrooms": 3, "bathrooms": 2.0, "rent": 2100, "sqft": 1500, "available": "Now", "address": "7817 Sandra Madison Loop Rd, Marysville, WA 98271", "features": ["On-Site Laundry"], "detailsUrl": "#", "applyUrl": "https://agmrealestategroup.appfolio.com/apply/37ba5d3c-0b92-4ddb-b9ba-6ab3253b793d/start"}
-```
-Plus: `propertyLeasingAgents` → `"leasing@agmrealestategroup.com"`;
-`propertyCoordinates` → `{ lat: 48.0809, lng: -122.1518 }`;
-`propertyWebsites` → `"https://agmrealestategroup.appfolio.com/listings"`.
-
----
-
-### STEP 1: Download the full AppFolio HTML
-
-IMPORTANT: Do NOT use WebFetch — it truncates large pages. Use curl instead:
-
-curl -o /tmp/appfolio_listings.html "https://agmrealestategroup.appfolio.com/listings"
-
-Verify the listing count:
-grep -c 'data-listing-id' /tmp/appfolio_listings.html
-
-This count is the authoritative number of listings. All must be captured.
-
----
-
-### STEP 2: Extract listing data with Python
-
-Run a Python script that parses the downloaded HTML using regex. The AppFolio HTML structure uses these CSS classes/patterns:
-
-- **Listing blocks**: Split HTML by `<div class="listing-item result js-listing-item"` — each block is one listing
-- **Title + UUID**: Inside each block, find the title inside `<h2 class="listing-item__title js-listing-title">` → `<a href="/listings/detail/UUID">Title Text</a>`. IMPORTANT: Each block also has an image `<a>` linking to the same UUID — match the one inside `js-listing-title` specifically to get clean title text.
-- **Address**: `<span class="js-listing-address">` — full street address
-- **Rent**: `<span/div class="js-listing-blurb-rent">` — contains e.g., "$1,695" (extract with regex `\$[\d,]+`)
-- **Bed/Bath**: `<span class="js-listing-blurb-bed-bath">` — e.g., "1 bd / 1 ba", "Studio / 1 ba"
-- **Square feet**: Prefer `<dt class="detail-box__label">Square Feet</dt><dd class="detail-box__value">NNN</dd>` (desktop). Fallback: `<span class="js-listing-square-feet">Square Feet: NNN</span>` (mobile).
-- **Availability**: `<dd class="detail-box__value js-listing-available">` — e.g., "NOW", "4/15/26"
-  CRITICAL: Each listing has TWO availability elements (mobile + desktop). Use the `<dd>` version (detail-box__value), NOT the mobile one.
-- **MFTE detection**: Check if title text contains "MFTE" (case-insensitive)
-
-The Python script should output JSON with these fields per listing:
-- uid (string) — from data-listing-id
-- title_text (string) — raw title text
-- address (string) — raw address text
-- rent (integer) — parsed from "$X,XXX / Month"
-- bedrooms — "Studio" (string) or integer (1, 2, 3)
-- bathrooms (float) — e.g., 1.0, 1.5, 2.0
-- sqft (integer) — 0 if not provided
-- available (string) — "Now" or "Mon DD, YYYY" (e.g., "Apr 15, 2026")
-- is_mfte (boolean)
-
-**Availability normalization**: AppFolio uses "NOW" or "M/D/YY" (e.g., "4/15/26"). Convert to:
-- "NOW" → "Now"
-- "M/D/YY" → "Mon DD, YYYY" (e.g., "Apr 15, 2026")
-
----
-
-### STEP 3: Map AppFolio titles to canonical property names
-
-Each AppFolio listing title contains the property name embedded in marketing text. Extract using these keyword patterns:
-
-| Keyword in title | Canonical property name |
+| Failure | What it means |
 |---|---|
-| "301" (as standalone or in address context) | 301 Apartments |
-| "Arbor Heights" | Arbor Heights |
-| "Avia" | Avia Apartments |
-| "BalCro" | BalCro |
-| "Bayview" | Bayview Apartments |
-| "Blanche Clare" | Blanche Clare Apartments |
-| "Cedar Lane" | Cedar Lane Apartments |
-| "Clift House" | Clift House Apartments |
-| "Crestview" | Crestview Townhomes |
-| "De Selm" | De Selm Apartments |
-| "East Union" | East Union Apartments |
-| "Fairlake" | Fairlake Quads |
-| "Golden Inca" | Golden Inca |
-| "Hill Town" | Hill Town Apartments |
-| "Highway Place" | Highway Place |
-| "Lorelei" | Lorelei Apartments |
-| "Mercer Tower" | Mercer Tower |
-| "Niwa" | Niwa Apartments |
-| "Rialto" | Rialto Court |
-| "Skandi" | Skandi Villa |
-| "Viewmont" | Viewmont Apartments |
-| "White Heather" | White Heather Apartments |
-| "Willow Creek" | Willow Creek Apartments |
+| `no listing blocks found` | AppFolio changed its markup, or the page did not load. The parser needs updating. |
+| `only N listings in the feed (floor is 40)` | Probably a partial or error page. Do not publish it. |
+| `N of M listings have no rent` | A selector stopped matching. This is the exact failure that broke the sync in Oct 2026. |
+| `listings for a property this app does not know` | A genuinely new property. See step 4. |
+| `expected 3 Quil Creek Crossing placeholders` | Someone removed the hand-maintained Quil units from index.html. Restore them first. |
 
-If a listing title doesn't match ANY known property, it's a **new property**. STOP and ask the user for:
+Read the report before continuing. A normal day is a handful of adds, removes
+and price changes. A day where most listings change is a signal, not a win.
+
+### 2. Apply it
+
+    python3 scripts/sync-availabilities.py
+
+Same work, but it rewrites the `agmListings` array in `index.html` and then
+runs `scripts/build-listings-json.js` to regenerate `listings.json`. If
+nothing changed, it says so and leaves both files alone.
+
+### 3. Commit
+
+    git add index.html listings.json
+    git commit -m "Update property availabilities from AppFolio"
+    git push
+
+Always stage `listings.json` alongside `index.html` — the Book-a-Tour page
+reads it at runtime, so shipping one without the other leaves the tour page
+offering units that are gone.
+
+Then give the user the change report from step 1 in markdown, and open a PR.
+
+### 4. If a new property appears
+
+The script stops rather than guessing. Ask the user for:
+
 1. Canonical property name
 2. Neighborhood
-3. Website URL (or "none")
+3. Website URL (or "none" — then use `https://agmrealestategroup.appfolio.com/listings`)
 4. GPS coordinates (lat/lng)
 
-**Short name** (used in the `title` field) — strip trailing descriptors:
-- "301 Apartments" → "301"
-- "Avia Apartments" → "Avia"
-- "Bayview Apartments" → "Bayview"
-- "Blanche Clare Apartments" → "Blanche Clare"
-- "Cedar Lane Apartments" → "Cedar Lane"
-- "Clift House Apartments" → "Clift House"
-- "Crestview Townhomes" → "Crestview"
-- "De Selm Apartments" → "De Selm"
-- "East Union Apartments" → "East Union"
-- "Hill Town Apartments" → "Hill Town"
-- "Lorelei Apartments" → "Lorelei"
-- "Niwa Apartments" → "Niwa"
-- "Viewmont Apartments" → "Viewmont"
-- "White Heather Apartments" → "White Heather"
-- "Willow Creek Apartments" → "Willow Creek"
-- All others keep their full canonical name as the short name (e.g., "BalCro", "Highway Place", "Mercer Tower", etc.)
+Add it to `agmListings` (one placeholder row is enough to register it),
+`propertyLeasingAgents`, `propertyCoordinates` and `propertyWebsites` in
+`index.html`, then rerun. The script reads all four from `index.html`, so once
+the property is there it maps on its own.
 
----
+Because `propertyCoordinates` changed, also rebuild the transit data:
 
-### STEP 4: Extract unit numbers from addresses
+    python3 scripts/build-transit-data.py
 
-Parse unit from the address string using these patterns (in order):
-1. `Apt XXX` or `APT XXX`
-2. `Unit XXX` or `UNIT XXX`
-3. `#XXX`
-4. `-XXX` (hyphen before unit at end)
+That is the ONLY time a routine sync touches `transit-data.js` /
+`transit-routes.json`. They are keyed off properties, not units — rebuilding
+them on an ordinary sync is wasted time and churns the diff.
 
-If no unit pattern found → use `"Not Specified"`
+### 5. Quil Creek Crossing is maintained by hand
 
-Examples:
-- "625 N 130th St, Apt 103, Seattle, WA" → "103"
-- "1406 Bellevue Ave #A, Seattle, WA" → "A"
-- "8509 14th Ave NW, Apt 305, Seattle, WA" → "305"
-- "12556 15TH AVE NE, SEATTLE, WA" → "Not Specified"
-
----
-
-### STEP 5: Build the listing objects
-
-Each listing in the `agmListings` array has this exact format:
-
-```json
-{
-  "property": "Avia Apartments",
-  "neighborhood": "Greenwood",
-  "unit": "101",
-  "title": "2 Bedrooms | Avia",
-  "bedrooms": 2,
-  "bathrooms": 1.0,
-  "rent": 2195,
-  "sqft": 875,
-  "available": "Now",
-  "address": "11534 Greenwood Ave N, Apt 101, Seattle, WA 98133",
-  "features": ["On-Site Laundry"],
-  "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/UUID",
-  "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=UUID&source=Website"
-}
-```
-
-Field rules:
-- **property**: Canonical property name (from mapping above)
-- **neighborhood**: From the property-to-neighborhood mapping (see below)
-- **unit**: Extracted from address; use `"Not Specified"` if none found
-- **title**: `"{BedType} | {ShortName}"` where BedType is "Studio", "1 Bedroom", "2 Bedrooms", or "3 Bedrooms"
-- **bedrooms**: `"Studio"` (string with quotes) for studios, integer (1, 2, 3) for bedrooms (no quotes)
-- **bathrooms**: Float (1.0, 1.5, 2.0)
-- **rent**: Integer, no decimals
-- **sqft**: Integer, use 0 if not available (app renders as "N/A")
-- **available**: `"Now"` or `"Mon DD, YYYY"` format
-- **address**: Exact address from AppFolio (preserve original casing)
-- **features**: `["On-Site Laundry"]` for all standard units. Use `["On-Site Laundry", "MFTE/MHA"]` if MFTE detected in title.
-- **detailsUrl**: `https://agmrealestategroup.appfolio.com/listings/detail/{UUID}`
-- **applyUrl**: `https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid={UUID}&source=Website`
-
-**Sort order**: Alphabetically by property name, then by unit (numeric sort where possible).
-
----
-
-### STEP 6: Property-to-neighborhood mapping
-
-```
-301 Apartments → Central District
-Arbor Heights → North Seattle
-Avia Apartments → Greenwood
-BalCro → Ballard
-Bayview Apartments → Beacon Hill
-Blanche Clare Apartments → Capitol Hill
-Cedar Lane Apartments → Greenwood
-Clift House Apartments → Capitol Hill
-Crestview Townhomes → Lynnwood
-De Selm Apartments → Capitol Hill
-East Union Apartments → Capitol Hill
-Fairlake Quads → Bellevue
-Golden Inca → Capitol Hill
-Hill Town Apartments → Central District
-Highway Place → Everett
-Lorelei Apartments → Capitol Hill
-Mercer Tower → Mercer Island
-Niwa Apartments → Lower Queen Anne
-Rialto Court → Capitol Hill
-Skandi Villa → Edmonds
-Viewmont Apartments → Capitol Hill
-White Heather Apartments → Lake City
-Willow Creek Apartments → Bothell
-```
-
-If a new property appears, ask the user for the neighborhood.
-
----
-
-### STEP 7: Replace the data in index.html
-
-The file `/home/user/agm-availabilities/index.html` has four data structures to update:
-
-1. **`agmListings` array** (~line 1386): Replace the entire array contents with all listings, sorted alphabetically by property then unit. **Keep the three Quil Creek Crossing Apartments placeholder objects** (see the preservation note above) — they are not in the AppFolio feed and must be re-added.
-
-2. **`propertyLeasingAgents` object** (~line 1481): Ensure all properties from the new listings are present. All map to `"leasing@agmrealestategroup.com"`. Remove any property no longer in listings. Keep alphabetical order.
-
-3. **`propertyCoordinates` object** (~line 1511): Ensure all properties are present. Remove properties no longer in listings. For new properties, ask the user for coordinates. Current coordinates:
-```
-"301 Apartments": { lat: 47.5991, lng: -122.2981 }
-"Arbor Heights": { lat: 47.7157, lng: -122.3365 }
-"Avia Apartments": { lat: 47.7103, lng: -122.3358 }
-"BalCro": { lat: 47.6877, lng: -122.3788 }
-"Bayview Apartments": { lat: 47.5763, lng: -122.3127 }
-"Blanche Clare Apartments": { lat: 47.6148, lng: -122.3260 }
-"Cedar Lane Apartments": { lat: 47.7198, lng: -122.3358 }
-"Clift House Apartments": { lat: 47.6199, lng: -122.3240 }
-"Crestview Townhomes": { lat: 47.8298, lng: -122.2852 }
-"De Selm Apartments": { lat: 47.6223, lng: -122.3110 }
-"East Union Apartments": { lat: 47.6144, lng: -122.3175 }
-"Fairlake Quads": { lat: 47.5973, lng: -122.1465 }
-"Golden Inca": { lat: 47.6203, lng: -122.3112 }
-"Highway Place": { lat: 47.9335, lng: -122.2276 }
-"Hill Town Apartments": { lat: 47.5921, lng: -122.3039 }
-"Lorelei Apartments": { lat: 47.6270, lng: -122.3219 }
-"Mercer Tower": { lat: 47.5686, lng: -122.2224 }
-"Niwa Apartments": { lat: 47.6240, lng: -122.3565 }
-"Rialto Court": { lat: 47.6186, lng: -122.3098 }
-"Skandi Villa": { lat: 47.8127, lng: -122.3654 }
-"Viewmont Apartments": { lat: 47.6239, lng: -122.3242 }
-"White Heather Apartments": { lat: 47.7155, lng: -122.2987 }
-"Willow Creek Apartments": { lat: 47.7594, lng: -122.2013 }
-```
-
-4. **`propertyWebsites` object** (~line 1541): Ensure all properties are present. Remove properties no longer in listings. For new properties without a dedicated website, use `"https://agmrealestategroup.appfolio.com/listings"`. Current websites:
-```
-"301 Apartments": "https://www.301apartments.com/"
-"Arbor Heights": "https://www.arborheightsapartments.com/"
-"Avia Apartments": "https://www.aviaapartmentsseattle.com/"
-"BalCro": "https://www.balcroapartmentsseattle.com/"
-"Bayview Apartments": "https://www.bayviewaptsbeaconhill.com/"
-"Blanche Clare Apartments": "https://www.blancheclareapartments.com/"
-"Cedar Lane Apartments": "https://www.cedarlaneseattle.com/"
-"Clift House Apartments": "https://www.clifthouseapartments.com/"
-"Crestview Townhomes": "https://agmrealestategroup.appfolio.com/listings"
-"De Selm Apartments": "https://www.deselmapartments.com/"
-"East Union Apartments": "https://www.eastunionapts.com/"
-"Fairlake Quads": "https://www.fairlakequadsapartments.com/"
-"Golden Inca": "https://www.goldenincaapartments.com/"
-"Highway Place": "https://agmrealestategroup.appfolio.com/listings"
-"Hill Town Apartments": "https://www.hilltownapartments.com/"
-"Lorelei Apartments": "https://www.theloreleiapartments.com/"
-"Mercer Tower": "https://www.mercertowerapartments.com/"
-"Niwa Apartments": "https://www.niwaseattle.com/"
-"Rialto Court": "https://www.rialtocourtapartments.com/"
-"Skandi Villa": "https://www.skandivillaapartments.com/"
-"Viewmont Apartments": "https://www.viewmontapts.com/"
-"White Heather Apartments": "https://www.whiteheatherapts.com/"
-"Willow Creek Apartments": "https://www.willowcreekaptsbothell.com/"
+Quil Creek Crossing Apartments is NOT in the AppFolio feed. Its three
+placeholder units power the `?property=Quil Creek Crossing Apartments` embed.
+The script preserves them and fails if they are missing, so you do not need to
+do anything — just never report them as removed.
 ```
 
 ---
 
-### STEP 8: Tour booking links
+## Verifying a sync
 
-The app has a "Book a Tour" form that sends emails via EmailJS to the leasing agent for the selected property. This is powered by the `propertyLeasingAgents` object (Step 7, item 2). There are NO separate per-property tour URLs in the listing data — the tour form is property-agnostic and routes via `propertyLeasingAgents[property]`.
+The script checks these itself and fails if any is wrong, but if you have
+edited `index.html` by hand, confirm:
 
-**What to ensure**: Every property in `agmListings` has a corresponding entry in `propertyLeasingAgents`. If a property is missing from `propertyLeasingAgents`, the tour form will fall back to `leasing@agmrealestategroup.com`, but this should be explicit. All properties currently use `"leasing@agmrealestategroup.com"`.
-
----
-
-### STEP 8.5: Regenerate `listings.json` (REQUIRED — keeps the Book-a-Tour page in sync)
-
-`index.html` is the single source of truth for availabilities. The standalone
-**Book-a-Tour page** (`book-a-tour.html`) reads `listings.json` at runtime so it
-shows the *specific units* available to tour for each property. That file is
-generated FROM `index.html`, so it must be rebuilt every time the `agmListings`
-array changes — otherwise the tour page will show stale units.
-
-After updating `index.html`, run:
-
-```
-node scripts/build-listings-json.js
-```
-
-This rewrites `listings.json` (the `agmListings` data + `propertyLeasingAgents`)
-and prints the listing/agent counts. Do NOT hand-edit `listings.json` — always
-regenerate it with the script so it stays a faithful mirror of `index.html`
-(including the 3 Quil Creek Crossing placeholders). Commit `listings.json`
-alongside `index.html`.
+1. Every property in `agmListings` has an entry in `propertyLeasingAgents`,
+   `propertyCoordinates` and `propertyWebsites`, and none of those three has
+   an entry for a property that no longer exists — except Quil Creek Crossing,
+   which is intentionally an orphan relative to the feed.
+2. `listings.json` was regenerated and its count matches `agmListings`.
+3. The three Quil placeholders are present, and the `isQuilCrossing` branches
+   plus the Quil branding block near the end of the script are intact.
 
 ---
 
-### STEP 8.6: Rebuild the transit data — ONLY when a property is added or removed
+## Why this is a script
 
-`transit-data.js` and `transit-routes.json` hold the light rail / Sounder map
-layers and the bus stops and routes near each property. They are keyed off
-`propertyCoordinates`, NOT off individual units, so a normal daily availabilities
-sync does NOT need to touch them. Leave both files alone unless this run added a
-property to, or removed one from, `propertyCoordinates`.
+This document used to spell out the CSS selectors and carry its own copy of
+every property's neighborhood, coordinates and website. Both rotted:
 
-If it did, run:
+**The selectors.** AppFolio widened its class attributes, so the documented
+`class="js-listing-blurb-rent"` no longer matched
+`class="sidebar__price rent-banner__text js-listing-blurb-rent"`. An exact
+match returns nothing, so every rent parsed as `0` — with no error. The sync
+stopped producing usable PRs after 28 Oct 2026 and nobody was told. The script
+matches on "class contains" and reads the desktop detail box first, and it
+aborts outright if rents go missing en masse.
 
-```
-python3 scripts/build-transit-data.py
-```
+**The property tables.** The lists in this document had fallen behind
+`index.html` — naming properties AGM no longer lists, and missing several it
+does. The script reads every mapping out of `index.html`, which is the real
+source of truth, so there is nothing left to keep in sync.
 
-It downloads the Sound Transit rail GTFS and queries the OneBusAway regional API,
-so it needs network access and takes about 5 minutes. It caches its downloads in
-`.transit-cache/` (git-ignored); delete that directory to force a fresh pull of
-service data. Commit the regenerated `transit-data.js` and `transit-routes.json`.
+**Matching.** AppFolio titles are free-text marketing copy and often omit the
+property name entirely ("2br w/ Balcony Available Now! | 1 Month Free!"). The
+listing description always links the property's own website, so the script
+matches on that first and falls back to the name appearing in the title,
+description or address.
 
-Worth re-running every few months regardless, so the bus and light rail data
-keeps up with service changes.
+To check the parser against a saved page without hitting the network:
 
----
-
-### STEP 9: Verify
-
-After updating, verify:
-1. Count listings in the agmListings array matches the AppFolio count **plus the 3 Quil Creek Crossing placeholders** (i.e. array length = AppFolio count + 3)
-2. Every property in agmListings exists in propertyLeasingAgents, propertyCoordinates, and propertyWebsites
-3. No orphan properties in the three supporting objects (removed from listings but still in objects) — **Quil Creek Crossing Apartments is the one allowed exception and must remain in all three objects**
-4. All UIDs are present in both detailsUrl and applyUrl for every listing (Quil placeholders use a literal `#` detailsUrl and an `/apply/.../start` applyUrl — leave them as-is)
-5. The three Quil Creek Crossing placeholder units are still present, and the `isQuilCrossing` rendering logic + custom-branding IIFE are intact
-6. `listings.json` was regenerated (Step 8.5) and its listing count matches the `agmListings` array. The `node scripts/build-listings-json.js` run reports no "missing leasing agent" warnings.
-7. If (and only if) a property was added to or removed from `propertyCoordinates`, `transit-data.js` was regenerated (Step 8.6) and every property in `propertyCoordinates` has an entry under its `properties` key.
-
----
-
-### STEP 10: Generate change report
-
-After all changes are applied, print a **detailed, shareable** report to the user summarizing exactly what changed. Compare listings by UUID (extracted from detailsUrl) between the previous git commit (`HEAD~1:index.html`) and the newly updated file. The report should use markdown table format so the user can easily copy-paste and share it.
-
-The report MUST include ALL of the following sections with the exact formatting shown:
-
-```
-============================================================
-AGM AVAILABILITIES UPDATE — [Month Day, Year]
-============================================================
-Total active listings: [new count] (previously [old count])
-
-------------------------------------------------------------
-NEW LISTINGS ([count])
-------------------------------------------------------------
-```
-
-For each new listing, show full details:
-```
-  [Property] — Unit [X]
-    $[rent]/mo | [beds] / [baths] | [sqft] sqft
-    Available: [date]
-    Address: [full address]
-```
-
-Then:
-```
-------------------------------------------------------------
-REMOVED LISTINGS ([count])
-------------------------------------------------------------
-```
-
-For each removed listing:
-```
-  [Property] — Unit [X]
-    Was: $[rent]/mo | [beds] / [baths] | [sqft] sqft
-```
-
-Then:
-```
-------------------------------------------------------------
-UPDATED LISTINGS ([count])
-------------------------------------------------------------
-```
-
-For each changed listing, show only the fields that changed:
-```
-  [Property] — Unit [X]
-    Rent: $[old] → $[new]
-    Available: [old] → [new]
-    Added tags: MFTE/MHA
-```
-
-Then:
-```
-------------------------------------------------------------
-NEW PROPERTIES ([count])
-------------------------------------------------------------
-  [Property Name] — Neighborhood: [X]
-
-------------------------------------------------------------
-REMOVED PROPERTIES ([count])
-------------------------------------------------------------
-  [Property Name]
-
-------------------------------------------------------------
-UNCHANGED LISTINGS ([count])
-------------------------------------------------------------
-  [Property] — Unit [X]: $[rent]/mo | [beds] / [baths] | [sqft] sqft | Avail: [date]
-```
-
-**Bed/Bath display format**: Use "Studio", "1 Bed", "2 Bed", "3 Bed" for bedrooms, and "1 Bath", "1.5 Bath", "2 Bath" for bathrooms.
-
-**Important**: List ALL unchanged listings with their full details (one line each) so the user has a complete inventory snapshot.
-
-This report lets the user verify correctness at a glance without diffing files, and is formatted to be easily shared with colleagues.
-
----
-
-### STEP 11: Commit and push
-
-git add index.html listings.json
-git commit -m "Update property availabilities from AppFolio"
-git push
-
-(Always stage `listings.json` too — it is regenerated in Step 8.5 and must ship
-with the matching `index.html` so the Book-a-Tour page stays in sync.)
-
----
-
-### Key gotchas to watch for:
-1. **WebFetch truncates** — always use curl to download the full HTML
-2. **Split listings by the correct element** — use `<div class="listing-item result js-listing-item"` to split listing blocks (NOT by `<h2>` title tags). Each listing block wraps an image `<a>` and a title `<a>` that both link to `/listings/detail/UUID`; you must match the title inside `js-listing-title` specifically, not the first `<a>` in the block.
-3. **Dual availability elements** — use `<dd class="detail-box__value js-listing-available">`, not the mobile span
-4. **Square feet from detail-box** — prefer `<dt class="detail-box__label">Square Feet</dt><dd class="detail-box__value">NNN</dd>` (desktop detail box); fall back to `Square Feet: NNN` in the mobile span
-5. **"Studio" is a string** — `"bedrooms": "Studio"` (with quotes), not an integer
-6. **Bathrooms are floats** — always `1.0`, `1.5`, `2.0` (not integers)
-7. **Missing sqft → 0** — never omit, never use null
-8. **Sort alphabetically** — by property name first, then unit number
-9. **New properties need user input** — don't guess neighborhoods, coordinates, or websites
-10. **MFTE units** — detected by "MFTE" in AppFolio title text, get `["On-Site Laundry", "MFTE/MHA"]` features
-11. **Address casing** — preserve exactly as AppFolio provides it
-12. **Unit "Not Specified"** — when no unit pattern found in address (not empty string, not null)
-13. **Tour booking** — powered by `propertyLeasingAgents`, not per-listing URLs. Ensure every property has an entry.
-14. **Change report comparison** — compare by UUID from `detailsUrl` between `git show HEAD~1:index.html` (old) and the updated file (new). This correctly identifies added, removed, changed, and unchanged listings.
-15. **Quil Crossing is manual** — the three Quil Creek Crossing Apartments placeholder units are NOT in the AppFolio feed. Always preserve them (listings + supporting objects + display logic) and never report them as removed. See the preservation note at the top of this prompt.
-16. **Only rebuild the transit data when the property list changes** — `transit-data.js` / `transit-routes.json` are keyed off `propertyCoordinates`, not off units. Rebuilding them on a routine availabilities sync is wasted time and churns the diff.
-17. **Regenerate `listings.json`** — after editing `index.html`, always run `node scripts/build-listings-json.js` and commit the result (Step 8.5). The Book-a-Tour page reads it at runtime to show the specific units available to tour; skipping this leaves the tour page showing stale units.
-```
+    python3 scripts/sync-availabilities.py --dry-run --from-file saved.html
