@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06",
+  "updatedAt": "2026-11-07",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -480,6 +480,23 @@
     {
       "property": "Lorelei Apartments",
       "neighborhood": "Capitol Hill",
+      "unit": "22",
+      "title": "1 Bedroom | Lorelei",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1895,
+      "sqft": 537,
+      "available": "Nov 20, 2026",
+      "address": "501 SUMMIT AVENUE EAST #22, SEATTLE, WA 98102",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/6b189ede-dd8a-4b4d-8408-d4b0aa2ad3e1",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=6b189ede-dd8a-4b4d-8408-d4b0aa2ad3e1&source=Website"
+    },
+    {
+      "property": "Lorelei Apartments",
+      "neighborhood": "Capitol Hill",
       "unit": "27",
       "title": "1 Bedroom | Lorelei",
       "bedrooms": 1,
@@ -833,6 +850,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/23d2ed01-f675-41db-a70e-2799a556dd1b",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=23d2ed01-f675-41db-a70e-2799a556dd1b&source=Website"
+    },
+    {
+      "property": "Niwa Apartments",
+      "neighborhood": "Lower Queen Anne",
+      "unit": "502",
+      "title": "1 Bedroom | Niwa",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 2350,
+      "sqft": 616,
+      "available": "Nov 30, 2026",
+      "address": "513 1st Ave N, Apt 502, Seattle, WA 98109",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/66f38fd3-21af-4aca-8d60-781f0576319f",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=66f38fd3-21af-4aca-8d60-781f0576319f&source=Website"
     },
     {
       "property": "Niwa Apartments",
