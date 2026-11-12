@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11",
+  "updatedAt": "2026-11-12",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -1173,6 +1173,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/00b98250-e62e-408c-a2c2-1b1f2da88d44",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=00b98250-e62e-408c-a2c2-1b1f2da88d44&source=Website"
+    },
+    {
+      "property": "The Palms in Eastlake",
+      "neighborhood": "Eastlake",
+      "unit": "12-7",
+      "title": "2 Bedrooms | The Palms in Eastlake",
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "rent": 2295,
+      "sqft": 600,
+      "available": "Now",
+      "address": "2712 FRANKLIN AVE E #12-7, SEATTLE, WA 98102",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/2ed22e41-7f5c-4da1-a005-7e7926d25edc",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=2ed22e41-7f5c-4da1-a005-7e7926d25edc&source=Website"
     },
     {
       "property": "The Palms in Eastlake",
