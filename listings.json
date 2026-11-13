@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12",
+  "updatedAt": "2026-11-13",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -911,7 +911,7 @@
       "bathrooms": 1,
       "rent": 1595,
       "sqft": 388,
-      "available": "Nov 13, 2026",
+      "available": "Now",
       "address": "513 1st Ave N, Apt 512, Seattle, WA 98109",
       "features": [
         "On-Site Laundry"
