@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13",
+  "updatedAt": "2026-11-15",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -282,7 +282,7 @@
       "bathrooms": 1.5,
       "rent": 2500,
       "sqft": 1060,
-      "available": "Nov 15, 2026",
+      "available": "Now",
       "address": "3712 188TH SW #6, LYNNWOOD, WA 98037",
       "features": [
         "On-Site Laundry"
@@ -673,7 +673,7 @@
       "bathrooms": 1,
       "rent": 2375,
       "sqft": 800,
-      "available": "Nov 15, 2026",
+      "available": "Now",
       "address": "2805 75th Pl SE, Apt 35, Mercer Island, WA 98040",
       "features": [
         "On-Site Laundry"
@@ -1149,7 +1149,7 @@
       "bathrooms": 1,
       "rent": 1595,
       "sqft": 550,
-      "available": "Nov 15, 2026",
+      "available": "Now",
       "address": "1729 BOYLSTON AVE #310, SEATTLE, WA 98122",
       "features": [
         "On-Site Laundry"
