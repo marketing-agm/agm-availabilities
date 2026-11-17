@@ -42,7 +42,7 @@
       "title": "1 Bedroom | Arbor Heights",
       "bedrooms": 1,
       "bathrooms": 1,
-      "rent": 1695,
+      "rent": 1595,
       "sqft": 690,
       "available": "Now",
       "address": "625 N 130th St, Apt 203, Seattle, WA 98133",
@@ -153,23 +153,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/e4ed9c7d-73b8-43f7-b793-4088d44f1fa5",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=e4ed9c7d-73b8-43f7-b793-4088d44f1fa5&source=Website"
-    },
-    {
-      "property": "BalCro",
-      "neighborhood": "Ballard",
-      "unit": "407",
-      "title": "1 Bedroom | BalCro",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 1645,
-      "sqft": 596,
-      "available": "Now",
-      "address": "8509 14th Ave NW, Apt 407, Seattle, WA 98117",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/0928969a-2c50-45d4-b9d9-c81700f0424a",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=0928969a-2c50-45d4-b9d9-c81700f0424a&source=Website"
     },
     {
       "property": "Blanche Clare Apartments",
@@ -665,23 +648,6 @@
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=9e6bc0fa-6b9f-42ed-9ace-758cc561d4c9&source=Website"
     },
     {
-      "property": "Mercer Tower",
-      "neighborhood": "Mercer Island",
-      "unit": "35",
-      "title": "1 Bedroom | Mercer Tower",
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "rent": 2375,
-      "sqft": 800,
-      "available": "Now",
-      "address": "2805 75th Pl SE, Apt 35, Mercer Island, WA 98040",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/4b2c288b-4a07-4097-a393-ca1fa7dd09c5",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=4b2c288b-4a07-4097-a393-ca1fa7dd09c5&source=Website"
-    },
-    {
       "property": "Niwa Apartments",
       "neighborhood": "Lower Queen Anne",
       "unit": "205",
@@ -1054,23 +1020,6 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/39ca39a1-20c0-44d0-ba0f-93156d68fc16",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=39ca39a1-20c0-44d0-ba0f-93156d68fc16&source=Website"
-    },
-    {
-      "property": "Niwa Apartments",
-      "neighborhood": "Lower Queen Anne",
-      "unit": "808",
-      "title": "2 Bedrooms | Niwa",
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "rent": 3195,
-      "sqft": 715,
-      "available": "Now",
-      "address": "513 1st Ave N, Apt 808, Seattle, WA 98109",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/32c90ee3-69c6-4b4a-af12-ecc94e6f99a6",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=32c90ee3-69c6-4b4a-af12-ecc94e6f99a6&source=Website"
     },
     {
       "property": "Quil Creek Crossing Apartments",
