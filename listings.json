@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15",
+  "updatedAt": "2026-11-17",
   "listings": [
     {
       "property": "6113 Apartments",
@@ -1126,23 +1126,6 @@
     {
       "property": "Rialto Court",
       "neighborhood": "Capitol Hill",
-      "unit": "109",
-      "title": "Studio | Rialto Court",
-      "bedrooms": "Studio",
-      "bathrooms": 1,
-      "rent": 1395,
-      "sqft": 525,
-      "available": "Now",
-      "address": "1729 BOYLSTON AVE #109, SEATTLE, WA 98122",
-      "features": [
-        "On-Site Laundry"
-      ],
-      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/d43fa0cd-4fdb-4a67-989d-41c783af7a6e",
-      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=d43fa0cd-4fdb-4a67-989d-41c783af7a6e&source=Website"
-    },
-    {
-      "property": "Rialto Court",
-      "neighborhood": "Capitol Hill",
       "unit": "310",
       "title": "1 Bedroom | Rialto Court",
       "bedrooms": 1,
@@ -1258,6 +1241,23 @@
       ],
       "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/ced627ef-23b1-4a7b-8f38-55ff2e9a1fcc",
       "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=ced627ef-23b1-4a7b-8f38-55ff2e9a1fcc&source=Website"
+    },
+    {
+      "property": "Viewmont Apartments",
+      "neighborhood": "Capitol Hill",
+      "unit": "310",
+      "title": "1 Bedroom | Viewmont",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "rent": 1425,
+      "sqft": 520,
+      "available": "Now",
+      "address": "219 BELLEVUE AVE E #310, SEATTLE, WA 98102",
+      "features": [
+        "On-Site Laundry"
+      ],
+      "detailsUrl": "https://agmrealestategroup.appfolio.com/listings/detail/09db2cf2-982c-46dd-9d51-a482d2d179f2",
+      "applyUrl": "https://agmrealestategroup.appfolio.com/listings/rental_applications/new?listable_uid=09db2cf2-982c-46dd-9d51-a482d2d179f2&source=Website"
     },
     {
       "property": "White Heather Apartments",
